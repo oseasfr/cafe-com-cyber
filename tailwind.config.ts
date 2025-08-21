@@ -52,21 +52,30 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
+				cyber: {
+					glow: 'hsl(var(--cyber-glow))',
+					'glow-soft': 'hsl(var(--cyber-glow-soft))',
+					dark: 'hsl(var(--cyber-dark))',
+					darker: 'hsl(var(--cyber-darker))',
+					gray: 'hsl(var(--cyber-gray))',
+					light: 'hsl(var(--cyber-light))'
 				}
 			},
-			borderRadius: {
-				lg: 'var(--radius)',
-				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+			backgroundImage: {
+				'gradient-cyber': 'var(--gradient-cyber)',
+				'gradient-dark': 'var(--gradient-dark)',
+				'gradient-glow': 'var(--gradient-glow)'
+			},
+			boxShadow: {
+				'cyber': 'var(--shadow-cyber)',
+				'cyber-soft': 'var(--shadow-soft)',
+				'cyber-glow': 'var(--shadow-glow)'
+			},
+			animation: {
+				'accordion-down': 'accordion-down 0.2s ease-out',
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'glow-pulse': 'glow-pulse 2s ease-in-out infinite alternate',
+				'cyber-float': 'cyber-float 6s ease-in-out infinite'
 			},
 			keyframes: {
 				'accordion-down': {
@@ -84,11 +93,23 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'glow-pulse': {
+					'0%': { 
+						boxShadow: '0 0 20px hsl(120 100% 50% / 0.3)' 
+					},
+					'100%': { 
+						boxShadow: '0 0 40px hsl(120 100% 50% / 0.6), 0 0 80px hsl(120 100% 50% / 0.2)' 
+					}
+				},
+				'cyber-float': {
+					'0%, 100%': { 
+						transform: 'translateY(0px)' 
+					},
+					'50%': { 
+						transform: 'translateY(-10px)' 
+					}
 				}
-			},
-			animation: {
-				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
 			}
 		}
 	},
