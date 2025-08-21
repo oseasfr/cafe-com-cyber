@@ -16,9 +16,9 @@
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 95%;
 
-    /* Cyber Green Accents */
-    --primary: 120 100% 50%;
-    --primary-foreground: 0 0% 8%;
+    /* Cyber Blue Accents */
+    --primary: 214 78% 55%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 20%;
     --secondary-foreground: 0 0% 90%;
@@ -26,7 +26,7 @@
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 120 60% 45%;
+    --accent: 214 60% 45%;
     --accent-foreground: 0 0% 95%;
 
     --destructive: 0 84% 60%;
@@ -34,25 +34,25 @@
 
     --border: 0 0% 25%;
     --input: 0 0% 20%;
-    --ring: 120 100% 50%;
+    --ring: 214 78% 55%;
 
     /* Cyber Design Tokens */
-    --cyber-glow: 120 100% 50%;
-    --cyber-glow-soft: 120 60% 45%;
+    --cyber-blue: 214 78% 55%;
+    --cyber-blue-muted: 214 60% 45%;
     --cyber-dark: 0 0% 8%;
     --cyber-darker: 0 0% 5%;
     --cyber-gray: 0 0% 15%;
     --cyber-light: 0 0% 95%;
 
     /* Gradients */
-    --gradient-cyber: linear-gradient(135deg, hsl(120 100% 50% / 0.1), hsl(120 60% 45% / 0.2));
+    --gradient-cyber: linear-gradient(135deg, hsl(214 78% 55% / 0.1), hsl(214 60% 45% / 0.2));
     --gradient-dark: linear-gradient(180deg, hsl(0 0% 8%), hsl(0 0% 5%));
-    --gradient-glow: linear-gradient(90deg, transparent, hsl(120 100% 50% / 0.3), transparent);
+    --gradient-glow: linear-gradient(90deg, transparent, hsl(214 78% 55% / 0.3), transparent);
 
     /* Shadows & Effects */
-    --shadow-cyber: 0 0 20px hsl(120 100% 50% / 0.3);
+    --shadow-cyber: 0 0 20px hsl(214 78% 55% / 0.3);
     --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.3);
-    --shadow-glow: 0 0 40px hsl(120 100% 50% / 0.2);
+    --shadow-glow: 0 0 40px hsl(214 78% 55% / 0.2);
 
     /* Animations */
     --transition-cyber: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
