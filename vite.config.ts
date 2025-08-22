@@ -4,7 +4,8 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ mode } ) => ({
+  base: "/cafe-com-cyber-hub/", // <--- CORREÇÃO ADICIONADA AQUI
   server: {
     host: "::",
     port: 8080,
