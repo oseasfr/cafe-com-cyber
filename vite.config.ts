@@ -12,7 +12,7 @@ export default defineConfig(({ mode } ) => {
     // --- CORREÇÃO PRINCIPAL ---
     // Define o caminho base para o projeto. Essencial para o GitHub Pages.
     // Garante que os links para CSS e JS funcionem corretamente.
-    base: "/cafe-com-cyber-hub/",
+    // base: "/cafe-com-cyber-hub/",
 
     // --- OTIMIZAÇÃO DE PRODUÇÃO ---
     // Configurações para o processo de "build" (quando você publica o site)
