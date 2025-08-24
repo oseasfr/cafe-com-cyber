@@ -1,4 +1,4 @@
 # Bem-Vindo ao projeto Café com cyber
 
-Seu hub de conhecimento em cybersecurity. Artigos, notícias e insights da comunidade de analistas.
+Artigos, notícias e insights da comunidade de analistas com conhecimento em cybersecurity.
 ☕🔐
