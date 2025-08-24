@@ -2,11 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Café com Cyber - Cybersecurity Blog Design System */
-
 @layer base {
   :root {
-    /* Cyber Theme - Dark Primary */
     --background: 0 0% 8%;
     --foreground: 0 0% 95%;
 
@@ -16,7 +13,6 @@
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 95%;
 
-    /* Cyber Blue Accents */
     --primary: 214 78% 55%;
     --primary-foreground: 0 0% 100%;
 
@@ -36,7 +32,6 @@
     --input: 0 0% 20%;
     --ring: 214 78% 55%;
 
-    /* Cyber Design Tokens */
     --cyber-blue: 214 78% 55%;
     --cyber-blue-muted: 214 60% 45%;
     --cyber-dark: 0 0% 8%;
@@ -44,17 +39,14 @@
     --cyber-gray: 0 0% 15%;
     --cyber-light: 0 0% 95%;
 
-    /* Gradients */
     --gradient-cyber: linear-gradient(135deg, hsl(214 78% 55% / 0.1), hsl(214 60% 45% / 0.2));
     --gradient-dark: linear-gradient(180deg, hsl(0 0% 8%), hsl(0 0% 5%));
     --gradient-glow: linear-gradient(90deg, transparent, hsl(214 78% 55% / 0.3), transparent);
 
-    /* Shadows & Effects */
     --shadow-cyber: 0 0 20px hsl(214 78% 55% / 0.3);
     --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.3);
     --shadow-glow: 0 0 40px hsl(214 78% 55% / 0.2);
 
-    /* Animations */
     --transition-cyber: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --radius: 0.75rem;
@@ -67,21 +59,6 @@
   }
 
   body {
-    @apply bg-background text-foreground min-h-screen;
-  }
-}
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  :root {
-    /* ... suas variáveis ... */
-  }
-
-  body {
-    /* Garante que o body tenha a altura da tela */
-    @apply min-h-screen text-foreground;
+    @apply bg-background text-foreground;
   }
 }
