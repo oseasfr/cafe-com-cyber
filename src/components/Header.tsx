@@ -35,9 +35,9 @@ const Header = () => {
             Notícias
           </a>
           <a href="#community" className="text-sm font-medium hover:text-primary transition-colors">
-            Sobre nós
+            Comunidade
           </a>
-           <a href="#community" className="text-sm font-medium hover:text-primary transition-colors">
+          <a href="#events" className="text-sm font-medium hover:text-primary transition-colors">
             Eventos
           </a>
         </nav>
