@@ -10,9 +10,13 @@ export default defineConfig(({ mode } ) => {
 
   return {
     // --- CORREÇÃO PRINCIPAL ---
-    // Define o caminho base para o projeto. Essencial para o GitHub Pages.
-    // Garante que os links para CSS e JS funcionem corretamente.
-    base: "/cafe-com-cyber/",
+    // Remove a propriedade "base" ou a define como "/" para que o Vercel
+    // sirva o site a partir da raiz do domínio.
+    // base: "/cafe-com-cyber/", // Linha comentada - era a causa do erro 404.
+    
+    // O Vercel já entende que o site está na raiz do domínio.
+    // Deixando a propriedade "base" com valor padrão, o Vite construirá
+    // os caminhos corretamente para a Vercel.
 
     // --- OTIMIZAÇÃO DE PRODUÇÃO ---
     // Configurações para o processo de "build" (quando você publica o site)
