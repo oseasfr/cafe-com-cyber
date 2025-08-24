@@ -20,7 +20,7 @@ const HeroSection = () => {
             <img 
               src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
               alt="Café com Cyber"
-              className="h-30 w-30"
+              className="h-26 w-26"
             />
           </div>
           
