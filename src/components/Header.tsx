@@ -13,7 +13,7 @@ const Header = () => {
           <img 
             src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
             alt="Café com Cyber"
-            className="h-10 w-10 animate-cyber-float"
+            className="h-10 w-10 rounded-full"
           />
           <div>
             <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
