@@ -122,7 +122,7 @@ const CommunitySection = () => {
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber"
               onClick={() =>
-              window.open("https://chat.whatsapp.com/DV1aSKqXnzU9yzLle4WpQ3?mode=ems_copy_t", "_blank")
+              window.open("https://chat.whatsapp.com/DV1aSKqXnzU9yzLle4WpQ3", "_blank")
               }
               >
               <MessageCircle className="mr-2 h-5 w-5" />
