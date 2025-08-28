@@ -23,7 +23,7 @@ const UnderConstruction = () => {
                 <img
                   src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png"
                   alt="Café com Cyber"
-                  className="h-26 w-auto"
+                  className="h-22 w-auto"
                 />
               </div>
 
@@ -34,7 +34,7 @@ const UnderConstruction = () => {
                 </h1>
                 <div className="space-y-4 max-w-3xl mx-auto">
                   <p className="text-2xl lg:text-3xl font-semibold text-foreground">
-                    Aqui teremos conhecimento em segurança da informação de forma colaborativa.
+                    Aqui teremos conhecimento em Segurança da Informação de forma colaborativa.
                   </p>
                 </div>
               </div>
