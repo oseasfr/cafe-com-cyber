@@ -65,7 +65,7 @@ const Footer = () => {
                   size="sm"
                   className="hover:text-primary"
                   onClick={() =>
-                    window.open("https://www.linkedin.com/company/caf%C3%A9-com-cyber/about/?viewAsMember=true", "_blank")
+                    window.open("#", "_blank")
                   }
                 >
   <Linkedin className="h-4 w-4" />
