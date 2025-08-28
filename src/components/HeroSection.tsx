@@ -31,7 +31,7 @@ const HeroSection = () => {
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-            Aqui você encontra artigos, notícias e insights da comunidade de analistas do setor para aprimorar seu conhecimento em <span className="text-primary font-semibold">Cibersegurança</span>. 
+          Encontre artigos, notícias e insights da comunidade para expandir seu conhecimento em <span className="text-primary font-semibold">Cibersegurança</span>.
           </p>
         </div>
 
