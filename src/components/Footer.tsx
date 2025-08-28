@@ -16,7 +16,6 @@ const Footer = () => {
               />
               <div>
                 <h3 className="text-lg font-bold text-primary">Café com Cyber</h3>
-                <p className="text-xs text-muted-foreground">Conteúdos diversos sobre Cybersecurity</p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
