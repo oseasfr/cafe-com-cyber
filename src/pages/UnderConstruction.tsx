@@ -23,25 +23,18 @@ const UnderConstruction = () => {
                 <img
                   src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png"
                   alt="Café com Cyber"
-                  className="h-24 w-auto"
+                  className="h-26 w-auto"
                 />
               </div>
 
               {/* Title */}
               <div className="space-y-6">
                 <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                  Em Construção
+                  Site em Construção ...
                 </h1>
                 <div className="space-y-4 max-w-3xl mx-auto">
                   <p className="text-2xl lg:text-3xl font-semibold text-foreground">
-                    Em breve nosso site estará pronto!
-                  </p>
-                  <p className="text-lg text-muted-foreground">
-                    Estamos trabalhando duro para trazer a melhor experiência em cybersecurity para você. 
-                    Nossa plataforma está sendo desenvolvida com as mais modernas tecnologias e práticas de segurança.
-                  </p>
-                  <p className="text-primary font-medium">
-                    Aguarde, algo incrível está chegando! ☕🔒
+                    Aqui teremos conhecimento em segurança da informação de forma colaborativa.
                   </p>
                 </div>
               </div>
