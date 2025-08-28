@@ -16,12 +16,11 @@ const Footer = () => {
               />
               <div>
                 <h3 className="text-lg font-bold text-primary">Café com Cyber</h3>
-                <p className="text-xs text-muted-foreground">Cybersecurity Hub</p>
+                <p className="text-xs text-muted-foreground">Conteúdos diversos sobre Cybersecurity</p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              Disseminando conhecimento em segurança da informação através da colaboração 
-              de analistas especializados.
+              Disseminando conhecimento em segurança da informação de forma colaborativa.
             </p>
           </div>
 
@@ -55,16 +54,24 @@ const Footer = () => {
             <div className="space-y-4">
               <p className="text-sm text-muted-foreground">
                 Participe da nossa comunidade e contribua para o crescimento 
-                da área de cybersecurity no Brasil.
+                da área de cybersecurity.
               </p>
               
               <div className="flex space-x-2">
                 <Button variant="ghost" size="sm" className="hover:text-primary">
                   <Github className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" size="sm" className="hover:text-primary">
-                  <Linkedin className="h-4 w-4" />
-                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="hover:text-primary"
+                  onClick={() =>
+                    window.open("https://www.linkedin.com/company/caf%C3%A9-com-cyber/", "_blank")
+                  }
+                >
+  <Linkedin className="h-4 w-4" />
+</Button>
+
                 <Button variant="ghost" size="sm" className="hover:text-primary">
                   <Mail className="h-4 w-4" />
                 </Button>
