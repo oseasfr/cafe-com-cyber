@@ -18,10 +18,14 @@ const UnderConstruction = () => {
 
           <div className="container relative py-32">
             <div className="text-center space-y-12">
-              {/* Icon */}
+              {/* Logo */}
               <div className="flex justify-center">
                 <div className="p-8 rounded-full bg-card border border-border shadow-cyber">
-                  <Construction className="h-20 w-20 text-primary animate-glow-pulse" />
+                  <img 
+                    src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
+                    alt="Café com Cyber Logo" 
+                    className="h-20 w-20 object-contain animate-glow-pulse"
+                  />
                 </div>
               </div>
 
