@@ -118,10 +118,15 @@ const CommunitySection = () => {
                 <span>Foque no aprendizado</span>
               </div>
             </div>
-
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber"
+              onClick={() =>
+              window.open("https://chat.whatsapp.com/DV1aSKqXnzU9yzLle4WpQ3?mode=ems_copy_t", "_blank")
+              }
+              >
               <MessageCircle className="mr-2 h-5 w-5" />
-              Participar da Discussão
+              Participar do Grupo do Whatsapp
             </Button>
           </CardContent>
         </Card>
