@@ -30,9 +30,18 @@ const UnderConstruction = () => {
                 <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
                   Em Construção
                 </h1>
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                  Estamos preparando algo especial para a comunidade de <span className="text-primary font-semibold">cybersecurity</span>
-                </p>
+                <div className="space-y-4 max-w-3xl mx-auto">
+                  <p className="text-2xl lg:text-3xl font-semibold text-foreground">
+                    Em breve nosso site estará pronto!
+                  </p>
+                  <p className="text-lg text-muted-foreground">
+                    Estamos trabalhando duro para trazer a melhor experiência em cybersecurity para você. 
+                    Nossa plataforma está sendo desenvolvida com as mais modernas tecnologias e práticas de segurança.
+                  </p>
+                  <p className="text-primary font-medium">
+                    Aguarde, algo incrível está chegando! ☕🔒
+                  </p>
+                </div>
               </div>
 
               {/* Status */}
