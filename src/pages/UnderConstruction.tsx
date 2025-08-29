@@ -29,11 +29,11 @@ const UnderConstruction = () => {
 
               {/* Title */}
               <div className="space-y-6">
-                <h1 className="text-5xl lg:text-7xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                  Site em Construção ...
+                <h1 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                  Site em Construção...
                 </h1>
-                <div className="space-y-4 max-w-3xl mx-auto">
-                  <p className="text-2xl lg:text-3xl font-semibold text-foreground">
+                <div className="space-y-4 max-w-2xl mx-auto">
+                  <p className="text-xl text-muted-foreground">
                     Aqui teremos conhecimento em Segurança da Informação de forma colaborativa.
                   </p>
                 </div>
