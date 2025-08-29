@@ -1,4 +1,4 @@
-import { Construction, Coffee, ArrowLeft } from "lucide-react";
+import { Construction, Coffee, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -49,13 +49,15 @@ const UnderConstruction = () => {
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-                <Button 
-                  size="lg" 
-                  onClick={() => window.location.href = '/'}
-                  className="flex items-center space-x-2 shadow-cyber hover:shadow-cyber-glow transition-all duration-300"
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber"
+                  onClick={() =>
+                    window.open("https://chat.whatsapp.com/DV1aSKqXnzU9yzLle4WpQ3", "_blank")
+                  }
                 >
-                  <ArrowLeft className="h-4 w-4" />
-                  <span>Voltar ao Início</span>
+                  <MessageCircle className="mr-2 h-5 w-5" />
+                  Participar do Grupo do Whatsapp
                 </Button>
               </div>
 
