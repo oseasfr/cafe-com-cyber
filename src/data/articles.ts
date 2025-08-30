@@ -1,46 +1,74 @@
 export const articles = [
   {
-    id: 'node-js-process-managers',
-    title: 'Node.js process managers tools detailed comparision...',
-    author: 'Sam Atmaramani',
-    date: 'Jan 29, 2024',
-    readTime: '3 min read',
-    imageUrl: 'https://cdn-images-1.medium.com/max/1000/1*cW5o1K7Bv-tC3dYtS3zFhA.png',
+    id: "fundamentos-de-seguranca-em-apis-rest",
+    title: "Fundamentos de Segurança em APIs REST",
+    description: "Aprenda as melhores práticas para proteger suas APIs contra ataques comuns como injection, broken authentication e muito mais.",
+    author: "Ana Santos",
+    readTime: "8 min",
+    category: "Web Security",
+    icon: "Shield", // Adicionei o ícone aqui
+    gradient: "from-primary/20 to-accent/20",
+    imageUrl: "https://seusite.com/caminho/para/imagem1.png",
     content: `
-# Node.js process managers tools detailed comparision for ex. pm2, forever...
+# Fundamentos de Segurança em APIs REST
 
-O gerenciamento de processos Node.js é crucial para garantir a alta disponibilidade e resiliência de suas aplicações. Esta é uma análise comparativa detalhada das ferramentas mais populares.
+A segurança em APIs REST é fundamental para proteger dados sensíveis. Aqui estão os pontos-chave:
 
-## 1. PM2 (Process Manager 2)
+## Autenticação e Autorização
+Use **JWT** (JSON Web Tokens) ou **OAuth 2.0** para autenticar usuários. Certifique-se de que cada solicitação tem permissão para acessar o recurso.
 
-O **PM2** é a ferramenta mais popular e robusta para gerenciamento de processos. Ele oferece:
--   **Reinicialização automática:** Reinicia o aplicativo em caso de falha.
--   **Cluster mode:** Permite que você execute sua aplicação em vários núcleos da CPU.
--   **Monitoramento:** Oferece um dashboard para monitorar o status da sua aplicação.
+## Validação de Entrada
+Sempre valide e sanitize todos os dados de entrada para evitar ataques como **SQL Injection** e **Cross-Site Scripting (XSS)**.
 
-\`\`\`javascript
-const http = require('http');
+## Limitação de Taxa (Rate Limiting)
+Implemente limites de requisições para prevenir ataques de negação de serviço (DDoS) e força bruta.
+`,
+  },
+  {
+    id: "zero-trust-o-futuro-da-seguranca-corporativa",
+    title: "Zero Trust: O Futuro da Segurança Corporativa",
+    description: "Entenda o modelo Zero Trust e como implementar uma arquitetura de segurança baseada na filosofia 'nunca confie, sempre verifique'.",
+    author: "Carlos Lima",
+    readTime: "12 min",
+    category: "Architecture",
+    icon: "Lock",
+    gradient: "from-accent/20 to-primary/20",
+    imageUrl: "https://seusite.com/caminho/para/imagem2.png",
+    content: `
+# Zero Trust: O Futuro da Segurança Corporativa
 
-http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' });
-  res.end('Hello World\\n');
-}).listen(3000, '127.0.0.1');
+O modelo de segurança **Zero Trust** se baseia no princípio de que nenhuma entidade, dentro ou fora da rede, deve ser automaticamente confiável.
 
-console.log('Server running at http://127.0.0.1:3000/');
-\`\`\`
+## Princípios Chave
+-   **Verificar sempre:** Autentique e autorize cada usuário e dispositivo.
+-   **Menor privilégio:** Conceda o mínimo de acesso necessário para completar uma tarefa.
+-   **Segmente a rede:** Divida a rede em pequenas áreas de segurança para isolar ameaças.
+`,
+  },
+  {
+    id: "osint-tecnicas-de-investigacao-digital",
+    title: "OSINT: Técnicas de Investigação Digital",
+    description: "Explore ferramentas e metodologias de Open Source Intelligence para investigações de segurança e análise de ameaças.",
+    author: "Maria Silva",
+    readTime: "15 min",
+    category: "Intelligence",
+    icon: "Eye",
+    gradient: "from-primary/20 to-cyber-glow/20",
+    imageUrl: "https://seusite.com/caminho/para/imagem3.png",
+    content: `
+# OSINT: Técnicas de Investigação Digital
 
-## 2. Forever
+**Open Source Intelligence (OSINT)** é o processo de coletar informações de fontes públicas. É uma habilidade crucial para analistas de segurança.
 
-O **Forever** é uma ferramenta de linha de comando mais simples, focada em garantir que um determinado script Node.js seja executado continuamente. É uma boa opção para projetos menores.
+## Fontes Comuns
+-   Redes sociais e fóruns.
+-   Registros públicos e bancos de dados de empresas.
+-   Motores de busca e ferramentas de mapeamento.
 
--   **Simplicidade:** Fácil de usar e configurar.
--   **Monitoramento básico:** Mantém o processo em execução.
-
-## Conclusão
-
-Embora **Forever** seja excelente para scripts pequenos, **PM2** se destaca com recursos avançados como clustering e monitoramento em tempo real, sendo a escolha preferida para aplicações em produção.
-
-*Este artigo é uma adaptação e resumo do conteúdo original.*
+## Ferramentas Úteis
+-   **Maltego:** Para visualizar conexões entre dados.
+-   **Recon-ng:** Um framework de reconhecimento.
+-   **Shodan:** Motor de busca para dispositivos conectados à internet.
 `,
   },
 ];
