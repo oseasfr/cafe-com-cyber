@@ -11,11 +11,13 @@ const Header = () => {
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <div className="flex items-center space-x-3">
-          <img 
-            src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
-            alt="Café com Cyber"
-            className="h-10 w-10 rounded-full"
-          />
+          <Link to="/">
+            <img 
+              src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
+              alt="Café com Cyber"
+              className="h-10 w-10 rounded-full"
+            />
+          </Link>
           <div>
             <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Café com Cyber
@@ -26,9 +28,9 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#home" className="text-sm font-medium hover:text-primary transition-colors">
+          <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">
             Início
-          </a>
+          </Link>
           <a href="#articles" className="text-sm font-medium hover:text-primary transition-colors">
             Artigos
           </a>
@@ -65,19 +67,19 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden border-t border-border bg-card">
           <nav className="container py-4 space-y-2">
-            <a href="#home" className="block py-2 text-sm font-medium hover:text-primary transition-colors">
+            <Link to="/" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Início
-            </a>
-            <a href="#articles" className="block py-2 text-sm font-medium hover:text-primary transition-colors">
+            </Link>
+            <a href="#articles" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Artigos
             </a>
-            <a href="#news" className="block py-2 text-sm font-medium hover:text-primary transition-colors">
+            <a href="#news" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Notícias
             </a>
-            <a href="#community" className="block py-2 text-sm font-medium hover:text-primary transition-colors">
+            <a href="#community" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Comunidade
             </a>
-            <a href="#events" className="block py-2 text-sm font-medium hover:text-primary transition-colors">
+            <a href="#events" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Eventos
             </a>
           </nav>
