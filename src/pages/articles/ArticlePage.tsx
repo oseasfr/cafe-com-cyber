@@ -1,3 +1,4 @@
+import { AuthorBio } from '../../components/AuthorBio';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { articles } from '../../data/articles';
