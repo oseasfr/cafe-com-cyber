@@ -31,16 +31,16 @@ const Header = () => {
           <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">
             Início
           </Link>
-          <a href="#articles" className="text-sm font-medium hover:text-primary transition-colors">
+          <a href="/articles" className="text-sm font-medium hover:text-primary transition-colors">
             Artigos
           </a>
-          <a href="#news" className="text-sm font-medium hover:text-primary transition-colors">
+          <a href="/news" className="text-sm font-medium hover:text-primary transition-colors">
             Notícias
           </a>
-          <a href="#community" className="text-sm font-medium hover:text-primary transition-colors">
+          <a href="/community" className="text-sm font-medium hover:text-primary transition-colors">
             Comunidade
           </a>
-          <a href="#events" className="text-sm font-medium hover:text-primary transition-colors">
+          <a href="/events" className="text-sm font-medium hover:text-primary transition-colors">
             Eventos
           </a>
         </nav>
