@@ -35,8 +35,8 @@ const App = () => {
         <BrowserRouter>
           <ScrollToTop /> {/* Adicionado para forçar a rolagem para o topo */}
           <Routes>
-            {/* Rota principal que carrega a página inicial */}
-            <Route path="/" element={<Index />} />
+            {/* Rota principal que carrega a página inicial 
+            <Route path="/" element={<Index />} />*/}
             
             {/* Rota para os artigos, com um ID dinâmico */}
             <Route path="/articles/:articleId" element={<ArticlePage />} />
