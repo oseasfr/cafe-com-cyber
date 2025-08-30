@@ -2,12 +2,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Clock, User, ArrowRight, Shield, Lock, Eye } from "lucide-react";
-import { Link } from "react-router-dom"; // Adicione a importação do Link, caso ele não exista
+import { Link } from "react-router-dom";
 
 const ArticlesSection = () => {
   const featuredArticles = [
     {
-      id: 1,
+      id: "fundamentos-api-rest",
       title: "Fundamentos de Segurança em APIs REST",
       description: "Aprenda as melhores práticas para proteger suas APIs contra ataques comuns como injection, broken authentication e muito mais.",
       author: "Ana Santos",
@@ -17,7 +17,7 @@ const ArticlesSection = () => {
       gradient: "from-primary/20 to-accent/20"
     },
     {
-      id: 2,
+      id: "zero-trust-futuro",
       title: "Zero Trust: O Futuro da Segurança Corporativa",
       description: "Entenda o modelo Zero Trust e como implementar uma arquitetura de segurança baseada na filosofia 'nunca confie, sempre verifique'.",
       author: "Carlos Lima",
@@ -27,7 +27,7 @@ const ArticlesSection = () => {
       gradient: "from-accent/20 to-primary/20"
     },
     {
-      id: 3,
+      id: "osint-investigacao-digital",
       title: "OSINT: Técnicas de Investigação Digital",
       description: "Explore ferramentas e metodologias de Open Source Intelligence para investigações de segurança e análise de ameaças.",
       author: "Maria Silva",
@@ -88,11 +88,13 @@ const ArticlesSection = () => {
                     </div>
                   </div>
 
-                  <Button variant="ghost" className="w-full group/btn justify-between p-0 h-auto hover:bg-transparent">
-                    <span className="text-sm font-medium group-hover/btn:text-primary transition-colors">
-                      Ler artigo
-                    </span>
-                    <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                  <Button asChild variant="ghost" className="w-full group/btn justify-between p-0 h-auto hover:bg-transparent">
+                    <Link to={`/articles/${article.id}`} className="flex justify-between w-full">
+                      <span className="text-sm font-medium group-hover/btn:text-primary transition-colors">
+                        Ler artigo
+                      </span>
+                      <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </Link>
                   </Button>
                 </CardContent>
               </Card>
