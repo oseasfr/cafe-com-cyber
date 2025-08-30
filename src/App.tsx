@@ -20,14 +20,22 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <Routes>
-            {/* Rota principal. O site vai carregar a página inicial. */}
+            {/* Opção 1: Deixar o site online.
+              Basta descomentar a linha abaixo. 
+            */}
             <Route path="/" element={<Index />} />
+            
+            {/* Opção 2: Colocar o site em manutenção.
+              - Comente a linha da "Opção 1" acima.
+              - Descomente a linha abaixo.
+            */}
+            {/* <Route path="/" element={<Navigate to="/em-construcao" replace />} /> */}
             
             {/* Rota para os artigos. */}
             <Route path="/articles/:articleId" element={<ArticlePage />} />
 
-            {/* Deixei a rota de manutenção comentada. Se precisar, é só descomentar. */}
-            {/* <Route path="/em-construcao" element={<UnderConstruction />} /> */}
+            {/* Rota da página de manutenção. É necessária para que o redirecionamento funcione. */}
+            <Route path="/em-construcao" element={<UnderConstruction />} />
             
             {/* Rota 404 para URLs não encontradas. */}
             <Route path="*" element={<NotFound />} />
