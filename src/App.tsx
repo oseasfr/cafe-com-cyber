@@ -22,9 +22,9 @@ const App = () => {
             {/* Rota principal que carrega a página inicial */}
             <Route path="/" element={<Index />} />
             
-            {/* A página "em-construcao" pode ser acessada por esta rota */}
+            {/* A página "em-construcao" pode ser acessada por esta rota 
             <Route path="/em-construcao" element={<UnderConstruction />} />
-            
+            */}
             {/* Página 404 - SEMPRE deve ser a última rota */}
             <Route path="*" element={<NotFound />} />
           </Routes>
