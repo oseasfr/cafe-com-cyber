@@ -1,42 +1,11 @@
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Clock, User, ArrowRight, Shield, Lock, Eye } from "lucide-react";
+import { articles } from "../data/articles"; // <--- NOVO: Importa a lista de artigos
 
-const ArticlesSection = () => {
-  const featuredArticles = [
-    {
-      id: 1,
-      title: "Fundamentos de Segurança em APIs REST",
-      description: "Aprenda as melhores práticas para proteger suas APIs contra ataques comuns como injection, broken authentication e muito mais.",
-      author: "Ana Santos",
-      readTime: "8 min",
-      category: "Web Security",
-      icon: Shield,
-      gradient: "from-primary/20 to-accent/20"
-    },
-    {
-      id: 2,
-      title: "Zero Trust: O Futuro da Segurança Corporativa",
-      description: "Entenda o modelo Zero Trust e como implementar uma arquitetura de segurança baseada na filosofia 'nunca confie, sempre verifique'.",
-      author: "Carlos Lima",
-      readTime: "12 min",
-      category: "Architecture",
-      icon: Lock,
-      gradient: "from-accent/20 to-primary/20"
-    },
-    {
-      id: 3,
-      title: "OSINT: Técnicas de Investigação Digital",
-      description: "Explore ferramentas e metodologias de Open Source Intelligence para investigações de segurança e análise de ameaças.",
-      author: "Maria Silva",
-      readTime: "15 min",
-      category: "Intelligence",
-      icon: Eye,
-      gradient: "from-primary/20 to-cyber-glow/20"
-    }
-  ];
-
+export const ArticlesSection = () => {
   return (
     <section id="articles" className="py-20 bg-gradient-to-b from-background to-cyber-darker">
       <div className="container">
@@ -50,53 +19,63 @@ const ArticlesSection = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredArticles.map((article) => {
-            const IconComponent = article.icon;
-            return (
-              <Card key={article.id} className="group hover:shadow-cyber-soft transition-all duration-300 border-border/50 bg-card/50 backdrop-blur">
-                <CardHeader className="space-y-4">
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${article.gradient} flex items-center justify-center group-hover:animate-glow-pulse`}>
-                    <IconComponent className="h-6 w-6 text-primary" />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <Badge variant="secondary" className="text-xs">
-                      {article.category}
-                    </Badge>
-                    <CardTitle className="text-xl group-hover:text-primary transition-colors">
+          {/* <--- MUDANÇA AQUI: Agora mapeamos a lista de artigos do nosso arquivo de dados */}
+          {articles.map((article) => (
+            <Card
+              key={article.id}
+              className="group hover:shadow-cyber-soft transition-all duration-300 border-border/50 bg-card/50 backdrop-blur"
+            >
+              <CardHeader className="space-y-4">
+                {article.imageUrl && (
+                  <img
+                    src={article.imageUrl}
+                    alt={article.title}
+                    className="w-full h-48 object-cover rounded-lg"
+                  />
+                )}
+                
+                <div className="space-y-2">
+                  <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                    <Link to={`/articles/${article.id}`}>
                       {article.title}
-                    </CardTitle>
-                  </div>
-                </CardHeader>
+                    </Link>
+                  </CardTitle>
+                </div>
+              </CardHeader>
 
-                <CardContent className="space-y-4">
-                  <CardDescription className="text-sm leading-relaxed">
-                    {article.description}
-                  </CardDescription>
+              <CardContent className="space-y-4">
+                <CardDescription className="text-sm leading-relaxed">
+                  {article.content.substring(0, 150)}...
+                </CardDescription>
 
-                  <div className="flex items-center justify-between text-xs text-muted-foreground">
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center space-x-1">
-                        <User className="h-3 w-3" />
-                        <span>{article.author}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <Clock className="h-3 w-3" />
-                        <span>{article.readTime}</span>
-                      </div>
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-1">
+                      <User className="h-3 w-3" />
+                      <span>{article.author}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Clock className="h-3 w-3" />
+                      <span>{article.readTime}</span>
                     </div>
                   </div>
+                </div>
 
-                  <Button variant="ghost" className="w-full group/btn justify-between p-0 h-auto hover:bg-transparent">
+                <Button
+                  asChild
+                  variant="ghost"
+                  className="w-full group/btn justify-between p-0 h-auto hover:bg-transparent"
+                >
+                  <Link to={`/articles/${article.id}`}>
                     <span className="text-sm font-medium group-hover/btn:text-primary transition-colors">
                       Ler artigo
                     </span>
                     <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </Button>
-                </CardContent>
-              </Card>
-            );
-          })}
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
         <div className="text-center mt-12">
@@ -109,5 +88,3 @@ const ArticlesSection = () => {
     </section>
   );
 };
-
-export default ArticlesSection;
