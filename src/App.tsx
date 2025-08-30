@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import UnderConstruction from "./pages/UnderConstruction";
+import ArticlePage from "./pages/articles/ArticlePage"; // <--- NOVO: Importando a página de artigo
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/home" element={<Index />} />
             
             {/* ADICIONE SUAS NOVAS ROTAS AQUI, SEMPRE ACIMA DA ROTA 404 */}
+            <Route path="/articles/:articleId" element={<ArticlePage />} /> {/* <--- NOVO: Rota para artigos */}
             
             {/* Página 404 - SEMPRE deve ser a última rota */}
             <Route path="*" element={<NotFound />} />
