@@ -103,10 +103,12 @@ const ArticlesSection = () => {
         </div>
 
         <div className="text-center mt-12">
-         <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-          Ver Todos os Artigos
-          <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+             <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+      <Link to="/articles">
+        Ver Todos os Artigos
+        <ArrowRight className="ml-2 h-5 w-5" />
+      </Link>
+    </Button>
         </div>
       </div>
     </section>
