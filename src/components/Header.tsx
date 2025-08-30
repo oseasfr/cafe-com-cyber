@@ -50,7 +50,7 @@ const Header = () => {
           <Button variant="ghost" size="sm" className="hidden sm:flex">
             <Search className="h-4 w-4" />
           </Button>
-          
+          
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"
@@ -76,3 +76,4 @@ const Header = () => {
             <a href="#news" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Notícias
             </a>
+            <a href="#community" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false
