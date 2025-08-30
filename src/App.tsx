@@ -20,17 +20,14 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <Routes>
-            {/* Redireciona página inicial para em-construção */}
-            <Route path="/" element={<Navigate to="/em-construcao" replace />} />
+            {/* Rota principal que carrega a página inicial */}
+            <Route path="/" element={<Index />} />
             
-            {/* Página em construção */}
-            {/* <Route path="/em-construcao" element={<UnderConstruction />} />*/}
-            
-            {/* Página inicial (caso queira acessar diretamente) */}
-            <Route path="/home" element={<Index />} />
-            
-            {/* ADICIONE SUAS NOVAS ROTAS AQUI, SEMPRE ACIMA DA ROTA 404 */}
-            <Route path="/articles/:articleId" element={<ArticlePage />} /> {/* <--- NOVO: Rota para artigos */}
+            {/* Rota para artigos */}
+            <Route path="/articles/:articleId" element={<ArticlePage />} />
+
+            {/* A página "em-construcao" pode ser acessada por esta rota */}
+            <Route path="/em-construcao" element={<UnderConstruction />} />
             
             {/* Página 404 - SEMPRE deve ser a última rota */}
             <Route path="*" element={<NotFound />} />
