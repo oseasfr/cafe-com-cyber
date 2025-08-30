@@ -1,4 +1,3 @@
-import ArticlePage from "./pages/articles/ArticlePage";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,6 +8,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import UnderConstruction from "./pages/UnderConstruction";
+import ArticlePage from "./pages/articles/ArticlePage"; // <--- NOVO: Importando a página de artigo
 
 const queryClient = new QueryClient();
 
@@ -23,9 +23,12 @@ const App = () => {
             {/* Rota principal que carrega a página inicial */}
             <Route path="/" element={<Index />} />
             
-            {/* A página "em-construcao" pode ser acessada por esta rota 
+            {/* Rota para os artigos, com um ID dinâmico */}
+            <Route path="/articles/:articleId" element={<ArticlePage />} />
+
+            {/* A página "em-construcao" pode ser acessada por esta rota */}
             <Route path="/em-construcao" element={<UnderConstruction />} />
-            */}
+            
             {/* Página 404 - SEMPRE deve ser a última rota */}
             <Route path="*" element={<NotFound />} />
           </Routes>
