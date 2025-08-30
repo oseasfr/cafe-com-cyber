@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import UnderConstruction from "./pages/UnderConstruction";
-import ArticlePage from "./pages/articles/ArticlePage"; // <--- NOVO: Importando a página de artigo
+import ArticlePage from "./pages/articles/ArticlePage";
 
 const queryClient = new QueryClient();
 
@@ -20,16 +20,16 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <Routes>
-            {/* Rota principal que carrega a página inicial */}
+            {/* Rota principal. O site vai carregar a página inicial. */}
             <Route path="/" element={<Index />} />
             
-            {/* Rota para artigos */}
+            {/* Rota para os artigos. */}
             <Route path="/articles/:articleId" element={<ArticlePage />} />
 
-            {/* A página "em-construcao" pode ser acessada por esta rota */}
-            <Route path="/em-construcao" element={<UnderConstruction />} />
+            {/* Deixei a rota de manutenção comentada. Se precisar, é só descomentar. */}
+            {/* <Route path="/em-construcao" element={<UnderConstruction />} /> */}
             
-            {/* Página 404 - SEMPRE deve ser a última rota */}
+            {/* Rota 404 para URLs não encontradas. */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
