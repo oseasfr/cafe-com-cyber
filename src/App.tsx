@@ -24,7 +24,7 @@ const App = () => {
             <Route path="/" element={<Navigate to="/em-construcao" replace />} />
             
             {/* Página em construção */}
-            <Route path="/em-construcao" element={<UnderConstruction />} />
+            {/* <Route path="/em-construcao" element={<UnderConstruction />} />*/}
             
             {/* Página inicial (caso queira acessar diretamente) */}
             <Route path="/home" element={<Index />} />
