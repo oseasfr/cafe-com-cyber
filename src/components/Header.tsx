@@ -31,16 +31,16 @@ const Header = () => {
           <Link to="/" className="text-sm font-medium hover:text-primary transition-colors">
             Início
           </Link>
-          <Link to="/articles" className="text-sm font-medium hover:text-primary transition-colors">
+          <a to="/articles" className="text-sm font-medium hover:text-primary transition-colors">
             Artigos
-          </Link>
-          <a href="#news" className="text-sm font-medium hover:text-primary transition-colors">
+          </a>
+          <a to="/news" className="text-sm font-medium hover:text-primary transition-colors">
             Notícias
           </a>
-          <a href="#community" className="text-sm font-medium hover:text-primary transition-colors">
+          <a to="/community" className="text-sm font-medium hover:text-primary transition-colors">
             Comunidade
           </a>
-          <a href="#events" className="text-sm font-medium hover:text-primary transition-colors">
+          <a to="/events" className="text-sm font-medium hover:text-primary transition-colors">
             Eventos
           </a>
         </nav>
@@ -70,10 +70,23 @@ const Header = () => {
             <Link to="/" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Início
             </Link>
-            <Link to="/articles" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+            <a href="#articles" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Artigos
-            </Link>
+            </a>
             <a href="#news" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Notícias
             </a>
-            <a href="#community" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false
+            <a href="#community" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Comunidade
+            </a>
+            <a href="#events" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Eventos
+            </a>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+};
+
+export default Header;
