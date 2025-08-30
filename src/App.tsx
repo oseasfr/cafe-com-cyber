@@ -32,6 +32,7 @@ const App = () => {
             
             {/* Página 404 - SEMPRE deve ser a última rota */}
             <Route path="*" element={<NotFound />} />
+            <Route path="/articles" element={<ArticlesArchive />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
