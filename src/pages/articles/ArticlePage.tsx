@@ -44,7 +44,7 @@ export default function ArticlePage() {
         )}
 
         {/* Conteúdo do Artigo */}
-        <div className="prose prose-lg max-w-none text-gray-700">
+        <div className="prose prose-lg max-w-none text-gray-300">
           <ReactMarkdown>
             {article.content}
           </ReactMarkdown>
