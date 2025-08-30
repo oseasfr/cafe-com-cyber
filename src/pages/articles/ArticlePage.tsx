@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { articles } from '../../data/articles';
-import { Header } from '../../components/Header.tsx';
-import { Footer } from '../../components/Footer.tsx';
+import Header from '../../components/Header.tsx';
+import Footer from '../../components/Footer.tsx';
 
 export default function ArticlePage() {
   const { articleId } = useParams();
