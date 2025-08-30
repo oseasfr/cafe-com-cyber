@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import { articles } from '../../data/articles';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { AuthorBio } from '../../components/AuthorBio'; // Importe o componente AuthorBio
+import { AuthorBio } from '../../components/AuthorBio';
 
 export default function ArticlePage() {
   const { articleId } = useParams();
@@ -26,17 +26,16 @@ export default function ArticlePage() {
       <Header />
 
       <main className="container mx-auto max-w-4xl px-4 py-8">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-4">
           {article.title}
         </h1>
 
-        {/* Diretório do Autor */}
-        <AuthorBio
-          author={article.author}
-          date={article.date}
-          readTime={article.readTime}
-          authorImage={article.authorImage}
-        />
+        {/* Informações do Autor */}
+        <div className="text-gray-400 mb-8 flex items-center space-x-2">
+          <span className="text-sm">{article.author}</span>
+          <span>•</span>
+          <span className="text-sm">{article.readTime}</span>
+        </div>
         
         {/* Imagem de Capa do Artigo */}
         {article.imageUrl && (
