@@ -1,9 +1,9 @@
-import { AuthorBio } from '../../components/AuthorBio';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import { articles } from '../../data/articles';
-import Header from '../../components/Header.tsx';
-import Footer from '../../components/Footer.tsx';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import { AuthorBio } from '../../components/AuthorBio'; // Importe o componente AuthorBio
 
 export default function ArticlePage() {
   const { articleId } = useParams();
@@ -30,18 +30,20 @@ export default function ArticlePage() {
           {article.title}
         </h1>
 
-        <div className="flex items-center text-gray-500 mb-8">
-          <span className="font-semibold">{article.author}</span>
-          <span className="mx-2">•</span>
-          <span>{article.date}</span>
-          <span className="mx-2">•</span>
-          <span>{article.readTime}</span>
-        </div>
+        {/* Diretório do Autor */}
+        <AuthorBio
+          author={article.author}
+          date={article.date}
+          readTime={article.readTime}
+          authorImage={article.authorImage}
+        />
         
+        {/* Imagem de Capa do Artigo */}
         {article.imageUrl && (
           <img src={article.imageUrl} alt={article.title} className="w-full h-auto object-cover rounded-lg mb-8" />
         )}
 
+        {/* Conteúdo do Artigo */}
         <div className="prose prose-lg max-w-none text-gray-700">
           <ReactMarkdown>
             {article.content}
