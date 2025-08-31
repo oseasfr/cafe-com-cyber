@@ -4,20 +4,5 @@
       "source": "/(.*)",
       "destination": "/"
     }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-transform"
-        },
-        {
-          "key": "Content-Encoding",
-          "value": "identity"
-        }
-      ]
-    }
   ]
 }
