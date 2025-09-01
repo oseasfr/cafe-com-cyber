@@ -1,4 +1,5 @@
 Contact: mailto:cafecomcyber@proton.me
 Expires: 2026-08-31T23:59:59Z
+Canonical: https://www.cafecomcyber.com.br/.well-known/security.txt
 Preferred-Languages: pt-BR
 Encryption: https://cafecomcyber.com.br/pgp/oseasfr.asc
