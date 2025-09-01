@@ -7,3 +7,18 @@ Canonical: https://www.cafecomcyber.com.br/.well-known/security.txt
 Preferred-Languages: pt-BR
 Encryption: https://www.cafecomcyber.com.br/pgp/oseasfr.asc
 -----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEvWCGjevxX5Qn2lIc/ZqnR1StyaEFAmi07ocACgkQ/ZqnR1St
+yaEvcBAAosfs8wkgrY/IRNgSGDTudqQfAKBnyb4Fv6P3RFXPBlXMicSMiYgnbqyZ
+e7ODPRo3Y2Qck73lvDoLuBepKK61w17WAcUV2rGek8vH0OJJ3zW/DqAjKqHAiaYI
+oWCp/m2VHU47L6cYDts0y9nyUARUWrx5GJJlrkbk7AaB6UWXl3xd0sIAHQ75nj9s
+kwZWRSPqPZjjkZiuudg842PTaSD8lF1lWOcnyP7uvEHHQT0EVwyVPEms/PmAX1DT
+FByfhtyQLFGOsKYuUIOhnPFMVBxOfVXDnf06L/ZmlqCVOw6/gODq6W5zD+tzqONw
+l3T1zc4jf7m3wCeT+VCxD/J+jWOL78LQH9de79ugD4gdbJofuUG0L1DjqBS190jn
+2BhEI0NdtIfFZPDXSeowyQIIcB12Mis9YbhaWm9hmP6F2NJnVLI5UjEeZKVpwnNp
+xzCEVLglEezQUBh3JcDfGMG6Kf5Gp11J7FGjbuHq5AOaU1lVdfMZ0I/NN1AYbBmP
+XB/qUjjb16PhQGX9iLaf4Q+KxCmZyb9zqpl9ljRvccBiAI3E2FvOJa3YC3eUDnH5
+0Ry9TGNldVUAjV6lVMmup95qI5qmppAAeErmYn4t54Or9rZsq/0PrxiV0uCNKaFL
+FRapEOlVZNra/d0JusJbYlqXZZQp0NniylfYzwkAbx8Sr5JJmCs=
+=5pvo
+-----END PGP SIGNATURE-----
