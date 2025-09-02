@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Shield, Coffee, Users, BookOpen } from "lucide-react";
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
@@ -37,10 +38,12 @@ const HeroSection = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
-            <BookOpen className="mr-2 h-5 w-5" />
-            Explorar Artigos
-          </Button>
+          <Link to="/articles">
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
+              <BookOpen className="mr-2 h-5 w-5" />
+              Explorar Artigos
+            </Button>
+          </Link>
           <a href="#community">
             <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
               <Users className="mr-2 h-5 w-5" />
