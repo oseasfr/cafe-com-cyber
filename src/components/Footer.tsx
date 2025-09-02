@@ -84,7 +84,7 @@ const Footer = () => {
         <div className="border-t border-border mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center space-x-4 text-sm text-muted-foreground">
-              <span>&copy; 2024 Café com Cyber. Feito com <Coffee className="h-4 w-4 inline-block align-sub" /> e <Shield className="h-4 w-4 inline-block align-sub" /></span>
+              <span>&copy; 2025 | Goiano Uai | Feito com <Coffee className="h-4 w-4 inline-block align-sub" /> e <Shield className="h-4 w-4 inline-block align-sub" /></span>
             </div>
             
             <div className="flex items-center space-x-6 text-sm text-muted-foreground">

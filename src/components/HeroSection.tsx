@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Shield, Coffee, Users, BookOpen } from "lucide-react";
+import { Shield, Coffee, Users, BookOpen, Lock, Eye } from "lucide-react";
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
@@ -20,7 +21,7 @@ const HeroSection = () => {
             <img 
               src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
               alt="Café com Cyber"
-              className="h-24 w-24"
+              className="h-24 w-24 animate-pulsate-blue"
             />
           </div>
           
@@ -37,14 +38,18 @@ const HeroSection = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
-            <BookOpen className="mr-2 h-5 w-5" />
-            Explorar Artigos
-          </Button>
-          <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-            <Users className="mr-2 h-5 w-5" />
-            Conhecer a Comunidade
-          </Button>
+          <Link to="/articles">
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
+              <BookOpen className="mr-2 h-5 w-5" />
+              Explorar Artigos
+            </Button>
+          </Link>
+          <a href="#community">
+            <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              <Users className="mr-2 h-5 w-5" />
+              Conhecer a Comunidade
+            </Button>
+          </a>
         </div>
 
         {/* Stats */}
@@ -75,6 +80,40 @@ const HeroSection = () => {
       <div className="absolute bottom-20 right-10 opacity-30">
         <Coffee className="h-8 w-8 text-accent animate-cyber-float" style={{ animationDelay: "1s" }} />
       </div>
+
+      <style>{`
+        /* Animação para a sombra pulsante */
+        @keyframes pulsate-blue {
+          0%, 100% {
+            filter: drop-shadow(0 0 5px hsl(220, 80%, 60%));
+          }
+          50% {
+            filter: drop-shadow(0 0 15px hsl(220, 80%, 60%));
+          }
+        }
+        .animate-pulsate-blue {
+          animation: pulsate-blue 3s ease-in-out infinite;
+        }
+
+        /* Animação para os ícones flutuantes */
+        @keyframes cyber-float {
+          0%, 100% {
+            transform: translateY(0) translateX(0) scale(1);
+          }
+          25% {
+            transform: translateY(-5px) translateX(2px) scale(1.05);
+          }
+          50% {
+            transform: translateY(0px) translateX(0px) scale(1);
+          }
+          75% {
+            transform: translateY(5px) translateX(-2px) scale(1.05);
+          }
+        }
+        .animate-cyber-float {
+          animation: cyber-float 5s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 };

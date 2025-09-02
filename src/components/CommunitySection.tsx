@@ -34,8 +34,8 @@ const CommunitySection = () => {
             Nossa <span className="text-primary">Comunidade</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Um espaço dedicado à troca de conhecimento sobre Cybersecurity com analistas 
-            apaixonados por segurança da informação
+              Um espaço dedicado à troca de conhecimento sobre Cybersecurity com analistas 
+              apaixonados por segurança da informação
           </p>
         </div>
 
@@ -81,7 +81,7 @@ const CommunitySection = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    {feature.description}
+                      {feature.description}
                   </p>
                 </CardContent>
               </Card>
@@ -99,9 +99,9 @@ const CommunitySection = () => {
           </CardHeader>
           <CardContent className="text-center space-y-6">
             <p className="text-muted-foreground leading-relaxed">
-              Mantemos um ambiente colaborativo focado no aprendizado. Compartilhe conhecimento, 
-              faça perguntas, divulgue eventos relevantes e vamos juntos construir uma comunidade 
-              forte e engajada em cibersegurança.
+                Mantemos um ambiente colaborativo focado no aprendizado. Compartilhe conhecimento, 
+                faça perguntas, divulgue eventos relevantes e vamos juntos construir uma comunidade 
+                forte e engajada em cibersegurança.
             </p>
             
             <div className="flex flex-wrap justify-center gap-4">
@@ -122,7 +122,7 @@ const CommunitySection = () => {
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber"
               onClick={() =>
-              window.open("https://chat.whatsapp.com/DV1aSKqXnzU9yzLle4WpQ3", "_blank")
+                window.open("https://chat.whatsapp.com/DV1aSKqXnzU9yzLle4WpQ3", "_blank")
               }
               >
               <MessageCircle className="mr-2 h-5 w-5" />
