@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import UnderConstruction from "./pages/UnderConstruction";
 import ArticlePage from "./pages/articles/ArticlePage";
 import ArticlesArchive from "./pages/articles/ArticlesArchive";
+import CommunityPage from "./pages/CommunityPage"; // Adicionado: Importação da página da comunidade
 
 // *** Variável de controle: Altere para 'false' para desativar a página de manutenção ***
 const MAINTENANCE_MODE = false;
@@ -62,12 +63,15 @@ const App = () => {
             {/* Rota para os artigos, com um ID dinâmico */}
             <Route path="/articles/:articleId" element={<ArticlePage />} />
 
-            {/* A página "em-construcao" pode ser acessada por esta rota */}
-            <Route path="/em-construcao" element={<UnderConstruction />} />
-            
             {/* Rota para a página de arquivo de artigos */}
             <Route path="/articles" element={<ArticlesArchive />} />
 
+            {/* Rota para a página da comunidade */}
+            <Route path="/community" element={<CommunityPage />} />
+
+            {/* A página "em-construcao" pode ser acessada por esta rota */}
+            <Route path="/em-construcao" element={<UnderConstruction />} />
+            
             {/* Página 404 - SEMPRE deve ser a última rota */}
             <Route path="*" element={<NotFound />} />
           </Routes>
