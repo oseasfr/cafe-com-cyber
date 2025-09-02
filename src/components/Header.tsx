@@ -37,9 +37,9 @@ const Header = () => {
           <Link to="/" className="text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
             Início
           </Link>
-          <Link to="#articles" className="text-sm font-medium hover:text-primary transition-colors">
+          <a href="#articles" className="text-sm font-medium hover:text-primary transition-colors">
             Artigos
-          </Link>
+          </a>
           <a href="#news" className="text-sm font-medium hover:text-primary transition-colors">
             Notícias
           </a>
@@ -76,9 +76,9 @@ const Header = () => {
             <Link to="/" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
               Início
             </Link>
-            <Link to="#articles" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+            <a href="#articles" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Artigos
-            </Link>
+            </a>
             <a href="#news" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Notícias
             </a>
