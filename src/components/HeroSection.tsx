@@ -41,10 +41,12 @@ const HeroSection = () => {
             <BookOpen className="mr-2 h-5 w-5" />
             Explorar Artigos
           </Button>
-          <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-            <Users className="mr-2 h-5 w-5" />
-            Conhecer a Comunidade
-          </Button>
+          <a href="#community">
+            <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              <Users className="mr-2 h-5 w-5" />
+              Conhecer a Comunidade
+            </Button>
+          </a>
         </div>
 
         {/* Stats */}
