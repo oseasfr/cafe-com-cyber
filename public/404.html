@@ -3,16 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Página Não Encontrada</title>
-    <link rel="stylesheet" href="/assets/index-SUA_HASH.css">
+    <title>Desculpe, não encontramos a página</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: #232f3e;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .message {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .home-link {
+            color: #007185;
+            text-decoration: none;
+        }
+
+        .home-link:hover {
+            text-decoration: underline;
+        }
+
+        .image-placeholder {
+            width: 150px;
+            height: 150px;
+            margin-top: 2rem;
+            /* Estilo para simular a imagem, você pode substituir por uma imagem de verdade */
+            background-color: #ccc;
+            border-radius: 50%;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="text-center">
-        <h1 class="text-4xl font-bold mb-4">404</h1>
-        <p class="text-xl text-gray-600 mb-4">Oops! Página não encontrada</p>
-        <a href="/" class="text-blue-500 hover:text-blue-700 underline">
-            Voltar para a página inicial
-        </a>
-    </div>
+<body>
+    <div class="container">
+        <h1 class="title">SORRY</h1>
+        <p class="subtitle">we couldn't find that page</p>
+        <p class="message">
+            Try searching or go to <a href="/" class="home-link">your home page</a>.
+        </p>
+        <div class="image-placeholder"></div>
+        </div>
 </body>
 </html>
