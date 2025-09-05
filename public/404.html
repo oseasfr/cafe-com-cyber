@@ -19,7 +19,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-color: #2c1810; /* fallback color - café escuro */
+            background-color: #2c1810;
             transition: background-image 0.5s ease-in-out;
             position: relative;
         }
@@ -103,6 +103,19 @@
             background-color: #e6951a;
         }
         
+        .debug {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            font-size: 12px;
+            max-width: 300px;
+            z-index: 100;
+            border-radius: 5px;
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5em;
@@ -110,11 +123,16 @@
             p {
                 font-size: 1.2em;
             }
+            .debug {
+                font-size: 10px;
+                max-width: 200px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="loading" id="loading">Carregando...</div>
+    <div class="loading" id="loading">Carregando imagem...</div>
+    <div class="debug" id="debug">Testando caminhos...</div>
     
     <div class="content-wrapper">
         <h1>Essa página não existe!</h1>
@@ -123,58 +141,82 @@
     </div>
     
     <script>
-        const images = [
-            'images-404/001-coffee.png',
-            'images-404/002-coffee.png',
-            'images-404/003-coffee.png',
-            'images-404/004-coffee.png',
-            'images-404/005-coffee.png',
-            'images-404/006-coffee.png',
-            'images-404/007-coffee.png',
-            'images-404/008-coffee.png',
-            'images-404/009-coffee.png',
-            'images-404/010-coffee.jpg'
+        const imageNames = [
+            '001-coffee.png', '002-coffee.png', '003-coffee.png', 
+            '004-coffee.png', '005-coffee.png', '006-coffee.png', 
+            '007-coffee.png', '008-coffee.png', '009-coffee.png', 
+            '010-coffee.jpg'
         ];
         
-        // Selecionar imagem aleatória e aplicar
-        function loadRandomBackground() {
-            const randomIndex = Math.floor(Math.random() * images.length);
-            const selectedImageUrl = images[randomIndex];
+        const debugDiv = document.getElementById('debug');
+        
+        function log(message) {
+            console.log(message);
+            debugDiv.innerHTML += message + '<br>';
+        }
+        
+        function tryImagePath(path) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                
+                img.onload = function() {
+                    log(`✅ FUNCIONOU: ${path}`);
+                    resolve(path);
+                };
+                
+                img.onerror = function() {
+                    log(`❌ Falhou: ${path}`);
+                    reject();
+                };
+                
+                img.src = path;
+            });
+        }
+        
+        async function findWorkingImage() {
+            const randomImage = imageNames[Math.floor(Math.random() * imageNames.length)];
+            log(`Imagem selecionada: ${randomImage}`);
             
-            const img = new Image();
+            const paths = [
+                `images-404/${randomImage}`,
+                `./images-404/${randomImage}`,
+                `/images-404/${randomImage}`,
+                `../images-404/${randomImage}`,
+                `/public/images-404/${randomImage}`,
+                `https://raw.githubusercontent.com/oseasfr/cafe-com-cyber/main/public/images-404/${randomImage}`
+            ];
             
-            img.onload = function() {
-                document.body.style.backgroundImage = `url('${selectedImageUrl}')`;
-                hideLoading();
-            };
+            for (const path of paths) {
+                try {
+                    log(`Testando: ${path}`);
+                    const workingPath = await tryImagePath(path);
+                    return workingPath;
+                } catch (e) {
+                    // continua para o próximo
+                }
+            }
             
-            img.onerror = function() {
-                console.warn('Não foi possível carregar a imagem de fundo:', selectedImageUrl);
-                // Manter apenas a cor de fundo café
-                document.body.style.backgroundColor = '#2c1810';
-                hideLoading();
-            };
-            
-            img.src = selectedImageUrl;
+            throw new Error('Nenhum caminho funcionou');
         }
         
         function hideLoading() {
-            const loading = document.getElementById('loading');
-            loading.classList.add('hidden');
+            document.getElementById('loading').classList.add('hidden');
             setTimeout(() => {
-                loading.style.display = 'none';
-            }, 300);
+                document.getElementById('debug').style.display = 'none';
+            }, 5000); // remove debug após 5 segundos
         }
         
-        // Inicializar quando a página carregar
-        document.addEventListener('DOMContentLoaded', loadRandomBackground);
-        
-        // Fallback caso DOMContentLoaded já tenha disparado
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadRandomBackground);
-        } else {
-            loadRandomBackground();
-        }
+        // Inicializar
+        findWorkingImage()
+            .then(workingPath => {
+                document.body.style.backgroundImage = `url('${workingPath}')`;
+                log(`🎉 Imagem aplicada com sucesso!`);
+                hideLoading();
+            })
+            .catch(() => {
+                log('❌ Nenhuma imagem carregou. Usando cor de fundo.');
+                hideLoading();
+            });
     </script>
 </body>
 </html>
