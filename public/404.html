@@ -3,72 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desculpe, não encontramos a página</title>
+    <title>404 - Página Não Encontrada | Cafe com Cyber</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f2f5;
+            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            text-align: center;
-            height: 100vh;
+            min-height: 100vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s ease-in-out;
+            position: relative;
         }
 
-        .container {
-            max-width: 600px;
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
             padding: 20px;
         }
 
-        .title {
-            font-size: 3.5rem;
-            font-weight: 300;
-            color: #232f3e;
-            margin-bottom: 0.5rem;
+        h1 {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
         }
 
-        .subtitle {
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: #555;
-            margin-bottom: 2rem;
-        }
-
-        .message {
-            font-size: 1rem;
-            color: #555;
+        p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
         }
 
         .home-link {
-            color: #007185;
+            display: inline-block;
+            background-color: #f7a524;
+            color: #ffffff;
+            padding: 12px 25px;
+            border-radius: 5px;
             text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .home-link:hover {
-            text-decoration: underline;
+            background-color: #e6951a;
         }
 
-        .image-placeholder {
-            width: 150px;
-            height: 150px;
-            margin-top: 2rem;
-            /* Estilo para simular a imagem, você pode substituir por uma imagem de verdade */
-            background-color: #ccc;
-            border-radius: 50%;
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            p {
+                font-size: 1.2em;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">SORRY</h1>
-        <p class="subtitle">we couldn't find that page</p>
-        <p class="message">
-            Try searching or go to <a href="/" class="home-link">your home page</a>.
-        </p>
-        <div class="image-placeholder"></div>
-        </div>
+    <div class="content-wrapper">
+        <h1>Essa página não existe!</h1>
+        <p>Aproveite para tomar um café e tente novamente.</p>
+        <a href="/" class="home-link">Voltar para a página inicial</a>
+    </div>
+
+    <script>
+        const images = [
+            '001-coffee.png',
+            '002-coffee.png',
+            '003-coffee.png',
+            '004-coffee.png',
+            '005-coffee.png',
+            '006-coffee.png',
+            '007-coffee.png',
+            '008-coffee.png',
+            '009-coffee.png',
+            '010-coffee.jpg'
+        ];
+
+        const randomIndex = Math.floor(Math.random() * images.length);
+        const selectedImage = images[randomIndex];
+        
+        const imageUrl = '/images-404/' + selectedImage;
+
+        document.body.style.backgroundImage = `url('${imageUrl}')`;
+    </script>
 </body>
 </html>
