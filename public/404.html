@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Página não encontrada - Cafe com Cyber">
     <title>404 - Página Não Encontrada | Cafe com Cyber</title>
     <style>
         body {
@@ -17,10 +19,11 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            background-color: #2c1810; /* fallback color - café escuro */
             transition: background-image 0.5s ease-in-out;
             position: relative;
         }
-
+        
         body::before {
             content: '';
             position: absolute;
@@ -31,15 +34,44 @@
             background-color: rgba(0, 0, 0, 0.6);
             z-index: 1;
         }
-
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            font-size: 1.2em;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
         .content-wrapper {
             position: relative;
             z-index: 2;
             text-align: center;
             max-width: 800px;
             padding: 20px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.3s forwards;
         }
-
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         h1 {
             font-size: 3.5em;
             font-weight: bold;
@@ -47,13 +79,13 @@
             line-height: 1.2;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
         }
-
+        
         p {
             font-size: 1.5em;
             margin-bottom: 30px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
         }
-
+        
         .home-link {
             display: inline-block;
             background-color: #f7a524;
@@ -66,11 +98,11 @@
             transition: background-color 0.3s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-
+        
         .home-link:hover {
             background-color: #e6951a;
         }
-
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5em;
@@ -82,12 +114,14 @@
     </style>
 </head>
 <body>
+    <div class="loading" id="loading">Carregando...</div>
+    
     <div class="content-wrapper">
         <h1>Essa página não existe!</h1>
         <p>Aproveite para tomar um café e tente novamente.</p>
         <a href="/" class="home-link">Voltar para a página inicial</a>
     </div>
-
+    
     <script>
         const images = [
             '001-coffee.png',
@@ -101,13 +135,81 @@
             '009-coffee.png',
             '010-coffee.jpg'
         ];
-
-        const randomIndex = Math.floor(Math.random() * images.length);
-        const selectedImage = images[randomIndex];
         
-        const imageUrl = '/images-404/' + selectedImage;
-
-        document.body.style.backgroundImage = `url('${imageUrl}')`;
+        // Função para testar diferentes caminhos de imagem
+        function tryImagePaths(imageName) {
+            const possiblePaths = [
+                `/images-404/${imageName}`,
+                `./images-404/${imageName}`,
+                `/public/images-404/${imageName}`,
+                `./public/images-404/${imageName}`,
+                `/cafe-com-cyber/public/images-404/${imageName}`,
+                `images-404/${imageName}`
+            ];
+            
+            return new Promise((resolve, reject) => {
+                let currentIndex = 0;
+                
+                function tryNext() {
+                    if (currentIndex >= possiblePaths.length) {
+                        reject(new Error('Nenhum caminho de imagem funcionou'));
+                        return;
+                    }
+                    
+                    const img = new Image();
+                    const currentPath = possiblePaths[currentIndex];
+                    
+                    img.onload = function() {
+                        resolve(currentPath);
+                    };
+                    
+                    img.onerror = function() {
+                        currentIndex++;
+                        tryNext();
+                    };
+                    
+                    img.src = currentPath;
+                }
+                
+                tryNext();
+            });
+        }
+        
+        // Selecionar imagem aleatória e aplicar
+        function loadRandomBackground() {
+            const randomIndex = Math.floor(Math.random() * images.length);
+            const selectedImage = images[randomIndex];
+            
+            tryImagePaths(selectedImage)
+                .then(workingPath => {
+                    document.body.style.backgroundImage = `url('${workingPath}')`;
+                    hideLoading();
+                })
+                .catch(error => {
+                    console.warn('Não foi possível carregar as imagens de fundo:', error);
+                    // Manter apenas a cor de fundo café
+                    document.body.style.backgroundColor = '#2c1810';
+                    hideLoading();
+                });
+        }
+        
+        function hideLoading() {
+            const loading = document.getElementById('loading');
+            loading.classList.add('hidden');
+            setTimeout(() => {
+                loading.style.display = 'none';
+            }, 300);
+        }
+        
+        // Inicializar quando a página carregar
+        document.addEventListener('DOMContentLoaded', loadRandomBackground);
+        
+        // Fallback caso DOMContentLoaded já tenha disparado
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadRandomBackground);
+        } else {
+            loadRandomBackground();
+        }
     </script>
 </body>
 </html>
