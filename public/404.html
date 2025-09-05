@@ -1,232 +1,83 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="Página não encontrada - Cafe com Cyber">
-    <title>404 - Página Não Encontrada | Cafe com Cyber</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #2c1810;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            transition: background-image 0.5s ease-in-out;
-            position: relative;
-        }
-        
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 1;
-        }
-        
-        .content-wrapper {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 800px;
-            padding: 20px;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        h1 {
-            font-size: 3.5em;
-            font-weight: bold;
-            margin-bottom: 20px;
-            line-height: 1.2;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
-        }
-        
-        p {
-            font-size: 1.5em;
-            margin-bottom: 30px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-        }
-        
-        .home-link {
-            display: inline-block;
-            background-color: #f7a524;
-            color: #ffffff;
-            padding: 12px 25px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .home-link:hover {
-            background-color: #e6951a;
-        }
-        
-        .debug {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            background: rgba(255,255,255,0.9);
-            color: black;
-            padding: 15px;
-            font-size: 12px;
-            max-width: 400px;
-            z-index: 100;
-            border-radius: 5px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5em;
-            }
-            p {
-                font-size: 1.2em;
-            }
-            .debug {
-                font-size: 10px;
-                max-width: 250px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página não encontrada</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      max-width: 900px;
+    }
+
+    .mascote {
+      max-width: 250px;
+      margin-right: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #0070f3;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #0059c9;
+    }
+  </style>
 </head>
 <body>
-    <div class="debug" id="debug">Iniciando diagnóstico...<br></div>
-    
-    <div class="content-wrapper">
-        <h1>Essa página não existe!</h1>
-        <p>Aproveite para tomar um café e tente novamente.</p>
-        <a href="/" class="home-link">Voltar para a página inicial</a>
+  <div class="logo">☕ Café com Cyber</div>
+  
+  <div class="container">
+    <!-- Aqui entra seu mascote de café -->
+    <img src="imagens/mascote-cafe.png" alt="Mascote de Café" class="mascote">
+
+    <div class="texto">
+      <h1>OOPS! PÁGINA NÃO ENCONTRADA.</h1>
+      <p>Parece que você pegou o caminho errado...  
+      Nosso mascote do café não conseguiu encontrar a página que você procura.</p>
+      <a href="/" class="btn">VOLTAR PARA O INÍCIO</a>
     </div>
-    
-    <script>
-        const debugDiv = document.getElementById('debug');
-        
-        function log(message) {
-            console.log(message);
-            debugDiv.innerHTML += message + '<br>';
-            debugDiv.scrollTop = debugDiv.scrollHeight;
-        }
-        
-        // URLs diretos do GitHub
-        const githubImages = [
-            'https://raw.githubusercontent.com/oseasfr/cafe-com-cyber/main/public/images-404/001-coffee.png',
-            'https://raw.githubusercontent.com/oseasfr/cafe-com-cyber/main/public/images-404/002-coffee.png',
-            'https://raw.githubusercontent.com/oseasfr/cafe-com-cyber/main/public/images-404/003-coffee.png',
-            'https://raw.githubusercontent.com/oseasfr/cafe-com-cyber/main/public/images-404/004-coffee.png',
-            'https://raw.githubusercontent.com/oseasfr/cafe-com-cyber/main/public/images-404/005-coffee.png',
-            'https://raw.githubusercontent.com/oseasfr/cafe-com-cyber/main/public/images-404/006-coffee.png',
-            'https://raw.githubusercontent.com/oseasfr/cafe-com-cyber/main/public/images-404/007-coffee.png',
-            'https://raw.githubusercontent.com/oseasfr/cafe-com-cyber/main/public/images-404/008-coffee.png',
-            'https://raw.githubusercontent.com/oseasfr/cafe-com-cyber/main/public/images-404/009-coffee.png',
-            'https://raw.githubusercontent.com/oseasfr/cafe-com-cyber/main/public/images-404/010-coffee.jpg'
-        ];
-        
-        function testImage(url) {
-            return new Promise((resolve, reject) => {
-                const img = new Image();
-                const startTime = Date.now();
-                
-                img.onload = function() {
-                    const loadTime = Date.now() - startTime;
-                    log(`✅ SUCESSO (${loadTime}ms): ${url}`);
-                    resolve(url);
-                };
-                
-                img.onerror = function(e) {
-                    const loadTime = Date.now() - startTime;
-                    log(`❌ ERRO (${loadTime}ms): ${url}`);
-                    log(`   → Detalhes: ${e.type || 'erro desconhecido'}`);
-                    reject(new Error('Falha ao carregar'));
-                };
-                
-                // Timeout de 10 segundos
-                setTimeout(() => {
-                    log(`⏰ TIMEOUT: ${url}`);
-                    reject(new Error('Timeout'));
-                }, 10000);
-                
-                log(`🔄 Testando: ${url}`);
-                img.src = url;
-            });
-        }
-        
-        async function loadRandomImage() {
-            log('=== DIAGNÓSTICO DA PÁGINA 404 ===');
-            log(`URL atual: ${window.location.href}`);
-            log(`Conexão: ${navigator.onLine ? 'Online' : 'Offline'}`);
-            log('');
-            
-            // Seleciona uma imagem aleatória
-            const randomIndex = Math.floor(Math.random() * githubImages.length);
-            const selectedUrl = githubImages[randomIndex];
-            
-            log(`Imagem selecionada (#${randomIndex + 1}): ${selectedUrl.split('/').pop()}`);
-            log(`URL completa: ${selectedUrl}`);
-            log('');
-            
-            try {
-                const workingUrl = await testImage(selectedUrl);
-                log('🎉 SUCESSO! Aplicando imagem de fundo...');
-                document.body.style.backgroundImage = `url('${workingUrl}')`;
-                
-                // Remove debug após sucesso
-                setTimeout(() => {
-                    debugDiv.style.display = 'none';
-                }, 3000);
-                
-            } catch (error) {
-                log('❌ FALHA - Tentando próxima imagem...');
-                
-                // Tenta uma imagem diferente
-                const fallbackIndex = (randomIndex + 1) % githubImages.length;
-                const fallbackUrl = githubImages[fallbackIndex];
-                
-                try {
-                    log(`Tentando fallback: ${fallbackUrl.split('/').pop()}`);
-                    const fallbackWorking = await testImage(fallbackUrl);
-                    document.body.style.backgroundImage = `url('${fallbackWorking}')`;
-                    log('✅ Fallback funcionou!');
-                    
-                    setTimeout(() => {
-                        debugDiv.style.display = 'none';
-                    }, 3000);
-                    
-                } catch (e) {
-                    log('❌ Fallback também falhou.');
-                    log('🎨 Mantendo cor de fundo café (#2c1810)');
-                }
-            }
-        }
-        
-        // Inicia o teste
-        loadRandomImage();
-    </script>
+  </div>
 </body>
 </html>
