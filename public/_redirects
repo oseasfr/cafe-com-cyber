@@ -1,0 +1,9 @@
+# Redirects para Cloudflare Pages
+# Todas as rotas não encontradas devem ser redirecionadas para o index.html
+# para que o React Router possa lidar com elas
+
+# Para rotas da aplicação React
+/*    /index.html   200
+
+# Para a página 404 específica (fallback)
+/404  /404.html    404
