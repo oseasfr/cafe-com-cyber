@@ -140,7 +140,7 @@
     }
 
     .error-code {
-      font-size: 6rem;
+      font-size: 4rem;
       font-weight: 800;
       line-height: 1;
       margin-bottom: 1rem;
@@ -157,6 +157,15 @@
       margin-bottom: 1rem;
     }
 
+    .error-description {
+      font-size: 1.125rem;
+      color: hsl(var(--muted-foreground));
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      max-width: 32rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
     .buttons {
       display: flex;
@@ -205,6 +214,9 @@
       transform: translateY(-1px);
     }
 
+    .btn-icon {
+      margin-right: 0.5rem;
+    }
 
     /* Floating Elements */
     .floating-element {
@@ -289,19 +301,17 @@
       }
 
       .error-code {
-        font-size: 8rem;
+        font-size: 6rem;
       }
 
       .error-title {
         font-size: 3rem;
       }
-
-
     }
 
     @media (min-width: 1024px) {
       .error-code {
-        font-size: 9rem;
+        font-size: 7rem;
       }
 
       .error-title {
@@ -361,16 +371,21 @@
       <!-- Error Code -->
       <div class="error-code">404</div>
       <h1 class="error-title">Página não encontrada</h1>
+      
       <!-- CTA Button -->
       <div class="buttons">
         <a href="/" class="btn btn-primary">
-          🏠 Voltar para o Início
+          <span class="btn-icon">🏠</span>
+          Voltar para o Início
         </a>
       </div>
     </div>
 
     <!-- Floating Elements -->
+    <div class="floating-element floating-shield">🛡️</div>
     <div class="floating-element floating-coffee">☕</div>
+    <div class="floating-element floating-book">📚</div>
+    <div class="floating-element floating-users">👥</div>
   </main>
 
   <footer class="footer">
