@@ -32,6 +32,7 @@ const NotFound = () => {
         <div className="container relative z-10 text-center space-y-8">
           {/* Logo animado - Mesmo da home page */}
           <div className="flex items-center justify-center mb-12">
+            <br>
             <img 
               src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
               alt="Café com Cyber"
@@ -50,12 +51,6 @@ const NotFound = () => {
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
               Página não encontrada
             </h2>
-            
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Parece que você pegou o caminho errado... Nosso mascote do café 
-              não conseguiu encontrar a página que você procura. 
-              Que tal tomar um café e tentar novamente?
-            </p>
           </div>
 
           {/* CTA Button - Mesmo estilo da home page */}
