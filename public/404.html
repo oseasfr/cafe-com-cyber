@@ -16,15 +16,37 @@
     :root {
       --background: 0 0% 8%;
       --foreground: 0 0% 95%;
+      --card: 0 0% 12%;
+      --card-foreground: 0 0% 95%;
+      --popover: 0 0% 10%;
+      --popover-foreground: 0 0% 95%;
       --primary: 214 78% 55%;
-      --accent: 214 60% 45%;
+      --primary-foreground: 0 0% 100%;
+      --secondary: 0 0% 20%;
+      --secondary-foreground: 0 0% 90%;
+      --muted: 0 0% 15%;
       --muted-foreground: 0 0% 65%;
+      --accent: 214 60% 45%;
+      --accent-foreground: 0 0% 95%;
+      --destructive: 0 84% 60%;
+      --destructive-foreground: 0 0% 95%;
       --border: 0 0% 25%;
+      --input: 0 0% 20%;
+      --ring: 214 78% 55%;
       --cyber-blue: 214 78% 55%;
       --cyber-blue-muted: 214 60% 45%;
       --cyber-dark: 0 0% 8%;
       --cyber-darker: 0 0% 5%;
+      --cyber-gray: 0 0% 15%;
       --cyber-light: 0 0% 95%;
+      --gradient-cyber: linear-gradient(135deg, hsl(214 78% 55% / 0.1), hsl(214 60% 45% / 0.2));
+      --gradient-dark: linear-gradient(180deg, hsl(0 0% 8%), hsl(0 0% 5%));
+      --gradient-glow: linear-gradient(90deg, transparent, hsl(214 78% 55% / 0.3), transparent);
+      --shadow-cyber: 0 0 20px hsl(214 78% 55% / 0.3);
+      --shadow-soft: 0 4px 20px hsl(0 0% 0% / 0.3);
+      --shadow-glow: 0 0 40px hsl(214 78% 55% / 0.2);
+      --transition-cyber: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius: 0.75rem;
     }
 
     body {
@@ -93,17 +115,17 @@
       overflow: hidden;
     }
 
-    /* Background Effects - Mesmo da home page */
+    /* Background Effects - Usando variáveis do design system */
     .bg-gradient-dark {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, hsl(var(--cyber-dark)), hsl(var(--cyber-darker)));
+      background: var(--gradient-dark);
     }
 
     .bg-gradient-cyber {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, hsl(214 78% 55% / 0.1), hsl(214 60% 45% / 0.2));
+      background: var(--gradient-cyber);
     }
 
     .grid-bg {
@@ -192,25 +214,27 @@
 
     .btn-primary {
       background: hsl(var(--primary));
-      color: white;
-      box-shadow: 0 0 20px hsl(214 78% 55% / 0.3);
+      color: hsl(var(--primary-foreground));
+      box-shadow: var(--shadow-cyber);
+      transition: var(--transition-cyber);
     }
 
     .btn-primary:hover {
       background: hsl(var(--primary) / 0.9);
       transform: translateY(-1px);
-      box-shadow: 0 0 30px hsl(214 78% 55% / 0.4);
+      box-shadow: var(--shadow-glow);
     }
 
     .btn-secondary {
       background: transparent;
       color: hsl(var(--primary));
       border-color: hsl(var(--primary));
+      transition: var(--transition-cyber);
     }
 
     .btn-secondary:hover {
       background: hsl(var(--primary));
-      color: white;
+      color: hsl(var(--primary-foreground));
       transform: translateY(-1px);
     }
 
@@ -259,7 +283,7 @@
       font-size: 0.875rem;
     }
 
-    /* Animations */
+    /* Animations - Exatamente iguais ao HeroSection */
     @keyframes pulsate-blue {
       0%, 100% {
         filter: drop-shadow(0 0 5px hsl(220, 80%, 60%));
