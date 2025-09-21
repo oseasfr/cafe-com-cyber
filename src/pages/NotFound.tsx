@@ -43,12 +43,12 @@
             <div className="space-y-4">
               <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight">
                 <span className="bg-gradient-to-r from-cyber-light via-primary to-accent bg-clip-text">
-                  404 ☕
+                  404
                 </span>
               </h1>
               
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
-                Opa, essa página não existe !
+                ☕ Opa, essa página não existe !
               </h2>
             </div>
 
