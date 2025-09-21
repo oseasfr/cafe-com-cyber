@@ -147,280 +147,13 @@
       padding: 2rem;
     }
 
-    /* Classes Tailwind para compatibilidade */
-    .space-y-4 > * + * {
-      margin-top: 1rem;
-    }
-
-    .space-y-8 > * + * {
-      margin-top: 2rem;
-    }
-
-    .flex {
-      display: flex;
-    }
-
-    .items-center {
-      align-items: center;
-    }
-
-    .justify-center {
-      justify-content: center;
-    }
-
-    .mb-6 {
-      margin-bottom: 1.5rem;
-    }
-
-    .h-24 {
-      height: 6rem;
-    }
-
-    .w-24 {
-      width: 6rem;
-    }
-
-    .text-4xl {
-      font-size: 2.25rem;
-      line-height: 2.5rem;
-    }
-
-    .text-xl {
-      font-size: 1.25rem;
-      line-height: 1.75rem;
-    }
-
-    .text-2xl {
-      font-size: 1.5rem;
-      line-height: 2rem;
-    }
-
-    .text-3xl {
-      font-size: 1.875rem;
-      line-height: 2.25rem;
-    }
-
-    .text-sm {
-      font-size: 0.875rem;
-      line-height: 1.25rem;
-    }
-
-    .font-bold {
-      font-weight: 700;
-    }
-
-    .font-semibold {
-      font-weight: 600;
-    }
-
-    .tracking-tight {
-      letter-spacing: -0.025em;
-    }
-
-    .text-center {
-      text-align: center;
-    }
-
-    .text-muted-foreground {
-      color: hsl(var(--muted-foreground));
-    }
-
-    .text-primary {
-      color: hsl(var(--primary));
-    }
-
-    .text-accent {
-      color: hsl(var(--accent));
-    }
-
-    .bg-gradient-to-r {
-      background-image: linear-gradient(to right, var(--tw-gradient-stops));
-    }
-
-    .from-cyber-light {
-      --tw-gradient-from: hsl(var(--cyber-light));
-      --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(245, 245, 245, 0));
-    }
-
-    .via-primary {
-      --tw-gradient-stops: var(--tw-gradient-from), hsl(var(--primary)), var(--tw-gradient-to, rgba(59, 130, 246, 0));
-    }
-
-    .to-accent {
-      --tw-gradient-to: hsl(var(--accent));
-    }
-
-    .bg-clip-text {
-      -webkit-background-clip: text;
-      background-clip: text;
-    }
-
-    .text-transparent {
-      -webkit-text-fill-color: transparent;
-      color: transparent;
-    }
-
-    .max-w-3xl {
-      max-width: 48rem;
-    }
-
-    .max-w-4xl {
-      max-width: 56rem;
-    }
-
-    .mx-auto {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .flex-col {
-      flex-direction: column;
-    }
-
-    .sm\:flex-row {
-      flex-direction: row;
-    }
-
-    .gap-4 {
-      gap: 1rem;
-    }
-
-    .gap-8 {
-      gap: 2rem;
-    }
-
-    .grid {
-      display: grid;
-    }
-
-    .grid-cols-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .md\:grid-cols-4 {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .md\:text-6xl {
-      font-size: 3.75rem;
-      line-height: 1;
-    }
-
-    .md\:text-2xl {
-      font-size: 1.5rem;
-      line-height: 2rem;
-    }
-
-    .md\:text-3xl {
-      font-size: 1.875rem;
-      line-height: 2.25rem;
-    }
-
-    .lg\:text-7xl {
-      font-size: 4.5rem;
-      line-height: 1;
-    }
-
-    .mt-16 {
-      margin-top: 4rem;
-    }
-
-    .opacity-30 {
-      opacity: 0.3;
-    }
-
-    .opacity-20 {
-      opacity: 0.2;
-    }
-
-    .absolute {
-      position: absolute;
-    }
-
-    .top-20 {
-      top: 5rem;
-    }
-
-    .left-10 {
-      left: 2.5rem;
-    }
-
-    .bottom-20 {
-      bottom: 5rem;
-    }
-
-    .right-10 {
-      right: 2.5rem;
-    }
-
-    .top-1\/2 {
-      top: 50%;
-    }
-
-    .left-20 {
-      left: 5rem;
-    }
-
-    .top-1\/3 {
-      top: 33.333333%;
-    }
-
-    .right-20 {
-      right: 5rem;
-    }
-
-    .h-8 {
-      height: 2rem;
-    }
-
-    .w-8 {
-      width: 2rem;
-    }
-
-    .h-6 {
-      height: 1.5rem;
-    }
-
-    .w-6 {
-      width: 1.5rem;
-    }
-
+    /* Apenas as animações essenciais que já existem no projeto */
     .animate-pulsate-blue {
       animation: pulsate-blue 3s ease-in-out infinite;
     }
 
     .animate-cyber-float {
       animation: cyber-float 5s ease-in-out infinite;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: var(--transition-cyber);
-      border: 2px solid transparent;
-      min-width: 200px;
-    }
-
-    .btn-primary {
-      background: hsl(var(--primary));
-      color: hsl(var(--primary-foreground));
-      box-shadow: var(--shadow-cyber);
-    }
-
-    .btn-primary:hover {
-      background: hsl(var(--primary) / 0.9);
-      transform: translateY(-1px);
-      box-shadow: var(--shadow-glow);
-    }
-
-    .btn-icon {
-      margin-right: 0.5rem;
     }
 
 
@@ -467,46 +200,6 @@
       }
     }
 
-    /* Responsive */
-    @media (min-width: 640px) {
-      .sm\:flex-row {
-        flex-direction: row;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .md\:text-6xl {
-        font-size: 3.75rem;
-        line-height: 1;
-      }
-
-      .md\:text-2xl {
-        font-size: 1.5rem;
-        line-height: 2rem;
-      }
-
-      .md\:text-3xl {
-        font-size: 1.875rem;
-        line-height: 2.25rem;
-      }
-
-      .md\:grid-cols-4 {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .lg\:text-7xl {
-        font-size: 4.5rem;
-        line-height: 1;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .container {
-        padding: 1rem;
-      }
-    }
   </style>
 </head>
 <body>
@@ -522,14 +215,18 @@
     </div>
   </header>
   
-  <main class="main">
-    <!-- Background Effects - Exatamente como HeroSection -->
-    <div class="bg-gradient-dark"></div>
-    <div class="bg-gradient-cyber"></div>
-    <div class="grid-bg"></div>
+  <main class="min-h-[80vh] flex items-center justify-center relative overflow-hidden">
+    <!-- Background Effects - Usando classes existentes -->
+    <div class="absolute inset-0 bg-gradient-dark"></div>
+    <div class="absolute inset-0 bg-gradient-cyber opacity-30"></div>
+    
+    <!-- Animated Grid Background -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="h-full w-full bg-[linear-gradient(hsl(var(--border))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border))_1px,transparent_1px)] bg-[size:50px_50px] animate-pulse"></div>
+    </div>
 
-    <div class="container">
-      <!-- Main Hero Content - Estrutura idêntica ao HeroSection -->
+    <div class="container relative z-10 text-center space-y-8">
+      <!-- Main Hero Content -->
       <div class="space-y-4">
         <div class="flex items-center justify-center mb-6">
           <img 
@@ -550,47 +247,20 @@
         </p>
       </div>
 
-      <!-- CTA Buttons - Estrutura idêntica ao HeroSection -->
+      <!-- CTA Buttons -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="/" class="btn btn-primary">
-          <span class="btn-icon">🏠</span>
-          Voltar para o Início
+        <a href="/" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary border border-transparent rounded-md shadow-sm hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+          🏠 Voltar para o Início
         </a>
-      </div>
-
-      <!-- Stats - Estrutura idêntica ao HeroSection -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-16">
-        <div class="text-center">
-          <div class="text-2xl md:text-3xl font-bold text-primary">404</div>
-          <div class="text-sm text-muted-foreground">Página não encontrada</div>
-        </div>
-        <div class="text-center">
-          <div class="text-2xl md:text-3xl font-bold text-primary">☕</div>
-          <div class="text-sm text-muted-foreground">Café com Cyber</div>
-        </div>
-        <div class="text-center">
-          <div class="text-2xl md:text-3xl font-bold text-primary">🔍</div>
-          <div class="text-sm text-muted-foreground">Busque novamente</div>
-        </div>
-        <div class="text-center">
-          <div class="text-2xl md:text-3xl font-bold text-primary">∞</div>
-          <div class="text-sm text-muted-foreground">Possibilidades</div>
-        </div>
       </div>
     </div>
 
-    <!-- Floating Elements - Exatamente como HeroSection -->
+    <!-- Floating Elements -->
     <div class="absolute top-20 left-10 opacity-30">
       <div class="h-8 w-8 text-primary animate-cyber-float">🛡️</div>
     </div>
     <div class="absolute bottom-20 right-10 opacity-30">
       <div class="h-8 w-8 text-accent animate-cyber-float" style="animation-delay: 1s;">☕</div>
-    </div>
-    <div class="absolute top-1/2 left-20 opacity-20">
-      <div class="h-6 w-6 text-primary animate-cyber-float" style="animation-delay: 2s;">📚</div>
-    </div>
-    <div class="absolute top-1/3 right-20 opacity-20">
-      <div class="h-6 w-6 text-accent animate-cyber-float" style="animation-delay: 3s;">👥</div>
     </div>
   </main>
 
