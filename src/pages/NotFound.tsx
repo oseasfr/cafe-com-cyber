@@ -42,7 +42,7 @@
             {/* Error Code com gradiente - Mesmo estilo da home page */}
             <div className="space-y-4">
               <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight">
-                <span className="bg-gradient-to-r from-cyber-light via-primary to-accent bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-cyber-light via-primary to-accent bg-clip-text">
                   404
                 </span>
               </h1>
