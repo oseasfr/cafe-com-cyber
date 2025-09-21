@@ -214,29 +214,6 @@
       transform: translateY(-1px);
     }
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-      max-width: 64rem;
-      margin: 0 auto;
-    }
-
-    .stat {
-      text-align: center;
-    }
-
-    .stat-number {
-      font-size: 2rem;
-      font-weight: 700;
-      color: hsl(var(--primary));
-      margin-bottom: 0.5rem;
-    }
-
-    .stat-label {
-      font-size: 0.875rem;
-      color: hsl(var(--muted-foreground));
-    }
 
     /* Floating Elements */
     .floating-element {
@@ -332,13 +309,6 @@
         font-size: 1.25rem;
       }
 
-      .stats {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .stat-number {
-        font-size: 2.5rem;
-      }
     }
 
     @media (min-width: 1024px) {
@@ -418,33 +388,10 @@
           📚 Explorar Artigos
         </a>
       </div>
-
-      <!-- Stats -->
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-number">404</div>
-          <div class="stat-label">Página não encontrada</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">☕</div>
-          <div class="stat-label">Café com Cyber</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">🔍</div>
-          <div class="stat-label">Busque novamente</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">∞</div>
-          <div class="stat-label">Possibilidades</div>
-        </div>
-      </div>
     </div>
 
     <!-- Floating Elements -->
-    <div class="floating-element floating-shield">🛡️</div>
     <div class="floating-element floating-coffee">☕</div>
-    <div class="floating-element floating-book">📚</div>
-    <div class="floating-element floating-users">👥</div>
   </main>
 
   <footer class="footer">
