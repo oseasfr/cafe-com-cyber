@@ -3,81 +3,236 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página não encontrada</title>
+  <title>404 - Página não encontrada | Café com Cyber</title>
+  <meta name="description" content="Página não encontrada. Volte para o início do Café com Cyber e explore nossos artigos sobre cibersegurança.">
+  <link rel="icon" href="/favicon.ico">
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fff;
-      color: #222;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      color: #1e293b;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
+    }
+
+    .header {
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5);
     }
 
     .logo {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 24px;
-      font-weight: bold;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e293b;
+      text-decoration: none;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
     }
 
     .container {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      padding: 3rem;
+      max-width: 64rem;
+      width: 100%;
+    }
+
+    .content {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      max-width: 900px;
+      text-align: center;
+      gap: 2rem;
+    }
+
+    .image-container {
+      flex-shrink: 0;
     }
 
     .mascote {
-      max-width: 250px;
-      margin-right: 40px;
+      width: 12rem;
+      height: 12rem;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
+    .text-content {
+      max-width: 32rem;
     }
 
-    p {
-      font-size: 1rem;
-      margin-bottom: 20px;
+    .error-code {
+      font-size: 6rem;
+      font-weight: 800;
+      color: #3b82f6;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .error-title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+
+    .error-description {
+      font-size: 1.125rem;
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      max-width: 20rem;
     }
 
     .btn {
-      display: inline-block;
-      background: #0070f3;
-      color: #fff;
-      padding: 12px 24px;
-      border-radius: 25px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
       text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s;
+      border: 2px solid transparent;
     }
 
-    .btn:hover {
-      background: #0059c9;
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #3b82f6;
+      border-color: #3b82f6;
+    }
+
+    .btn-secondary:hover {
+      background: #3b82f6;
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    .footer {
+      padding: 1rem 2rem;
+      text-align: center;
+      color: #64748b;
+      font-size: 0.875rem;
+      background: rgba(255, 255, 255, 0.5);
+      border-top: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+    @media (min-width: 768px) {
+      .content {
+        flex-direction: row;
+        text-align: left;
+        gap: 3rem;
+      }
+
+      .buttons {
+        flex-direction: row;
+        max-width: none;
+      }
+
+      .error-code {
+        font-size: 8rem;
+      }
+
+      .error-title {
+        font-size: 2.5rem;
+      }
+
+      .mascote {
+        width: 16rem;
+        height: 16rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 2rem 1.5rem;
+      }
+
+      .error-code {
+        font-size: 4rem;
+      }
+
+      .error-title {
+        font-size: 1.5rem;
+      }
+
+      .mascote {
+        width: 10rem;
+        height: 10rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="logo">☕ Café com Cyber</div>
+  <header class="header">
+    <a href="/" class="logo">☕ Café com Cyber</a>
+  </header>
   
-  <div class="container">
-    <!-- Aqui entra seu mascote de café -->
-    <img src="images-404/001-coffee.png" alt="Mascote de Café" class="mascote">
+  <main class="main">
+    <div class="container">
+      <div class="content">
+        <div class="image-container">
+          <img src="/images-404/001-coffee.png" alt="Café com Cyber - Página não encontrada" class="mascote">
+        </div>
 
-    <div class="texto">
-      <h1>OOPS! PÁGINA NÃO ENCONTRADA.</h1>
-      <p>Parece que você pegou o caminho errado...  
-      Nosso mascote do café não conseguiu encontrar a página que você procura.</p>
-      <a href="/" class="btn">VOLTAR PARA O INÍCIO</a>
+        <div class="text-content">
+          <div class="error-code">404</div>
+          <h1 class="error-title">Oops! Página não encontrada</h1>
+          <p class="error-description">
+            Parece que você pegou o caminho errado... Nosso mascote do café 
+            não conseguiu encontrar a página que você procura. 
+            Que tal tomar um café e tentar novamente?
+          </p>
+          
+          <div class="buttons">
+            <a href="/" class="btn btn-primary">
+              ☕ Voltar para o início
+            </a>
+            <a href="/articles" class="btn btn-secondary">
+              📚 Ver artigos
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </main>
+
+  <footer class="footer">
+    <p>Se você acredita que isso é um erro, entre em contato conosco.</p>
+  </footer>
 </body>
 </html>
