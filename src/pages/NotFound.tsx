@@ -1,7 +1,7 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Shield, Coffee, BookOpen, Users, Home, ArrowLeft } from "lucide-react";
+import { Shield, Coffee, Home } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -31,7 +31,7 @@ const NotFound = () => {
 
         <div className="container relative z-10 text-center space-y-8">
           {/* Logo animado - Mesmo da home page */}
-          <div className="flex items-center justify-center mb-6">
+          <div className="flex items-center justify-center mb-12">
             <img 
               src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
               alt="Café com Cyber"
@@ -58,41 +58,16 @@ const NotFound = () => {
             </p>
           </div>
 
-          {/* CTA Buttons - Mesmo estilo da home page */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          {/* CTA Button - Mesmo estilo da home page */}
+          <div className="flex justify-center items-center">
             <Link to="/">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
                 <Home className="mr-2 h-5 w-5" />
                 Voltar para o Início
               </Button>
             </Link>
-            <Link to="/articles">
-              <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                <BookOpen className="mr-2 h-5 w-5" />
-                Explorar Artigos
-              </Button>
-            </Link>
           </div>
 
-          {/* Stats - Adaptado para 404 */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-16">
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-primary">404</div>
-              <div className="text-sm text-muted-foreground">Página não encontrada</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-primary">☕</div>
-              <div className="text-sm text-muted-foreground">Café com Cyber</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-primary">🔍</div>
-              <div className="text-sm text-muted-foreground">Busque novamente</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-primary">∞</div>
-              <div className="text-sm text-muted-foreground">Possibilidades</div>
-            </div>
-          </div>
         </div>
 
         {/* Floating Elements - Mesmo da home page */}
@@ -101,12 +76,6 @@ const NotFound = () => {
         </div>
         <div className="absolute bottom-20 right-10 opacity-30">
           <Coffee className="h-8 w-8 text-accent animate-cyber-float" style={{ animationDelay: "1s" }} />
-        </div>
-        <div className="absolute top-1/2 left-20 opacity-20">
-          <BookOpen className="h-6 w-6 text-primary animate-cyber-float" style={{ animationDelay: "2s" }} />
-        </div>
-        <div className="absolute top-1/3 right-20 opacity-20">
-          <Users className="h-6 w-6 text-accent animate-cyber-float" style={{ animationDelay: "3s" }} />
         </div>
 
         {/* CSS para animações - Mesmo da home page */}
