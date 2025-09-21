@@ -50,12 +50,6 @@
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
                 Página não encontrada
               </h2>
-              
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-                Parece que você pegou o caminho errado... Nosso mascote do café 
-                não conseguiu encontrar a página que você procura. 
-                Que tal tomar um café e tentar novamente?
-              </p>
             </div>
 
             {/* CTA Button - Mesmo estilo da home page */}
