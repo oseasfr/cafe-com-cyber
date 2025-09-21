@@ -47,9 +47,7 @@
                 </span>
               </h1>
               
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
-                ☕ Opa, essa página não existe !
-              </h2>
+             <p class="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto"> ☕ Opa, essa página <span class="text-primary font-semibold">não</span> existe ! .</p>
             </div>
 
             {/* CTA Button - Mesmo estilo da home page */}
