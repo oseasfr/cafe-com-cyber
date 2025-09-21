@@ -48,7 +48,7 @@
               </h1>
               
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
-                Página não encontrada
+                Opa, essa página não existe! ☕
               </h2>
             </div>
 
