@@ -43,11 +43,11 @@
             <div className="space-y-4">
               <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight">
                 <span className="bg-gradient-to-r from-cyber-light via-primary to-accent bg-clip-text">
-                  404
+                  Opa
                 </span>
               </h1>
               
-             <p class="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto"> ☕ Opa, essa página <span class="text-primary font-semibold">não existe</span> !</p>
+             <p class="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto"> ☕ Essa página <span class="text-primary font-semibold">não existe</span> !</p>
             </div>
 
             {/* CTA Button - Mesmo estilo da home page */}
