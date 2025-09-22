@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+limport { Link } from 'react-router-dom';
 import { Coffee, Github, Linkedin, Mail, Shield } from "lucide-react";
 
 const Footer = () => {
@@ -26,7 +26,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              Disseminando conhecimento em segurança da informação de forma colaborativa.
+              Conhecimento em Segurança da Informação de forma colaborativa.
             </p>
           </div>
 
@@ -40,7 +40,7 @@ const Footer = () => {
               <li><a href="#articles" className="text-muted-foreground hover:text-primary transition-colors">Artigos</a></li>
               <li><a href="#news" className="text-muted-foreground hover:text-primary transition-colors">Notícias</a></li>
               <li><a href="#community" className="text-muted-foreground hover:text-primary transition-colors">Comunidade</a></li>
-              <li><a href="#events" className="text-muted-foreground hover:text-primary transition-colors">Links Úteis</a></li>
+              <li><a href="#useful-links" className="text-muted-foreground hover:text-primary transition-colors">Links Úteis</a></li>
             </ul>
           </div>
 
