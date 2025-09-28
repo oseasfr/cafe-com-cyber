@@ -4,8 +4,8 @@ const UsefulLinks = () => {
   return (
     <div style={{ padding: 0, margin: 0, minHeight: '100vh' }}> 
       <iframe
-        src="https://oseasfr-dashy.vercel.app/"
-        title="Dashy Useful Links"
+        src="https://dashy-links-uteis.vercel.app/"
+        title="Links Úteis"
         width="100vw"
         height="1200px" 
         style={{ 
