@@ -13,6 +13,8 @@ import UnderConstruction from "./pages/UnderConstruction";
 import ArticlePage from "./pages/articles/ArticlePage";
 import ArticlesArchive from "./pages/articles/ArticlesArchive";
 import CommunityPage from "./pages/CommunityPage"; // Adicionado: Importação da página da comunidade
+// NOVO: Importação do componente da nova página
+import UsefulLinks from "./pages/UsefulLinks"; 
 
 // *** Variável de controle: Altere para 'false' para desativar a página de manutenção ***
 const MAINTENANCE_MODE = false;
@@ -68,6 +70,9 @@ const App = () => {
 
             {/* Rota para a página da comunidade */}
             <Route path="/community" element={<CommunityPage />} />
+            
+            {/* NOVO: Rota para o seu dashboard Dashy */}
+            <Route path="/useful-links" element={<UsefulLinks />} />
 
             {/* A página "em-construcao" pode ser acessada por esta rota */}
             <Route path="/em-construcao" element={<UnderConstruction />} />
