@@ -1,33 +1,28 @@
 // src/pages/UsefulLinks.tsx
 
 import React from 'react';
-// Se você usa componentes como Header e Footer, importe-os aqui:
-// import Header from '../components/Header'; 
-// import Footer from '../components/Footer';
+// Importe Header e Footer se necessário, mas vou remover o conteúdo extra
+// para que o Dashy seja o foco principal.
 
 const UsefulLinks = () => {
   return (
-    <div className="container mx-auto py-10 px-4"> 
+    // Reduza o padding ou margin do div container para encostar o Dashy
+    // Se quiser remover o espaço em branco acima, remova `py-10` ou ajuste para `pt-0`
+    <div className="container mx-auto py-10 px-4" style={{ paddingTop: 0, paddingBottom: 0 }}> 
       
-      {/* Você pode adicionar seu Header aqui se não for global */}
+      {/* A área de título e descrição foi removida! 
+      */}
       
-      <h1 className="text-3xl font-bold mb-4">Central de Links e Ferramentas</h1>
-      <p className="text-gray-600 mb-6">
-        Este dashboard é powered by Dashy e contém todos os links e recursos importantes.
-      </p>
-      
-      {/* O IFRAME DO DASHY - AJUSTE A ALTURA (height) CONFORME O SEU DASHBOARD */}
+      {/* O IFRAME DO DASHY */}
       <iframe
         src="https://oseasfr-dashy.vercel.app/"
         title="Dashy Useful Links"
         width="100%"
         height="1200px" 
-        style={{ border: '1px solid #e2e8f0', borderRadius: '8px', minHeight: '80vh' }} 
+        style={{ border: 'none', minHeight: '80vh', display: 'block' }} 
       >
         Seu navegador não suporta iframes.
       </iframe>
-      
-      {/* Você pode adicionar seu Footer aqui se não for global */}
       
     </div>
   );
