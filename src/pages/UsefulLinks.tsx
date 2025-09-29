@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Usefullinks = () => {
+const UsefulLinks = () => {
   return (
     <div style={{ padding: 0, margin: 0, minHeight: '100vh' }}> 
       <iframe
@@ -24,4 +24,4 @@ const Usefullinks = () => {
   );
 };
 
-export default Usefullinks;
+export default UsefulLinks;
