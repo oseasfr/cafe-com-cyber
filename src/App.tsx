@@ -14,7 +14,7 @@ import ArticlePage from "./pages/articles/ArticlePage";
 import ArticlesArchive from "./pages/articles/ArticlesArchive";
 import CommunityPage from "./pages/CommunityPage"; // Adicionado: Importação da página da comunidade
 // NOVO: Importação do componente da nova página
-import UsefulLinks from "./pages/links-uteis"; 
+import linksuteis from "./pages/links-uteis"; 
 
 // *** Variável de controle: Altere para 'false' para desativar a página de manutenção ***
 const MAINTENANCE_MODE = false;
