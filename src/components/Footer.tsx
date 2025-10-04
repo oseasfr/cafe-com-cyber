@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Coffee, Github, Linkedin, Mail, Shield } from "lucide-react";
+import { Coffee, Github, Linkedin, Instagram, Shield } from "lucide-react";
 
 const Footer = () => {
   const handleHomeClick = () => {
@@ -73,7 +73,7 @@ const Footer = () => {
                   <Linkedin className="h-4 w-4" />
                 </a>
                 <a href="#" target="_blank" rel="noopener noreferrer">
-                  <Mail className="h-4 w-4" />
+                  <Instagram className="h-4 w-4" />
                 </a>
               </div>
             </div>
