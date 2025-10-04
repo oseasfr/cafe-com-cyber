@@ -66,13 +66,13 @@ const Footer = () => {
               </p>
               
               <div className="flex space-x-2">
-                <a href="#" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/cafecomcyber" target="_blank" rel="noopener noreferrer">
                   <Github className="h-4 w-4" />
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/company/cafecomcyber/" target="_blank" rel="noopener noreferrer">
                   <Linkedin className="h-4 w-4" />
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer">
+                <a href="http://instagra.com/cafecomcyber_" target="_blank" rel="noopener noreferrer">
                   <Instagram className="h-4 w-4" />
                 </a>
               </div>
