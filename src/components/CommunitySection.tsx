@@ -126,7 +126,7 @@ const CommunitySection = () => {
               }
               >
               <MessageCircle className="mr-2 h-5 w-5" />
-              Participar do Grupo do Whatsapp
+              Entrar no grupo do Whatsapp
             </Button>
           </CardContent>
         </Card>
