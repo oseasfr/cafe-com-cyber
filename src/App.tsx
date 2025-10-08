@@ -5,35 +5,23 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-
-// Importação das páginas
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import UnderConstruction from "./pages/UnderConstruction";
 import ArticlePage from "./pages/articles/ArticlePage";
 import ArticlesArchive from "./pages/articles/ArticlesArchive";
-import CommunityPage from "./pages/CommunityPage"; // Adicionado: Importação da página da comunidade
-// NOVO: Importação do componente da nova página
+import CommunityPage from "./pages/CommunityPage";
 import UsefulLinks from "./pages/useful-links"; 
-
-// *** Variável de controle: Altere para 'false' para desativar a página de manutenção ***
-const MAINTENANCE_MODE = false;
-
-// Componente para rolar a página para o topo em cada mudança de rota
+const MAINTENANCE_MODE = true;
 const ScrollToTop = () => {
   const { pathname } = useLocation();
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-
   return null;
 };
-
 const queryClient = new QueryClient();
-
 const App = () => {
-  // Se o modo de manutenção estiver ativado, renderiza apenas a página de manutenção
   if (MAINTENANCE_MODE) {
     return (
       <QueryClientProvider client={queryClient}>
@@ -49,15 +37,13 @@ const App = () => {
       </QueryClientProvider>
     );
   }
-
-  // Se o modo de manutenção estiver desativado, renderiza as rotas normais
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <ScrollToTop /> {/* Adicionado para forçar a rolagem para o topo */}
+          <ScrollToTop />
           <Routes>
             {/* Rota principal que carrega a página inicial */}
             <Route path="/" element={<Index />} />
@@ -85,5 +71,4 @@ const App = () => {
     </QueryClientProvider>
   );
 };
-
 export default App;
