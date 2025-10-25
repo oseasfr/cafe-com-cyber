@@ -12,7 +12,7 @@ import ArticlePage from "./pages/articles/ArticlePage";
 import ArticlesArchive from "./pages/articles/ArticlesArchive";
 import CommunityPage from "./pages/CommunityPage";
 import UsefulLinks from "./pages/useful-links"; 
-const MAINTENANCE_MODE = true;
+const MAINTENANCE_MODE = false;
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
