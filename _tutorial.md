@@ -1,8 +1,17 @@
-> enable site
+## cafecomcyber.com.br
 
-edit /userdata/conf.yml
+> enable site cafecomcyber.com.br
 
-line 56 allowConfigEdit: false [true]
+- https://github.com/oseasfr/cafe-com-cyber/src/App.tsx
 
-> enable edit dashy-ccc
+edit App.tsx
 
+update line 15 const MAINTENANCE_MODE = [false;] to [true;]
+
+## dashy-ccc
+
+- https://github.com/cafecomcyber/dashy-ccc/blob/master/user-data/conf.yml
+
+edit /conf.yml
+
+update line 56 allowConfigEdit: [false] --> [true]
