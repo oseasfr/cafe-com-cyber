@@ -14,4 +14,4 @@ update line 15 const MAINTENANCE_MODE = [false;] to [true;]
 
 edit /conf.yml
 
-update line 56 allowConfigEdit: [false] --> [true]
+update line 55 disableConfigurationForNonAdmin: [true] --> [false]
