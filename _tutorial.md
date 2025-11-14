@@ -2,7 +2,7 @@
 
 > enable site cafecomcyber.com.br
 
-- https://github.com/oseasfr/cafe-com-cyber/src/App.tsx
+- https://github.com/oseasfr/cafe-com-cyber/blob/main/src/App.tsx
 
 edit App.tsx
 
