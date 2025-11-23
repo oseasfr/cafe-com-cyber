@@ -19,7 +19,7 @@ import UsefulLinks from "./pages/useful-links";
 import GeradorDeSenhas from "./pages/gerador-de-senhas"; 
 
 // 🚨 CONTROLE DE MANUTENÇÃO
-const MAINTENANCE_MODE = true; 
+const MAINTENANCE_MODE = false; 
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
