@@ -15,8 +15,8 @@ import ArticlesArchive from "./pages/articles/ArticlesArchive";
 import CommunityPage from "./pages/CommunityPage";
 import UsefulLinks from "./pages/useful-links";
 
-// NOVO IMPORT: Componente GeradorDeSenhas
-import GeradorDeSenhas from "./pages/GeradorDeSenhas"; 
+// 🚨 CORREÇÃO: O import agora usa o nome do arquivo com hífens
+import GeradorDeSenhas from "./pages/gerador-de-senhas"; 
 
 // 🚨 CONTROLE DE MANUTENÇÃO
 const MAINTENANCE_MODE = true; 
@@ -41,7 +41,7 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <Routes>
-              {/* TUDO VAI PARA EM CONSTRUÇÃO, incluindo /gerador-de-senhas */}
+              {/* TUDO VAI PARA EM CONSTRUÇÃO */}
               <Route path="*" element={<UnderConstruction />} />
             </Routes>
           </BrowserRouter>
@@ -62,7 +62,7 @@ const App = () => {
             {/* Rota principal que carrega a página inicial */}
             <Route path="/" element={<Index />} />
             
-            {/* Rota correta para o Gerador de Senhas */}
+            {/* ROTA PARA O GERADOR: /gerador-de-senhas */}
             <Route path="/gerador-de-senhas" element={<GeradorDeSenhas />} />
 
             {/* Rota para os artigos, com um ID dinâmico */}
