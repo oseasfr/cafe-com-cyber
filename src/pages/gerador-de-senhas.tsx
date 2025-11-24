@@ -1,10 +1,50 @@
 // src/pages/gerador-de-senhas.tsx
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const GeradorDeSenhas = () => {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    const adjustIframeHeight = () => {
+      if (iframeRef.current) {
+        try {
+          const iframeDocument =
+            iframeRef.current.contentDocument ||
+            iframeRef.current.contentWindow?.document;
+          if (iframeDocument) {
+            const height = iframeDocument.body.scrollHeight;
+            iframeRef.current.style.height = `${height + 20}px`;
+          }
+        } catch (e) {
+          console.log('Não foi possível ajustar altura automaticamente devido a CORS');
+        }
+      }
+    };
+
+    const iframe = iframeRef.current;
+    if (iframe) {
+      iframe.addEventListener('load', adjustIframeHeight);
+    }
+
+    return () => {
+      if (iframe) {
+        iframe.removeEventListener('load', adjustIframeHeight);
+      }
+    };
+  }, []);
+
   return (
-    <div style={{ width: '100%', height: '100vh', margin: 0, padding: 0, overflow: 'hidden' }}>
+    <div
+      style={{
+        padding: 0,
+        margin: 0,
+        minHeight: '100vh',
+        overflow: 'hidden',
+        width: '100%',
+      }}
+    >
       <iframe
+        ref={iframeRef}
         src="https://gerador-de-senhas-cme.pages.dev/"
         title="Gerador de Senhas"
         style={{
@@ -15,7 +55,7 @@ const GeradorDeSenhas = () => {
           minHeight: '600px',
           margin: 0,
           padding: 0,
-          overflow: 'hidden'
+          overflow: 'hidden',
         }}
         scrolling="no"
       >
