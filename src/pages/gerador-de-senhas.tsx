@@ -1,18 +1,19 @@
-import Header from "@/components/Header";
-
-export default function GeradorDeSenhas() {
+const GeradorSenhas = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header showPasswordGenerator={true} />
       <iframe
-        src="https://gerador-de-senhas-cme.pages.dev/"
+        src="https://cafecomcyber.com.br/gerador-de-senhas/"
         title="Gerador de Senhas"
-        style={{
+        style={{ 
           flex: 1,
           width: '100%',
           border: 'none',
         }}
-      />
+      >
+        Seu navegador não suporta iframes.
+      </iframe>
     </div>
   );
-}
+};
+
+export default GeradorSenhas;
