@@ -15,11 +15,11 @@ const UsefulLinks = () => {
           border: 'none',
           display: 'block',
           width: '100%',
-          height: '3000px', 
-          minHeight: '100vh',
+          height: '100vh', // Volta para 100% da altura da tela
+          minHeight: '600px',
           margin: 0,
           padding: 0,
-          overflow: 'auto'
+          overflow: 'auto' // Permite rolagem interna no iframe
         }}
       >
         Seu navegador não suporta iframes.
