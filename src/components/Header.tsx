@@ -46,9 +46,9 @@ const Header = () => {
           <a href="#community" className="text-sm font-medium hover:text-primary transition-colors">
             Comunidade
           </a>
-          <a href="#events" className="text-sm font-medium hover:text-primary transition-colors">
-            Eventos
-          </a>
+          <Link to="/links-uteis" className="text-sm font-medium hover:text-primary transition-colors">
+            Links Úteis
+          </Link>
         </nav>
 
         {/* Right Actions */}
@@ -85,9 +85,9 @@ const Header = () => {
             <a href="#community" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Comunidade
             </a>
-            <a href="#events" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
-              Eventos
-            </a>
+            <Link to="/links-uteis" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Links Úteis
+            </Link>
           </nav>
         </div>
       )}
