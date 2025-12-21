@@ -1,18 +1,18 @@
-import React from 'react'
+import Header from "@/components/Header";
 
 export default function GeradorDeSenhas() {
   return (
-    <iframe
-      src="https://gerador-de-senhas-cme.pages.dev/"
-      title="Gerador de Senhas"
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        border: 'none',
-      }}
-    />
-  )
+    <div className="min-h-screen bg-background flex flex-col">
+      <Header showPasswordGenerator={true} />
+      <iframe
+        src="https://gerador-de-senhas-cme.pages.dev/"
+        title="Gerador de Senhas"
+        style={{
+          flex: 1,
+          width: '100%',
+          border: 'none',
+        }}
+      />
+    </div>
+  );
 }
