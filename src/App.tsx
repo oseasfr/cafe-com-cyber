@@ -13,7 +13,7 @@ import ArticlesArchive from "./pages/articles/ArticlesArchive";
 import CommunityPage from "./pages/CommunityPage";
 import LinksUteis from "./pages/links-uteis";
 import GeradorDeSenhas from "./pages/gerador-de-senhas"; 
-const MAINTENANCE_MODE = false; 
+const MAINTENANCE_MODE = true; 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
   useEffect(() => {
