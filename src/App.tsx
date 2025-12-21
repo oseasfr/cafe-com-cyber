@@ -29,12 +29,16 @@ const App = () => {
         <TooltipProvider>
           <Toaster />
           <Sonner />
+          // ...
           <BrowserRouter>
             <Routes>
-              {/* TUDO VAI PARA EM CONSTRUÇÃO */}
+              {/* EXCEÇÃO: ROTA PARA O GERADOR DE SENHAS */}
+              <Route path="/gerador-de-senhas" element={<GeradorDeSenhas />} />
+              {/* TUDO O MAIS VAI PARA EM CONSTRUÇÃO */}
               <Route path="*" element={<UnderConstruction />} />
             </Routes>
           </BrowserRouter>
+// ...
         </TooltipProvider>
       </QueryClientProvider>
     );
