@@ -14,7 +14,7 @@ import CommunityPage from "./pages/CommunityPage";
 import LinksUteis from "./pages/links-uteis";
 import GeradorDeSenhas from "./pages/gerador-de-senhas"; 
 
-const MAINTENANCE_MODE = true; 
+const MAINTENANCE_MODE = false; 
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
