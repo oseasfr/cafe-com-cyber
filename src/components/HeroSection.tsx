@@ -17,7 +17,7 @@ const HeroSection = () => {
       <div className="container relative z-10 text-center space-y-8">
         {/* Main Hero Content */}
         <div className="space-y-4">
-          <div className="flex items-center justify-center mb-6">
+          <div className="flex items-center justify-center mb-6 mt-8 md:mt-0">
             <img 
               src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
               alt="Café com Cyber"
