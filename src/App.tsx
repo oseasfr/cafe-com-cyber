@@ -11,7 +11,7 @@ import UnderConstruction from "./pages/UnderConstruction";
 import ArticlePage from "./pages/articles/ArticlePage";
 import ArticlesArchive from "./pages/articles/ArticlesArchive";
 import CommunityPage from "./pages/CommunityPage";
-import UsefulLinks from "./pages/useful-links";
+import LinksUteis from "./pages/links-uteis";
 import GeradorDeSenhas from "./pages/gerador-de-senhas"; 
 const MAINTENANCE_MODE = false; 
 const ScrollToTop = () => {
@@ -58,7 +58,7 @@ const App = () => {
             {/* Rota para a página da comunidade */}
             <Route path="/community" element={<CommunityPage />} />
             {/* Rota para os links úteis */}
-            <Route path="/useful-links" element={<UsefulLinks />} />
+            <Route path="/links-uteis" element={<LinksUteis />} />
             {/* A página "em-construcao" pode ser acessada por esta rota */}
             <Route path="/em-construcao" element={<UnderConstruction />} />
             {/* Página 404 - SEMPRE deve ser a última rota */}
