@@ -1,129 +1,96 @@
-import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Link } from 'react-router-dom';
+import { Shield, Menu, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Button } from "./ui/button";
-import { Separator } from "./ui/separator";
-import { cn } from "@/lib/utils";
 
-interface HeaderProps {
-  showPasswordGenerator?: boolean;
-}
-
-const Header = ({ showPasswordGenerator = false }: HeaderProps) => {
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const handleHomeClick = () => {
+    // Scroll to top of the page
+    window.scrollTo(0, 0);
+    setIsMenuOpen(false); // Close mobile menu
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
-        <div className="mr-4 hidden md:flex">
-          <Link to="/" className="mr-6 flex items-center space-x-2">
-            <span className="hidden font-bold sm:inline-block">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-16 items-center justify-between">
+        {/* Logo - Ícone fixo no topo */}
+        <div className="flex items-center space-x-3">
+          <Link to="/" onClick={handleHomeClick}>
+            <img 
+              src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
+              alt="Café com Cyber"
+              className="h-10 w-10"
+            />
+          </Link>
+          <div className="hidden sm:block">
+            <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Café com Cyber
-            </span>
-          </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
-            <Link
-              to="/articles"
-              className="text-sm font-medium hover:text-primary transition-colors"
-            >
-              Artigos
-            </Link>
-            <Link
-              to="/community"
-              className="text-sm font-medium hover:text-primary transition-colors"
-            >
-              Comunidade
-            </Link>
-            <Link
-              to="/links-uteis"
-              className="text-sm font-medium hover:text-primary transition-colors"
-            >
-              Links Úteis
-            </Link>
-            {showPasswordGenerator && (
-              <Link
-                to="/gerador-de-senhas"
-                className="text-sm font-medium hover:text-primary transition-colors"
-              >
-                Gerador de Senhas
-              </Link>
-            )}
-          </nav>
-        </div>
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <nav className="flex items-center">
-            <Button
-              variant="ghost"
-              className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
-              onClick={toggleMenu}
-            >
-              <Menu className="h-6 w-6" />
-              <span className="sr-only">Toggle Menu</span>
-            </Button>
-          </nav>
-        </div>
-      </div>
-      <div className={cn("fixed inset-0 top-14 z-50 grid h-[calc(100vh-3.5rem)] grid-flow-row auto-rows-max overflow-auto p-6 pb-32 shadow-md animate-in slide-in-from-bottom-80 md:hidden", isMenuOpen ? "block bg-background" : "hidden")}>
-        <div className="relative z-20 grid gap-6 rounded-md bg-popover p-4 text-popover-foreground shadow-md">
-          <Link to="/" className="flex items-center space-x-2">
-            <span className="font-bold">Café com Cyber</span>
-          </Link>
-          <nav className="grid grid-flow-row auto-rows-max text-sm">
-            <Link
-              to="/articles"
-              className="block py-2 text-sm font-medium hover:text-primary transition-colors"
-              onClick={toggleMenu}
-            >
-              Artigos
-            </Link>
-            <Link
-              to="/community"
-              className="block py-2 text-sm font-medium hover:text-primary transition-colors"
-              onClick={toggleMenu}
-            >
-              Comunidade
-            </Link>
-            <Link
-              to="/links-uteis"
-              className="block py-2 text-sm font-medium hover:text-primary transition-colors"
-              onClick={toggleMenu}
-            >
-              Links Úteis
-            </Link>
-            {showPasswordGenerator && (
-              <Link
-                to="/gerador-de-senhas"
-                className="block py-2 text-sm font-medium hover:text-primary transition-colors"
-                onClick={toggleMenu}
-              >
-                Gerador de Senhas
-              </Link>
-            )}
-          </nav>
-          <Separator />
-          <div className="flex flex-col space-y-2">
-            <Link
-              to="/em-construcao"
-              className="block py-2 text-sm font-medium hover:text-primary transition-colors"
-              onClick={toggleMenu}
-            >
-              Login
-            </Link>
+            </h1>
+            <p className="text-xs text-muted-foreground">Conteúdos diversos sobre Cybersecurity</p>
           </div>
         </div>
-        <Button
-          variant="ghost"
-          className="absolute right-4 top-4 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
-          onClick={toggleMenu}
-        >
-          <X className="h-6 w-6" />
-          <span className="sr-only">Close Menu</span>
-        </Button>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-8">
+          <Link to="/" className="text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
+            Início
+          </Link>
+          <a href="#articles" className="text-sm font-medium hover:text-primary transition-colors">
+            Artigos
+          </a>
+          <a href="#news" className="text-sm font-medium hover:text-primary transition-colors">
+            Notícias
+          </a>
+          <a href="#community" className="text-sm font-medium hover:text-primary transition-colors">
+            Comunidade
+          </a>
+          <a href="#events" className="text-sm font-medium hover:text-primary transition-colors">
+            Eventos
+          </a>
+        </nav>
+
+        {/* Right Actions */}
+        <div className="flex items-center space-x-4">
+          <Button variant="ghost" size="sm" className="hidden sm:flex">
+            <Search className="h-4 w-4" />
+          </Button>
+          
+          {/* Mobile Menu Button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <Menu className="h-5 w-5" />
+          </Button>
+        </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden border-t border-border bg-card">
+          <nav className="container py-4 space-y-2">
+            <Link to="/" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
+              Início
+            </Link>
+            <a href="#articles" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Artigos
+            </a>
+            <a href="#news" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Notícias
+            </a>
+            <a href="#community" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Comunidade
+            </a>
+            <a href="#events" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Eventos
+            </a>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
