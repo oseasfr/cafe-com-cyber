@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Shield, Menu, Search } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
@@ -53,10 +53,6 @@ const Header = () => {
 
         {/* Right Actions */}
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="sm" className="hidden sm:flex">
-            <Search className="h-4 w-4" />
-          </Button>
-          
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"
@@ -71,28 +67,4 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t border-border bg-card">
-          <nav className="container py-4 space-y-2">
-            <Link to="/" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
-              Início
-            </Link>
-            <a href="#articles" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
-              Artigos
-            </a>
-            <a href="#news" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
-              Notícias
-            </a>
-            <a href="#community" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
-              Comunidade
-            </a>
-            <Link to="/links-uteis" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
-              Links Úteis
-            </Link>
-          </nav>
-        </div>
-      )}
-    </header>
-  );
-};
-
-export default Header;
+        <div className="md:hidde
