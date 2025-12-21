@@ -13,63 +13,61 @@ import ArticlesArchive from "./pages/articles/ArticlesArchive";
 import CommunityPage from "./pages/CommunityPage";
 import LinksUteis from "./pages/links-uteis";
 import GeradorDeSenhas from "./pages/gerador-de-senhas"; 
+
 const MAINTENANCE_MODE = true; 
+
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  return null;
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
 };
+
 const queryClient = new QueryClient();
+
 const App = () => {
-  if (MAINTENANCE_MODE) {
-    return (
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          // ...
-          <BrowserRouter>
-            <Routes>
-              <Route path="/gerador-de-senhas" element={<GeradorDeSenhas />} />
-              <Route path="/links-uteis" element={<LinksUteis />} />
-              <Route path="*" element={<UnderConstruction />} />
-            </Routes>
-          </BrowserRouter>
-// ...
-        </TooltipProvider>
-      </QueryClientProvider>
-    );
-  }
-  return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            {/* Rota principal que carrega a página inicial */}
-            <Route path="/" element={<Index />} />
-            {/* ROTA PARA O GERADOR: /gerador-de-senhas */}
-            <Route path="/gerador-de-senhas" element={<GeradorDeSenhas />} />
-            {/* Rota para os artigos, com um ID dinâmico */}
-            <Route path="/articles/:articleId" element={<ArticlePage />} />
-            {/* Rota para a página de arquivo de artigos */}
-            <Route path="/articles" element={<ArticlesArchive />} />
-            {/* Rota para a página da comunidade */}
-            <Route path="/community" element={<CommunityPage />} />
-            {/* Rota para os links úteis */}
-            <Route path="/links-uteis" element={<LinksUteis />} />
-            {/* A página "em-construcao" pode ser acessada por esta rota */}
-            <Route path="/em-construcao" element={<UnderConstruction />} />
-            {/* Página 404 - SEMPRE deve ser a última rota */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  );
+  if (MAINTENANCE_MODE) {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/gerador-de-senhas" element={<GeradorDeSenhas />} />
+              <Route path="/links-uteis" element={<LinksUteis />} />
+              <Route path="*" element={<UnderConstruction />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    );
+  }
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/gerador-de-senhas" element={<GeradorDeSenhas />} />
+            <Route path="/articles/:articleId" element={<ArticlePage />} />
+            <Route path="/articles" element={<ArticlesArchive />} />
+            <Route path="/community" element={<CommunityPage />} />
+            <Route path="/links-uteis" element={<LinksUteis />} />
+            <Route path="/em-construcao" element={<UnderConstruction />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
 };
+
 export default App;
