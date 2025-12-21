@@ -2,7 +2,7 @@ const GeradorSenhas = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <iframe
-        src="https://cafecomcyber.com.br/gerador-de-senhas/"
+        src="https://gerador-de-senhas-cme.pages.dev/"
         title="Gerador de Senhas"
         style={{ 
           flex: 1,
