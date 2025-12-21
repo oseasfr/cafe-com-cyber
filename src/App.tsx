@@ -32,11 +32,8 @@ const App = () => {
           // ...
           <BrowserRouter>
             <Routes>
-              {/* EXCEÇÃO: ROTA PARA O GERADOR DE SENHAS */}
               <Route path="/gerador-de-senhas" element={<GeradorDeSenhas />} />
-              {/* EXCEÇÃO: ROTA PARA O LINKS UTEIS */}
               <Route path="/links-uteis" element={<LinksUteis />} />
-              {/* TUDO O MAIS VAI PARA EM CONSTRUÇÃO */}
               <Route path="*" element={<UnderConstruction />} />
             </Routes>
           </BrowserRouter>
