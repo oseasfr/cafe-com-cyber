@@ -1,9 +1,6 @@
-import Header from "@/components/Header";
-
 const UsefulLinks = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Header showPasswordGenerator={true} />
       <iframe
         src="https://dashy-ccc.vercel.app/"
         title="Links Úteis"
