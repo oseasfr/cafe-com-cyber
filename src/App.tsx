@@ -35,6 +35,8 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
             <Routes>
+              <Route path="/gerador-de-senhas" element={<GeradorDeSenhas />} />
+              <Route path="/links-uteis" element={<LinksUteis />} />
               <Route path="*" element={<UnderConstruction />} />
             </Routes>
           </BrowserRouter>
