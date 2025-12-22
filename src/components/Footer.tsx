@@ -37,9 +37,9 @@ const Footer = () => {
               <li>
                 <Link to="/" onClick={handleHomeClick} className="text-muted-foreground hover:text-primary transition-colors">Início</Link>
               </li>
-              <li><a href="#articles" className="text-muted-foreground hover:text-primary transition-colors">Artigos</a></li>
-              <li><a href="#news" className="text-muted-foreground hover:text-primary transition-colors">Notícias</a></li>
-              <li><a href="#community" className="text-muted-foreground hover:text-primary transition-colors">Comunidade</a></li>
+              <li><a href="articles" className="text-muted-foreground hover:text-primary transition-colors">Artigos</a></li>
+              <li><a href="news" className="text-muted-foreground hover:text-primary transition-colors">Notícias</a></li>
+              <li><a href="community" className="text-muted-foreground hover:text-primary transition-colors">Comunidade</a></li>
               <li><a href="links-uteis" className="text-muted-foreground hover:text-primary transition-colors">Links Úteis</a></li>
               <li><a href="gerador-de-senhas" className="text-muted-foreground hover:text-primary transition-colors">Gerador de Senhas</a></li>
             </ul>
