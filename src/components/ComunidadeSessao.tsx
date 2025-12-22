@@ -27,7 +27,7 @@ const ComunidadeSessao = () => {
   ];
 
   return (
-    <section id="Comunidade" className="py-20 bg-gradient-cyber">
+    <section id="comunidade" className="py-20 bg-gradient-cyber">
       <div className="container">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
