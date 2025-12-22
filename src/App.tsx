@@ -10,7 +10,7 @@ import NotFound from "./pages/NotFound";
 import UnderConstruction from "./pages/UnderConstruction";
 import ArticlePage from "./pages/articles/ArticlePage";
 import ArticlesArchive from "./pages/articles/ArticlesArchive";
-import CommunityPage from "./pages/CommunityPage";
+import ComunidadeSessao from "./pages/Comunidade";
 import LinksUteis from "./pages/links-uteis";
 import GeradorDeSenhas from "./pages/gerador-de-senhas"; 
 
@@ -57,7 +57,7 @@ const App = () => {
             <Route path="/gerador-de-senhas" element={<GeradorDeSenhas />} />
             <Route path="/articles/:articleId" element={<ArticlePage />} />
             <Route path="/articles" element={<ArticlesArchive />} />
-            <Route path="/community" element={<CommunityPage />} />
+            <Route path="/Comunidade" element={<ComunidadeSessao />} />
             <Route path="/links-uteis" element={<LinksUteis />} />
             <Route path="/em-construcao" element={<UnderConstruction />} />
             <Route path="*" element={<NotFound />} />
