@@ -2,7 +2,7 @@ const UsefulLinks = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <iframe
-        src="https://dashy-ccc.vercel.app/"
+        src="https://dashy-ccc.vercel.app/?homeUrl=https://www.cafecomcyber.com.br"
         title="Links Úteis"
         style={{ 
           flex: 1,
