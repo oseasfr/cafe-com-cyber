@@ -44,7 +44,7 @@ const HeroSection = () => {
               Explorar Artigos
             </Button>
           </Link>
-          <a href="#community">
+          <a href="#comunidade">
             <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
               <Users className="mr-2 h-5 w-5" />
               Conhecer a Comunidade
