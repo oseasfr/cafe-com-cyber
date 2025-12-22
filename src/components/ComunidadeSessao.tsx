@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Users, MessageCircle, Calendar, Trophy, Coffee, Lightbulb, Share2 } from "lucide-react";
 
-const CommunitySection = () => {
+const ComunidadeSessao = () => {
   const communityFeatures = [
     {
       icon: MessageCircle,
@@ -27,7 +27,7 @@ const CommunitySection = () => {
   ];
 
   return (
-    <section id="community" className="py-20 bg-gradient-cyber">
+    <section id="Comunidade" className="py-20 bg-gradient-cyber">
       <div className="container">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -135,4 +135,4 @@ const CommunitySection = () => {
   );
 };
 
-export default CommunitySection;
+export default ComunidadeSessao;
