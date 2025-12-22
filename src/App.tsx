@@ -10,7 +10,7 @@ import NotFound from "./pages/NotFound";
 import UnderConstruction from "./pages/UnderConstruction";
 import ArticlePage from "./pages/articles/ArticlePage";
 import ArticlesArchive from "./pages/articles/ArticlesArchive";
-import ComunidadeSessao from "./pages/Comunidade";
+import Comunidade from "./pages/Comunidade";
 import LinksUteis from "./pages/links-uteis";
 import GeradorDeSenhas from "./pages/gerador-de-senhas"; 
 
