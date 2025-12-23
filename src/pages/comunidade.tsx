@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import comunidadesessao from "@/components/comunidade-sessao";
+import ComunidadeSessao from "@/components/ComunidadeSessao";
 
 const comunidade = () => {
   return (
