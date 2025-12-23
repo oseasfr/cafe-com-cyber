@@ -2,16 +2,16 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ComunidadeSessao from "@/components/ComunidadeSessao";
 
-const comunidade = () => {
+const ComunidadePagina = () => {
   return (
     <div>
       <Header />
       <main>
-        <comunidadesessao />
+        <ComunidadeSessao />
       </main>
       <Footer />
     </div>
   );
 };
 
-export default comunidadesessao;
+export default ComunidadePagina;
