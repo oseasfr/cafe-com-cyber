@@ -4,8 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import NotFound from '../NotFound';
 import { artigos } from '../../data/artigos'; 
-// CORREÇÃO AQUI: ArticleContent -> ArtigoConteudo
-import ArtigoConteudo from '@/components/ArtigoConteudo'; 
+import ArticleContent  from '@/components/ArticleContent'; 
 
 const ArtigosPagina = () => {
   const { artigoId } = useParams(); 
