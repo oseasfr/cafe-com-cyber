@@ -8,8 +8,8 @@ import { useLocation } from 'react-router-dom';
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import UnderConstruction from "./pages/UnderConstruction";
-import ArticlePage from "./pages/articles/ArticlePage";
-import ArticlesArchive from "./pages/articles/ArticlesArchive";
+import ArtigosPagina from "./pages/artigos/ArtigosPagina";
+import ArtigosArquivos from "./pages/artigos/ArtigosArquivos";
 import ComunidadePagina from "./pages/Comunidade";
 import LinksUteis from "./pages/links-uteis";
 import GeradorDeSenhas from "./pages/gerador-de-senhas"; 
@@ -55,8 +55,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/gerador-de-senhas" element={<GeradorDeSenhas />} />
-            <Route path="/articles/:articleId" element={<ArticlePage />} />
-            <Route path="/articles" element={<ArticlesArchive />} />
+            <Route path="/artigos/:artigoId" element={<ArtigosPagina />} />
+            <Route path="/artigos" element={<ArtigosArquivos />} />
             <Route path="/Comunidade" element={<ComunidadePagina />} />
             <Route path="/links-uteis" element={<LinksUteis />} />
             <Route path="/em-construcao" element={<UnderConstruction />} />
