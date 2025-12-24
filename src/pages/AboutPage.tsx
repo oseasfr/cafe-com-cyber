@@ -82,55 +82,6 @@ const AboutPage = () => {
             </CardContent>
           </Card>
         </div>
-
-        {/* Nossa Missão */}
-        <div className="mb-12">
-          <Card className="border-primary/20 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur">
-            <CardHeader>
-              <div className="flex items-center gap-3 mb-4">
-                <Target className="h-6 w-6 text-primary" />
-                <CardTitle className="text-2xl">Nossa Missão</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Disseminar conhecimento em segurança da informação de forma colaborativa, 
-                acessível e prática, fortalecendo a comunidade brasileira de cybersecurity 
-                e contribuindo para um ambiente digital mais seguro para todos.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Nossos Valores */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-8 text-center">
-            Nossos <span className="text-primary">Valores</span>
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {values.map((value, index) => {
-              const IconComponent = value.icon;
-              return (
-                <Card key={index} className="border-border/50 bg-card/50 backdrop-blur hover:border-primary/50 transition-all">
-                  <CardHeader>
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className="p-2 rounded-lg bg-primary/10">
-                        <IconComponent className="h-5 w-5 text-primary" />
-                      </div>
-                      <CardTitle className="text-xl">{value.title}</CardTitle>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {value.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              );
-            })}
-          </div>
-        </div>
-
         {/* CTA Final */}
         <div className="text-center mb-8">
           <Card className="border-primary/20 bg-gradient-to-br from-primary/10 to-accent/10 backdrop-blur">
@@ -151,19 +102,6 @@ const AboutPage = () => {
               </Button>
             </CardContent>
           </Card>
-        </div>
-
-        {/* Botão Voltar no Final */}
-        <div className="text-center">
-          <Button
-            asChild
-            variant="outline"
-          >
-            <Link to="/">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Voltar para Início
-            </Link>
-          </Button>
         </div>
       </main>
 
