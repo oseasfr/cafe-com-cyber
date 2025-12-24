@@ -1,56 +1,36 @@
+// src/pages/artigos/ArtigosPagina.tsx
 import { useParams } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
-import { articles } from '../../data/articles';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import { AuthorBio } from '../../components/AuthorBio';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import NotFound from '../NotFound';
+// ALTERAÇÃO 1: Importação de dados renomeada
+import { artigos } from '../../data/artigos'; 
+// Supondo que você tenha um componente para o conteúdo do artigo
+import ArticleContent from '@/components/ArticleContent'; 
 
-export default function ArticlePage() {
-  const { articleId } = useParams();
-  const article = articles.find(a => a.id === articleId);
+// ALTERAÇÃO 2: Renomeação do componente
+const ArtigosPagina = () => {
+  // ALTERAÇÃO 3: Renomeação do parâmetro de rota
+  const { artigoId } = useParams(); 
+  
+  // ALTERAÇÃO 4: Renomeação da variável
+  const artigo = artigos.find(a => a.id === artigoId); 
 
-  if (!article) {
-    return (
-      <>
-        <Header />
-        <main className="container mx-auto p-8 text-center">
-          <h1 className="text-2xl font-bold text-red-500">Artigo não encontrado.</h1>
-        </main>
-        <Footer />
-      </>
-    );
+  if (!artigo) {
+    return <NotFound />;
   }
 
   return (
     <div>
       <Header />
-
-      <main className="container mx-auto max-w-4xl px-4 py-8">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-white leading-tight mb-4">
-          {article.title}
-        </h1>
-
-        {/* Informações do Autor */}
-        <div className="text-gray-400 mb-8 flex items-center space-x-2">
-          <span className="text-sm">{article.author}</span>
-          <span>•</span>
-          <span className="text-sm">{article.readTime}</span>
-        </div>
-        
-        {/* Imagem de Capa do Artigo */}
-        {article.imageUrl && (
-          <img src={article.imageUrl} alt={article.title} className="w-full h-auto object-cover rounded-lg mb-8" />
-        )}
-
-        {/* Conteúdo do Artigo */}
-        <div className="prose prose-lg max-w-none text-gray-300">
-          <ReactMarkdown>
-            {article.content}
-          </ReactMarkdown>
-        </div>
+      <main>
+        {/* ALTERAÇÃO 5: Uso da variável renomeada */}
+        <ArticleContent artigo={artigo} /> 
       </main>
-
       <Footer />
     </div>
   );
-}
+};
+
+// ALTERAÇÃO 6: Renomeação do export
+export default ArtigosPagina;
