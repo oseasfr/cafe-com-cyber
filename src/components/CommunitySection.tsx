@@ -39,34 +39,6 @@ const CommunitySection = () => {
           </p>
         </div>
 
-        {/* Community Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          <Card className="text-center border-border/50 bg-card/30 backdrop-blur hover:border-primary/50 transition-colors">
-            <CardContent className="pt-6">
-              <div className="text-2xl md:text-3xl font-bold text-primary mb-2">100+</div>
-              <div className="text-sm text-muted-foreground">Analistas Ativos</div>
-            </CardContent>
-          </Card>
-          <Card className="text-center border-border/50 bg-card/30 backdrop-blur hover:border-primary/50 transition-colors">
-            <CardContent className="pt-6">
-              <div className="text-2xl md:text-3xl font-bold text-primary mb-2">500+</div>
-              <div className="text-sm text-muted-foreground">Discussões por Mês</div>
-            </CardContent>
-          </Card>
-          <Card className="text-center border-border/50 bg-card/30 backdrop-blur hover:border-primary/50 transition-colors">
-            <CardContent className="pt-6">
-              <div className="text-2xl md:text-3xl font-bold text-primary mb-2">24/7</div>
-              <div className="text-sm text-muted-foreground">Suporte Colaborativo</div>
-            </CardContent>
-          </Card>
-          <Card className="text-center border-border/50 bg-card/30 backdrop-blur hover:border-primary/50 transition-colors">
-            <CardContent className="pt-6">
-              <div className="text-2xl md:text-3xl font-bold text-primary mb-2">0%</div>
-              <div className="text-sm text-muted-foreground">Debates Políticos</div>
-            </CardContent>
-          </Card>
-        </div>
-
         {/* Features Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {communityFeatures.map((feature, index) => {
@@ -130,7 +102,7 @@ const CommunitySection = () => {
               }
             >
               <MessageCircle className="mr-2 h-5 w-5" />
-              Participar do Grupo do Whatsapp
+              Grupo do Whatsapp
             </Button>
           </CardContent>
         </Card>
