@@ -52,8 +52,18 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/sobre-nos" className="text-muted-foreground hover:text-primary transition-colors">
+                  Sobre Nós
+                </Link>
+              </li>
+              <li>
                 <Link to="/links-uteis" className="text-muted-foreground hover:text-primary transition-colors">
                   Links Úteis
+                </Link>
+              </li>
+              <li>
+                <Link to="/gerador-de-senhas" className="text-muted-foreground hover:text-primary transition-colors">
+                  Gerador de Senhas
                 </Link>
               </li>
             </ul>
@@ -102,19 +112,14 @@ const Footer = () => {
           {/* Coluna 4: Contato */}
           <div>
             <h4 className="text-lg font-semibold mb-4 text-foreground">Contato</h4>
-            <p className="text-sm text-muted-foreground flex items-center space-x-2 mb-4">
+            <p className="text-sm text-muted-foreground flex items-center space-x-2">
               <Mail className="h-4 w-4" />
               <a 
-                href="mailto:contato@cafecomcyber.com.br" 
+                href="mailto:cafecomcyber@proton.me" 
                 className="hover:text-primary transition-colors"
               >
-                contato@cafecomcyber.com.br
+                cafecomcyber@proton.me
               </a>
-            </p>
-            <p className="text-sm text-muted-foreground">
-              <Link to="/security.txt" className="hover:text-primary transition-colors">
-                security.txt
-              </Link>
             </p>
           </div>
         </div>
@@ -128,7 +133,7 @@ const Footer = () => {
               <span>Feito com</span>
               <Coffee className="h-4 w-4" />
               <span>e segurança</span>
-               <Shield className="h-4 w-4 text-primary" />
+              <Shield className="h-4 w-4 text-primary" />
             </div>
           </div>
         </div>
