@@ -81,9 +81,22 @@ const Header = () => {
               Comunidade
             </Link>
           )}
-          <Link to="/sobre-nos" className="text-sm font-medium hover:text-primary transition-colors">
-            Sobre Nós
-          </Link>
+          {isHomePage ? (
+            <a 
+              href="#about" 
+              className="text-sm font-medium hover:text-primary transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                handleSectionClick("about");
+              }}
+            >
+              Sobre Nós
+            </a>
+          ) : (
+            <Link to="/sobre-nos" className="text-sm font-medium hover:text-primary transition-colors">
+              Sobre Nós
+            </Link>
+          )}
           <Link to="/links-uteis" className="text-sm font-medium hover:text-primary transition-colors">
             Links Úteis
           </Link>
@@ -155,13 +168,26 @@ const Header = () => {
                 Comunidade
               </Link>
             )}
-            <Link 
-              to="/sobre-nos" 
-              className="block py-2 text-sm font-medium hover:text-primary transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Sobre Nós
-            </Link>
+            {isHomePage ? (
+              <a 
+                href="#about" 
+                className="block py-2 text-sm font-medium hover:text-primary transition-colors"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSectionClick("about");
+                }}
+              >
+                Sobre Nós
+              </a>
+            ) : (
+              <Link 
+                to="/sobre-nos" 
+                className="block py-2 text-sm font-medium hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Sobre Nós
+              </Link>
+            )}
             <Link 
               to="/links-uteis" 
               className="block py-2 text-sm font-medium hover:text-primary transition-colors"
