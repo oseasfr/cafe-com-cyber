@@ -9,11 +9,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Clock, User, ArrowRight, Shield, Lock, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
-import { artigos } from "../data/artigos"; // Certifique-se de que o caminho está correto
-import { ArtigoCartao } from "./ArtigoCartao"; // Importa o novo componente
+import { artigos } from "../data/artigos";
+import { ArtigosCartao } from "./ArtigosCartao";
 
 const ArticlesSection = () => {
-  const featuredArticles = articles.slice(0, 3); // Pega os 3 primeiros artigos
+  const featuredArticles = articles.slice(0, 3);
   return (
     <section
       id="articles"
