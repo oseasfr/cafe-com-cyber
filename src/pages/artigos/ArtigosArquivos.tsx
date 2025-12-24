@@ -1,24 +1,27 @@
-import { Link } from 'react-router-dom';
-import { articles } from '../../data/articles'; // Certifique-se de que o caminho está correto
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import { ArticleCard } from '../../components/ArticleCard'; // Importa o componente ArticleCard
+// src/pages/artigos/ArtigosArquivos.tsx
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+// ALTERAÇÃO 1: Importação de dados renomeada
+import { artigos } from '../../data/artigos'; 
+// Supondo que você tenha um componente para o cartão do artigo
+import ArtigosCartao from '@/components/ArtigosCartao'; 
 
-export default function ArticlesArchive() {
+// ALTERAÇÃO 2: Renomeação do componente
+export default function ArtigosArquivos() {
   return (
-    <>
+    <div>
       <Header />
-      <main className="container mx-auto max-w-5xl px-4 py-16">
-        <h1 className="text-4xl font-bold text-center mb-12">
-          Todos os Artigos
-        </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {articles.map(article => (
-            <ArticleCard key={article.id} article={article} />
+      <main className="container py-12">
+        <h1 className="text-4xl font-bold mb-8">Arquivo de Artigos</h1>
+        <div className="grid gap-8 md:grid-cols-3">
+          {/* ALTERAÇÃO 3: Uso da variável renomeada */}
+          {artigos.map(artigo => (
+            // ALTERAÇÃO 4: Uso do componente e prop renomeados
+            <ArtigosCartao key={artigo.id} artigo={artigo} />
           ))}
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
