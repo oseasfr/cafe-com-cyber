@@ -12,8 +12,8 @@ import NotFound from "./pages/NotFound";
 import UnderConstruction from "./pages/UnderConstruction";
 import ArticlePage from "./pages/articles/ArticlePage";
 import ArticlesArchive from "./pages/articles/ArticlesArchive";
-import Comunidade from "./pages/Comunidade";
-import LinksUteis from "./pages/links-uteis";
+import CommunityPage from "./pages/CommunityPage";
+import UsefulLinks from "./pages/links-uteis";
 import GeradorSenhas from "./pages/gerador-de-senhas";
 
 // *** Variável de controle: Altere para 'false' para desativar a página de manutenção ***
@@ -57,22 +57,22 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <ScrollToTop />
+          <ScrollToTop /> {/* Adicionado para forçar a rolagem para o topo */}
           <Routes>
             {/* Rota principal que carrega a página inicial */}
             <Route path="/" element={<Index />} />
             
             {/* Rota para os artigos, com um ID dinâmico */}
-            <Route path="/articles/:articleId" element={<ArticlesPage />} />
+            <Route path="/articles/:articleId" element={<ArticlePage />} />
 
             {/* Rota para a página de arquivo de artigos */}
-            <Route path="/article" element={<ArticlesArchive />} />
+            <Route path="/articles" element={<ArticlesArchive />} />
 
             {/* Rota para a página da comunidade */}
-            <Route path="/community" element={<Comunidade />} />
+            <Route path="/community" element={<CommunityPage />} />
 
             {/* Rota para a página de Links Úteis */}
-            <Route path="/links-uteis" element={<LinksUteis />} />
+            <Route path="/links-uteis" element={<UsefulLinks />} />
 
             {/* Rota para a página de Gerador de Senhas */}
             <Route path="/gerador-de-senhas" element={<GeradorSenhas />} />
