@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+// src/components/Header.tsx
+import { Link } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -37,7 +38,8 @@ const Header = () => {
           <Link to="/" className="text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
             Início
           </Link>
-          <a href="#articles" className="text-sm font-medium hover:text-primary transition-colors">
+          {/* ALTERAÇÃO AQUI: articles -> artigos */}
+          <a href="#artigos" className="text-sm font-medium hover:text-primary transition-colors">
             Artigos
           </a>
           <a href="#news" className="text-sm font-medium hover:text-primary transition-colors">
@@ -72,7 +74,8 @@ const Header = () => {
             <Link to="/" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
               Início
             </Link>
-            <a href="#articles" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+            {/* ALTERAÇÃO AQUI: articles -> artigos */}
+            <a href="#artigos" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Artigos
             </a>
             <a href="#news" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
