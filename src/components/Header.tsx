@@ -16,7 +16,6 @@ const Header = () => {
   const handleSectionClick = (sectionId: string) => {
     setIsMenuOpen(false);
     
-    // Se estiver na página inicial, rola para a seção
     if (isHomePage) {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -82,6 +81,9 @@ const Header = () => {
               Comunidade
             </Link>
           )}
+          <Link to="/sobre-nos" className="text-sm font-medium hover:text-primary transition-colors">
+            Sobre Nós
+          </Link>
           <Link to="/links-uteis" className="text-sm font-medium hover:text-primary transition-colors">
             Links Úteis
           </Link>
@@ -153,6 +155,13 @@ const Header = () => {
                 Comunidade
               </Link>
             )}
+            <Link 
+              to="/sobre-nos" 
+              className="block py-2 text-sm font-medium hover:text-primary transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Sobre Nós
+            </Link>
             <Link 
               to="/links-uteis" 
               className="block py-2 text-sm font-medium hover:text-primary transition-colors"
