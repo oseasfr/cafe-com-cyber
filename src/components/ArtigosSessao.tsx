@@ -31,8 +31,7 @@ const ArticlesSection = () => {
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredArticles.map((article) => (
-            <ArticleCard key={article.id} article={article} />
-          ))}
+            <ArtigosCartao key={article.id} article={article} />          ))}
         </div>
         <div className="text-center mt-12">
           <Button
