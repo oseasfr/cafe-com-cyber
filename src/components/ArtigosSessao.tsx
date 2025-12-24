@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Clock, User, ArrowRight, Shield, Lock, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
-import { articles } from "../data/articles"; // Certifique-se de que o caminho está correto
+import { artigos } from "../data/artigos"; // Certifique-se de que o caminho está correto
 import { ArticleCard } from "./ArticleCard"; // Importa o novo componente
 
 const ArticlesSection = () => {
