@@ -55,7 +55,7 @@ export const ArticleCard = ({ article }: ArticleProps) => {
                     </div>
                 </div>
                 <Button asChild variant="ghost" className="w-full group/btn justify-between p-0 h-auto hover:bg-transparent">
-                    <Link to={`/articles/${article.id}`} className="flex justify-between w-full">
+                    <Link to={/artigos/${artigo.id}} className="flex justify-between w-full">
                         <span className="text-sm font-medium group-hover/btn:text-primary transition-colors">
                             Ler artigo
                         </span>
