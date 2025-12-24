@@ -140,14 +140,14 @@ const AboutPage = () => {
                 Junte-se a nós e contribua para o crescimento da área de cybersecurity no Brasil.
               </p>
               <Button
-                asChild
                 size="lg"
                 className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber"
+                onClick={() =>
+                  window.open("https://chat.whatsapp.com/DV1aSKqXnzU9yzLle4WpQ3", "_blank", "noopener,noreferrer")
+                }
               >
-                <Link to="/community">
-                  Conhecer a Comunidade
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
+                Conhecer a Comunidade
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </CardContent>
           </Card>
