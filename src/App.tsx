@@ -11,7 +11,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import UnderConstruction from "./pages/UnderConstruction";
 import ArticlePage from "./pages/articles/ArticlePage";
-import ArticlesArchive from "./pages/articles/ArticlesArchive";
+import ArticlesArchive from "./pages/articles/ArticlesFiles";
 import CommunityPage from "./pages/CommunityPage";
 import UsefulLinks from "./pages/links-uteis";
 import GeradorSenhas from "./pages/gerador-de-senhas";
