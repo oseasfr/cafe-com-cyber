@@ -9,8 +9,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Clock, User, ArrowRight, Shield, Lock, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
-import { artigos } from "../data/artigos";
-import { ArtigosCartao } from "./ArtigosCartao";
+import { articles } from "../data/articles";
+import { ArticleCard } from "./ArticleCard";
 
 const ArticlesSection = () => {
   const featuredArticles = articles.slice(0, 3);
@@ -31,7 +31,7 @@ const ArticlesSection = () => {
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredArticles.map((article) => (
-            <ArtigosCartao key={article.id} article={article} />          ))}
+            <ArticlesCard key={article.id} article={article} />          ))}
         </div>
         <div className="text-center mt-12">
           <Button
