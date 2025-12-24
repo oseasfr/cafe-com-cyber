@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Coffee, Shield, Users, Lightbulb, Target } from "lucide-react";
+import { ArrowLeft, ArrowRight, Coffee, Shield, Users, Lightbulb, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
