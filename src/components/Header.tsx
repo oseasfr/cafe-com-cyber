@@ -1,16 +1,28 @@
-// src/components/Header.tsx
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   const handleHomeClick = () => {
-    // Scroll to top of the page
     window.scrollTo(0, 0);
-    setIsMenuOpen(false); // Close mobile menu
+    setIsMenuOpen(false);
+  };
+
+  const handleSectionClick = (sectionId: string) => {
+    setIsMenuOpen(false);
+    
+    // Se estiver na página inicial, rola para a seção
+    if (isHomePage) {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
   };
 
   return (
@@ -38,16 +50,38 @@ const Header = () => {
           <Link to="/" className="text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
             Início
           </Link>
-          {/* ALTERAÇÃO AQUI: articles -> artigos */}
-          <a href="#artigos" className="text-sm font-medium hover:text-primary transition-colors">
-            Artigos
-          </a>
-          <a href="#news" className="text-sm font-medium hover:text-primary transition-colors">
-            Notícias
-          </a>
-          <a href="#comunidade" className="text-sm font-medium hover:text-primary transition-colors">
-            Comunidade
-          </a>
+          {isHomePage ? (
+            <a 
+              href="#articles" 
+              className="text-sm font-medium hover:text-primary transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                handleSectionClick("articles");
+              }}
+            >
+              Artigos
+            </a>
+          ) : (
+            <Link to="/articles" className="text-sm font-medium hover:text-primary transition-colors">
+              Artigos
+            </Link>
+          )}
+          {isHomePage ? (
+            <a 
+              href="#community" 
+              className="text-sm font-medium hover:text-primary transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                handleSectionClick("community");
+              }}
+            >
+              Comunidade
+            </a>
+          ) : (
+            <Link to="/community" className="text-sm font-medium hover:text-primary transition-colors">
+              Comunidade
+            </Link>
+          )}
           <Link to="/links-uteis" className="text-sm font-medium hover:text-primary transition-colors">
             Links Úteis
           </Link>
@@ -61,6 +95,7 @@ const Header = () => {
             size="sm"
             className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
             <Menu className="h-5 w-5" />
           </Button>
@@ -71,20 +106,58 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden border-t border-border bg-card">
           <nav className="container py-4 space-y-2">
-            <Link to="/" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
+            <Link 
+              to="/" 
+              className="block py-2 text-sm font-medium hover:text-primary transition-colors" 
+              onClick={handleHomeClick}
+            >
               Início
             </Link>
-            {/* ALTERAÇÃO AQUI: articles -> artigos */}
-            <a href="#artigos" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
-              Artigos
-            </a>
-            <a href="#news" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
-              Notícias
-            </a>
-            <a href="#comunidade" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
-              Comunidade
-            </a>
-            <Link to="/links-uteis" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+            {isHomePage ? (
+              <a 
+                href="#articles" 
+                className="block py-2 text-sm font-medium hover:text-primary transition-colors"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSectionClick("articles");
+                }}
+              >
+                Artigos
+              </a>
+            ) : (
+              <Link 
+                to="/articles" 
+                className="block py-2 text-sm font-medium hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Artigos
+              </Link>
+            )}
+            {isHomePage ? (
+              <a 
+                href="#community" 
+                className="block py-2 text-sm font-medium hover:text-primary transition-colors"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSectionClick("community");
+                }}
+              >
+                Comunidade
+              </a>
+            ) : (
+              <Link 
+                to="/community" 
+                className="block py-2 text-sm font-medium hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Comunidade
+              </Link>
+            )}
+            <Link 
+              to="/links-uteis" 
+              className="block py-2 text-sm font-medium hover:text-primary transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
               Links Úteis
             </Link>
           </nav>
