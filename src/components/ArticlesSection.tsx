@@ -1,19 +1,17 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Clock, User, ArrowRight, Shield, Lock, Eye } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { articles } from "../data/articles";
 import { ArticleCard } from "./ArticleCard";
 
 const ArticlesSection = () => {
   const featuredArticles = articles.slice(0, 3);
+
+  // Se não houver artigos, não renderiza a seção
+  if (!articles || articles.length === 0) {
+    return null;
+  }
+
   return (
     <section
       id="articles"
@@ -31,21 +29,24 @@ const ArticlesSection = () => {
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredArticles.map((article) => (
-            <ArticlesCard key={article.id} article={article} />          ))}
+            <ArticleCard key={article.id} article={article} />
+          ))}
         </div>
-        <div className="text-center mt-12">
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-          >
-            <Link to="/articles">
-              Ver Todos os Artigos
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
-        </div>
+        {articles.length > 3 && (
+          <div className="text-center mt-12">
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              <Link to="/articles">
+                Ver Todos os Artigos
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
