@@ -76,7 +76,7 @@ const Footer = () => {
               </li>
               <li>
                 <a 
-                  href="https://github.com/oseasfr/cafe-com-cyber" 
+                  href="https://github.com/cafecomcyber" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
@@ -94,17 +94,6 @@ const Footer = () => {
                 >
                   <Instagram className="h-4 w-4" />
                   <span>Instagram</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://www.youtube.com/@cafecomcyber" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Youtube className="h-4 w-4" />
-                  <span>YouTube</span>
                 </a>
               </li>
             </ul>
@@ -136,10 +125,10 @@ const Footer = () => {
               <span>&copy; {new Date().getFullYear()} Café com Cyber. Todos os direitos reservados.</span>
             </div>
             <div className="flex items-center space-x-2">
-              <Coffee className="h-4 w-4" />
               <span>Feito com</span>
-              <Shield className="h-4 w-4 text-primary" />
+              <Coffee className="h-4 w-4" />
               <span>e segurança</span>
+               <Shield className="h-4 w-4 text-primary" />
             </div>
           </div>
         </div>
