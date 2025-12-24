@@ -1,23 +1,44 @@
-// src/pages/artigos/ArtigosArquivos.tsx
+import { articles } from '../../data/articles';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-// ALTERAÇÃO 1: Importação de dados renomeada
-import { artigos } from '../../data/artigos'; 
-// Supondo que você tenha um componente para o cartão do artigo
-import ArtigosCartao from '@/components/ArtigosCartao'; 
+import { ArticleCard } from '@/components/ArticleCard';
 
-// ALTERAÇÃO 2: Renomeação do componente
-export default function ArtigosArquivos() {
+export default function ArticlesArchive() {
+  // Se não houver artigos, mostra mensagem
+  if (!articles || articles.length === 0) {
+    return (
+      <>
+        <Header />
+        <main className="container mx-auto max-w-5xl px-4 py-16">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold mb-4">Todos os Artigos</h1>
+            <p className="text-muted-foreground">Nenhum artigo disponível no momento.</p>
+          </div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
+
   return (
-    <div>
+    <div className="min-h-screen bg-background">
       <Header />
-      <main className="container py-12">
-        <h1 className="text-4xl font-bold mb-8">Arquivo de Artigos</h1>
-        <div className="grid gap-8 md:grid-cols-3">
-          {/* ALTERAÇÃO 3: Uso da variável renomeada */}
-          {artigos.map(artigo => (
-            // ALTERAÇÃO 4: Uso do componente e prop renomeados
-            <ArtigosCartao key={artigo.id} artigo={artigo} />
+      <main className="container mx-auto max-w-5xl px-4 py-16" role="main">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Todos os <span className="text-primary">Artigos</span>
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Explore nossa coleção completa de artigos sobre cybersecurity
+          </p>
+          <p className="text-sm text-muted-foreground mt-2">
+            {articles.length} {articles.length === 1 ? 'artigo encontrado' : 'artigos encontrados'}
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {articles.map((article) => (
+            <ArticleCard key={article.id} article={article} />
           ))}
         </div>
       </main>
