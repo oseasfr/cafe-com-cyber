@@ -1,4 +1,4 @@
-export const artigos = [
+export const articles = [
   {
     id: "fundamentos-de-seguranca-em-apis-rest",
     title: "Fundamentos de Segurança em APIs REST",
