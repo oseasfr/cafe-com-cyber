@@ -13,6 +13,7 @@ import UnderConstruction from "./pages/UnderConstruction";
 import ArticlePage from "./pages/articles/ArticlePage";
 import ArticlesArchive from "./pages/articles/ArticlesFiles";
 import CommunityPage from "./pages/CommunityPage";
+import AboutPage from "./pages/AboutPage";
 import UsefulLinks from "./pages/links-uteis";
 import GeradorSenhas from "./pages/gerador-de-senhas";
 
@@ -70,6 +71,9 @@ const App = () => {
 
             {/* Rota para a página da comunidade */}
             <Route path="/community" element={<CommunityPage />} />
+
+            {/* Rota para a página Sobre Nós */}
+            <Route path="/sobre-nos" element={<AboutPage />} />
 
             {/* Rota para a página de Links Úteis */}
             <Route path="/links-uteis" element={<UsefulLinks />} />
