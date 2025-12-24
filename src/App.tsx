@@ -10,8 +10,8 @@ import { useLocation } from 'react-router-dom';
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import UnderConstruction from "./pages/UnderConstruction";
-import ArtigosPagina from "./pages/artigos/ArtigosPagina";
-import ArtigosArquivo from "./pages/artigos/ArtigosArquivo";
+import ArticlePage from "./pages/articles/ArticlePage";
+import ArticlesArchive from "./pages/articles/ArticlesArchive";
 import Comunidade from "./pages/Comunidade";
 import LinksUteis from "./pages/links-uteis";
 import GeradorSenhas from "./pages/gerador-de-senhas";
@@ -63,10 +63,10 @@ const App = () => {
             <Route path="/" element={<Index />} />
             
             {/* Rota para os artigos, com um ID dinâmico */}
-            <Route path="/artigo/:articleId" element={<ArtigosPagina />} />
+            <Route path="/articles/:articleId" element={<ArticlesPage />} />
 
             {/* Rota para a página de arquivo de artigos */}
-            <Route path="/artigo" element={<ArtigosArquivo />} />
+            <Route path="/article" element={<ArticlesArchive />} />
 
             {/* Rota para a página da comunidade */}
             <Route path="/community" element={<Comunidade />} />
