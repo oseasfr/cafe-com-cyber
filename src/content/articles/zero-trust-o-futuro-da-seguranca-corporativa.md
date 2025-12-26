@@ -1,43 +1,55 @@
 ---
-id: zero-trust-o-futuro-da-seguranca-corporativa
-title: Zero Trust: O Futuro da Segurança Corporativa
-description: Entenda o modelo Zero Trust e como implementar uma arquitetura de segurança baseada na filosofia 'nunca confie, sempre verifique'.
-author: Carlos Lima
-readTime: 12 min
-category: Architecture
-icon: Lock
-gradient: from-accent/20 to-primary/20
-imageUrl: /images/articles/zero-trust.jpg
-publishedAt: 2025-01-10
-tags: [Zero Trust, Security, Architecture, Corporate]
+id: osint-tecnicas-de-investigacao-digital
+title: OSINT: Técnicas de Investigação Digital
+description: Explore ferramentas e metodologias de Open Source Intelligence para investigações de segurança e análise de ameaças.
+author: Maria Silva
+readTime: 15 min
+category: Intelligence
+icon: Eye
+gradient: from-primary/20 to-cyber-glow/20
+publishedAt: 2025-01-05
+tags: [OSINT, Intelligence, Investigation, Security]
 ---
 
-# Zero Trust: O Futuro da Segurança Corporativa
+# OSINT: Técnicas de Investigação Digital
 
-O modelo de segurança **Zero Trust** se baseia no princípio de que nenhuma entidade, dentro ou fora da rede, deve ser automaticamente confiável.
+**Open Source Intelligence (OSINT)** é o processo de coletar informações de fontes públicas. É uma habilidade crucial para analistas de segurança.
 
-## Princípios Chave
+## Fontes Comuns
 
-- **Verificar sempre:** Autentique e autorize cada usuário e dispositivo.
-- **Menor privilégio:** Conceda o mínimo de acesso necessário para completar uma tarefa.
-- **Segmente a rede:** Divida a rede em pequenas áreas de segurança para isolar ameaças.
+- Redes sociais e fóruns
+- Registros públicos e bancos de dados de empresas
+- Motores de busca e ferramentas de mapeamento
+- Código-fonte e repositórios públicos
+- Documentos governamentais
 
-## Implementação
+## Ferramentas Úteis
 
-A implementação do Zero Trust requer uma mudança cultural e tecnológica significativa nas organizações.
+### Análise de Domínios
 
-### Componentes Essenciais
+- **Maltego:** Para visualizar conexões entre dados
+- **Recon-ng:** Um framework de reconhecimento
+- **Shodan:** Motor de busca para dispositivos conectados à internet
 
-1. **Identidade e Acesso:** Verificação contínua de identidade
-2. **Dispositivos:** Inventário e gerenciamento de todos os dispositivos
-3. **Rede:** Segmentação e isolamento
-4. **Aplicações:** Proteção em camadas
-5. **Dados:** Classificação e criptografia
+### Análise de Redes Sociais
 
-## Benefícios
+- **Sherlock:** Busca de nomes de usuário em redes sociais
+- **theHarvester:** Coleta de emails, subdomínios e hosts
 
-- Redução de superfície de ataque
-- Melhor visibilidade e controle
-- Conformidade regulatória
-- Proteção contra ameaças internas
+## Metodologia
+
+A metodologia OSINT segue um processo estruturado:
+
+1. **Planejamento:** Definir objetivos e escopo
+2. **Coleta:** Reunir informações de fontes públicas
+3. **Processamento:** Organizar e validar dados
+4. **Análise:** Identificar padrões e conexões
+5. **Disseminação:** Apresentar resultados
+
+## Boas Práticas
+
+- Sempre documente suas fontes
+- Valide informações de múltiplas fontes
+- Respeite a privacidade e leis locais
+- Mantenha-se atualizado com novas ferramentas
 
