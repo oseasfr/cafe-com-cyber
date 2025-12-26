@@ -117,3 +117,4 @@ export function loadArticles(markdownContents: string[]): Article[] {
       return dateB - dateA;
     });
 }
+
