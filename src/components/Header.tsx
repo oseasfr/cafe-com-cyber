@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from 'react-router-dom';
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -6,21 +6,27 @@ import { useState } from "react";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
+  const isHomePage = location.pathname === '/';
 
   const handleHomeClick = () => {
+    // Scroll to top of the page
     window.scrollTo(0, 0);
-    setIsMenuOpen(false);
+    setIsMenuOpen(false); // Close mobile menu
   };
 
-  const handleSectionClick = (sectionId: string) => {
+  const handleAboutClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
     setIsMenuOpen(false);
     
     if (isHomePage) {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+      // Se estiver na home, faz scroll suave para #about
+      const aboutSection = document.getElementById('about');
+      if (aboutSection) {
+        aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+    } else {
+      // Se estiver em outra página, vai para a home com #about
+      window.location.href = '/#about';
     }
   };
 
@@ -49,54 +55,15 @@ const Header = () => {
           <Link to="/" className="text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
             Início
           </Link>
-          {isHomePage ? (
-            <a 
-              href="#articles" 
-              className="text-sm font-medium hover:text-primary transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                handleSectionClick("articles");
-              }}
-            >
-              Artigos
-            </a>
-          ) : (
-            <Link to="/articles" className="text-sm font-medium hover:text-primary transition-colors">
-              Artigos
-            </Link>
-          )}
-          {isHomePage ? (
-            <a 
-              href="#community" 
-              className="text-sm font-medium hover:text-primary transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                handleSectionClick("community");
-              }}
-            >
-              Comunidade
-            </a>
-          ) : (
-            <Link to="/community" className="text-sm font-medium hover:text-primary transition-colors">
-              Comunidade
-            </Link>
-          )}
-          {isHomePage ? (
-            <a 
-              href="#about" 
-              className="text-sm font-medium hover:text-primary transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                handleSectionClick("about");
-              }}
-            >
-              Sobre Nós
-            </a>
-          ) : (
-            <Link to="/sobre-nos" className="text-sm font-medium hover:text-primary transition-colors">
-              Sobre Nós
-            </Link>
-          )}
+          <a href="#articles" className="text-sm font-medium hover:text-primary transition-colors">
+            Artigos
+          </a>
+          <a href="#community" className="text-sm font-medium hover:text-primary transition-colors">
+            Comunidade
+          </a>
+          <a href={isHomePage ? "#about" : "/#about"} onClick={handleAboutClick} className="text-sm font-medium hover:text-primary transition-colors">
+            Sobre Nós
+          </a>
           <Link to="/links-uteis" className="text-sm font-medium hover:text-primary transition-colors">
             Links Úteis
           </Link>
@@ -110,7 +77,6 @@ const Header = () => {
             size="sm"
             className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
           >
             <Menu className="h-5 w-5" />
           </Button>
@@ -121,78 +87,19 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden border-t border-border bg-card">
           <nav className="container py-4 space-y-2">
-            <Link 
-              to="/" 
-              className="block py-2 text-sm font-medium hover:text-primary transition-colors" 
-              onClick={handleHomeClick}
-            >
+            <Link to="/" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
               Início
             </Link>
-            {isHomePage ? (
-              <a 
-                href="#articles" 
-                className="block py-2 text-sm font-medium hover:text-primary transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleSectionClick("articles");
-                }}
-              >
-                Artigos
-              </a>
-            ) : (
-              <Link 
-                to="/articles" 
-                className="block py-2 text-sm font-medium hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Artigos
-              </Link>
-            )}
-            {isHomePage ? (
-              <a 
-                href="#community" 
-                className="block py-2 text-sm font-medium hover:text-primary transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleSectionClick("community");
-                }}
-              >
-                Comunidade
-              </a>
-            ) : (
-              <Link 
-                to="/community" 
-                className="block py-2 text-sm font-medium hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Comunidade
-              </Link>
-            )}
-            {isHomePage ? (
-              <a 
-                href="#about" 
-                className="block py-2 text-sm font-medium hover:text-primary transition-colors"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleSectionClick("about");
-                }}
-              >
-                Sobre Nós
-              </a>
-            ) : (
-              <Link 
-                to="/sobre-nos" 
-                className="block py-2 text-sm font-medium hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Sobre Nós
-              </Link>
-            )}
-            <Link 
-              to="/links-uteis" 
-              className="block py-2 text-sm font-medium hover:text-primary transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
+            <a href="#articles" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Artigos
+            </a>
+            <a href="#community" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+              Comunidade
+            </a>
+            <a href={isHomePage ? "#about" : "/#about"} onClick={handleAboutClick} className="block py-2 text-sm font-medium hover:text-primary transition-colors">
+              Sobre Nós
+            </a>
+            <Link to="/links-uteis" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Links Úteis
             </Link>
           </nav>
