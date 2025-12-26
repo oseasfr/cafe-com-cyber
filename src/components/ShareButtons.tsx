@@ -115,4 +115,3 @@ const ShareButtons = ({ title, url, description }: ShareButtonsProps) => {
 };
 
 export default ShareButtons;
-
