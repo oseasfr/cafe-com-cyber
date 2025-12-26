@@ -1,16 +1,25 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { articles } from "../data/articles";
 import { ArticleCard } from "./ArticleCard";
+import { memo } from "react";
 
-const ArticlesSection = () => {
-  const featuredArticles = articles.slice(0, 3);
-
-  // Se não houver artigos, não renderiza a seção
+const ArticlesSection = memo(() => {
+  // Validação: verifica se há artigos disponíveis
   if (!articles || articles.length === 0) {
-    return null;
+    return null; // Não renderiza nada se não houver artigos
   }
+
+  const featuredArticles = articles.slice(0, 3); // Pega os 3 primeiros artigos
 
   return (
     <section
@@ -50,6 +59,8 @@ const ArticlesSection = () => {
       </div>
     </section>
   );
-};
+});
+
+ArticlesSection.displayName = 'ArticlesSection';
 
 export default ArticlesSection;
