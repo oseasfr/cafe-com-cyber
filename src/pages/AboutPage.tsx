@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MessageCircle, Shield, Users, Lightbulb, Target, Heart, ArrowRight } from "lucide-react";
+import { MessageCircle, Shield, Users, Lightbulb, Target, ArrowRight } from "lucide-react";
 
 const AboutPage = () => {
   return (
@@ -101,10 +101,7 @@ const AboutPage = () => {
           {/* What We Do */}
           <Card className="border-primary/20 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur">
             <CardHeader>
-              <div className="flex items-center gap-3 mb-2">
-                <Heart className="h-6 w-6 text-primary" />
-                <CardTitle className="text-2xl">O Que Fazemos</CardTitle>
-              </div>
+              <CardTitle className="text-2xl">O Que Fazemos</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-muted-foreground leading-relaxed">
