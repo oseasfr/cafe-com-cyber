@@ -5,7 +5,7 @@ import CommunitySection from "@/components/CommunitySection";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Heart } from "lucide-react";
+import { ArrowRight, shield } from "lucide-react";
 
 const Index = () => {
   return (
@@ -20,7 +20,7 @@ const Index = () => {
           <div className="container">
             <div className="max-w-4xl mx-auto text-center space-y-6">
               <div className="w-16 h-16 mx-auto rounded-full bg-gradient-cyber flex items-center justify-center mb-4">
-                <Heart className="h-8 w-8 text-primary animate-cyber-float" />
+                <shield className="h-8 w-8 text-primary animate-cyber-float" />
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 <span className="text-primary">Sobre Nós</span>
