@@ -27,7 +27,7 @@ export default function ArticlePage() {
         <div className="mb-6">
           <Button
             asChild
-            variant="outline"
+            variant="ghost"
             size="sm"
             className="text-muted-foreground hover:text-foreground"
           >
@@ -39,9 +39,23 @@ export default function ArticlePage() {
         </div>
 
         {/* Título do Artigo */}
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground leading-tight mb-6">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground leading-tight mb-4">
           {article.title}
         </h1>
+
+        {/* Tags - Logo abaixo do título */}
+        {article.tags && article.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-6">
+            {article.tags.map((tag) => (
+              <span
+                key={tag}
+                className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded-md"
+              >
+                #{tag}
+              </span>
+            ))}
+          </div>
+        )}
 
         {/* Informações do Autor e Tempo de Leitura */}
         <div className="flex items-center gap-4 text-muted-foreground mb-4">
@@ -75,20 +89,6 @@ export default function ArticlePage() {
               alt={article.title} 
               className="w-full h-auto object-cover"
             />
-          </div>
-        )}
-
-        {/* Tags */}
-        {article.tags && article.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-8">
-            {article.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded-md"
-              >
-                #{tag}
-              </span>
-            ))}
           </div>
         )}
 
