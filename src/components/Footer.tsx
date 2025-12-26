@@ -1,18 +1,19 @@
-import { Link } from "react-router-dom";
-import { Mail, Linkedin, Github, Instagram, Youtube, Coffee, Shield } from "lucide-react";
+import { Link } from 'react-router-dom';
+import { Coffee, Github, Linkedin, Mail, Shield, Instagram } from "lucide-react";
 
 const Footer = () => {
   const handleHomeClick = () => {
+    // Scroll para o topo da página
     window.scrollTo(0, 0);
   };
 
   return (
-    <footer className="border-t border-border bg-card/50 backdrop-blur">
-      <div className="container py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {/* Coluna 1: Logo e Descrição */}
-          <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center space-x-3 mb-4">
+    <footer className="bg-cyber-darker border-t border-border">
+      <div className="container py-16">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Brand */}
+          <div className="space-y-4">
+            <div className="flex items-center space-x-3">
               <Link to="/" onClick={handleHomeClick}>
                 <img 
                   src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
@@ -21,119 +22,79 @@ const Footer = () => {
                 />
               </Link>
               <div>
-                <h3 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  Café com Cyber
-                </h3>
-                <p className="text-xs text-muted-foreground">Conteúdos diversos sobre Cybersecurity</p>
+                <h3 className="text-lg font-bold text-primary">Café com Cyber</h3>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              A sua dose diária de conhecimento em Segurança da Informação.
+              Disseminando conhecimento em segurança da informação de forma colaborativa.
             </p>
           </div>
 
-          {/* Coluna 2: Navegação */}
+          {/* Navigation */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-foreground">Navegação</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="text-sm font-semibold mb-4 text-foreground">Navegação</h4>
+            <ul className="space-y-3 text-sm">
               <li>
-                <Link to="/" onClick={handleHomeClick} className="text-muted-foreground hover:text-primary transition-colors">
-                  Início
-                </Link>
+                <Link to="/" onClick={handleHomeClick} className="text-muted-foreground hover:text-primary transition-colors">Início</Link>
               </li>
-              <li>
-                <Link to="/articles" className="text-muted-foreground hover:text-primary transition-colors">
-                  Artigos
-                </Link>
-              </li>
-              <li>
-                <Link to="/community" className="text-muted-foreground hover:text-primary transition-colors">
-                  Comunidade
-                </Link>
-              </li>
-              <li>
-                <Link to="/sobre-nos" className="text-muted-foreground hover:text-primary transition-colors">
-                  Sobre Nós
-                </Link>
-              </li>
-              <li>
-                <Link to="/links-uteis" className="text-muted-foreground hover:text-primary transition-colors">
-                  Links Úteis
-                </Link>
-              </li>
-              <li>
-                <Link to="/gerador-de-senhas" className="text-muted-foreground hover:text-primary transition-colors">
-                  Gerador de Senhas
-                </Link>
-              </li>
+              <li><a href="#articles" className="text-muted-foreground hover:text-primary transition-colors">Artigos</a></li>
+              <li><a href="#news" className="text-muted-foreground hover:text-primary transition-colors">Notícias</a></li>
+              <li><a href="#community" className="text-muted-foreground hover:text-primary transition-colors">Comunidade</a></li>
+              <li><a href="#events" className="text-muted-foreground hover:text-primary transition-colors">Eventos</a></li>
             </ul>
           </div>
 
-          {/* Coluna 3: Redes Sociais */}
+          {/* Topics */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-foreground">Redes Sociais</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a 
-                  href="https://www.linkedin.com/company/cafecomcyber/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
-                >
-                  <Linkedin className="h-4 w-4" />
-                  <span>LinkedIn</span>
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://github.com/cafecomcyber" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
-                >
+            <h4 className="text-sm font-semibold mb-4 text-foreground">Tópicos</h4>
+            <ul className="space-y-3 text-sm">
+              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Web Security</a></li>
+              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Network Security</a></li>
+              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">OSINT</a></li>
+              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Incident Response</a></li>
+              <li><a href="#" className="text-muted-foreground hover:text-primary transition-colors">Compliance</a></li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="text-sm font-semibold mb-4 text-foreground">Conecte-se</h4>
+            <div className="space-y-4">
+              <p className="text-sm text-muted-foreground">
+                Participe da nossa comunidade e contribua para o crescimento 
+                da área de cybersecurity.
+              </p>
+              
+              <div className="flex space-x-2">
+                <a href="https://github.com/cafecomcyber" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                   <Github className="h-4 w-4" />
-                  <span>GitHub</span>
                 </a>
-              </li>
-              <li>
-                <a 
-                  href="https://www.instagram.com/cafecomcyber/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
-                >
+                <a href="https://www.linkedin.com/company/cafecomcyber/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Linkedin className="h-4 w-4" />
+                </a>
+                <a href="https://www.instagram.com/cafecomcyber_/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                   <Instagram className="h-4 w-4" />
-                  <span>Instagram</span>
                 </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Coluna 4: Contato */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4 text-foreground">Contato</h4>
-            <p className="text-sm text-muted-foreground flex items-center space-x-2">
-              <Mail className="h-4 w-4" />
-              <a 
-                href="mailto:cafecomcyber@proton.me" 
-                className="hover:text-primary transition-colors"
-              >
-                cafecomcyber@proton.me
-              </a>
-            </p>
+                <a href="mailto:cafecomcyber@proton.me" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Mail className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-border/50 text-center text-sm text-muted-foreground">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
-            <div className="flex items-center space-x-2">
-              <span>&copy; {new Date().getFullYear()} Café com Cyber. Todos os direitos reservados.</span>
+        {/* Divider */}
+        <div className="border-t border-border mt-12 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+              <span>&copy; 2025 | Goiano Uai | Feito com <Coffee className="h-4 w-4 inline-block align-sub" /> e <Shield className="h-4 w-4 inline-block align-sub" /></span>
             </div>
-            <div className="flex items-center space-x-2">
-              <span>Feito com</span>
-              <Coffee className="h-4 w-4" />
-              <span>e segurança</span>
-              <Shield className="h-4 w-4 text-primary" />
+            
+            <div className="flex items-center space-x-6 text-sm text-muted-foreground">
+              <div className="flex items-center space-x-2">
+                <Shield className="h-4 w-4 text-primary" />
+                <span>Seguro por Design</span>
+              </div>
             </div>
           </div>
         </div>
