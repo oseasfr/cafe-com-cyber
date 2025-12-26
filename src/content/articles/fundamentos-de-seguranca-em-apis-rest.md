@@ -7,7 +7,6 @@ readTime: 8 min
 category: Web Security
 icon: Shield
 gradient: from-primary/20 to-accent/20
-imageUrl: /images/articles/api-security.jpg
 publishedAt: 2025-01-15
 tags: [API, Security, REST, JWT, OAuth]
 ---
