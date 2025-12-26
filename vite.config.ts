@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import fs from "fs";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode } ) => {
@@ -46,6 +47,21 @@ export default defineConfig(({ mode } ) => {
       // O lovable-tagger só será ativado em modo de desenvolvimento,
       // não afetando a versão final de produção.
       mode === 'development' && componentTagger(),
+      // Plugin para importar arquivos .md como texto bruto
+      {
+        name: 'markdown-loader',
+        load(id) {
+          if (id.endsWith('.md')) {
+            try {
+              const content = fs.readFileSync(id, 'utf-8');
+              return `export default ${JSON.stringify(content)}`;
+            } catch (error) {
+              console.error(`Error loading markdown file: ${id}`, error);
+              return null;
+            }
+          }
+        }
+      }
     ].filter(Boolean),
     resolve: {
       alias: {
