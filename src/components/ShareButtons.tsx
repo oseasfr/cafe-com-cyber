@@ -21,7 +21,7 @@ const ShareButtons = ({ title, url, description }: ShareButtonsProps) => {
     if (platform === 'instagram') {
       // Instagram não permite compartilhamento direto via URL
       // Abre o perfil da empresa
-      window.open('https://www.instagram.com/cafecomcyber/', '_blank', 'noopener,noreferrer');
+      window.open('https://www.instagram.com/cafecomcyber_/', '_blank', 'noopener,noreferrer');
     } else {
       window.open(shareLinks[platform], '_blank', 'noopener,noreferrer');
     }
@@ -64,3 +64,4 @@ const ShareButtons = ({ title, url, description }: ShareButtonsProps) => {
 };
 
 export default ShareButtons;
+
