@@ -9,6 +9,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const PasswordGenerator = () => {
   const [password, setPassword] = useState('');
@@ -95,136 +97,142 @@ const PasswordGenerator = () => {
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto bg-black/40 border-cyber-glow/30 backdrop-blur-xl shadow-[0_0_20px_rgba(0,242,255,0.1)] overflow-hidden">
-      <CardHeader className="border-b border-white/5 bg-gradient-to-r from-cyber-darker/50 to-transparent">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 bg-primary/10 rounded-lg border border-primary/20">
-            <Shield className="w-6 h-6 text-primary animate-pulse" />
-          </div>
-          <div>
-            <CardTitle className="text-2xl font-bold tracking-tight text-white">
-              Gerador de Senhas <span className="text-primary">Cyber</span>
-            </CardTitle>
-            <CardDescription className="text-gray-400">
-              Gere senhas ultra-seguras com criptografia de ponta.
-            </CardDescription>
-          </div>
-        </div>
-      </CardHeader>
-      
-      <CardContent className="space-y-8 pt-8">
-        {/* Password Display */}
-        <div className="relative group">
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-          <div className="relative flex items-center gap-2 bg-black/60 border border-white/10 p-1 rounded-xl">
-            <Input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              readOnly
-              className="bg-transparent border-none text-xl md:text-2xl font-mono text-primary placeholder:text-primary/20 focus-visible:ring-0 h-14"
-            />
-            <div className="flex items-center gap-1 pr-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setShowPassword(!showPassword)}
-                className="text-gray-400 hover:text-white hover:bg-white/5"
-              >
-                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-              </Button>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={generatePassword}
-                className="text-gray-400 hover:text-primary hover:bg-primary/5"
-              >
-                <RefreshCw className="w-5 h-5" />
-              </Button>
-              <Button
-                onClick={copyToClipboard}
-                className="bg-primary hover:bg-primary/80 text-black font-bold px-4"
-              >
-                <Copy className="w-4 h-4 mr-2" />
-                Copiar
-              </Button>
+    <div className="min-h-screen bg-background flex flex-col">
+      <Header />
+      <main className="container mx-auto px-4 py-12 flex-1">
+        <Card className="w-full max-w-2xl mx-auto bg-card/50 border-border/50 backdrop-blur-xl shadow-lg">
+          <CardHeader className="border-b border-border/50 bg-gradient-to-r from-card/80 to-transparent">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="p-2 bg-primary/10 rounded-lg border border-primary/20">
+                <Shield className="w-6 h-6 text-primary animate-pulse" />
+              </div>
+              <div>
+                <CardTitle className="text-2xl font-bold tracking-tight text-foreground">
+                  Gerador de Senhas <span className="text-primary">Cyber</span>
+                </CardTitle>
+                <CardDescription className="text-muted-foreground">
+                  Gere senhas ultra-seguras com criptografia de ponta.
+                </CardDescription>
+              </div>
             </div>
-          </div>
-        </div>
-
-        {/* Strength Meter */}
-        {strength && (
-          <div className="space-y-3">
-            <div className="flex justify-between items-end">
-              <Label className="text-sm font-medium text-gray-400 uppercase tracking-wider">Força da Senha</Label>
-              <span className={cn(
-                "text-sm font-bold px-2 py-0.5 rounded border",
-                strength.score <= 1 ? "text-red-400 border-red-400/20 bg-red-400/5" :
-                strength.score === 2 ? "text-yellow-400 border-yellow-400/20 bg-yellow-400/5" :
-                "text-emerald-400 border-emerald-400/20 bg-emerald-400/5"
-              )}>
-                {getStrengthLabel(strength.score)}
-              </span>
-            </div>
-            <div className="flex gap-1.5 h-2">
-              {[0, 1, 2, 3].map((step) => (
-                <div
-                  key={step}
-                  className={cn(
-                    "flex-1 rounded-full transition-all duration-500",
-                    strength.score > step ? getStrengthColor(strength.score) : "bg-white/5"
-                  )}
+          </CardHeader>
+          
+          <CardContent className="space-y-8 pt-8">
+            {/* Password Display */}
+            <div className="relative group">
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+              <div className="relative flex items-center gap-2 bg-card border border-border p-1 rounded-xl">
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  readOnly
+                  className="bg-transparent border-none text-xl md:text-2xl font-mono text-primary placeholder:text-primary/20 focus-visible:ring-0 h-14"
                 />
-              ))}
+                <div className="flex items-center gap-1 pr-2">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="text-muted-foreground hover:text-foreground hover:bg-accent/10"
+                  >
+                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={generatePassword}
+                    className="text-muted-foreground hover:text-primary hover:bg-primary/10"
+                  >
+                    <RefreshCw className="w-5 h-5" />
+                  </Button>
+                  <Button
+                    onClick={copyToClipboard}
+                    className="bg-primary hover:bg-primary/80 text-primary-foreground font-bold px-4"
+                  >
+                    <Copy className="w-4 h-4 mr-2" />
+                    Copiar
+                  </Button>
+                </div>
+              </div>
             </div>
-            <p className="text-xs text-gray-500 italic">
-              Tempo estimado para quebrar: <span className="text-gray-300">{strength.crack_times_display.offline_slow_hashing_1e4_per_second}</span>
+
+            {/* Strength Meter */}
+            {strength && (
+              <div className="space-y-3">
+                <div className="flex justify-between items-end">
+                  <Label className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Força da Senha</Label>
+                  <span className={cn(
+                    "text-sm font-bold px-2 py-0.5 rounded border",
+                    strength.score <= 1 ? "text-red-400 border-red-400/20 bg-red-400/5" :
+                    strength.score === 2 ? "text-yellow-400 border-yellow-400/20 bg-yellow-400/5" :
+                    "text-emerald-400 border-emerald-400/20 bg-emerald-400/5"
+                  )}>
+                    {getStrengthLabel(strength.score)}
+                  </span>
+                </div>
+                <div className="flex gap-1.5 h-2">
+                  {[0, 1, 2, 3].map((step) => (
+                    <div
+                      key={step}
+                      className={cn(
+                        "flex-1 rounded-full transition-all duration-500",
+                        strength.score > step ? getStrengthColor(strength.score) : "bg-muted"
+                      )}
+                    />
+                  ))}
+                </div>
+                <p className="text-xs text-muted-foreground italic">
+                  Tempo estimado para quebrar: <span className="text-foreground">{strength.crack_times_display.offline_slow_hashing_1e4_per_second}</span>
+                </p>
+              </div>
+            )}
+
+            {/* Configuration */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <div className="flex justify-between">
+                    <Label className="text-foreground">Comprimento: <span className="text-primary font-mono">{length}</span></Label>
+                  </div>
+                  <Slider
+                    value={[length]}
+                    onValueChange={(val) => setLength(val[0])}
+                    max={64}
+                    min={8}
+                    step={1}
+                    className="py-4"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-4">
+                {Object.entries(options).map(([key, value]) => (
+                  <div key={key} className="flex items-center justify-between p-3 rounded-lg border border-border bg-card/50 hover:bg-card transition-colors">
+                    <Label htmlFor={key} className="capitalize text-foreground cursor-pointer">
+                      {key === 'uppercase' ? 'Maiúsculas' : 
+                       key === 'lowercase' ? 'Minúsculas' : 
+                       key === 'numbers' ? 'Números' : 'Símbolos'}
+                    </Label>
+                    <Switch
+                      id={key}
+                      checked={value}
+                      onCheckedChange={(checked) => setOptions(prev => ({ ...prev, [key]: checked }))}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </CardContent>
+          
+          <div className="p-4 bg-primary/5 border-t border-border/50 text-center">
+            <p className="text-[10px] text-primary/60 uppercase tracking-[0.2em]">
+              Protegido por Protocolos de Segurança Cafe com Cyber
             </p>
           </div>
-        )}
-
-        {/* Configuration */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <div className="flex justify-between">
-                <Label className="text-gray-300">Comprimento: <span className="text-primary font-mono">{length}</span></Label>
-              </div>
-              <Slider
-                value={[length]}
-                onValueChange={(val) => setLength(val[0])}
-                max={64}
-                min={8}
-                step={1}
-                className="py-4"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4">
-            {Object.entries(options).map(([key, value]) => (
-              <div key={key} className="flex items-center justify-between p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors">
-                <Label htmlFor={key} className="capitalize text-gray-300 cursor-pointer">
-                  {key === 'uppercase' ? 'Maiúsculas' : 
-                   key === 'lowercase' ? 'Minúsculas' : 
-                   key === 'numbers' ? 'Números' : 'Símbolos'}
-                </Label>
-                <Switch
-                  id={key}
-                  checked={value}
-                  onCheckedChange={(checked) => setOptions(prev => ({ ...prev, [key]: checked }))}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </CardContent>
-      
-      <div className="p-4 bg-primary/5 border-t border-white/5 text-center">
-        <p className="text-[10px] text-primary/40 uppercase tracking-[0.2em]">
-          Protegido por Protocolos de Segurança Cafe com Cyber
-        </p>
-      </div>
-    </Card>
+        </Card>
+      </main>
+      <Footer />
+    </div>
   );
 };
 
