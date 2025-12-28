@@ -5,7 +5,8 @@ import CommunitySection from "@/components/CommunitySection";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowRight, Users } from "lucide-react";
+import { ArrowRight, Users, Lock } from "lucide-react";
+import PasswordGenerator from "@/components/PasswordGenerator";
 
 const Index = () => {
   return (
@@ -13,8 +14,37 @@ const Index = () => {
       <Header />
       <main role="main">
         <HeroSection />
+        
+        {/* Nova Seção: Gerador de Senhas */}
+        <section id="gerador-senhas" className="py-24 relative overflow-hidden">
+          {/* Background Decorativo para a seção */}
+          <div className="absolute inset-0 bg-primary/5 pointer-events-none" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+          
+          <div className="container relative z-10">
+            <div className="text-center mb-12 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest">
+                <Lock className="w-3 h-3" />
+                Ferramenta de Segurança
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+                Gerador de Senhas <span className="text-primary">Seguras</span>
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Proteja suas contas com senhas geradas localmente no seu navegador. 
+                Nenhum dado é enviado para nossos servidores.
+              </p>
+            </div>
+            
+            <PasswordGenerator />
+          </div>
+          
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+        </section>
+
         <ArticlesSection />
         <CommunitySection />
+        
         {/* Seção Sobre Nós */}
         <section id="about" className="py-20 bg-background relative">
           <div className="container">
