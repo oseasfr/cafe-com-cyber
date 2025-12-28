@@ -127,7 +127,7 @@ const Footer = () => {
         <div className="mt-12 pt-6 border-t border-border/50 text-center text-sm text-muted-foreground">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
             <div className="flex items-center space-x-2">
-              <span>&copy; {new Date().getFullYear()} Goiano UAI ! Todos os direitos reservados. ® </span>
+              <span>&copy; {new Date().getFullYear()} Goiano UAI ! Todos os direitos reservados.</span>
             </div>
             <div className="flex items-center space-x-2">
               <span>Feito com</span>
