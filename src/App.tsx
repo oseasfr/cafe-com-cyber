@@ -15,7 +15,7 @@ import ArticlesArchive from "./pages/articles/ArticlesFiles";
 import CommunityPage from "./pages/CommunityPage";
 import AboutPage from "./pages/AboutPage";
 import UsefulLinks from "./pages/links-uteis";
-// import GeradorSenhas from "./pages/gerador-de-senhas";
+import GeradorSenhas from "./pages/gerador-de-senhas";
 
 // *** Variável de controle: Altere para 'false' para desativar a página de manutenção ***
 const MAINTENANCE_MODE = false;
