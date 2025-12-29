@@ -370,31 +370,31 @@ const PasswordGenerator = () => {
               type={showPassword ? "text" : "password"}
               value={password}
               readOnly
-              className="bg-transparent border-none text-xl md:text-2xl font-mono text-primary placeholder:text-primary/20 focus-visible:ring-0 h-14"
+              className="bg-transparent border-none text-base sm:text-lg md:text-xl lg:text-2xl font-mono text-primary placeholder:text-primary/20 focus-visible:ring-0 h-12 sm:h-14 flex-1 min-w-0"
             />
-            <div className="flex items-center gap-1 pr-2">
+            <div className="flex items-center gap-1 flex-shrink-0">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-muted-foreground hover:text-foreground hover:bg-accent/10"
+                className="text-muted-foreground hover:text-foreground hover:bg-accent/10 h-8 w-8 sm:h-10 sm:w-10"
               >
-                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                {showPassword ? <EyeOff className="w-4 h-4 sm:w-5 sm:h-5" /> : <Eye className="w-4 h-4 sm:w-5 sm:h-5" />}
               </Button>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={generatePassword}
-                className="text-muted-foreground hover:text-primary hover:bg-primary/10"
+                className="text-muted-foreground hover:text-primary hover:bg-primary/10 h-8 w-8 sm:h-10 sm:w-10"
               >
-                <RefreshCw className="w-5 h-5" />
+                <RefreshCw className="w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
               <Button
                 onClick={() => copyToClipboard(password)}
-                className="bg-primary hover:bg-primary/80 text-primary-foreground font-bold px-4"
+                className="bg-primary hover:bg-primary/80 text-primary-foreground font-bold px-2 sm:px-4 h-8 sm:h-10 text-xs sm:text-sm"
               >
-                <Copy className="w-4 h-4 mr-2" />
-                Copiar
+                <Copy className="w-3 h-3 sm:w-4 sm:h-4 sm:mr-2" />
+                <span className="hidden sm:inline">Copiar</span>
               </Button>
             </div>
           </div>
