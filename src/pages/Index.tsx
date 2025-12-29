@@ -7,8 +7,37 @@ import PasswordGenerator from "@/components/PasswordGenerator";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Users, Lock } from "lucide-react";
+import { useEffect } from "react";
 
 const Index = () => {
+  // Handler para hash anchors ao carregar a página
+  useEffect(() => {
+    const handleHashScroll = () => {
+      const hash = window.location.hash.slice(1); // Remove o '#'
+      if (hash) {
+        setTimeout(() => {
+          const element = document.getElementById(hash);
+          if (element) {
+            const headerHeight = 64; // h-16 = 64px
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }, 100); // Pequeno delay para garantir que o DOM está pronto
+      }
+    };
+
+    // Executa ao carregar a página
+    handleHashScroll();
+
+    // Também escuta mudanças no hash
+    window.addEventListener('hashchange', handleHashScroll);
+    return () => window.removeEventListener('hashchange', handleHashScroll);
+  }, []);
   return (
     <div className="min-h-screen bg-background">
       <Header />
