@@ -307,12 +307,9 @@ const PasswordGenerator = () => {
           <div className="p-2 bg-primary/10 rounded-lg border border-primary/20">
             <Shield className="w-6 h-6 text-primary animate-pulse" />
           </div>
-          <div>
-            <CardTitle className="text-2xl font-bold tracking-tight text-foreground">
-              Gerador de Senhas <span className="text-primary">Cyber</span>
-            </CardTitle>
+          <div></div>
             <CardDescription className="text-muted-foreground">
-              Gere senhas ultra-seguras ou analise a força de suas senhas.
+              Gere novas senhas seguras ou analise a força de suas senhas atuais.
             </CardDescription>
           </div>
         </div>
