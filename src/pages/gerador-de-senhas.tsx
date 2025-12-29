@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Shield, Copy, RefreshCw, Check, Lock, Eye, EyeOff } from 'lucide-react';
+import { Shield, Copy, RefreshCw, Eye, EyeOff } from 'lucide-react';
+// @ts-ignore - zxcvbn types may not be perfect
 import zxcvbn from 'zxcvbn';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -61,8 +62,12 @@ const GeradorSenhas = () => {
 
   useEffect(() => {
     if (password) {
-      const result = zxcvbn(password);
-      setStrength(result);
+      try {
+        const result = zxcvbn(password);
+        setStrength(result);
+      } catch (error) {
+        console.error('Error calculating password strength:', error);
+      }
     }
   }, [password]);
 
@@ -181,9 +186,11 @@ const GeradorSenhas = () => {
                     />
                   ))}
                 </div>
-                <p className="text-xs text-muted-foreground italic">
-                  Tempo estimado para quebrar: <span className="text-foreground">{strength.crack_times_display.offline_slow_hashing_1e4_per_second}</span>
-                </p>
+                {strength.crack_times_display && (
+                  <p className="text-xs text-muted-foreground italic">
+                    Tempo estimado para quebrar: <span className="text-foreground">{strength.crack_times_display.offline_slow_hashing_1e4_per_second || 'Mais de 100 séculos'}</span>
+                  </p>
+                )}
               </div>
             )}
 
