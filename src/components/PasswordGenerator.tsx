@@ -459,7 +459,7 @@ const PasswordGenerator = () => {
               <Slider
                 value={[length]}
                 onValueChange={(val) => setLength(val[0])}
-                max={64}
+                max={30}
                 min={8}
                 step={1}
                 className="py-4"
@@ -485,12 +485,6 @@ const PasswordGenerator = () => {
           </div>
         </div>
       </CardContent>
-      
-      <div className="p-4 bg-primary/5 border-t border-border/50 text-center">
-        <p className="text-[10px] text-primary/60 uppercase tracking-[0.2em]">
-          Protegido por Protocolos de Segurança Cafe com Cyber
-        </p>
-      </div>
     </Card>
   );
 };
