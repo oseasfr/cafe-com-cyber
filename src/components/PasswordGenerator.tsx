@@ -365,19 +365,24 @@ const PasswordGenerator = () => {
         {/* Password Display */}
         <div className="relative group">
           <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-          <div className="relative flex items-center gap-2 bg-card border border-border p-1 rounded-xl">
-            <Input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              readOnly
-              className="bg-transparent border-none text-base sm:text-lg md:text-xl lg:text-2xl font-mono text-primary placeholder:text-primary/20 focus-visible:ring-0 h-12 sm:h-14 flex-1 min-w-0"
-            />
-            <div className="flex items-center gap-1 flex-shrink-0">
+          <div className="relative bg-card border border-border rounded-xl flex flex-col">
+            {/* Input Field */}
+            <div className="p-2 sm:p-3">
+              <Input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                readOnly
+                className="bg-transparent border-none text-base sm:text-lg md:text-xl lg:text-2xl font-mono text-primary placeholder:text-primary/20 focus-visible:ring-0 h-12 sm:h-14 w-full text-center"
+              />
+            </div>
+            {/* Action Buttons - Always below the input */}
+            <div className="flex items-center justify-center gap-2 p-2 sm:p-3 border-t border-border/50 bg-card/30">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setShowPassword(!showPassword)}
-                className="text-muted-foreground hover:text-foreground hover:bg-accent/10 h-8 w-8 sm:h-10 sm:w-10"
+                className="text-muted-foreground hover:text-foreground hover:bg-accent/10 h-9 w-9 sm:h-10 sm:w-10"
+                title="Exibir/Ocultar senha"
               >
                 {showPassword ? <EyeOff className="w-4 h-4 sm:w-5 sm:h-5" /> : <Eye className="w-4 h-4 sm:w-5 sm:h-5" />}
               </Button>
@@ -385,16 +390,18 @@ const PasswordGenerator = () => {
                 variant="ghost"
                 size="icon"
                 onClick={generatePassword}
-                className="text-muted-foreground hover:text-primary hover:bg-primary/10 h-8 w-8 sm:h-10 sm:w-10"
+                className="text-muted-foreground hover:text-primary hover:bg-primary/10 h-9 w-9 sm:h-10 sm:w-10"
+                title="Gerar nova senha"
               >
                 <RefreshCw className="w-4 h-4 sm:w-5 sm:h-5" />
               </Button>
               <Button
                 onClick={() => copyToClipboard(password)}
-                className="bg-primary hover:bg-primary/80 text-primary-foreground font-bold px-2 sm:px-4 h-8 sm:h-10 text-xs sm:text-sm"
+                className="bg-primary hover:bg-primary/80 text-primary-foreground font-bold px-4 sm:px-6 h-9 sm:h-10 text-xs sm:text-sm"
+                title="Copiar senha"
               >
-                <Copy className="w-3 h-3 sm:w-4 sm:h-4 sm:mr-2" />
-                <span className="hidden sm:inline">Copiar</span>
+                <Copy className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+                Copiar
               </Button>
             </div>
           </div>
