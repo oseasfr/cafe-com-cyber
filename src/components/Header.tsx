@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import React from "react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,6 +28,22 @@ const Header = () => {
     } else {
       // Se estiver em outra página, vai para a home com #about
       window.location.href = '/#about';
+    }
+  };
+
+  const handlePasswordGeneratorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    
+    if (isHomePage) {
+      // Se estiver na home, faz scroll suave para #gerador-senhas
+      const geradorSection = document.getElementById('gerador-senhas');
+      if (geradorSection) {
+        geradorSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      // Se estiver em outra página, vai para a home com #gerador-senhas
+      window.location.href = '/#gerador-senhas';
     }
   };
 
@@ -67,6 +84,9 @@ const Header = () => {
           <Link to="/links-uteis" className="text-sm font-medium hover:text-primary transition-colors">
             Links Úteis
           </Link>
+          <a href={isHomePage ? "#gerador-senhas" : "/#gerador-senhas"} onClick={handlePasswordGeneratorClick} className="text-sm font-medium hover:text-primary transition-colors">
+            Gerador de Senhas
+          </a>
         </nav>
 
         {/* Right Actions */}
@@ -102,6 +122,9 @@ const Header = () => {
             <Link to="/links-uteis" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
               Links Úteis
             </Link>
+            <a href={isHomePage ? "#gerador-senhas" : "/#gerador-senhas"} onClick={handlePasswordGeneratorClick} className="block py-2 text-sm font-medium hover:text-primary transition-colors">
+              Gerador de Senhas
+            </a>
           </nav>
         </div>
       )}
