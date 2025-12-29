@@ -1,7 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PasswordGenerator from "@/components/PasswordGenerator";
-import { Lock } from "lucide-react";
 
 const GeradorSenhas = () => {
   return (
@@ -16,10 +15,6 @@ const GeradorSenhas = () => {
           
           <div className="container relative z-10">
             <div className="text-center mb-12 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest">
-                <Lock className="w-3 h-3" />
-                Ferramenta de Segurança
-              </div>
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
                 Gerador de Senhas <span className="text-primary">Seguras</span>
               </h2>
