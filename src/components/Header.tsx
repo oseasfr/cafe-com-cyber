@@ -15,16 +15,28 @@ const Header = () => {
     setIsMenuOpen(false); // Close mobile menu
   };
 
+  // Função auxiliar para scroll com offset do header
+  const scrollToSection = (elementId: string) => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      const headerHeight = 64; // h-16 = 64px
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const handleAboutClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setIsMenuOpen(false);
     
     if (isHomePage) {
-      // Se estiver na home, faz scroll suave para #about
-      const aboutSection = document.getElementById('about');
-      if (aboutSection) {
-        aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      // Se estiver na home, faz scroll suave para #about com offset
+      setTimeout(() => scrollToSection('about'), 0);
     } else {
       // Se estiver em outra página, vai para a home com #about
       window.location.href = '/#about';
@@ -36,14 +48,33 @@ const Header = () => {
     setIsMenuOpen(false);
     
     if (isHomePage) {
-      // Se estiver na home, faz scroll suave para #gerador-senhas
-      const geradorSection = document.getElementById('gerador-senhas');
-      if (geradorSection) {
-        geradorSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      // Se estiver na home, faz scroll suave para #gerador-senhas com offset
+      setTimeout(() => scrollToSection('gerador-senhas'), 0);
     } else {
       // Se estiver em outra página, vai para a home com #gerador-senhas
       window.location.href = '/#gerador-senhas';
+    }
+  };
+
+  const handleArticlesClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    
+    if (isHomePage) {
+      setTimeout(() => scrollToSection('articles'), 0);
+    } else {
+      window.location.href = '/#articles';
+    }
+  };
+
+  const handleCommunityClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    
+    if (isHomePage) {
+      setTimeout(() => scrollToSection('community'), 0);
+    } else {
+      window.location.href = '/#community';
     }
   };
 
@@ -72,10 +103,10 @@ const Header = () => {
           <Link to="/" className="text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
             Início
           </Link>
-          <a href="#articles" className="text-sm font-medium hover:text-primary transition-colors">
+          <a href={isHomePage ? "#articles" : "/#articles"} onClick={handleArticlesClick} className="text-sm font-medium hover:text-primary transition-colors">
             Artigos
           </a>
-          <a href="#community" className="text-sm font-medium hover:text-primary transition-colors">
+          <a href={isHomePage ? "#community" : "/#community"} onClick={handleCommunityClick} className="text-sm font-medium hover:text-primary transition-colors">
             Comunidade
           </a>
           <a href={isHomePage ? "#about" : "/#about"} onClick={handleAboutClick} className="text-sm font-medium hover:text-primary transition-colors">
@@ -110,10 +141,10 @@ const Header = () => {
             <Link to="/" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
               Início
             </Link>
-            <a href="#articles" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+            <a href={isHomePage ? "#articles" : "/#articles"} onClick={handleArticlesClick} className="block py-2 text-sm font-medium hover:text-primary transition-colors">
               Artigos
             </a>
-            <a href="#community" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
+            <a href={isHomePage ? "#community" : "/#community"} onClick={handleCommunityClick} className="block py-2 text-sm font-medium hover:text-primary transition-colors">
               Comunidade
             </a>
             <a href={isHomePage ? "#about" : "/#about"} onClick={handleAboutClick} className="block py-2 text-sm font-medium hover:text-primary transition-colors">
@@ -133,3 +164,5 @@ const Header = () => {
 };
 
 export default Header;
+
+
