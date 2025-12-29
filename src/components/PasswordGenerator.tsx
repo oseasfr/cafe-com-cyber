@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Shield, Copy, RefreshCw, Eye, EyeOff, Search } from 'lucide-react';
+import { Copy, RefreshCw, Eye, EyeOff, Search } from 'lucide-react';
 // @ts-ignore - zxcvbn types may not be perfect
 import zxcvbn from 'zxcvbn';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -302,19 +302,6 @@ const PasswordGenerator = () => {
 
   return (
     <Card className="w-full max-w-2xl mx-auto bg-card/50 border-border/50 backdrop-blur-xl shadow-lg">
-      <CardHeader className="border-b border-border/50 bg-gradient-to-r from-card/80 to-transparent">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="p-2 bg-primary/10 rounded-lg border border-primary/20">
-            <Shield className="w-6 h-6 text-primary animate-pulse" />
-          </div>
-          <div></div>
-            <CardDescription className="text-muted-foreground">
-              Gere novas senhas seguras ou analise a força de suas senhas atuais.
-            </CardDescription>
-          </div>
-        </div>
-      </CardHeader>
-      
       <CardContent className="space-y-8 pt-8">
         {/* Seção: Análise de Senha Customizada */}
         <div className="space-y-4">
