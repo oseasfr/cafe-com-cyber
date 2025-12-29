@@ -18,7 +18,7 @@ import UsefulLinks from "./pages/links-uteis";
 import GeradorSenhas from "./pages/gerador-de-senhas";
 
 // *** Variável de controle: Altere para 'false' para desativar a página de manutenção ***
-const MAINTENANCE_MODE = false;
+const MAINTENANCE_MODE = true;
 
 // Componente para rolar a página para o topo em cada mudança de rota
 const ScrollToTop = () => {
