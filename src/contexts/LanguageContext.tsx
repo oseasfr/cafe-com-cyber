@@ -12,7 +12,15 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+    // Em vez de quebrar a aplicação, retorna valores padrão
+    // Isso permite que a aplicação renderize mesmo se houver problema temporário
+    console.warn('useLanguage called outside LanguageProvider, using default values');
+    return {
+      language: 'pt' as Language,
+      setLanguage: () => {
+        console.warn('setLanguage called but LanguageProvider is not available');
+      },
+    };
   }
   return context;
 };
