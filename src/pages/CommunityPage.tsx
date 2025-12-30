@@ -4,9 +4,9 @@ import CommunitySection from "@/components/CommunitySection";
 
 const CommunityPage = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div>
       <Header />
-      <main role="main">
+      <main>
         <CommunitySection />
       </main>
       <Footer />
