@@ -34,9 +34,37 @@ const CommunitySection = () => {
             Nossa <span className="text-primary">Comunidade</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Um espaço dedicado à troca de conhecimento sobre Cybersecurity com analistas 
-            apaixonados por segurança da informação
+              Um espaço dedicado à troca de conhecimento sobre Cybersecurity com analistas 
+              apaixonados por segurança da informação
           </p>
+        </div>
+
+        {/* Community Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          <Card className="text-center border-border/50 bg-card/30 backdrop-blur">
+            <CardContent className="pt-6">
+              <div className="text-2xl md:text-3xl font-bold text-primary mb-2">100+</div>
+              <div className="text-sm text-muted-foreground">Analistas Ativos</div>
+            </CardContent>
+          </Card>
+          <Card className="text-center border-border/50 bg-card/30 backdrop-blur">
+            <CardContent className="pt-6">
+              <div className="text-2xl md:text-3xl font-bold text-primary mb-2">500+</div>
+              <div className="text-sm text-muted-foreground">Discussões por Mês</div>
+            </CardContent>
+          </Card>
+          <Card className="text-center border-border/50 bg-card/30 backdrop-blur">
+            <CardContent className="pt-6">
+              <div className="text-2xl md:text-3xl font-bold text-primary mb-2">24/7</div>
+              <div className="text-sm text-muted-foreground">Suporte Colaborativo</div>
+            </CardContent>
+          </Card>
+          <Card className="text-center border-border/50 bg-card/30 backdrop-blur">
+            <CardContent className="pt-6">
+              <div className="text-2xl md:text-3xl font-bold text-primary mb-2">0%</div>
+              <div className="text-sm text-muted-foreground">Debates Políticos</div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Features Grid */}
@@ -44,10 +72,7 @@ const CommunitySection = () => {
           {communityFeatures.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
-              <Card 
-                key={index} 
-                className="text-center group hover:shadow-cyber-soft transition-all duration-300 border-border/50 bg-card/50 backdrop-blur"
-              >
+              <Card key={index} className="text-center group hover:shadow-cyber-soft transition-all duration-300 border-border/50 bg-card/50 backdrop-blur">
                 <CardHeader>
                   <div className="w-12 h-12 mx-auto rounded-lg bg-gradient-cyber flex items-center justify-center group-hover:animate-glow-pulse mb-4">
                     <IconComponent className="h-6 w-6 text-primary" />
@@ -56,7 +81,7 @@ const CommunitySection = () => {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    {feature.description}
+                      {feature.description}
                   </p>
                 </CardContent>
               </Card>
@@ -74,9 +99,9 @@ const CommunitySection = () => {
           </CardHeader>
           <CardContent className="text-center space-y-6">
             <p className="text-muted-foreground leading-relaxed">
-              Mantemos um ambiente colaborativo focado no aprendizado. Compartilhe conhecimento, 
-              faça perguntas, divulgue eventos relevantes e vamos juntos construir uma comunidade 
-              forte e engajada em cibersegurança.
+                Mantemos um ambiente colaborativo focado no aprendizado. Compartilhe conhecimento, 
+                faça perguntas, divulgue eventos relevantes e vamos juntos construir uma comunidade 
+                forte e engajada em cibersegurança.
             </p>
             
             <div className="flex flex-wrap justify-center gap-4">
@@ -93,16 +118,15 @@ const CommunitySection = () => {
                 <span>Foque no aprendizado</span>
               </div>
             </div>
-            
             <Button
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber"
               onClick={() =>
-                window.open("https://chat.whatsapp.com/DV1aSKqXnzU9yzLle4WpQ3", "_blank", "noopener,noreferrer")
+                window.open("https://chat.whatsapp.com/DV1aSKqXnzU9yzLle4WpQ3", "_blank")
               }
-            >
+              >
               <MessageCircle className="mr-2 h-5 w-5" />
-              Grupo do Whatsapp
+              Participar do Grupo do Whatsapp
             </Button>
           </CardContent>
         </Card>
