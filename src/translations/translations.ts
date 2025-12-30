@@ -13,6 +13,10 @@ export type TranslationKey =
   | 'hero.subtitle'
   | 'hero.description'
   | 'hero.cta'
+  | 'hero.exploreArticles'
+  | 'hero.knowCommunity'
+  | 'hero.continuousLearning'
+  | 'hero.networking'
   // Articles Section
   | 'articles.title'
   | 'articles.subtitle'
@@ -70,8 +74,12 @@ export const translations: Record<Language, Record<TranslationKey, string>> = {
     // Hero Section
     'hero.title': 'Café com Cyber',
     'hero.subtitle': 'Conteúdos diversos sobre Cybersecurity',
-    'hero.description': 'Explore artigos, tutoriais e recursos sobre segurança da informação',
+    'hero.description': 'Encontre artigos, notícias e insights da comunidade para expandir seu conhecimento em Cibersegurança.',
     'hero.cta': 'Explorar Artigos',
+    'hero.exploreArticles': 'Explorar Artigos',
+    'hero.knowCommunity': 'Conhecer a Comunidade',
+    'hero.continuousLearning': 'Aprendizado contínuo',
+    'hero.networking': 'Networking e interações técnicas',
     // Articles Section
     'articles.title': 'Artigos Recentes',
     'articles.subtitle': 'Conteúdos sobre segurança da informação',
@@ -128,8 +136,12 @@ export const translations: Record<Language, Record<TranslationKey, string>> = {
     // Hero Section
     'hero.title': 'Café com Cyber',
     'hero.subtitle': 'Various content about Cybersecurity',
-    'hero.description': 'Explore articles, tutorials and resources on information security',
+    'hero.description': 'Find articles, news and community insights to expand your knowledge in Cybersecurity.',
     'hero.cta': 'Explore Articles',
+    'hero.exploreArticles': 'Explore Articles',
+    'hero.knowCommunity': 'Know the Community',
+    'hero.continuousLearning': 'Continuous learning',
+    'hero.networking': 'Networking and technical interactions',
     // Articles Section
     'articles.title': 'Recent Articles',
     'articles.subtitle': 'Content about information security',
