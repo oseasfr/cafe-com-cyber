@@ -1,14 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Shield, Coffee, Users, BookOpen, Lock, Eye } from "lucide-react";
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
-  const handleSectionClick = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <section id="home" className="min-h-[80vh] flex items-center justify-center relative overflow-hidden">
       {/* Background Effects */}
@@ -44,25 +38,13 @@ const HeroSection = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a 
-            href="#articles" 
-            onClick={(e) => {
-              e.preventDefault();
-              handleSectionClick('articles');
-            }}
-          >
+          <Link to="/articles">
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
               <BookOpen className="mr-2 h-5 w-5" />
               Explorar Artigos
             </Button>
-          </a>
-          <a 
-            href="#community"
-            onClick={(e) => {
-              e.preventDefault();
-              handleSectionClick('community');
-            }}
-          >
+          </Link>
+          <a href="#community">
             <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
               <Users className="mr-2 h-5 w-5" />
               Conhecer a Comunidade
@@ -71,22 +53,12 @@ const HeroSection = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto mt-16">
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">100+</div>
-            <div className="text-sm text-muted-foreground">Analistas</div>
+            <div className="text-lg md:text-xl font-semibold text-primary">Aprendizado contínuo</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">50+</div>
-            <div className="text-sm text-muted-foreground">Artigos</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">24/7</div>
-            <div className="text-sm text-muted-foreground">Discussões</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">∞</div>
-            <div className="text-sm text-muted-foreground">Aprendizado</div>
+            <div className="text-lg md:text-xl font-semibold text-primary">Networking e interações técnicas</div>
           </div>
         </div>
       </div>
