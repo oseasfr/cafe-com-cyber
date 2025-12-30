@@ -52,6 +52,7 @@ export default defineConfig(({ mode } ) => {
         // Mantém o alias "@" para facilitar a importação de arquivos.
         "@": path.resolve(__dirname, "./src"),
       },
+      extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json'],
     },
   };
 });
