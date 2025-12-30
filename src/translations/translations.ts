@@ -17,6 +17,14 @@ export type TranslationKey =
   | 'hero.knowCommunity'
   | 'hero.continuousLearning'
   | 'hero.networking'
+  | 'hero.stats.analysts'
+  | 'hero.stats.analystsValue'
+  | 'hero.stats.articles'
+  | 'hero.stats.articlesValue'
+  | 'hero.stats.discussions'
+  | 'hero.stats.discussionsValue'
+  | 'hero.stats.learning'
+  | 'hero.stats.learningValue'
   // Articles Section
   | 'articles.title'
   | 'articles.subtitle'
@@ -80,6 +88,14 @@ export const translations: Record<Language, Record<TranslationKey, string>> = {
     'hero.knowCommunity': 'Conhecer a Comunidade',
     'hero.continuousLearning': 'Aprendizado contínuo',
     'hero.networking': 'Networking e interações técnicas',
+    'hero.stats.analysts': 'Analistas',
+    'hero.stats.analystsValue': '+200',
+    'hero.stats.articles': 'Artigos',
+    'hero.stats.articlesValue': 'Diversos',
+    'hero.stats.discussions': 'Discussões',
+    'hero.stats.discussionsValue': '24/7',
+    'hero.stats.learning': 'Aprendizado',
+    'hero.stats.learningValue': 'Contínuo',
     // Articles Section
     'articles.title': 'Artigos Recentes',
     'articles.subtitle': 'Conteúdos sobre segurança da informação',
@@ -142,6 +158,14 @@ export const translations: Record<Language, Record<TranslationKey, string>> = {
     'hero.knowCommunity': 'Know the Community',
     'hero.continuousLearning': 'Continuous learning',
     'hero.networking': 'Networking and technical interactions',
+    'hero.stats.analysts': 'Analysts',
+    'hero.stats.analystsValue': '+200',
+    'hero.stats.articles': 'Articles',
+    'hero.stats.articlesValue': 'Various',
+    'hero.stats.discussions': 'Discussions',
+    'hero.stats.discussionsValue': '24/7',
+    'hero.stats.learning': 'Learning',
+    'hero.stats.learningValue': 'Continuous',
     // Articles Section
     'articles.title': 'Recent Articles',
     'articles.subtitle': 'Content about information security',
