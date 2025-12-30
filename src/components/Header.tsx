@@ -3,6 +3,7 @@ import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import React from "react";
+import { LanguageSelector } from "@/components/LanguageSelector";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -121,7 +122,10 @@ const Header = () => {
         </nav>
 
         {/* Right Actions */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2">
+          {/* Language Selector */}
+          <LanguageSelector />
+          
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"
@@ -164,5 +168,3 @@ const Header = () => {
 };
 
 export default Header;
-
-
