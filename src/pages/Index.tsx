@@ -93,7 +93,7 @@ const Index = () => {
                 Gerador de Senhas <span className="text-primary">Seguras</span>
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Proteja suas contas com senhas geradas localmente no seu navegador.
+                Consulte a força da sua senha atual e reforce-a gerando uma de maior complexidade.
               </p>
             </div>
             
