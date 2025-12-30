@@ -1,8 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Shield, Coffee, Users, BookOpen, Lock, Eye } from "lucide-react";
 import { Link } from 'react-router-dom';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const HeroSection = () => {
+  const { t } = useTranslation();
   return (
     <section id="home" className="min-h-[80vh] flex items-center justify-center relative overflow-hidden">
       {/* Background Effects */}
@@ -27,12 +29,12 @@ const HeroSection = () => {
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
             <span className="bg-gradient-to-r from-cyber-light via-primary to-accent bg-clip-text text-transparent">
-              Café com Cyber
+              {t('hero.title')}
             </span>
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-          Encontre artigos, notícias e insights da comunidade para expandir seu conhecimento em <span className="text-primary font-semibold">Cibersegurança</span>.
+            {t('hero.description')}
           </p>
         </div>
 
@@ -41,13 +43,13 @@ const HeroSection = () => {
           <Link to="/articles">
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
               <BookOpen className="mr-2 h-5 w-5" />
-              Explorar Artigos
+              {t('hero.exploreArticles')}
             </Button>
           </Link>
           <a href="#community">
             <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
               <Users className="mr-2 h-5 w-5" />
-              Conhecer a Comunidade
+              {t('hero.knowCommunity')}
             </Button>
           </a>
         </div>
@@ -55,10 +57,10 @@ const HeroSection = () => {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto mt-16">
           <div className="text-center">
-            <div className="text-lg md:text-xl font-semibold text-primary">Aprendizado contínuo</div>
+            <div className="text-lg md:text-xl font-semibold text-primary">{t('hero.continuousLearning')}</div>
           </div>
           <div className="text-center">
-            <div className="text-lg md:text-xl font-semibold text-primary">Networking e interações técnicas</div>
+            <div className="text-lg md:text-xl font-semibold text-primary">{t('hero.networking')}</div>
           </div>
         </div>
       </div>
