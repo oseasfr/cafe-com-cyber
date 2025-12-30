@@ -1,10 +1,24 @@
 import { Button } from "@/components/ui/button";
-import { Shield, Coffee, Users, BookOpen, Lock, Eye } from "lucide-react";
-import { Link } from 'react-router-dom';
+import { Shield, Coffee, Users, BookOpen } from "lucide-react";
 import { useTranslation } from '@/hooks/useTranslation';
 
 const HeroSection = () => {
   const { t } = useTranslation();
+
+  const handleSectionClick = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerHeight = 64; // h-16 = 64px
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <section id="home" className="min-h-[80vh] flex items-center justify-center relative overflow-hidden">
       {/* Background Effects */}
@@ -40,13 +54,25 @@ const HeroSection = () => {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link to="/articles">
+          <a 
+            href="#articles" 
+            onClick={(e) => {
+              e.preventDefault();
+              handleSectionClick('articles');
+            }}
+          >
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
               <BookOpen className="mr-2 h-5 w-5" />
               {t('hero.exploreArticles')}
             </Button>
-          </Link>
-          <a href="#community">
+          </a>
+          <a 
+            href="#community"
+            onClick={(e) => {
+              e.preventDefault();
+              handleSectionClick('community');
+            }}
+          >
             <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
               <Users className="mr-2 h-5 w-5" />
               {t('hero.knowCommunity')}
@@ -55,12 +81,22 @@ const HeroSection = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto mt-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-16">
           <div className="text-center">
-            <div className="text-lg md:text-xl font-semibold text-primary">{t('hero.continuousLearning')}</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary">{t('hero.stats.analysts')}</div>
+            <div className="text-sm text-muted-foreground">{t('hero.stats.analystsValue')}</div>
           </div>
           <div className="text-center">
-            <div className="text-lg md:text-xl font-semibold text-primary">{t('hero.networking')}</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary">{t('hero.stats.articles')}</div>
+            <div className="text-sm text-muted-foreground">{t('hero.stats.articlesValue')}</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl md:text-3xl font-bold text-primary">{t('hero.stats.discussions')}</div>
+            <div className="text-sm text-muted-foreground">{t('hero.stats.discussionsValue')}</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl md:text-3xl font-bold text-primary">{t('hero.stats.learning')}</div>
+            <div className="text-sm text-muted-foreground">{t('hero.stats.learningValue')}</div>
           </div>
         </div>
       </div>
