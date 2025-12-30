@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import React from "react";
 import { LanguageSelector } from "@/components/LanguageSelector";
+import { useTranslation } from '@/hooks/useTranslation';
 
 const Header = () => {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const isHomePage = location.pathname === '/';
@@ -102,22 +104,22 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
-            Início
+            {t('nav.home')}
           </Link>
           <a href={isHomePage ? "#articles" : "/#articles"} onClick={handleArticlesClick} className="text-sm font-medium hover:text-primary transition-colors">
-            Artigos
+            {t('nav.articles')}
           </a>
           <a href={isHomePage ? "#community" : "/#community"} onClick={handleCommunityClick} className="text-sm font-medium hover:text-primary transition-colors">
-            Comunidade
+            {t('nav.community')}
           </a>
           <a href={isHomePage ? "#about" : "/#about"} onClick={handleAboutClick} className="text-sm font-medium hover:text-primary transition-colors">
-            Sobre Nós
+            {t('nav.about')}
           </a>
           <Link to="/links-uteis" className="text-sm font-medium hover:text-primary transition-colors">
-            Links Úteis
+            {t('nav.usefulLinks')}
           </Link>
           <a href={isHomePage ? "#gerador-senhas" : "/#gerador-senhas"} onClick={handlePasswordGeneratorClick} className="text-sm font-medium hover:text-primary transition-colors">
-            Gerador de Senhas
+            {t('nav.passwordGenerator')}
           </a>
         </nav>
 
@@ -143,22 +145,22 @@ const Header = () => {
         <div className="md:hidden border-t border-border bg-card">
           <nav className="container py-4 space-y-2">
             <Link to="/" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={handleHomeClick}>
-              Início
+              {t('nav.home')}
             </Link>
             <a href={isHomePage ? "#articles" : "/#articles"} onClick={handleArticlesClick} className="block py-2 text-sm font-medium hover:text-primary transition-colors">
-              Artigos
+              {t('nav.articles')}
             </a>
             <a href={isHomePage ? "#community" : "/#community"} onClick={handleCommunityClick} className="block py-2 text-sm font-medium hover:text-primary transition-colors">
-              Comunidade
+              {t('nav.community')}
             </a>
             <a href={isHomePage ? "#about" : "/#about"} onClick={handleAboutClick} className="block py-2 text-sm font-medium hover:text-primary transition-colors">
-              Sobre Nós
+              {t('nav.about')}
             </a>
             <Link to="/links-uteis" className="block py-2 text-sm font-medium hover:text-primary transition-colors" onClick={() => setIsMenuOpen(false)}>
-              Links Úteis
+              {t('nav.usefulLinks')}
             </Link>
             <a href={isHomePage ? "#gerador-senhas" : "/#gerador-senhas"} onClick={handlePasswordGeneratorClick} className="block py-2 text-sm font-medium hover:text-primary transition-colors">
-              Gerador de Senhas
+              {t('nav.passwordGenerator')}
             </a>
           </nav>
         </div>
