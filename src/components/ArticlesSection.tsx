@@ -9,8 +9,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { articles } from "../data/articles";
-import { ArticleCard } from "./ArticleCard";
+import { articles } from "../data/articles"; // Certifique-se de que o caminho está correto
+import { ArticleCard } from "./ArticleCard"; // Importa o componente ArticleCard
 import { memo } from "react";
 
 const ArticlesSection = memo(() => {
