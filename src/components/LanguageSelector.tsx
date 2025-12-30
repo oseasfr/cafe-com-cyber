@@ -3,7 +3,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-// Componente SVG da bandeira do Brasil (simplificada)
+// Componente SVG da bandeira do Brasil
 const BrazilFlag: React.FC<{ className?: string }> = ({ className }) => (
   <svg
     viewBox="0 0 20 14"
@@ -11,10 +11,8 @@ const BrazilFlag: React.FC<{ className?: string }> = ({ className }) => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <rect width="20" height="14" fill="#009739" />
-    <path d="M10 7L3 3h14L10 7z" fill="#FEDD00" />
-    <path d="M10 7L3 11h14L10 7z" fill="#012169" />
-    <circle cx="10" cy="7" r="2.5" fill="#FEDD00" />
-    <circle cx="10" cy="7" r="1.5" fill="#012169" />
+    <path d="M10 1.5L3 7l7 5.5 7-5.5z" fill="#FEDD00" />
+    <circle cx="10" cy="7" r="2.5" fill="#002776" />
   </svg>
 );
 
