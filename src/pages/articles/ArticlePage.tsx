@@ -8,11 +8,14 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Clock, User, Copy, Check } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { ThemeProvider, useTheme } from 'next-themes';
 import NotFound from '../NotFound';
 
 // Componente para blocos de código com botão de copiar
 function CodeBlock({ children, ...props }: any) {
   const [copied, setCopied] = useState(false);
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   
   // Extrai o texto do código - pode ser string ou ReactNode
   const getCodeText = (node: any): string => {
@@ -40,12 +43,16 @@ function CodeBlock({ children, ...props }: any) {
 
   return (
     <div className="relative group">
-      <pre className="bg-cyber-darker p-4 rounded-lg overflow-x-auto mb-4" {...props}>
+      <pre className={`p-4 rounded-lg overflow-x-auto mb-4 ${isLight ? 'bg-gray-100 text-gray-800' : 'bg-cyber-darker text-primary'}`} {...props}>
         {children}
       </pre>
       <button
         onClick={copyToClipboard}
-        className="absolute top-2 right-2 p-2 bg-cyber-darker/80 hover:bg-cyber-darker border border-border rounded-md text-muted-foreground hover:text-foreground transition-colors opacity-0 group-hover:opacity-100 z-10"
+        className={`absolute top-2 right-2 p-2 rounded-md transition-colors opacity-0 group-hover:opacity-100 z-10 ${
+          isLight 
+            ? 'bg-gray-200 hover:bg-gray-300 border border-gray-300 text-gray-700 hover:text-gray-900' 
+            : 'bg-cyber-darker/80 hover:bg-cyber-darker border border-border text-muted-foreground hover:text-foreground'
+        }`}
         title="Copiar código"
         aria-label="Copiar código"
       >
@@ -121,154 +128,168 @@ export default function ArticlePage() {
   }, [article, fullUrl, imageUrl]);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
-      <main className="container mx-auto max-w-4xl px-4 py-8">
-        {/* Botão Voltar e Seletor de Tema */}
-        <div className="mb-6 flex items-center justify-between">
-          <Button
-            asChild
-            variant="ghost"
-            size="sm"
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <Link to="/articles">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Voltar para Artigos
-            </Link>
-          </Button>
-          <ThemeToggle />
-        </div>
-
-        {/* Título do Artigo */}
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground leading-tight mb-4">
-          {article.title}
-        </h1>
-
-        {/* Tags - Logo abaixo do título */}
-        {article.tags && article.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-6">
-            {article.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded-md"
-              >
-                #{tag}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {/* Informações do Autor e Tempo de Leitura */}
-        <div className="flex items-center gap-4 text-muted-foreground mb-4">
-          <div className="flex items-center gap-2">
-            <User className="h-4 w-4" />
-            <span className="text-sm font-medium">{article.author}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4" />
-            <span className="text-sm">{article.readTime}</span>
-          </div>
-          {article.category && (
-            <span className="text-sm px-2 py-1 bg-primary/10 text-primary rounded-md">
-              {article.category}
-            </span>
-          )}
-        </div>
-
-        {/* Botões de Compartilhamento - Topo */}
-        <ShareButtons 
-          title={article.title}
-          url={articleUrl}
-          description={article.description}
-        />
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} storageKey="article-theme">
+      <div className="min-h-screen bg-background">
+        <Header />
         
-        {/* Imagem de Capa do Artigo */}
-        {article.imageUrl && (
-          <div className="mb-8 rounded-lg overflow-hidden mt-6">
-            <img 
-              src={article.imageUrl} 
-              alt={article.title} 
-              className="w-full h-auto object-cover"
-            />
-          </div>
-        )}
-
-        {/* Conteúdo do Artigo */}
-        <article className="prose prose-lg prose-invert max-w-none">
-          <div className="text-foreground">
-            <ReactMarkdown
-              components={{
-                h1: ({node, ...props}) => <h1 className="text-3xl font-bold text-foreground mt-8 mb-4" {...props} />,
-                h2: ({node, ...props}) => <h2 className="text-2xl font-bold text-foreground mt-6 mb-3" {...props} />,
-                h3: ({node, ...props}) => <h3 className="text-xl font-semibold text-foreground mt-4 mb-2" {...props} />,
-                h4: ({node, ...props}) => <h4 className="text-lg font-semibold text-foreground mt-4 mb-2" {...props} />,
-                p: ({node, ...props}) => <p className="text-muted-foreground leading-relaxed mb-4" {...props} />,
-                ul: ({node, ...props}) => <ul className="list-disc list-inside mb-4 text-muted-foreground space-y-2 ml-4" {...props} />,
-                ol: ({node, ...props}) => <ol className="list-decimal list-inside mb-4 text-muted-foreground space-y-2 ml-4" {...props} />,
-                li: ({node, ...props}) => <li className="ml-2" {...props} />,
-                code: ({node, className, children, ...props}: any) => {
-                  const isInline = !className;
-                  if (isInline) {
-                    return (
-                      <code className="bg-cyber-darker px-2 py-1 rounded text-primary font-mono text-sm" {...props}>
-                        {children}
-                      </code>
-                    );
-                  }
-                  // Para blocos de código, retorna o código com a classe
-                  return (
-                    <code className={`${className} block bg-cyber-darker p-4 rounded-lg text-primary font-mono text-sm overflow-x-auto mb-4`} {...props}>
-                      {children}
-                    </code>
-                  );
-                },
-                pre: ({node, children, ...props}: any) => {
-                  // Renderiza o bloco de código com botão de copiar
-                  return <CodeBlock {...props}>{children}</CodeBlock>;
-                },
-                strong: ({node, ...props}) => <strong className="font-bold text-foreground" {...props} />,
-                em: ({node, ...props}) => <em className="italic text-foreground" {...props} />,
-                a: ({node, ...props}) => <a className="text-primary hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
-                blockquote: ({node, ...props}) => <blockquote className="border-l-4 border-primary pl-4 italic text-muted-foreground my-4" {...props} />,
-                hr: ({node, ...props}) => <hr className="border-border my-8" {...props} />,
-                img: ({node, ...props}) => <img className="w-full h-auto rounded-lg my-4" {...props} />,
-                table: ({node, ...props}) => <div className="overflow-x-auto my-4"><table className="min-w-full border border-border" {...props} /></div>,
-                th: ({node, ...props}) => <th className="border border-border px-4 py-2 bg-muted text-foreground font-semibold" {...props} />,
-                td: ({node, ...props}) => <td className="border border-border px-4 py-2 text-muted-foreground" {...props} />,
-              }}
+        <main className="container mx-auto max-w-4xl px-4 py-8">
+          {/* Botão Voltar e Seletor de Tema */}
+          <div className="mb-6 flex items-center justify-between">
+            <Button
+              asChild
+              variant="ghost"
+              size="sm"
+              className="text-muted-foreground hover:text-foreground"
             >
-              {article.content}
-            </ReactMarkdown>
+              <Link to="/articles">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Voltar para Artigos
+              </Link>
+            </Button>
+            <ThemeToggle />
           </div>
-        </article>
 
-        {/* Botões de Compartilhamento - Final */}
-        <div className="mt-8">
+          {/* Título do Artigo */}
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground leading-tight mb-4">
+            {article.title}
+          </h1>
+
+          {/* Tags - Logo abaixo do título */}
+          {article.tags && article.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-6">
+              {article.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded-md"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* Informações do Autor e Tempo de Leitura */}
+          <div className="flex items-center gap-4 text-muted-foreground mb-4">
+            <div className="flex items-center gap-2">
+              <User className="h-4 w-4" />
+              <span className="text-sm font-medium">{article.author}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="h-4 w-4" />
+              <span className="text-sm">{article.readTime}</span>
+            </div>
+            {article.category && (
+              <span className="text-sm px-2 py-1 bg-primary/10 text-primary rounded-md">
+                {article.category}
+              </span>
+            )}
+          </div>
+
+          {/* Botões de Compartilhamento - Topo */}
           <ShareButtons 
             title={article.title}
             url={articleUrl}
             description={article.description}
           />
-        </div>
+          
+          {/* Imagem de Capa do Artigo */}
+          {article.imageUrl && (
+            <div className="mb-8 rounded-lg overflow-hidden mt-6">
+              <img 
+                src={article.imageUrl} 
+                alt={article.title} 
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          )}
 
-        {/* Botão Voltar no Final */}
-        <div className="mt-12 pt-8 border-t border-border">
-          <Button
-            asChild
-            variant="outline"
-            className="w-full sm:w-auto"
-          >
-            <Link to="/articles">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Ver Todos os Artigos
-            </Link>
-          </Button>
-        </div>
-      </main>
+          {/* Conteúdo do Artigo com Tema Isolado */}
+          <ArticleContent article={article} />
 
-      <Footer />
+          {/* Botões de Compartilhamento - Final */}
+          <div className="mt-8">
+            <ShareButtons 
+              title={article.title}
+              url={articleUrl}
+              description={article.description}
+            />
+          </div>
+
+          {/* Botão Voltar no Final */}
+          <div className="mt-12 pt-8 border-t border-border">
+            <Button
+              asChild
+              variant="outline"
+              className="w-full sm:w-auto"
+            >
+              <Link to="/articles">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Ver Todos os Artigos
+              </Link>
+            </Button>
+          </div>
+        </main>
+
+        <Footer />
+      </div>
+    </ThemeProvider>
+  );
+}
+
+// Componente que renderiza apenas o conteúdo do artigo com tema isolado
+function ArticleContent({ article }: { article: typeof articles[0] }) {
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
+
+  return (
+    <div className={`rounded-lg p-6 transition-colors ${
+      isLight 
+        ? 'bg-white text-gray-900 border border-gray-200' 
+        : 'bg-transparent'
+    }`}>
+      <article className={`prose max-w-none ${isLight ? 'prose-slate' : 'prose-invert'}`}>
+        <ReactMarkdown
+          components={{
+            h1: ({node, ...props}) => <h1 className={`text-3xl font-bold mt-8 mb-4 ${isLight ? 'text-gray-900' : 'text-foreground'}`} {...props} />,
+            h2: ({node, ...props}) => <h2 className={`text-2xl font-bold mt-6 mb-3 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
+            h3: ({node, ...props}) => <h3 className={`text-xl font-semibold mt-4 mb-2 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
+            h4: ({node, ...props}) => <h4 className={`text-lg font-semibold mt-4 mb-2 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
+            p: ({node, ...props}) => <p className={`leading-relaxed mb-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
+            ul: ({node, ...props}) => <ul className={`list-disc list-inside mb-4 space-y-2 ml-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
+            ol: ({node, ...props}) => <ol className={`list-decimal list-inside mb-4 space-y-2 ml-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
+            li: ({node, ...props}) => <li className="ml-2" {...props} />,
+            code: ({node, className, children, ...props}: any) => {
+              const isInline = !className;
+              if (isInline) {
+                return (
+                  <code className={`px-2 py-1 rounded font-mono text-sm ${isLight ? 'bg-gray-100 text-blue-600' : 'bg-cyber-darker text-primary'}`} {...props}>
+                    {children}
+                  </code>
+                );
+              }
+              return (
+                <code className={`${className} block p-4 rounded-lg font-mono text-sm overflow-x-auto mb-4 ${isLight ? 'bg-gray-100 text-gray-800' : 'bg-cyber-darker text-primary'}`} {...props}>
+                  {children}
+                </code>
+              );
+            },
+            pre: ({node, children, ...props}: any) => {
+              return <CodeBlock {...props}>{children}</CodeBlock>;
+            },
+            strong: ({node, ...props}) => <strong className={`font-bold ${isLight ? 'text-gray-900' : 'text-foreground'}`} {...props} />,
+            em: ({node, ...props}) => <em className={`italic ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
+            a: ({node, ...props}) => <a className="text-primary hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+            blockquote: ({node, ...props}) => <blockquote className={`border-l-4 pl-4 italic my-4 ${isLight ? 'border-gray-300 text-gray-700' : 'border-primary text-muted-foreground'}`} {...props} />,
+            hr: ({node, ...props}) => <hr className={`my-8 ${isLight ? 'border-gray-200' : 'border-border'}`} {...props} />,
+            img: ({node, ...props}) => <img className="w-full h-auto rounded-lg my-4" {...props} />,
+            table: ({node, ...props}) => <div className={`overflow-x-auto my-4 ${isLight ? 'border border-gray-200' : ''}`}><table className={`min-w-full ${isLight ? 'border border-gray-200' : 'border border-border'}`} {...props} /></div>,
+            th: ({node, ...props}) => <th className={`border px-4 py-2 font-semibold ${isLight ? 'border-gray-200 bg-gray-50 text-gray-900' : 'border-border bg-muted text-foreground'}`} {...props} />,
+            td: ({node, ...props}) => <td className={`border px-4 py-2 ${isLight ? 'border-gray-200 text-gray-700' : 'border-border text-muted-foreground'}`} {...props} />,
+          }}
+        >
+          {article.content}
+        </ReactMarkdown>
+      </article>
     </div>
   );
 }
