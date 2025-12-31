@@ -33,7 +33,7 @@ export const iconMap: Record<string, { icon: string; color: string }> = {
   'Network': { icon: 'fa-network-wired', color: 'text-orange-500' },
   'Cloud': { icon: 'fa-cloud', color: 'text-sky-500' },
   'Search': { icon: 'fa-magnifying-glass', color: 'text-cyan-500' },
-  'penguin': { icon: 'fa-penguin', color: 'text-blue-500' },
+  'penguin': { icon: 'fa-terminal', color: 'text-blue-500' },
 };
 
 /**
