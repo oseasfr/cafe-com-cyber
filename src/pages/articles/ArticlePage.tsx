@@ -5,8 +5,58 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ShareButtons from '@/components/ShareButtons';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Clock, User } from 'lucide-react';
+import { ArrowLeft, Clock, User, Copy, Check } from 'lucide-react';
+import { useState } from 'react';
 import NotFound from '../NotFound';
+
+// Componente para blocos de código com botão de copiar
+function CodeBlock({ children, ...props }: any) {
+  const [copied, setCopied] = useState(false);
+  
+  // Extrai o texto do código - pode ser string ou ReactNode
+  const getCodeText = (node: any): string => {
+    if (typeof node === 'string') return node;
+    if (Array.isArray(node)) {
+      return node.map(getCodeText).join('');
+    }
+    if (node?.props?.children) {
+      return getCodeText(node.props.children);
+    }
+    return String(node);
+  };
+  
+  const code = getCodeText(children).replace(/\n$/, '');
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy code:', err);
+    }
+  };
+
+  return (
+    <div className="relative group">
+      <pre className="bg-cyber-darker p-4 rounded-lg overflow-x-auto mb-4" {...props}>
+        {children}
+      </pre>
+      <button
+        onClick={copyToClipboard}
+        className="absolute top-2 right-2 p-2 bg-cyber-darker/80 hover:bg-cyber-darker border border-border rounded-md text-muted-foreground hover:text-foreground transition-colors opacity-0 group-hover:opacity-100 z-10"
+        title="Copiar código"
+        aria-label="Copiar código"
+      >
+        {copied ? (
+          <Check className="h-4 w-4 text-green-500" />
+        ) : (
+          <Copy className="h-4 w-4" />
+        )}
+      </button>
+    </div>
+  );
+}
 
 export default function ArticlePage() {
   const { articleId } = useParams();
@@ -105,15 +155,26 @@ export default function ArticlePage() {
                 ul: ({node, ...props}) => <ul className="list-disc list-inside mb-4 text-muted-foreground space-y-2 ml-4" {...props} />,
                 ol: ({node, ...props}) => <ol className="list-decimal list-inside mb-4 text-muted-foreground space-y-2 ml-4" {...props} />,
                 li: ({node, ...props}) => <li className="ml-2" {...props} />,
-                code: ({node, className, ...props}: any) => {
+                code: ({node, className, children, ...props}: any) => {
                   const isInline = !className;
-                  return isInline ? (
-                    <code className="bg-cyber-darker px-2 py-1 rounded text-primary font-mono text-sm" {...props} />
-                  ) : (
-                    <code className="block bg-cyber-darker p-4 rounded-lg text-primary font-mono text-sm overflow-x-auto mb-4" {...props} />
+                  if (isInline) {
+                    return (
+                      <code className="bg-cyber-darker px-2 py-1 rounded text-primary font-mono text-sm" {...props}>
+                        {children}
+                      </code>
+                    );
+                  }
+                  // Para blocos de código, retorna o código com a classe
+                  return (
+                    <code className={`${className} block bg-cyber-darker p-4 rounded-lg text-primary font-mono text-sm overflow-x-auto mb-4`} {...props}>
+                      {children}
+                    </code>
                   );
                 },
-                pre: ({node, ...props}) => <pre className="bg-cyber-darker p-4 rounded-lg overflow-x-auto mb-4" {...props} />,
+                pre: ({node, children, ...props}: any) => {
+                  // Renderiza o bloco de código com botão de copiar
+                  return <CodeBlock {...props}>{children}</CodeBlock>;
+                },
                 strong: ({node, ...props}) => <strong className="font-bold text-foreground" {...props} />,
                 em: ({node, ...props}) => <em className="italic text-foreground" {...props} />,
                 a: ({node, ...props}) => <a className="text-primary hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
