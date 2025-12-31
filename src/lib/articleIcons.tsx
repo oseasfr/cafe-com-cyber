@@ -18,6 +18,7 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
   'Threat Intelligence': { icon: 'fa-brain', color: 'text-violet-500' },
   'Penetration Testing': { icon: 'fa-user-secret', color: 'text-rose-500' },
   'Security Awareness': { icon: 'fa-graduation-cap', color: 'text-emerald-500' },
+  'Troubleshooting Linux': { icon: 'fa-penguin', color: 'text-blue-500' },
 };
 
 /**
@@ -32,6 +33,7 @@ export const iconMap: Record<string, { icon: string; color: string }> = {
   'Network': { icon: 'fa-network-wired', color: 'text-orange-500' },
   'Cloud': { icon: 'fa-cloud', color: 'text-sky-500' },
   'Search': { icon: 'fa-magnifying-glass', color: 'text-cyan-500' },
+  'penguin': { icon: 'fa-penguin', color: 'text-blue-500' },
 };
 
 /**
