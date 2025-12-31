@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import ShareButtons from '@/components/ShareButtons';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Clock, User, Copy, Check } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import NotFound from '../NotFound';
 
 // Componente para blocos de código com botão de copiar
@@ -67,6 +67,57 @@ export default function ArticlePage() {
   }
 
   const articleUrl = `/articles/${article.id}`;
+  const fullUrl = typeof window !== 'undefined' ? window.location.origin + articleUrl : articleUrl;
+  const imageUrl = article.imageUrl 
+    ? (article.imageUrl.startsWith('http') ? article.imageUrl : window.location.origin + article.imageUrl)
+    : window.location.origin + '/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png';
+
+  // Atualiza meta tags dinamicamente para compartilhamento
+  useEffect(() => {
+    // Atualiza título da página
+    document.title = `${article.title} | Café com Cyber`;
+
+    // Função para atualizar ou criar meta tag
+    const updateMetaTag = (property: string, content: string, isProperty = true) => {
+      const attribute = isProperty ? 'property' : 'name';
+      let meta = document.querySelector(`meta[${attribute}="${property}"]`);
+      
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute(attribute, property);
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', content);
+    };
+
+    // Open Graph tags
+    updateMetaTag('og:title', article.title);
+    updateMetaTag('og:description', article.description);
+    updateMetaTag('og:type', 'article');
+    updateMetaTag('og:url', fullUrl);
+    updateMetaTag('og:image', imageUrl);
+    updateMetaTag('og:site_name', 'Café com Cyber');
+
+    // Twitter Card tags
+    updateMetaTag('twitter:card', 'summary_large_image', false);
+    updateMetaTag('twitter:title', article.title, false);
+    updateMetaTag('twitter:description', article.description, false);
+    updateMetaTag('twitter:image', imageUrl, false);
+    updateMetaTag('twitter:site', '@cafecomcyber', false);
+
+    // Meta description padrão
+    updateMetaTag('description', article.description, false);
+
+    // Cleanup: restaura meta tags padrão ao sair da página
+    return () => {
+      document.title = 'Café com Cyber';
+      updateMetaTag('og:title', 'Café com Cyber');
+      updateMetaTag('og:description', 'Blog de cybersecurity com artigos, notícias e insights da comunidade de analistas.');
+      updateMetaTag('og:type', 'website');
+      updateMetaTag('og:url', window.location.origin);
+      updateMetaTag('og:image', window.location.origin + '/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png');
+    };
+  }, [article, fullUrl, imageUrl]);
 
   return (
     <div className="min-h-screen bg-background">
