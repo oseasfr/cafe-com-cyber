@@ -18,7 +18,7 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
   'Threat Intelligence': { icon: 'fa-brain', color: 'text-violet-500' },
   'Penetration Testing': { icon: 'fa-user-secret', color: 'text-rose-500' },
   'Security Awareness': { icon: 'fa-graduation-cap', color: 'text-emerald-500' },
-  'Troubleshooting Linux': { icon: 'fa-penguin', color: 'text-blue-500' },
+  'Troubleshooting Linux': { icon: 'fa-terminal', color: 'text-blue-500' },
 };
 
 /**
