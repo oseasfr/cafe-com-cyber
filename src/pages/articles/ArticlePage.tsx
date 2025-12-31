@@ -4,17 +4,35 @@ import { articles } from '@/data/articles';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ShareButtons from '@/components/ShareButtons';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Clock, User, Copy, Check } from 'lucide-react';
+import { ArrowLeft, Clock, User, Copy, Check, Sun, Moon } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { ThemeProvider, useTheme } from 'next-themes';
 import NotFound from '../NotFound';
 
+// Hook customizado para gerenciar tema apenas do artigo
+function useArticleTheme() {
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('article-theme') as 'light' | 'dark' | null;
+      return saved || 'dark';
+    }
+    return 'dark';
+  });
+  
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('article-theme', newTheme);
+    }
+  };
+
+  return { theme, toggleTheme };
+}
+
 // Componente para blocos de código com botão de copiar
-function CodeBlock({ children, ...props }: any) {
+function CodeBlock({ children, theme, ...props }: any) {
   const [copied, setCopied] = useState(false);
-  const { theme } = useTheme();
   const isLight = theme === 'light';
   
   // Extrai o texto do código - pode ser string ou ReactNode
@@ -127,27 +145,28 @@ export default function ArticlePage() {
     };
   }, [article, fullUrl, imageUrl]);
 
+  const articleTheme = useArticleTheme();
+
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} storageKey="article-theme">
-      <div className="min-h-screen bg-background">
-        <Header />
-        
-        <main className="container mx-auto max-w-4xl px-4 py-8">
-          {/* Botão Voltar e Seletor de Tema */}
-          <div className="mb-6 flex items-center justify-between">
-            <Button
-              asChild
-              variant="ghost"
-              size="sm"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              <Link to="/articles">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Voltar para Artigos
-              </Link>
-            </Button>
-            <ThemeToggle />
-          </div>
+    <div className="min-h-screen bg-background">
+      <Header />
+      
+      <main className="container mx-auto max-w-4xl px-4 py-8">
+        {/* Botão Voltar e Seletor de Tema */}
+        <div className="mb-6 flex items-center justify-between">
+          <Button
+            asChild
+            variant="ghost"
+            size="sm"
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <Link to="/articles">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Voltar para Artigos
+            </Link>
+          </Button>
+          <ArticleThemeToggle theme={articleTheme.theme} onToggle={articleTheme.toggleTheme} />
+        </div>
 
           {/* Título do Artigo */}
           <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground leading-tight mb-4">
@@ -204,7 +223,7 @@ export default function ArticlePage() {
           )}
 
           {/* Conteúdo do Artigo com Tema Isolado */}
-          <ArticleContent article={article} />
+          <ArticleContent article={article} theme={articleTheme.theme} />
 
           {/* Botões de Compartilhamento - Final */}
           <div className="mt-8">
@@ -230,23 +249,45 @@ export default function ArticlePage() {
           </div>
         </main>
 
-        <Footer />
-      </div>
-    </ThemeProvider>
+      <Footer />
+    </div>
+  );
+}
+
+// Componente de toggle de tema simplificado
+function ArticleThemeToggle({ theme, onToggle }: { theme: 'light' | 'dark'; onToggle: () => void }) {
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={onToggle}
+      className="relative"
+      aria-label="Alternar tema do artigo"
+      title={theme === "dark" ? "Modo claro" : "Modo escuro"}
+    >
+      {theme === 'dark' ? (
+        <Sun className="h-[1.2rem] w-[1.2rem]" />
+      ) : (
+        <Moon className="h-[1.2rem] w-[1.2rem]" />
+      )}
+      <span className="sr-only">Alternar tema do artigo</span>
+    </Button>
   );
 }
 
 // Componente que renderiza apenas o conteúdo do artigo com tema isolado
-function ArticleContent({ article }: { article: typeof articles[0] }) {
-  const { theme } = useTheme();
+function ArticleContent({ article, theme }: { article: typeof articles[0]; theme: 'light' | 'dark' }) {
   const isLight = theme === 'light';
 
   return (
-    <div className={`rounded-lg p-6 transition-colors ${
-      isLight 
-        ? 'bg-white text-gray-900 border border-gray-200' 
-        : 'bg-transparent'
-    }`}>
+    <div 
+      data-article-content
+      className={`rounded-lg p-6 transition-colors ${
+        isLight 
+          ? 'bg-white text-gray-900 border border-gray-200 light' 
+          : 'bg-transparent dark'
+      }`}
+    >
       <article className={`prose max-w-none ${isLight ? 'prose-slate' : 'prose-invert'}`}>
         <ReactMarkdown
           components={{
@@ -274,7 +315,7 @@ function ArticleContent({ article }: { article: typeof articles[0] }) {
               );
             },
             pre: ({node, children, ...props}: any) => {
-              return <CodeBlock {...props}>{children}</CodeBlock>;
+              return <CodeBlock theme={theme} {...props}>{children}</CodeBlock>;
             },
             strong: ({node, ...props}) => <strong className={`font-bold ${isLight ? 'text-gray-900' : 'text-foreground'}`} {...props} />,
             em: ({node, ...props}) => <em className={`italic ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
