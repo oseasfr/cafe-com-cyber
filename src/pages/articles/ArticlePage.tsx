@@ -4,6 +4,7 @@ import { articles } from '@/data/articles';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ShareButtons from '@/components/ShareButtons';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Clock, User, Copy, Check } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -124,8 +125,8 @@ export default function ArticlePage() {
       <Header />
       
       <main className="container mx-auto max-w-4xl px-4 py-8">
-        {/* Botão Voltar */}
-        <div className="mb-6">
+        {/* Botão Voltar e Seletor de Tema */}
+        <div className="mb-6 flex items-center justify-between">
           <Button
             asChild
             variant="ghost"
@@ -137,6 +138,7 @@ export default function ArticlePage() {
               Voltar para Artigos
             </Link>
           </Button>
+          <ThemeToggle />
         </div>
 
         {/* Título do Artigo */}
