@@ -1,37 +1,68 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { articles } from "../data/articles"; // Certifique-se de que o caminho está correto
+import { ArticleCard } from "./ArticleCard"; // Importa o componente ArticleCard
+import { memo } from "react";
 
-const AboutSection = () => {
+const ArticlesSection = memo(() => {
+  
+  // Validação: verifica se há artigos disponíveis
+  if (!articles || articles.length === 0) {
+    return null; // Não renderiza nada se não houver artigos
+  }
+
+  const featuredArticles = articles.slice(0, 3); // Pega os 3 primeiros artigos
+
   return (
-    <section id="about" className="py-20 bg-background">
+    <section
+      id="articles"
+      className="py-20 bg-gradient-to-b from-background to-cyber-darker"
+    >
       <div className="container">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
+        <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="text-primary">Sobre Nós</span>
+            Artigos em <span className="text-primary">Destaque</span>
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            O Café com Cyber é uma iniciativa dedicada a democratizar o conhecimento em 
-            Segurança da Informação. Nossa missão é criar um espaço colaborativo onde 
-            profissionais, entusiastas e estudantes possam compartilhar experiências, 
-            aprender juntos e fortalecer a comunidade de cibersegurança no Brasil.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Conteúdo de qualidade produzido pela nossa comunidade de
+            especialistas em cybersecurity
           </p>
-          <div className="pt-4">
-            <Link to="/sobre-nos">
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber"
-              >
-                Saiba mais
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-          </div>
         </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredArticles.map((article) => (
+            <ArticleCard key={article.id} article={article} />
+          ))}
+        </div>
+        {articles.length > 3 && (
+          <div className="text-center mt-12">
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              <Link to="/articles">
+                Ver Todos os Artigos
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
-};
+});
 
-export default AboutSection;
+ArticlesSection.displayName = 'ArticlesSection';
+
+export default ArticlesSection;
 
