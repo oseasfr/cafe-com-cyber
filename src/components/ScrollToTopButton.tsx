@@ -125,11 +125,11 @@ const ScrollToTopButton = () => {
     return (
       <Button
         onClick={scrollToTop}
-        className="fixed bottom-8 right-8 z-50 rounded-full h-12 w-12 p-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-primary hover:bg-primary/90"
+        className="fixed bottom-8 right-8 z-50 rounded-full h-14 w-14 p-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gray-800 hover:bg-gray-700 border border-gray-700"
         aria-label="Ir para o topo"
         title="Ir para o topo"
       >
-        <ArrowUp className="h-5 w-5" />
+        <ArrowUp className="h-4 w-4 text-white" />
       </Button>
     );
   }
@@ -144,7 +144,7 @@ const ScrollToTopButton = () => {
         aria-label="Subir"
         title="Subir"
       >
-        <ArrowUp className="h-5 w-5 text-white" />
+        <ArrowUp className="h-4 w-4 text-white" />
       </Button>
 
       {/* Botão para descer (próxima seção ou final) */}
@@ -154,7 +154,7 @@ const ScrollToTopButton = () => {
         aria-label="Ir para o final"
         title="Ir para o final"
       >
-        <ArrowDown className="h-5 w-5 text-white" />
+        <ArrowDown className="h-4 w-4 text-white" />
       </Button>
     </div>
   );
