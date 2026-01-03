@@ -1,28 +1,31 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Users, MessageCircle, Calendar, Trophy, Coffee, Lightbulb, Share2 } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 const CommunitySection = () => {
+  const { t } = useTranslation();
+  
   const communityFeatures = [
     {
       icon: MessageCircle,
-      title: "Discussões Diárias",
-      description: "Troque conhecimento sobre ameaças, ferramentas e técnicas de segurança"
+      title: t('community.features.dailyDiscussions'),
+      description: t('community.features.dailyDiscussionsDesc')
     },
     {
       icon: Lightbulb,
-      title: "Boas Práticas",
-      description: "Compartilhe experiências do dia a dia e aprenda com a comunidade"
+      title: t('community.features.bestPractices'),
+      description: t('community.features.bestPracticesDesc')
     },
     {
       icon: Calendar,
-      title: "Eventos & Oportunidades",
-      description: "Fique por dentro de eventos, vagas e iniciativas do setor"
+      title: t('community.features.eventsOpportunities'),
+      description: t('community.features.eventsOpportunitiesDesc')
     },
     {
       icon: Trophy,
-      title: "Conscientização",
-      description: "Promovemos a importância da segurança digital através de memes e alertas"
+      title: t('community.features.awareness'),
+      description: t('community.features.awarenessDesc')
     }
   ];
 
@@ -31,11 +34,10 @@ const CommunitySection = () => {
       <div className="container">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Nossa <span className="text-primary">Comunidade</span>
+            {t('community.titleOur')} <span className="text-primary">Comunidade</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Um espaço dedicado à troca de conhecimento sobre Cybersecurity com analistas 
-              apaixonados por segurança da informação
+            {t('community.descriptionOur')}
           </p>
         </div>
 
@@ -44,25 +46,25 @@ const CommunitySection = () => {
           <Card className="text-center border-border/50 bg-card/30 backdrop-blur">
             <CardContent className="pt-6">
               <div className="text-2xl md:text-3xl font-bold text-primary mb-2">100+</div>
-              <div className="text-sm text-muted-foreground">Analistas Ativos</div>
+              <div className="text-sm text-muted-foreground">{t('community.stats.activeAnalysts')}</div>
             </CardContent>
           </Card>
           <Card className="text-center border-border/50 bg-card/30 backdrop-blur">
             <CardContent className="pt-6">
               <div className="text-2xl md:text-3xl font-bold text-primary mb-2">500+</div>
-              <div className="text-sm text-muted-foreground">Discussões por Mês</div>
+              <div className="text-sm text-muted-foreground">{t('community.stats.discussionsPerMonth')}</div>
             </CardContent>
           </Card>
           <Card className="text-center border-border/50 bg-card/30 backdrop-blur">
             <CardContent className="pt-6">
               <div className="text-2xl md:text-3xl font-bold text-primary mb-2">24/7</div>
-              <div className="text-sm text-muted-foreground">Suporte Colaborativo</div>
+              <div className="text-sm text-muted-foreground">{t('community.stats.collaborativeSupport')}</div>
             </CardContent>
           </Card>
           <Card className="text-center border-border/50 bg-card/30 backdrop-blur">
             <CardContent className="pt-6">
               <div className="text-2xl md:text-3xl font-bold text-primary mb-2">0%</div>
-              <div className="text-sm text-muted-foreground">Debates Políticos</div>
+              <div className="text-sm text-muted-foreground">{t('community.stats.politicalDebates')}</div>
             </CardContent>
           </Card>
         </div>
@@ -95,27 +97,25 @@ const CommunitySection = () => {
             <div className="w-16 h-16 mx-auto rounded-full bg-gradient-cyber flex items-center justify-center mb-4">
               <Coffee className="h-8 w-8 text-primary animate-cyber-float" />
             </div>
-            <CardTitle className="text-2xl">Diretrizes da Comunidade</CardTitle>
+            <CardTitle className="text-2xl">{t('community.guidelines.title')}</CardTitle>
           </CardHeader>
           <CardContent className="text-center space-y-6">
             <p className="text-muted-foreground leading-relaxed">
-                Mantemos um ambiente colaborativo focado no aprendizado. Compartilhe conhecimento, 
-                faça perguntas, divulgue eventos relevantes e vamos juntos construir uma comunidade 
-                forte e engajada em cibersegurança.
+              {t('community.guidelines.description')}
             </p>
             
             <div className="flex flex-wrap justify-center gap-4">
               <div className="flex items-center space-x-2 text-sm text-primary">
                 <Share2 className="h-4 w-4" />
-                <span>Compartilhe conhecimento</span>
+                <span>{t('community.guidelines.shareKnowledge')}</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-primary">
                 <Users className="h-4 w-4" />
-                <span>Respeite a comunidade</span>
+                <span>{t('community.guidelines.respectCommunity')}</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-primary">
                 <Lightbulb className="h-4 w-4" />
-                <span>Foque no aprendizado</span>
+                <span>{t('community.guidelines.focusLearning')}</span>
               </div>
             </div>
             <Button
@@ -126,7 +126,7 @@ const CommunitySection = () => {
               }
               >
               <MessageCircle className="mr-2 h-5 w-5" />
-              Participar do Grupo do Whatsapp
+              {t('community.guidelines.joinWhatsapp')}
             </Button>
           </CardContent>
         </Card>
