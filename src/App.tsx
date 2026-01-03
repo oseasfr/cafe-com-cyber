@@ -16,6 +16,7 @@ import CommunityPage from "./pages/CommunityPage";
 import AboutPage from "./pages/AboutPage";
 import UsefulLinks from "./pages/links-uteis";
 import GeradorSenhas from "./pages/gerador-de-senhas";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
 // *** Variável de controle: Altere para 'false' para desativar a página de manutenção ***
 const MAINTENANCE_MODE = false;
@@ -78,6 +79,7 @@ const App = () => {
         <Sonner />
         <BrowserRouter>
           <ScrollToTop /> {/* Adicionado para forçar a rolagem para o topo */}
+          <ScrollToTopButton /> {/* Botão flutuante para voltar ao topo */}
           <Routes>
             {/* Rota principal que carrega a página inicial */}
             <Route path="/" element={<Index />} />
