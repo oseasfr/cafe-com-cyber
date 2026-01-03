@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { LanguageProvider } from "@/contexts/LanguageContext";
 
 // Importação das páginas
 import Index from "./pages/Index";
@@ -38,63 +37,59 @@ const App = () => {
   // Se o modo de manutenção estiver ativado, renderiza apenas a página de manutenção
   if (MAINTENANCE_MODE) {
     return (
-      <LanguageProvider>
-        <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <Routes>
-                <Route path="*" element={<UnderConstruction />} />
-              </Routes>
-            </BrowserRouter>
-          </TooltipProvider>
-        </QueryClientProvider>
-      </LanguageProvider>
-    );
-  }
-
-  // Se o modo de manutenção estiver desativado, renderiza as rotas normais
-  return (
-    <LanguageProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Toaster />
           <Sonner />
           <BrowserRouter>
-            <ScrollToTop /> {/* Adicionado para forçar a rolagem para o topo */}
             <Routes>
-              {/* Rota principal que carrega a página inicial */}
-              <Route path="/" element={<Index />} />
-              
-              {/* Rota para os artigos, com um ID dinâmico */}
-              <Route path="/articles/:articleId" element={<ArticlePage />} />
-
-              {/* Rota para a página de arquivo de artigos */}
-              <Route path="/articles" element={<ArticlesArchive />} />
-
-              {/* Rota para a página da comunidade */}
-              <Route path="/community" element={<CommunityPage />} />
-
-              {/* Rota para a página Sobre Nós */}
-              <Route path="/sobre-nos" element={<AboutPage />} />
-
-              {/* Rota para a página de Links Úteis */}
-              <Route path="/links-uteis" element={<UsefulLinks />} />
-
-              {/* Rota para a página de Gerador de Senhas */}
-              <Route path="/gerador-de-senhas" element={<GeradorSenhas />} />
-
-              {/* A página "em-construcao" pode ser acessada por esta rota */}
-              <Route path="/em-construcao" element={<UnderConstruction />} />
-              
-              {/* Página 404 - SEMPRE deve ser a última rota */}
-              <Route path="*" element={<NotFound />} />
+              <Route path="*" element={<UnderConstruction />} />
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
       </QueryClientProvider>
-    </LanguageProvider>
+    );
+  }
+
+  // Se o modo de manutenção estiver desativado, renderiza as rotas normais
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <ScrollToTop /> {/* Adicionado para forçar a rolagem para o topo */}
+          <Routes>
+            {/* Rota principal que carrega a página inicial */}
+            <Route path="/" element={<Index />} />
+            
+            {/* Rota para os artigos, com um ID dinâmico */}
+            <Route path="/articles/:articleId" element={<ArticlePage />} />
+
+            {/* Rota para a página de arquivo de artigos */}
+            <Route path="/articles" element={<ArticlesArchive />} />
+
+            {/* Rota para a página da comunidade */}
+            <Route path="/community" element={<CommunityPage />} />
+
+            {/* Rota para a página Sobre Nós */}
+            <Route path="/sobre-nos" element={<AboutPage />} />
+
+            {/* Rota para a página de Links Úteis */}
+            <Route path="/links-uteis" element={<UsefulLinks />} />
+
+            {/* Rota para a página de Gerador de Senhas */}
+            <Route path="/gerador-de-senhas" element={<GeradorSenhas />} />
+
+            {/* A página "em-construcao" pode ser acessada por esta rota */}
+            <Route path="/em-construcao" element={<UnderConstruction />} />
+            
+            {/* Página 404 - SEMPRE deve ser a última rota */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
   );
 };
 
