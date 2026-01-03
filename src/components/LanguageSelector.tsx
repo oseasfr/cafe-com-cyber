@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -48,7 +48,7 @@ const languages = [
 ];
 
 export const LanguageSelector: React.FC = () => {
-  const { language, setLanguage } = useLanguage();
+  const { i18n: i18nInstance } = useTranslation();
 
   return (
     <div className="flex items-center gap-1.5">
@@ -57,10 +57,10 @@ export const LanguageSelector: React.FC = () => {
           key={lang.code}
           variant="ghost"
           size="sm"
-          onClick={() => setLanguage(lang.code)}
+          onClick={() => i18nInstance.changeLanguage(lang.code)}
           className={cn(
             "h-8 w-8 p-0 hover:bg-accent/20 transition-all flex items-center justify-center",
-            language === lang.code 
+            i18nInstance.language === lang.code 
               ? "bg-accent/30 scale-110" 
               : "opacity-60 hover:opacity-100"
           )}
