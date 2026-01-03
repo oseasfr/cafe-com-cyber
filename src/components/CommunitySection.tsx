@@ -27,8 +27,17 @@ const CommunitySection = () => {
   ];
 
   return (
-    <section id="community" className="py-20 bg-gradient-cyber">
-      <div className="container">
+    <section id="community" className="py-20 relative overflow-hidden">
+      {/* Background Effects - Mesmo do HeroSection */}
+      <div className="absolute inset-0 bg-gradient-dark"></div>
+      <div className="absolute inset-0 bg-gradient-cyber opacity-30"></div>
+      
+      {/* Animated Grid Background - Mesmo do HeroSection */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="h-full w-full bg-[linear-gradient(hsl(var(--border))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border))_1px,transparent_1px)] bg-[size:50px_50px] animate-pulse"></div>
+      </div>
+
+      <div className="container relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Nossa <span className="text-primary">Comunidade</span>
