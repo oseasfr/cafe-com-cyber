@@ -1,55 +1,37 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { articles } from "../data/articles"; // Certifique-se de que o caminho está correto
-import { ArticleCard } from "./ArticleCard"; // Importa o componente ArticleCard
+import { ArrowRight } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
-const ArticlesSection = () => {
-  const featuredArticles = articles.slice(0, 3); // Pega os 3 primeiros artigos
+const AboutSection = () => {
+  const { t } = useTranslation();
+  
   return (
-    <section
-      id="articles"
-      className="py-20 bg-gradient-to-b from-background to-cyber-darker"
-    >
+    <section id="about" className="py-20 bg-background">
       <div className="container">
-        <div className="text-center mb-16">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Artigos em <span className="text-primary">Destaque</span>
+            <span className="text-primary">{t('about.title')}</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Conteúdo de qualidade produzido pela nossa comunidade de
-            especialistas em cybersecurity
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            {t('about.description')}
           </p>
-        </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredArticles.map((article) => (
-            <ArticleCard key={article.id} article={article} />
-          ))}
-        </div>
-        <div className="text-center mt-12">
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-          >
-            <Link to="/articles">
-              Ver Todos os Artigos
-              <ArrowRight className="ml-2 h-5 w-5" />
+          <div className="pt-4">
+            <Link to="/sobre-nos">
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber"
+              >
+                {t('about.learnMore')}
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
             </Link>
-          </Button>
+          </div>
         </div>
       </div>
     </section>
   );
 };
 
-export default ArticlesSection;
+export default AboutSection;
+
