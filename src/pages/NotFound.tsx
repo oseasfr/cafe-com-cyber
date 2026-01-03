@@ -4,10 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Shield, Coffee, Home } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { useTranslation } from 'react-i18next';
 
 const NotFound = () => {
-  const { t } = useTranslation();
   const location = useLocation();
 
   useEffect(() => {
@@ -50,11 +48,13 @@ const NotFound = () => {
             </h1>
             
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
-              {t('notFound.title')}
+              Página não encontrada
             </h2>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-              {t('notFound.description')}
+              Parece que você pegou o caminho errado... Nosso mascote do café 
+              não conseguiu encontrar a página que você procura. 
+              Que tal tomar um café e tentar novamente?
             </p>
           </div>
 
@@ -63,7 +63,7 @@ const NotFound = () => {
             <Link to="/">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
                 <Home className="mr-2 h-5 w-5" />
-                {t('notFound.backToHome')}
+                Voltar para o Início
               </Button>
             </Link>
           </div>
