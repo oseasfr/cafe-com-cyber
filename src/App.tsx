@@ -22,11 +22,30 @@ const MAINTENANCE_MODE = false;
 
 // Componente para rolar a página para o topo em cada mudança de rota
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, search, hash } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    // Aguarda um tick para garantir que a página foi renderizada
+    const timer = setTimeout(() => {
+      // Se não há hash, rola para o topo
+      if (!hash) {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'instant' as ScrollBehavior
+        });
+        // Fallback para navegadores antigos
+        if (document.documentElement) {
+          document.documentElement.scrollTop = 0;
+        }
+        if (document.body) {
+          document.body.scrollTop = 0;
+        }
+      }
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, [pathname, search, hash]);
 
   return null;
 };
