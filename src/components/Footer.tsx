@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Mail, Linkedin, Github, Instagram, Youtube, Coffee, Shield } from "lucide-react";
 
 const Footer = () => {
   const handleLinkClick = () => {
-    // Rola para o topo quando qualquer link do footer é clicado
+    // Rola para o topo imediatamente quando qualquer link do footer é clicado
     window.scrollTo({
       top: 0,
       left: 0,
