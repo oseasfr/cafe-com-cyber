@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ArrowUp, ArrowDown, ChevronUp, ChevronDown } from 'lucide-react';
+import { ArrowUp, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLocation } from 'react-router-dom';
 
@@ -8,8 +8,6 @@ const ScrollToTopButton = () => {
   const isHomePage = location.pathname === '/';
   const [isVisible, setIsVisible] = useState(false);
   const [currentSection, setCurrentSection] = useState<string | null>(null);
-  const [canGoUp, setCanGoUp] = useState(false);
-  const [canGoDown, setCanGoDown] = useState(false);
 
   // Lista de seções na ordem de aparição (apenas na home)
   const sections = ['articles', 'community', 'about', 'gerador-senhas'];
@@ -53,23 +51,7 @@ const ScrollToTopButton = () => {
 
       setCurrentSection(current);
       
-      // Determina se pode ir para cima ou para baixo
-      if (current) {
-        const currentIndex = sections.indexOf(current);
-        setCanGoUp(currentIndex > 0);
-        setCanGoDown(currentIndex < sections.length - 1);
-      } else {
-        // Se não está em nenhuma seção específica, permite navegação baseada na posição
-        const firstSection = document.getElementById(sections[0]);
-        const lastSection = document.getElementById(sections[sections.length - 1]);
-        
-        if (firstSection && lastSection) {
-          setCanGoDown(window.pageYOffset < firstSection.offsetTop);
-          setCanGoUp(window.pageYOffset > lastSection.offsetTop + lastSection.offsetHeight);
-        }
-      }
-
-      // Mostra o botão quando rola mais de 300px
+      // Mostra os botões quando rola mais de 300px
       setIsVisible(window.pageYOffset > 300);
     };
 
@@ -90,11 +72,18 @@ const ScrollToTopButton = () => {
     });
   };
 
-  // Função para ir para a seção anterior (acima)
-  const scrollToPreviousSection = () => {
+  // Função para ir para a seção anterior (acima) ou topo
+  const scrollUp = () => {
     if (!currentSection) {
-      // Se não está em nenhuma seção, vai para a última
-      scrollToSection(sections[sections.length - 1]);
+      // Se não está em nenhuma seção e está no topo, não faz nada
+      // Se está após a última seção, vai para a última seção
+      const lastSection = document.getElementById(sections[sections.length - 1]);
+      if (lastSection && window.pageYOffset > lastSection.offsetTop) {
+        scrollToSection(sections[sections.length - 1]);
+        return;
+      }
+      // Se está antes da primeira seção, vai para o topo
+      scrollToTop();
       return;
     }
 
@@ -107,8 +96,8 @@ const ScrollToTopButton = () => {
     }
   };
 
-  // Função para ir para a próxima seção (abaixo)
-  const scrollToNextSection = () => {
+  // Função para ir para a próxima seção (abaixo) ou final da página
+  const scrollDown = () => {
     if (!currentSection) {
       // Se não está em nenhuma seção, vai para a primeira
       scrollToSection(sections[0]);
@@ -118,6 +107,12 @@ const ScrollToTopButton = () => {
     const currentIndex = sections.indexOf(currentSection);
     if (currentIndex < sections.length - 1) {
       scrollToSection(sections[currentIndex + 1]);
+    } else {
+      // Se está na última seção, vai para o final da página
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -139,42 +134,28 @@ const ScrollToTopButton = () => {
     );
   }
 
-  // Na home, mostra botões de navegação entre seções
+  // Na home, mostra botões de navegação (subir e descer)
   return (
-    <div className="fixed bottom-8 right-8 z-50 flex flex-col gap-2">
-      {/* Botão de seção anterior (acima) */}
-      {canGoUp && (
-        <Button
-          onClick={scrollToPreviousSection}
-          className="rounded-full h-12 w-12 p-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-primary/80 hover:bg-primary backdrop-blur-sm"
-          aria-label="Seção anterior"
-          title="Seção anterior"
-        >
-          <ChevronUp className="h-5 w-5" />
-        </Button>
-      )}
-
-      {/* Botão de voltar ao topo */}
+    <div className="fixed bottom-8 right-8 z-50 flex flex-col gap-3">
+      {/* Botão para subir (seção anterior ou topo) */}
       <Button
-        onClick={scrollToTop}
-        className="rounded-full h-12 w-12 p-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-primary hover:bg-primary/90"
-        aria-label="Ir para o topo"
-        title="Ir para o topo"
+        onClick={scrollUp}
+        className="rounded-full h-14 w-14 p-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gray-800 hover:bg-gray-700 border border-gray-700"
+        aria-label="Subir"
+        title="Subir"
       >
-        <ArrowUp className="h-5 w-5" />
+        <ArrowUp className="h-5 w-5 text-white" />
       </Button>
 
-      {/* Botão de próxima seção (abaixo) */}
-      {canGoDown && (
-        <Button
-          onClick={scrollToNextSection}
-          className="rounded-full h-12 w-12 p-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-primary/80 hover:bg-primary backdrop-blur-sm"
-          aria-label="Próxima seção"
-          title="Próxima seção"
-        >
-          <ChevronDown className="h-5 w-5" />
-        </Button>
-      )}
+      {/* Botão para descer (próxima seção ou final) */}
+      <Button
+        onClick={scrollDown}
+        className="rounded-full h-14 w-14 p-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gray-800 hover:bg-gray-700 border border-gray-700"
+        aria-label="Ir para o final"
+        title="Ir para o final"
+      >
+        <ArrowDown className="h-5 w-5 text-white" />
+      </Button>
     </div>
   );
 };
