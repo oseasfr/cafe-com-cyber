@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "home": "Início",
+    "articles": "Artigos",
+    "community": "Comunidade",
+    "about": "Sobre Nós",
+    "usefulLinks": "Links Úteis",
+    "passwordGenerator": "Gerador de Senhas"
+  },
+  "hero": {
+    "title": "Café com Cyber",
+    "subtitle": "Conteúdos diversos sobre Cybersecurity",
+    "description": "Encontre artigos, notícias e insights da comunidade para expandir seu conhecimento em Cibersegurança.",
+    "cta": "Explorar Artigos",
+    "exploreArticles": "Explorar Artigos",
+    "knowCommunity": "Conhecer a Comunidade",
+    "continuousLearning": "Aprendizado contínuo",
+    "networking": "Networking e interações técnicas",
+    "stats": {
+      "analysts": "Analistas",
+      "analystsValue": "+200",
+      "articles": "Artigos",
+      "articlesValue": "Diversos",
+      "discussions": "Discussões",
+      "discussionsValue": "24/7",
+      "learning": "Aprendizado",
+      "learningValue": "Contínuo"
+    }
+  },
+  "articles": {
+    "title": "Artigos Recentes",
+    "subtitle": "Conteúdos sobre segurança da informação",
+    "viewAll": "Ver Todos",
+    "readMore": "Ler Mais"
+  },
+  "community": {
+    "title": "Comunidade",
+    "subtitle": "Participe da nossa comunidade",
+    "description": "Conecte-se com profissionais e entusiastas de segurança da informação",
+    "join": "Participar"
+  },
+  "about": {
+    "title": "Sobre Nós",
+    "description": "O Café com Cyber é uma iniciativa dedicada a democratizar o conhecimento em Segurança da Informação. Nossa missão é criar um espaço colaborativo onde profissionais, entusiastas e estudantes possam compartilhar experiências, aprender juntos e fortalecer a comunidade de cibersegurança no Brasil.",
+    "learnMore": "Saiba mais"
+  },
+  "passwordGenerator": {
+    "title": "Gerador de Senhas Seguras",
+    "subtitle": "Proteja suas contas com senhas geradas localmente no seu navegador.",
+    "analyzePassword": "Analisar Senha",
+    "analyzePlaceholder": "Digite uma senha para análise...",
+    "generatePassword": "Gerar Nova Senha",
+    "length": "Comprimento",
+    "uppercase": "Maiúsculas",
+    "lowercase": "Minúsculas",
+    "numbers": "Números",
+    "symbols": "Símbolos",
+    "copy": "Copiar",
+    "copied": "Copiado!",
+    "copiedDescription": "Senha copiada para a área de transferência.",
+    "strength": "Força",
+    "veryWeak": "Muito Fraca",
+    "weak": "Fraca",
+    "fair": "Razoável",
+    "good": "Boa",
+    "strong": "Forte",
+    "empty": "Vazia",
+    "error": "Erro",
+    "strengthLabel": "Força da Senha",
+    "crackTime": "Tempo estimado para quebrar",
+    "selectCharType": "Selecione pelo menos um tipo de caractere."
+  },
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "notFound": "Não encontrado",
+    "backHome": "Voltar ao início"
+  }
+}
