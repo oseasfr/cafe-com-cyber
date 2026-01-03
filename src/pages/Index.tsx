@@ -8,11 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Users, Lock } from "lucide-react";
 import { useEffect } from "react";
-import { useTranslation } from 'react-i18next';
 
 const Index = () => {
-  const { t } = useTranslation();
-  
   // Handler para hash anchors ao carregar a página
   useEffect(() => {
     const handleHashScroll = () => {
@@ -57,10 +54,13 @@ const Index = () => {
                 <Users className="h-8 w-8 text-primary animate-cyber-float" />
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                <span className="text-primary">{t('index.about.title')}</span>
+                <span className="text-primary">Sobre Nós</span>
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                {t('index.about.description')}
+                O Café com Cyber é uma iniciativa dedicada a democratizar o conhecimento em 
+                Segurança da Informação. Nossa missão é criar um espaço colaborativo onde 
+                profissionais, entusiastas e estudantes possam compartilhar experiências, 
+                aprender juntos e fortalecer a comunidade de cibersegurança no Brasil.
               </p>
               <div className="pt-4">
                 <Link to="/sobre-nos">
@@ -68,7 +68,7 @@ const Index = () => {
                     size="lg"
                     className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber"
                   >
-                    {t('index.about.learnMore')}
+                    Saiba mais
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
@@ -87,13 +87,13 @@ const Index = () => {
             <div className="text-center mb-12 space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-widest">
                 <Lock className="w-3 h-3" />
-                {t('index.passwordGenerator.badge')}
+                Ferramenta de Segurança
               </div>
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-                {t('index.passwordGenerator.title')}
+                Gerador de Senhas <span className="text-primary">Seguras</span>
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                {t('index.passwordGenerator.subtitle')}
+                Proteja suas contas com senhas geradas localmente no seu navegador.
               </p>
             </div>
             
