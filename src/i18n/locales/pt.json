@@ -29,15 +29,49 @@
   },
   "articles": {
     "title": "Artigos Recentes",
+    "titleFeatured": "Artigos em Destaque",
     "subtitle": "Conteúdos sobre segurança da informação",
+    "subtitleFeatured": "Conteúdo de qualidade produzido pela nossa comunidade de especialistas em cybersecurity",
     "viewAll": "Ver Todos",
-    "readMore": "Ler Mais"
+    "viewAllArticles": "Ver Todos os Artigos",
+    "readMore": "Ler Mais",
+    "allArticles": "Todos os Artigos",
+    "allArticlesSubtitle": "Explore nossa coleção completa de artigos sobre cybersecurity",
+    "articlesFound": "artigos encontrados",
+    "articleFound": "artigo encontrado",
+    "backToArticles": "Voltar para Artigos"
   },
   "community": {
     "title": "Comunidade",
+    "titleOur": "Nossa Comunidade",
     "subtitle": "Participe da nossa comunidade",
     "description": "Conecte-se com profissionais e entusiastas de segurança da informação",
-    "join": "Participar"
+    "descriptionOur": "Um espaço dedicado à troca de conhecimento sobre Cybersecurity com analistas apaixonados por segurança da informação",
+    "join": "Participar",
+    "stats": {
+      "activeAnalysts": "Analistas Ativos",
+      "discussionsPerMonth": "Discussões por Mês",
+      "collaborativeSupport": "Suporte Colaborativo",
+      "politicalDebates": "Debates Políticos"
+    },
+    "features": {
+      "dailyDiscussions": "Discussões Diárias",
+      "dailyDiscussionsDesc": "Troque conhecimento sobre ameaças, ferramentas e técnicas de segurança",
+      "bestPractices": "Boas Práticas",
+      "bestPracticesDesc": "Compartilhe experiências do dia a dia e aprenda com a comunidade",
+      "eventsOpportunities": "Eventos & Oportunidades",
+      "eventsOpportunitiesDesc": "Fique por dentro de eventos, vagas e iniciativas do setor",
+      "awareness": "Conscientização",
+      "awarenessDesc": "Promovemos a importância da segurança digital através de memes e alertas"
+    },
+    "guidelines": {
+      "title": "Diretrizes da Comunidade",
+      "description": "Mantemos um ambiente colaborativo focado no aprendizado. Compartilhe conhecimento, faça perguntas, divulgue eventos relevantes e vamos juntos construir uma comunidade forte e engajada em cibersegurança.",
+      "shareKnowledge": "Compartilhe conhecimento",
+      "respectCommunity": "Respeite a comunidade",
+      "focusLearning": "Foque no aprendizado",
+      "joinWhatsapp": "Participar do Grupo do Whatsapp"
+    }
   },
   "about": {
     "title": "Sobre Nós",
@@ -75,5 +109,33 @@
     "error": "Erro",
     "notFound": "Não encontrado",
     "backHome": "Voltar ao início"
+  },
+  "footer": {
+    "description": "Conteúdos diversos sobre Cybersecurity",
+    "tagline": "A sua dose diária de conhecimento em Segurança da Informação.",
+    "navigation": "Navegação",
+    "socialMedia": "Redes Sociais",
+    "contact": "Contato",
+    "copyright": "Todos os direitos reservados.",
+    "madeWith": "Feito com",
+    "andSecurity": "e segurança"
+  },
+  "notFound": {
+    "title": "Página não encontrada",
+    "description": "Parece que você pegou o caminho errado... Nosso mascote do café não conseguiu encontrar a página que você procura. Que tal tomar um café e tentar novamente?",
+    "backToHome": "Voltar para o Início"
+  },
+  "index": {
+    "about": {
+      "title": "Sobre Nós",
+      "description": "O Café com Cyber é uma iniciativa dedicada a democratizar o conhecimento em Segurança da Informação. Nossa missão é criar um espaço colaborativo onde profissionais, entusiastas e estudantes possam compartilhar experiências, aprender juntos e fortalecer a comunidade de cibersegurança no Brasil.",
+      "learnMore": "Saiba mais"
+    },
+    "passwordGenerator": {
+      "badge": "Ferramenta de Segurança",
+      "title": "Gerador de Senhas Seguras",
+      "subtitle": "Proteja suas contas com senhas geradas localmente no seu navegador."
+    }
   }
 }
+
