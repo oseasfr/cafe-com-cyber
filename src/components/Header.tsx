@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import React from "react";
 import { LanguageSelector } from "@/components/LanguageSelector";
-import { useTranslation } from '@/hooks/useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
   const { t } = useTranslation();
