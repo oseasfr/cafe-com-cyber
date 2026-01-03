@@ -12,10 +12,8 @@ import { Link } from "react-router-dom";
 import { articles } from "../data/articles"; // Certifique-se de que o caminho está correto
 import { ArticleCard } from "./ArticleCard"; // Importa o componente ArticleCard
 import { memo } from "react";
-import { useTranslation } from 'react-i18next';
 
 const ArticlesSection = memo(() => {
-  const { t } = useTranslation();
   
   // Validação: verifica se há artigos disponíveis
   if (!articles || articles.length === 0) {
@@ -35,7 +33,8 @@ const ArticlesSection = memo(() => {
             Artigos em <span className="text-primary">Destaque</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t('articles.subtitleFeatured')}
+            Conteúdo de qualidade produzido pela nossa comunidade de
+            especialistas em cybersecurity
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -52,7 +51,7 @@ const ArticlesSection = memo(() => {
               className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
             >
               <Link to="/articles">
-                {t('articles.viewAllArticles')}
+                Ver Todos os Artigos
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
