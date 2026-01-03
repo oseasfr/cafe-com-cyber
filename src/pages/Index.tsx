@@ -79,9 +79,14 @@ const Index = () => {
         
         {/* Nova Seção: Gerador de Senhas */}
         <section id="gerador-senhas" className="py-24 relative overflow-hidden">
-          {/* Background Decorativo para a seção */}
-          <div className="absolute inset-0 bg-primary/5 pointer-events-none" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+          {/* Background Effects - Mesmo do HeroSection */}
+          <div className="absolute inset-0 bg-gradient-dark"></div>
+          <div className="absolute inset-0 bg-gradient-cyber opacity-30"></div>
+          
+          {/* Animated Grid Background - Mesmo do HeroSection */}
+          <div className="absolute inset-0 opacity-20">
+            <div className="h-full w-full bg-[linear-gradient(hsl(var(--border))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border))_1px,transparent_1px)] bg-[size:50px_50px] animate-pulse"></div>
+          </div>
           
           <div className="container relative z-10">
             <div className="text-center mb-12 space-y-4">
@@ -99,8 +104,6 @@ const Index = () => {
             
             <PasswordGenerator />
           </div>
-          
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
         </section>
       </main>
       <Footer />
