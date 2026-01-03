@@ -2,8 +2,20 @@ import { Link } from "react-router-dom";
 import { Mail, Linkedin, Github, Instagram, Youtube, Coffee, Shield } from "lucide-react";
 
 const Footer = () => {
-  const handleHomeClick = () => {
-    window.scrollTo(0, 0);
+  const handleLinkClick = () => {
+    // Rola para o topo quando qualquer link do footer é clicado
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant' as ScrollBehavior
+    });
+    // Fallback para navegadores antigos
+    if (document.documentElement) {
+      document.documentElement.scrollTop = 0;
+    }
+    if (document.body) {
+      document.body.scrollTop = 0;
+    }
   };
 
   return (
@@ -13,7 +25,7 @@ const Footer = () => {
           {/* Coluna 1: Logo e Descrição */}
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center space-x-3 mb-4">
-              <Link to="/" onClick={handleHomeClick}>
+              <Link to="/" onClick={handleLinkClick}>
                 <img 
                   src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
                   alt="Café com Cyber"
@@ -37,32 +49,32 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4 text-foreground">Navegação</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/" onClick={handleHomeClick} className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
                   Início
                 </Link>
               </li>
               <li>
-                <Link to="/articles" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/articles" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
                   Artigos
                 </Link>
               </li>
               <li>
-                <Link to="/community" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/community" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
                   Comunidade
                 </Link>
               </li>
               <li>
-                <Link to="/sobre-nos" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/sobre-nos" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
                   Sobre Nós
                 </Link>
               </li>
               <li>
-                <Link to="/links-uteis" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/links-uteis" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
                   Links Úteis
                 </Link>
               </li>
               <li>
-                <Link to="/gerador-de-senhas" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/gerador-de-senhas" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
                   Gerador de Senhas
                 </Link>
               </li>
