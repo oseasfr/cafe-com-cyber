@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { Mail, Linkedin, Github, Instagram, Youtube, Coffee, Shield } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
+  
   const handleHomeClick = () => {
     window.scrollTo(0, 0);
   };
@@ -24,46 +27,46 @@ const Footer = () => {
                 <h3 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   Café com Cyber
                 </h3>
-                <p className="text-xs text-muted-foreground">Conteúdos diversos sobre Cybersecurity</p>
+                <p className="text-xs text-muted-foreground">{t('footer.description')}</p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              A sua dose diária de conhecimento em Segurança da Informação.
+              {t('footer.tagline')}
             </p>
           </div>
 
           {/* Coluna 2: Navegação */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-foreground">Navegação</h4>
+            <h4 className="text-lg font-semibold mb-4 text-foreground">{t('footer.navigation')}</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/" onClick={handleHomeClick} className="text-muted-foreground hover:text-primary transition-colors">
-                  Início
+                  {t('nav.home')}
                 </Link>
               </li>
               <li>
                 <Link to="/articles" className="text-muted-foreground hover:text-primary transition-colors">
-                  Artigos
+                  {t('nav.articles')}
                 </Link>
               </li>
               <li>
                 <Link to="/community" className="text-muted-foreground hover:text-primary transition-colors">
-                  Comunidade
+                  {t('nav.community')}
                 </Link>
               </li>
               <li>
                 <Link to="/sobre-nos" className="text-muted-foreground hover:text-primary transition-colors">
-                  Sobre Nós
+                  {t('nav.about')}
                 </Link>
               </li>
               <li>
                 <Link to="/links-uteis" className="text-muted-foreground hover:text-primary transition-colors">
-                  Links Úteis
+                  {t('nav.usefulLinks')}
                 </Link>
               </li>
               <li>
                 <Link to="/gerador-de-senhas" className="text-muted-foreground hover:text-primary transition-colors">
-                  Gerador de Senhas
+                  {t('nav.passwordGenerator')}
                 </Link>
               </li>
             </ul>
@@ -71,7 +74,7 @@ const Footer = () => {
 
           {/* Coluna 3: Redes Sociais */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-foreground">Redes Sociais</h4>
+            <h4 className="text-lg font-semibold mb-4 text-foreground">{t('footer.socialMedia')}</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <a 
@@ -111,7 +114,7 @@ const Footer = () => {
 
           {/* Coluna 4: Contato */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-foreground">Contato</h4>
+            <h4 className="text-lg font-semibold mb-4 text-foreground">{t('footer.contact')}</h4>
             <p className="text-sm text-muted-foreground flex items-center space-x-2">
               <Mail className="h-4 w-4" />
               <a 
@@ -127,12 +130,12 @@ const Footer = () => {
         <div className="mt-12 pt-6 border-t border-border/50 text-center text-sm text-muted-foreground">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
             <div className="flex items-center space-x-2">
-              <span>&copy; {new Date().getFullYear()} Café com Cyber. Todos os direitos reservados.</span>
+              <span>&copy; {new Date().getFullYear()} Café com Cyber. {t('footer.copyright')}</span>
             </div>
             <div className="flex items-center space-x-2">
-              <span>Feito com</span>
+              <span>{t('footer.madeWith')}</span>
               <Coffee className="h-4 w-4" />
-              <span>e segurança</span>
+              <span>{t('footer.andSecurity')}</span>
               <Shield className="h-4 w-4 text-primary" />
             </div>
           </div>
