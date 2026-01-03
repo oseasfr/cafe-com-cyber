@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Shield, Coffee, Users, BookOpen } from "lucide-react";
-import { useTranslation } from '@/hooks/useTranslation';
+import { useTranslation } from 'react-i18next';
 
 const HeroSection = () => {
   const { t } = useTranslation();
