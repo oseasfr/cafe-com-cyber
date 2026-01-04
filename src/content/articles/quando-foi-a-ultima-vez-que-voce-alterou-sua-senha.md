@@ -41,4 +41,4 @@ Aqui estão **algumas dicas** para criar senhas fortes:
 * Configure a autenticação de dois fatores
 * Responda às “perguntas de segurança” com informações falsas
 
-Se você trabalha com cybersegurança, oriente os colaboradores da sue empresa para que essas boas práticas sejam implementadas e garanta a proteção de identidades e dados.
+Se você trabalha com cybersegurança, oriente os colaboradores da sua empresa para que essas boas práticas sejam implementadas e garanta a proteção de identidades e dados.
