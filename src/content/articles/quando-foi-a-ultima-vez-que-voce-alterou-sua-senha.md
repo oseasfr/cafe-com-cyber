@@ -49,4 +49,5 @@ O Café com Cyber tem seu próprio gerador de senhas, que também valida a forç
 
 Algumas outras soluções web gratuitas também tem os mesmos recursos:
 
-- [Testador de Senhas e Gerador de Senhas fortes Kaspersky](https://password.kaspersky.com/pt/)
+- [Testador de Senhas e Gerador de Senhas fortes - Kaspersky](https://password.kaspersky.com/pt/)
+- [Gerador de Senhas - Lastpass](https://www.lastpass.com/pt/features/password-generator)
