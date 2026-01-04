@@ -3,7 +3,7 @@ id: quando-foi-a-ultima-vez-que-voce-alterou-sua-senha
 title: "Quando foi a última vez que você alterou sua senha?"
 description: Aprenda boas práticas para criar e alterar senhas de forma segura.
 author: "Alberto Santos"
-readTime: "5 min"
+readTime: "8 min"
 category: "Password Security"
 icon: "Key"
 gradient: "from-primary/20 to-accent/20"
