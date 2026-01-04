@@ -95,13 +95,8 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/sobre-nos" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
-                  Sobre Nós
-                </Link>
-              </li>
-              <li>
-                <Link to="/links-uteis" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
-                  Links Úteis
+                <Link to="/cursos" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
+                  Cursos
                 </Link>
               </li>
               <li>
@@ -110,8 +105,13 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/cursos" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
-                  Cursos
+                <Link to="/links-uteis" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
+                  Links Úteis
+                </Link>
+              </li>
+              <li>
+                <Link to="/sobre-nos" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
+                  Sobre Nós
                 </Link>
               </li>
             </ul>
