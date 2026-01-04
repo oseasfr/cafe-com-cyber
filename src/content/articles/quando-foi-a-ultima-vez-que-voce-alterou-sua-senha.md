@@ -14,7 +14,7 @@ featured: false
 priority: 0
 ---
 
-Provavelmente, apenas a senha corporativa devido à política interna da empresa (caso tenha 😶). 
+Provavelmente, apenas a sua senha corporativa você deve ter alterado devido à política interna da sua empresa (caso tenha 😶). 
 
 Mas, você sabia que no dia 01º de Fevereiro é o Dia mundial de alteração de senhas?
 
