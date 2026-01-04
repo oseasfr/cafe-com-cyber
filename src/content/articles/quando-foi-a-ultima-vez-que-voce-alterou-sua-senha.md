@@ -17,7 +17,7 @@ priority: 0
 
 Provavelmente, apenas a senha corporativa devido à política interna da empresa (caso tenha 😶). 
 
-Mas, você sabia que hoje (01º de Fevereiro) é o Dia mundial de alteração de senhas?
+Mas, você sabia que no dia 01º de Fevereiro é o Dia mundial de alteração de senhas?
 
 Data essa que foi criada para chamar a atenção das pessoas sobre a importância desta prática, tanto pra contas de **e-mail**, **redes sociais** e demais serviços web.
 
