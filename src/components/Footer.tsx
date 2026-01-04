@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Mail, Linkedin, Github, Instagram, Youtube, Coffee, Shield } from "lucide-react";
-import CursosSection from "@/components/CursosSection";
 
 const Footer = () => {
   const handleLinkClick = () => {
@@ -51,11 +50,7 @@ const Footer = () => {
   };
 
   return (
-    <>
-      {/* Seção de Cursos */}
-      <CursosSection />
-      
-      <footer className="border-t border-border bg-card/50 backdrop-blur">
+    <footer className="border-t border-border bg-card/50 backdrop-blur">
         <div className="container py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Coluna 1: Logo e Descrição */}
@@ -112,6 +107,11 @@ const Footer = () => {
               <li>
                 <Link to="/gerador-de-senhas" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
                   Gerador de Senhas
+                </Link>
+              </li>
+              <li>
+                <Link to="/cursos" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
+                  Cursos
                 </Link>
               </li>
             </ul>
@@ -187,7 +187,6 @@ const Footer = () => {
         </div>
       </div>
     </footer>
-    </>
   );
 };
 
