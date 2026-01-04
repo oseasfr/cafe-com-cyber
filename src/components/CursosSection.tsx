@@ -46,7 +46,7 @@ const CursosSection = () => {
               </span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Listaremos diversos cursos online gratuitos em diversas áreas do conhecimento em Cibersegurança.
+              Listarei nesta página diversos cursos online gratuitos em diversas áreas do conhecimento sobre Cibersegurança.
             </p>
           </div>
 
@@ -121,15 +121,6 @@ const CursosSection = () => {
                     className="text-primary hover:underline cursor-pointer"
                   >
                     Udemy
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="#8-repositório-de-documentações" 
-                    onClick={(e) => handleAnchorClick(e, '8-repositório-de-documentações')}
-                    className="text-primary hover:underline cursor-pointer"
-                  >
-                    Repositório de documentações
                   </a>
                 </li>
               </ol>
@@ -424,43 +415,6 @@ const CursosSection = () => {
                   className="text-primary hover:underline inline-flex items-center gap-1"
                 >
                   Udemy
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-                <div className="mt-4">
-                  <a
-                    href="#cursos"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                      });
-                    }}
-                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
-                  >
-                    <ChevronDown className="h-3 w-3 rotate-180" />
-                    Voltar ao topo
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* 8. Repositório de documentações */}
-            <Card id="8-repositório-de-documentações">
-              <CardHeader>
-                <CardTitle>8. Repositório de documentações</CardTitle>
-                <CardDescription>
-                  Acesse o repositório com documentações relacionadas aos cursos:
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <a
-                  href="https://github.com/oseasfr/cyber/blob/Principal/cursos/arquivos/readme.md"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline inline-flex items-center gap-1"
-                >
-                  Repositório de documentações
                   <ExternalLink className="h-4 w-4" />
                 </a>
                 <div className="mt-4">
