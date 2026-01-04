@@ -46,7 +46,7 @@ const CursosSection = () => {
               </span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Listarei nesta página diversos cursos online gratuitos em diversas áreas do conhecimento sobre Cibersegurança.
+              Listaremos diversos cursos online gratuitos em diversas áreas do conhecimento em Cibersegurança.
             </p>
           </div>
 
