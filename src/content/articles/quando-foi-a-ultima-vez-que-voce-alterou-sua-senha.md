@@ -8,7 +8,7 @@ category: "Security"
 icon: "Shield"
 gradient: "from-primary/20 to-accent/20"
 publishedAt: "2025-01-XX"
-tags: [Security, Password]
+tags: [segurança, password, mfa, senha, 2fa, ]
 featured: false
 priority: 0
 ---
