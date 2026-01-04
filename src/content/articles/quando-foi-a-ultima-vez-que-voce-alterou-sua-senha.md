@@ -14,8 +14,6 @@ featured: false
 priority: 0
 ---
 
-# Quando foi a última vez que você alterou sua senha?
-
 Provavelmente, apenas a senha corporativa devido à política interna da empresa (caso tenha 😶). 
 
 Mas, você sabia que no dia 01º de Fevereiro é o Dia mundial de alteração de senhas?
