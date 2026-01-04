@@ -26,26 +26,57 @@ const ScrollToTop = () => {
   const { pathname, search, hash } = useLocation();
 
   useEffect(() => {
-    // Aguarda um tick para garantir que a página foi renderizada
-    const timer = setTimeout(() => {
-      // Se não há hash, rola para o topo
-      if (!hash) {
+    // Se não há hash, rola para o topo
+    if (!hash) {
+      // Função robusta para scroll no mobile e desktop
+      const scrollToTop = () => {
+        // Método 1: window.scrollTo (funciona na maioria dos casos)
         window.scrollTo({
           top: 0,
           left: 0,
           behavior: 'instant' as ScrollBehavior
         });
-        // Fallback para navegadores antigos
+        
+        // Método 2: Fallback direto para elementos (importante no mobile)
         if (document.documentElement) {
           document.documentElement.scrollTop = 0;
         }
         if (document.body) {
           document.body.scrollTop = 0;
         }
-      }
-    }, 0);
+        
+        // Método 3: Para iOS Safari e outros navegadores mobile
+        const scrollableElements = [
+          document.documentElement,
+          document.body,
+          window
+        ];
+        
+        scrollableElements.forEach(element => {
+          if (element && typeof (element as any).scrollTo === 'function') {
+            try {
+              (element as any).scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            } catch (e) {
+              // Ignora erros
+            }
+          }
+        });
+      };
 
-    return () => clearTimeout(timer);
+      // Rola imediatamente (0ms)
+      scrollToTop();
+      
+      // Aguarda a renderização e rola novamente (50ms)
+      const timer1 = setTimeout(scrollToTop, 50);
+      
+      // Rola novamente após um tempo maior (300ms) para garantir no mobile
+      const timer2 = setTimeout(scrollToTop, 300);
+
+      return () => {
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+      };
+    }
   }, [pathname, search, hash]);
 
   return null;
