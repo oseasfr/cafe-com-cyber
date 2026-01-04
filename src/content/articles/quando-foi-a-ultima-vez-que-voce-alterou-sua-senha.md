@@ -1,3 +1,18 @@
+---
+id: quando-foi-a-ultima-vez-que-voce-alterou-sua-senha
+title: "Quando foi a última vez que você alterou sua senha?"
+description: "Descrição do artigo"
+author: "Nome do Autor"
+readTime: "5 min"
+category: "Security"
+icon: "Shield"
+gradient: "from-primary/20 to-accent/20"
+publishedAt: "2025-01-XX"
+tags: [Security, Password]
+featured: false
+priority: 0
+---
+
 Quando foi a última vez que você alterou sua senha?
 
 Provavelmente, apenas a senha corporativa devido à política interna da empresa (caso tenha 😶). Mas, você sabia que hoje (01º de Fevereiro) é o Dia mundial de alteração de senhas?
