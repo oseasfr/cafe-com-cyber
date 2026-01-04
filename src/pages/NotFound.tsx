@@ -39,32 +39,26 @@ const NotFound = () => {
             />
           </div>
           
-          {/* Error Code com gradiente - Mesmo estilo da home page */}
-          <div className="space-y-4">
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight">
-              <span className="bg-gradient-to-r from-cyber-light via-primary to-accent bg-clip-text text-transparent">
-                404
-              </span>
-            </h1>
-            
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
-              Página não encontrada
-            </h2>
-            
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Parece que você pegou o caminho errado... Nosso mascote do café 
-              não conseguiu encontrar a página que você procura. 
-              Que tal tomar um café e tentar novamente?
-            </p>
-          </div>
+            {/* Error Code com gradiente - Mesmo estilo da home page */}
+            <div className="space-y-4">
+              <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tight">
+                <span className="bg-gradient-to-r from-cyber-light via-primary to-accent bg-clip-text">
+                  Opa
+                </span>
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
+                ☕ Essa página <span className="text-primary font-semibold">não existe</span> !
+              </p>
+            </div>
 
           {/* CTA Button - Mesmo estilo da home page */}
           <div className="flex justify-center items-center">
             <Link to="/">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
-                <Home className="mr-2 h-5 w-5" />
-                Voltar para o Início
-              </Button>
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
+                  <Home className="mr-2 h-5 w-5" />
+                  Voltar para o Início
+                </Button>
             </Link>
           </div>
 
