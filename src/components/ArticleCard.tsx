@@ -35,7 +35,12 @@ export const ArticleCard = ({ article }: ArticleProps) => {
                         {article.category}
                     </Badge>
                     <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                        {article.title}
+                        <Link 
+                            to={`/articles/${article.id}`} 
+                            className="hover:underline cursor-pointer"
+                        >
+                            {article.title}
+                        </Link>
                     </CardTitle>
                 </div>
             </CardHeader>
