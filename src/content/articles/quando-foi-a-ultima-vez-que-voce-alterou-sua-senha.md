@@ -53,6 +53,6 @@ Algumas outras soluções web gratuitas também tem os mesmos recursos:
 
 A melhor duração de senhas é imediatamente após uma identificação de vazamento, reforçando-a com o MFA e seus três fatores clássicos: algo que você sabe, algo que você possui e algo que você é.
 
-No fim das contas, a pergunta não é apenas quando foi a última vez que você alterou sua senha, mas se hoje suas credenciais estão realmente protegidas contra as ameaças atuais.
+No fim das contas, a pergunta não é apenas quando foi a última vez que você alterou suas senhas, mas se suas credenciais estão realmente protegidas contra as ameaças atuais.
 
 Se você gera senhas seguras, realiza o monitoramento de possíveis vazamentos e utiliza a autenticação de multifator você está no caminho certo.
