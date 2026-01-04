@@ -42,3 +42,11 @@ Aqui estão **algumas dicas** para criar senhas fortes:
 * Responda às “perguntas de segurança” com informações falsas
 
 Se você trabalha com cybersegurança, oriente os colaboradores da sua empresa para que essas boas práticas sejam implementadas e garanta a proteção de identidades e dados.
+
+O Café com Cyber tem seu próprio gerador de senhas, que também valida a força das suas senha atuais:
+
+- [Gerador de Senhas](https://www.cafecomcyber.com.br/gerador-de-senhas)
+
+Algumas outras soluções web gratuitas também tem os mesmos recursos:
+
+- [Testador de Senhas e Gerador de Senhas fortes Kaspersky](https://password.kaspersky.com/pt/)
