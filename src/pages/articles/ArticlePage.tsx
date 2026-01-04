@@ -217,7 +217,7 @@ export default function ArticlePage() {
               <img 
                 src={article.imageUrl} 
                 alt={article.title} 
-                className="w-full h-auto object-cover"
+                className="w-full h-48 sm:h-56 md:h-64 object-cover"
               />
             </div>
           )}
