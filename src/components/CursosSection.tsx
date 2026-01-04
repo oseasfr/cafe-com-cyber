@@ -26,15 +26,28 @@ const CursosSection = () => {
     }
   };
   return (
-    <section id="cursos" className="py-16 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="cursos" className="py-20 relative overflow-hidden">
+      {/* Background Effects - Mesmo do CommunitySection */}
+      <div className="absolute inset-0 bg-gradient-dark"></div>
+      <div className="absolute inset-0 bg-gradient-cyber opacity-30"></div>
+      
+      {/* Animated Grid Background - Mesmo do CommunitySection */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="h-full w-full bg-[linear-gradient(hsl(var(--border))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border))_1px,transparent_1px)] bg-[size:50px_50px] animate-pulse"></div>
+      </div>
+
+      <div className="container relative z-10 mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           {/* Cabeçalho */}
-          <div className="mb-12 text-center">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              Cursos
+          <div className="mb-16 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Cursos
+              </span>
             </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               Listarei nesta página diversos cursos online gratuitos em diversas áreas do conhecimento sobre Cibersegurança.
+            </p>
           </div>
 
           {/* Índice */}
