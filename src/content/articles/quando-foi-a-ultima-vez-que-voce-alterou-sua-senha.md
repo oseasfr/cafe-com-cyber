@@ -9,7 +9,7 @@ icon: "Key"
 gradient: "from-primary/20 to-accent/20"
 publishedAt: "2026-02-01"
 tags: [segurança, passwords, mfa, 2fa, senhas]
-imageUrl: "/src/imagens/article-qfauvqvass.jpg"
+imageUrl: /images/articles/qfauvqvass.jpg
 featured: false
 priority: 0
 ---
