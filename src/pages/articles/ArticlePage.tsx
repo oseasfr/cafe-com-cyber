@@ -7,7 +7,7 @@ import ShareButtons from '@/components/ShareButtons';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Clock, User, Copy, Check, Sun, Moon } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import NotFound from '../NotFound';
+import NotFound from '@/pages/NotFound';
 
 // Hook customizado para gerenciar tema apenas do artigo
 function useArticleTheme() {
@@ -94,9 +94,21 @@ export default function ArticlePage() {
 
   const articleUrl = `/articles/${article.id}`;
   const fullUrl = typeof window !== 'undefined' ? window.location.origin + articleUrl : articleUrl;
-  const imageUrl = article.imageUrl 
-    ? (article.imageUrl.startsWith('http') ? article.imageUrl : window.location.origin + article.imageUrl)
-    : window.location.origin + '/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png';
+  
+  // Prepara o imageUrl - garante que comece com / se for caminho relativo
+  const getImageUrl = () => {
+    if (!article.imageUrl) {
+      return typeof window !== 'undefined' ? window.location.origin + '/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png' : '';
+    }
+    if (article.imageUrl.startsWith('http')) {
+      return article.imageUrl;
+    }
+    // Garante que comece com / se não começar
+    const path = article.imageUrl.startsWith('/') ? article.imageUrl : '/' + article.imageUrl;
+    return typeof window !== 'undefined' ? window.location.origin + path : path;
+  };
+  
+  const imageUrl = getImageUrl();
 
   // Atualiza meta tags dinamicamente para compartilhamento
   useEffect(() => {
@@ -215,7 +227,7 @@ export default function ArticlePage() {
           {article.imageUrl && (
             <div className="mb-8 rounded-lg overflow-hidden mt-6">
               <img 
-                src={article.imageUrl} 
+                src={imageUrl} 
                 alt={article.title} 
                 className="w-full h-48 sm:h-56 md:h-64 object-cover"
               />
