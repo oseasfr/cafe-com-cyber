@@ -17,14 +17,26 @@ interface ArticleProps {
         category: string;
         icon: string;
         gradient: string;
+        imageUrl?: string;
     };
 }
 
 export const ArticleCard = ({ article }: ArticleProps) => {
     const { icon: faIcon, color } = getArticleIcon(article.category, article.icon);
+    const articleWithImage = article as typeof article & { imageUrl?: string };
 
     return (
-        <Card key={article.id} className="group hover:shadow-cyber-soft transition-all duration-300 border-border/50 bg-card/50 backdrop-blur">
+        <Card key={article.id} className="group hover:shadow-cyber-soft transition-all duration-300 border-border/50 bg-card/50 backdrop-blur overflow-hidden">
+            {/* Imagem do Artigo */}
+            {articleWithImage.imageUrl && (
+                <div className="w-full h-32 sm:h-40 overflow-hidden">
+                    <img 
+                        src={articleWithImage.imageUrl} 
+                        alt={article.title} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                </div>
+            )}
             <CardHeader className="space-y-4">
                 <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${article.gradient} flex items-center justify-center group-hover:animate-glow-pulse`}>
                     <i className={`fa-solid ${faIcon} text-lg ${color}`} aria-hidden="true" />
