@@ -16,6 +16,7 @@ import CommunityPage from "./pages/CommunityPage";
 import AboutPage from "./pages/AboutPage";
 import UsefulLinks from "./pages/links-uteis";
 import GeradorSenhas from "./pages/gerador-de-senhas";
+import CursosPage from "./pages/CursosPage";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 
 // *** Variável de controle: Altere para 'false' para desativar a página de manutenção ***
@@ -132,6 +133,9 @@ const App = () => {
 
             {/* Rota para a página de Gerador de Senhas */}
             <Route path="/gerador-de-senhas" element={<GeradorSenhas />} />
+
+            {/* Rota para a página de Cursos */}
+            <Route path="/cursos" element={<CursosPage />} />
 
             {/* A página "em-construcao" pode ser acessada por esta rota */}
             <Route path="/em-construcao" element={<UnderConstruction />} />
