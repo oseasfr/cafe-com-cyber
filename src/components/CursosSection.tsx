@@ -10,6 +10,21 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const CursosSection = () => {
+  // Função para scroll suave com offset do header
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, anchorId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(anchorId);
+    if (element) {
+      const headerHeight = 64; // h-16 = 64px (altura do header)
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
   return (
     <section id="cursos" className="py-16 bg-background">
       <div className="container mx-auto px-4">
@@ -35,42 +50,74 @@ const CursosSection = () => {
             <CardContent>
               <ol className="list-decimal list-inside space-y-2 text-sm">
                 <li>
-                  <a href="#1-escola-virtual-gov" className="text-primary hover:underline">
+                  <a 
+                    href="#1-escola-virtual-gov" 
+                    onClick={(e) => handleAnchorClick(e, '1-escola-virtual-gov')}
+                    className="text-primary hover:underline cursor-pointer"
+                  >
                     Escola Virtual Gov
                   </a>
                 </li>
                 <li>
-                  <a href="#2-hackers-do-bem" className="text-primary hover:underline">
+                  <a 
+                    href="#2-hackers-do-bem" 
+                    onClick={(e) => handleAnchorClick(e, '2-hackers-do-bem')}
+                    className="text-primary hover:underline cursor-pointer"
+                  >
                     Hackers do Bem
                   </a>
                 </li>
                 <li>
-                  <a href="#3-senai---sp" className="text-primary hover:underline">
+                  <a 
+                    href="#3-senai---sp" 
+                    onClick={(e) => handleAnchorClick(e, '3-senai---sp')}
+                    className="text-primary hover:underline cursor-pointer"
+                  >
                     Senai - SP
                   </a>
                 </li>
                 <li>
-                  <a href="#4-curso-em-vídeo" className="text-primary hover:underline">
+                  <a 
+                    href="#4-curso-em-vídeo" 
+                    onClick={(e) => handleAnchorClick(e, '4-curso-em-vídeo')}
+                    className="text-primary hover:underline cursor-pointer"
+                  >
                     Curso em Vídeo
                   </a>
                 </li>
                 <li>
-                  <a href="#5-cisco-networking-academy" className="text-primary hover:underline">
+                  <a 
+                    href="#5-cisco-networking-academy" 
+                    onClick={(e) => handleAnchorClick(e, '5-cisco-networking-academy')}
+                    className="text-primary hover:underline cursor-pointer"
+                  >
                     Cisco Networking Academy
                   </a>
                 </li>
                 <li>
-                  <a href="#6-linux-foundation" className="text-primary hover:underline">
+                  <a 
+                    href="#6-linux-foundation" 
+                    onClick={(e) => handleAnchorClick(e, '6-linux-foundation')}
+                    className="text-primary hover:underline cursor-pointer"
+                  >
                     Linux Foundation
                   </a>
                 </li>
                 <li>
-                  <a href="#7-udemy" className="text-primary hover:underline">
+                  <a 
+                    href="#7-udemy" 
+                    onClick={(e) => handleAnchorClick(e, '7-udemy')}
+                    className="text-primary hover:underline cursor-pointer"
+                  >
                     Udemy
                   </a>
                 </li>
                 <li>
-                  <a href="#8-repositório-de-documentações" className="text-primary hover:underline">
+                  <a 
+                    href="#8-repositório-de-documentações" 
+                    onClick={(e) => handleAnchorClick(e, '8-repositório-de-documentações')}
+                    className="text-primary hover:underline cursor-pointer"
+                  >
                     Repositório de documentações
                   </a>
                 </li>
@@ -154,7 +201,14 @@ const CursosSection = () => {
                 <div className="mt-4">
                   <a
                     href="#cursos"
-                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                      });
+                    }}
+                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
                   >
                     <ChevronDown className="h-3 w-3 rotate-180" />
                     Voltar ao topo
@@ -184,7 +238,14 @@ const CursosSection = () => {
                 <div className="mt-4">
                   <a
                     href="#cursos"
-                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                      });
+                    }}
+                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
                   >
                     <ChevronDown className="h-3 w-3 rotate-180" />
                     Voltar ao topo
@@ -212,7 +273,14 @@ const CursosSection = () => {
                 <div className="mt-4">
                   <a
                     href="#cursos"
-                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                      });
+                    }}
+                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
                   >
                     <ChevronDown className="h-3 w-3 rotate-180" />
                     Voltar ao topo
@@ -242,7 +310,14 @@ const CursosSection = () => {
                 <div className="mt-4">
                   <a
                     href="#cursos"
-                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                      });
+                    }}
+                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
                   >
                     <ChevronDown className="h-3 w-3 rotate-180" />
                     Voltar ao topo
@@ -270,7 +345,14 @@ const CursosSection = () => {
                 <div className="mt-4">
                   <a
                     href="#cursos"
-                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                      });
+                    }}
+                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
                   >
                     <ChevronDown className="h-3 w-3 rotate-180" />
                     Voltar ao topo
@@ -298,7 +380,14 @@ const CursosSection = () => {
                 <div className="mt-4">
                   <a
                     href="#cursos"
-                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                      });
+                    }}
+                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
                   >
                     <ChevronDown className="h-3 w-3 rotate-180" />
                     Voltar ao topo
@@ -328,7 +417,14 @@ const CursosSection = () => {
                 <div className="mt-4">
                   <a
                     href="#cursos"
-                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                      });
+                    }}
+                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
                   >
                     <ChevronDown className="h-3 w-3 rotate-180" />
                     Voltar ao topo
@@ -358,7 +454,14 @@ const CursosSection = () => {
                 <div className="mt-4">
                   <a
                     href="#cursos"
-                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                      });
+                    }}
+                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
                   >
                     <ChevronDown className="h-3 w-3 rotate-180" />
                     Voltar ao topo
