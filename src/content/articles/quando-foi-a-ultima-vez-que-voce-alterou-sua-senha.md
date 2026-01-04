@@ -30,13 +30,13 @@ Mas como elevar a segurança dessas contas a um outro nível?
 
 Aqui estão **algumas dicas** para criar senhas fortes:
 
-* Use um gerador de senhas
-* Evite usar datas de aniversário, nomes de parentes e bichos de estimação
-* Use uma mistura de letras maiúsculas e minúsculas, números e símbolos
-* Crie senhas com pelo menos 16 caracteres
-* Não repita a mesma senha em várias plataformas
-* Configure a autenticação de dois fatores
-* Responda às “perguntas de segurança” com informações falsas
+* Use um gerador de senhas;
+* Evite usar datas de aniversário, nomes de parentes e bichos de estimação;
+* Use uma mistura de letras maiúsculas e minúsculas, números e símbolos;
+* Crie senhas com pelo menos 16 caracteres;
+* Não repita a mesma senha em várias plataformas;
+* Configure a autenticação de dois fatores;
+* Responda às “perguntas de segurança” com informações falsas;
 
 Se você trabalha com cybersegurança, oriente os colaboradores da sua empresa para que essas boas práticas sejam implementadas e garanta a proteção de identidades e dados.
 
