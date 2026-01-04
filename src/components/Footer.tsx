@@ -4,19 +4,49 @@ import { Mail, Linkedin, Github, Instagram, Youtube, Coffee, Shield } from "luci
 
 const Footer = () => {
   const handleLinkClick = () => {
-    // Rola para o topo imediatamente quando qualquer link do footer é clicado
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'instant' as ScrollBehavior
-    });
-    // Fallback para navegadores antigos
-    if (document.documentElement) {
-      document.documentElement.scrollTop = 0;
-    }
-    if (document.body) {
-      document.body.scrollTop = 0;
-    }
+    // Função robusta para scroll no mobile e desktop
+    const scrollToTop = () => {
+      // Método 1: window.scrollTo (funciona na maioria dos casos)
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'instant' as ScrollBehavior
+      });
+      
+      // Método 2: Fallback direto para elementos (importante no mobile)
+      if (document.documentElement) {
+        document.documentElement.scrollTop = 0;
+      }
+      if (document.body) {
+        document.body.scrollTop = 0;
+      }
+      
+      // Método 3: Para iOS Safari e outros navegadores mobile
+      // Tenta encontrar o elemento scrollable correto
+      const scrollableElements = [
+        document.documentElement,
+        document.body,
+        window
+      ];
+      
+      scrollableElements.forEach(element => {
+        if (element && typeof (element as any).scrollTo === 'function') {
+          try {
+            (element as any).scrollTo({ top: 0, left: 0, behavior: 'instant' });
+          } catch (e) {
+            // Ignora erros
+          }
+        }
+      });
+    };
+
+    // Rola imediatamente
+    scrollToTop();
+
+    // Aguarda um pouco para garantir que a navegação tenha iniciado
+    // e rola novamente (importante no mobile)
+    setTimeout(scrollToTop, 100);
+    setTimeout(scrollToTop, 300);
   };
 
   return (
