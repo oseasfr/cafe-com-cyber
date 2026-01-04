@@ -8,7 +8,7 @@ category: "Password Security"
 icon: "Key"
 gradient: "from-primary/20 to-accent/20"
 publishedAt: "2026-02-01"
-tags: [segurança, password, mfa, senha, 2fa, ]
+tags: [segurança, passwords, mfa, 2fa, senhas]
 featured: false
 priority: 0
 ---
