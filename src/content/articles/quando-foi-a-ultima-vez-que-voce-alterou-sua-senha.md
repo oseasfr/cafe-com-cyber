@@ -28,7 +28,7 @@ Mas como elevar a segurança dessas contas a um outro nível?
 
 > **Simples:** ativando a autenticação multifator (MFA). 
 
-O MFA adiciona uma segunda camada de proteção, tornando muito mais difícil para os atacantes acessarem as suas contas.
+O **MFA** adiciona uma segunda camada de proteção, tornando muito mais difícil para os atacantes acessarem as suas contas.
 
 Aqui estão **algumas dicas** para criar senhas fortes:
 
