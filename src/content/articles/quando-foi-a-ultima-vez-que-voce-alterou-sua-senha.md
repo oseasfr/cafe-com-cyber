@@ -2,10 +2,10 @@
 id: quando-foi-a-ultima-vez-que-voce-alterou-sua-senha
 title: "Quando foi a última vez que você alterou sua senha?"
 description: "Descrição do artigo"
-author: "Nome do Autor"
-readTime: "5 min"
-category: "Security"
-icon: "Shield"
+author: "Alberto Santos"
+readTime: "7 min"
+category: "Passwords"
+icon: "Key"
 gradient: "from-primary/20 to-accent/20"
 publishedAt: "2025-02-01"
 tags: [segurança, password, mfa, senha, 2fa, ]
@@ -13,7 +13,7 @@ featured: false
 priority: 0
 ---
 
-## Quando foi a última vez que você alterou sua senha?
+# Quando foi a última vez que você alterou sua senha?
 
 Provavelmente, apenas a senha corporativa devido à política interna da empresa (caso tenha 😶). 
 
