@@ -48,3 +48,11 @@ Algumas outras soluções web gratuitas também tem os mesmos recursos:
 
 - [Testador de Senhas e Gerador de Senhas fortes - Kaspersky](https://password.kaspersky.com/pt/)
 - [Gerador de Senhas - Lastpass](https://www.lastpass.com/pt/features/password-generator)
+
+E com que frequência devemos altera nossas senhas?
+
+A melhor duração de senhas é realizá-la imediatamente após uma violação (vazamento) e reforçá-la com a autenticação MFA, com três fatores clássicos: algo que você sabe, algo que você possui e algo que você é.
+
+No fim das contas, a pergunta não é apenas quando foi a última vez que você alterou sua senha, mas se hoje suas credenciais estão realmente protegidas contra as ameaças atuais.
+
+Se você gera senhas seguras, realiza o monitoramento de possíveis vazamentos e utiliza a autenticação de multifator você está no caminho certo.
