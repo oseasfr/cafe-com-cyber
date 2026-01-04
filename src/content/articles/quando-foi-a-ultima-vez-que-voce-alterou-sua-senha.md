@@ -22,7 +22,7 @@ Data essa que foi criada para chamar a atenção das pessoas sobre a importânci
 
 Alterar sua senha é um **ótimo primeiro passo**, mas não é suficiente. 
 
-Cibercriminosos têm maneiras de quebrar até mesmo as senhas complexas.
+Os cibercriminosos têm inúmeras maneiras de quebrar até mesmo as senhas complexas.
 
 Mas como elevar a segurança dessas contas a um outro nível? 
 
