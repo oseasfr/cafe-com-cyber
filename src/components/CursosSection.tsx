@@ -34,9 +34,7 @@ const CursosSection = () => {
             <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Cursos
             </h2>
-            <blockquote className="text-lg text-muted-foreground italic border-l-4 border-primary pl-4 max-w-2xl mx-auto">
               Listarei nesta página diversos cursos online gratuitos em diversas áreas do conhecimento sobre Cibersegurança.
-            </blockquote>
           </div>
 
           {/* Índice */}
