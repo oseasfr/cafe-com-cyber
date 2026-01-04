@@ -1,162 +1,348 @@
-import { useEffect } from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MessageCircle, Shield, Users, Lightbulb, Target, ArrowRight } from "lucide-react";
+import { useParams, Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import { articles } from '@/data/articles';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import ShareButtons from '@/components/ShareButtons';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft, Clock, User, Copy, Check, Sun, Moon } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import NotFound from '../NotFound';
 
-const AboutPage = () => {
+// Hook customizado para gerenciar tema apenas do artigo
+function useArticleTheme() {
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('article-theme') as 'light' | 'dark' | null;
+      return saved || 'dark';
+    }
+    return 'dark';
+  });
+  
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('article-theme', newTheme);
+    }
+  };
+
+  return { theme, toggleTheme };
+}
+
+// Componente para blocos de código com botão de copiar
+function CodeBlock({ children, theme, ...props }: any) {
+  const [copied, setCopied] = useState(false);
+  const isLight = theme === 'light';
+  
+  // Extrai o texto do código - pode ser string ou ReactNode
+  const getCodeText = (node: any): string => {
+    if (typeof node === 'string') return node;
+    if (Array.isArray(node)) {
+      return node.map(getCodeText).join('');
+    }
+    if (node?.props?.children) {
+      return getCodeText(node.props.children);
+    }
+    return String(node);
+  };
+  
+  const code = getCodeText(children).replace(/\n$/, '');
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy code:', err);
+    }
+  };
+
+  return (
+    <div className="relative group">
+      <pre className={`p-4 rounded-lg overflow-x-auto mb-4 ${isLight ? 'bg-gray-100 text-gray-800' : 'bg-cyber-darker text-primary'}`} {...props}>
+        {children}
+      </pre>
+      <button
+        onClick={copyToClipboard}
+        className={`absolute top-2 right-2 p-2 rounded-md transition-colors opacity-0 group-hover:opacity-100 z-10 ${
+          isLight 
+            ? 'bg-gray-200 hover:bg-gray-300 border border-gray-300 text-gray-700 hover:text-gray-900' 
+            : 'bg-cyber-darker/80 hover:bg-cyber-darker border border-border text-muted-foreground hover:text-foreground'
+        }`}
+        title="Copiar código"
+        aria-label="Copiar código"
+      >
+        {copied ? (
+          <Check className="h-4 w-4 text-green-500" />
+        ) : (
+          <Copy className="h-4 w-4" />
+        )}
+      </button>
+    </div>
+  );
+}
+
+export default function ArticlePage() {
+  const { articleId } = useParams();
+  const article = articles.find(a => a.id === articleId);
+
+  if (!article) {
+    return <NotFound />;
+  }
+
+  const articleUrl = `/articles/${article.id}`;
+  const fullUrl = typeof window !== 'undefined' ? window.location.origin + articleUrl : articleUrl;
+  
+  // Prepara o imageUrl - garante que comece com / se for caminho relativo
+  const getImageUrl = () => {
+    if (!article.imageUrl) {
+      return typeof window !== 'undefined' ? window.location.origin + '/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png' : '';
+    }
+    if (article.imageUrl.startsWith('http')) {
+      return article.imageUrl;
+    }
+    // Garante que comece com / se não começar
+    const path = article.imageUrl.startsWith('/') ? article.imageUrl : '/' + article.imageUrl;
+    return typeof window !== 'undefined' ? window.location.origin + path : path;
+  };
+  
+  const imageUrl = getImageUrl();
+
+  // Atualiza meta tags dinamicamente para compartilhamento
   useEffect(() => {
-    // Rola para o topo quando a página carrega
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'instant' as ScrollBehavior
-    });
-    // Fallback para navegadores antigos
-    if (document.documentElement) {
-      document.documentElement.scrollTop = 0;
-    }
-    if (document.body) {
-      document.body.scrollTop = 0;
-    }
-  }, []);
+    // Atualiza título da página
+    document.title = `${article.title} | Café com Cyber`;
+
+    // Função para atualizar ou criar meta tag
+    const updateMetaTag = (property: string, content: string, isProperty = true) => {
+      const attribute = isProperty ? 'property' : 'name';
+      let meta = document.querySelector(`meta[${attribute}="${property}"]`);
+      
+      if (!meta) {
+        meta = document.createElement('meta');
+        meta.setAttribute(attribute, property);
+        document.head.appendChild(meta);
+      }
+      meta.setAttribute('content', content);
+    };
+
+    // Open Graph tags
+    updateMetaTag('og:title', article.title);
+    updateMetaTag('og:description', article.description);
+    updateMetaTag('og:type', 'article');
+    updateMetaTag('og:url', fullUrl);
+    updateMetaTag('og:image', imageUrl);
+    updateMetaTag('og:site_name', 'Café com Cyber');
+
+    // Twitter Card tags
+    updateMetaTag('twitter:card', 'summary_large_image', false);
+    updateMetaTag('twitter:title', article.title, false);
+    updateMetaTag('twitter:description', article.description, false);
+    updateMetaTag('twitter:image', imageUrl, false);
+    updateMetaTag('twitter:site', '@cafecomcyber', false);
+
+    // Meta description padrão
+    updateMetaTag('description', article.description, false);
+
+    // Cleanup: restaura meta tags padrão ao sair da página
+    return () => {
+      document.title = 'Café com Cyber';
+      updateMetaTag('og:title', 'Café com Cyber');
+      updateMetaTag('og:description', 'Blog de cybersecurity com artigos, notícias e insights da comunidade de analistas.');
+      updateMetaTag('og:type', 'website');
+      updateMetaTag('og:url', window.location.origin);
+      updateMetaTag('og:image', window.location.origin + '/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png');
+    };
+  }, [article, fullUrl, imageUrl]);
+
+  const articleTheme = useArticleTheme();
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="container mx-auto max-w-5xl px-4 py-16" role="main">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <div className="flex justify-center mb-6">
-            <img 
-              src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
-              alt="Café com Cyber"
-              className="h-24 w-24"
+      
+      <main className="container mx-auto max-w-4xl px-4 py-8">
+        {/* Botão Voltar e Seletor de Tema */}
+        <div className="mb-6 flex items-center justify-between">
+          <Button
+            asChild
+            variant="ghost"
+            size="sm"
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <Link to="/articles">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Voltar para Artigos
+            </Link>
+          </Button>
+          <ArticleThemeToggle theme={articleTheme.theme} onToggle={articleTheme.toggleTheme} />
+        </div>
+
+          {/* Título do Artigo */}
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground leading-tight mb-4">
+            {article.title}
+          </h1>
+
+          {/* Tags - Logo abaixo do título */}
+          {article.tags && article.tags.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-6">
+              {article.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded-md"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* Informações do Autor e Tempo de Leitura */}
+          <div className="flex items-center gap-4 text-muted-foreground mb-4">
+            <div className="flex items-center gap-2">
+              <User className="h-4 w-4" />
+              <span className="text-sm font-medium">{article.author}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="h-4 w-4" />
+              <span className="text-sm">{article.readTime}</span>
+            </div>
+            {article.category && (
+              <span className="text-sm px-2 py-1 bg-primary/10 text-primary rounded-md">
+                {article.category}
+              </span>
+            )}
+          </div>
+
+          {/* Botões de Compartilhamento - Topo */}
+          <ShareButtons 
+            title={article.title}
+            url={articleUrl}
+            description={article.description}
+          />
+          
+          {/* Imagem de Capa do Artigo */}
+          {article.imageUrl && (
+            <div className="mb-8 rounded-lg overflow-hidden mt-6">
+              <img 
+                src={imageUrl} 
+                alt={article.title} 
+                className="w-full h-48 sm:h-56 md:h-64 object-cover"
+              />
+            </div>
+          )}
+
+          {/* Conteúdo do Artigo com Tema Isolado */}
+          <ArticleContent article={article} theme={articleTheme.theme} />
+
+          {/* Botões de Compartilhamento - Final */}
+          <div className="mt-8">
+            <ShareButtons 
+              title={article.title}
+              url={articleUrl}
+              description={article.description}
             />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Sobre o <span className="text-primary">Café com Cyber</span>
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Uma iniciativa dedicada a democratizar o conhecimento em Segurança da Informação
-          </p>
-        </div>
 
-        {/* Main Content */}
-        <div className="space-y-12">
-          {/* Mission */}
-          <Card className="border-primary/20 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur">
-            <CardHeader>
-              <div className="flex items-center gap-3 mb-2">
-                <Target className="h-6 w-6 text-primary" />
-                <CardTitle className="text-2xl">Nossa Missão</CardTitle>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground leading-relaxed">
-                O Café com Cyber nasceu da necessidade de criar um espaço colaborativo onde 
-                profissionais, entusiastas e estudantes de cibersegurança possam compartilhar 
-                conhecimento, experiências e aprender juntos. Acreditamos que a segurança da 
-                informação deve ser acessível a todos, e trabalhamos para fortalecer a comunidade 
-                de cybersecurity no Brasil através de conteúdo de qualidade, discussões abertas 
-                e colaboração mútua.
-              </p>
-            </CardContent>
-          </Card>
-
-          {/* Values */}
-          <div>
-            <h2 className="text-3xl font-bold mb-8 text-center">
-              Nossos <span className="text-primary">Valores</span>
-            </h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card className="text-center border-border/50 bg-card/50 backdrop-blur">
-                <CardHeader>
-                  <div className="w-12 h-12 mx-auto rounded-lg bg-gradient-cyber flex items-center justify-center mb-4">
-                    <Shield className="h-6 w-6 text-primary" />
-                  </div>
-                  <CardTitle>Segurança</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    Promovemos práticas seguras e conscientização sobre ameaças cibernéticas
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="text-center border-border/50 bg-card/50 backdrop-blur">
-                <CardHeader>
-                  <div className="w-12 h-12 mx-auto rounded-lg bg-gradient-cyber flex items-center justify-center mb-4">
-                    <Users className="h-6 w-6 text-primary" />
-                  </div>
-                  <CardTitle>Comunidade</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    Construímos uma comunidade inclusiva e colaborativa para todos os níveis
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="text-center border-border/50 bg-card/50 backdrop-blur">
-                <CardHeader>
-                  <div className="w-12 h-12 mx-auto rounded-lg bg-gradient-cyber flex items-center justify-center mb-4">
-                    <Lightbulb className="h-6 w-6 text-primary" />
-                  </div>
-                  <CardTitle>Conhecimento</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    Compartilhamos conhecimento de forma acessível e prática
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          {/* What We Do */}
-          <Card className="border-primary/20 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur">
-            <CardHeader>
-              <CardTitle className="text-2xl">O Que Fazemos</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-muted-foreground leading-relaxed">
-                Através do nosso site e comunidade no WhatsApp, oferecemos:
-              </p>
-              <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4">
-                <li>Artigos técnicos sobre cibersegurança escritos por especialistas</li>
-                <li>Discussões diárias sobre ameaças, ferramentas e técnicas</li>
-                <li>Compartilhamento de boas práticas e experiências do dia a dia</li>
-                <li>Divulgação de eventos, vagas e oportunidades na área</li>
-                <li>Conscientização sobre segurança digital através de conteúdo educativo</li>
-                <li>Ferramentas úteis como gerador de senhas e links úteis</li>
-              </ul>
-            </CardContent>
-          </Card>
-
-          {/* CTA */}
-          <div className="text-center pt-8">
-            <p className="text-lg text-muted-foreground mb-6">
-              Junte-se à nossa comunidade e faça parte dessa jornada de aprendizado!
-            </p>
+          {/* Botão Voltar no Final */}
+          <div className="mt-12 pt-8 border-t border-border">
             <Button
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber"
-              onClick={() =>
-                window.open("https://chat.whatsapp.com/DV1aSKqXnzU9yzLle4WpQ3", "_blank")
-              }
+              asChild
+              variant="outline"
+              className="w-full sm:w-auto"
             >
-              <MessageCircle className="mr-2 h-5 w-5" />
-              Conhecer a Comunidade
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <Link to="/articles">
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Ver Todos os Artigos
+              </Link>
             </Button>
           </div>
-        </div>
-      </main>
+        </main>
+
       <Footer />
     </div>
   );
-};
+}
 
-export default AboutPage;
+// Componente de toggle de tema simplificado
+function ArticleThemeToggle({ theme, onToggle }: { theme: 'light' | 'dark'; onToggle: () => void }) {
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={onToggle}
+      className="relative"
+      aria-label="Alternar tema do artigo"
+      title={theme === "dark" ? "Modo claro" : "Modo escuro"}
+    >
+      {theme === 'dark' ? (
+        <Sun className="h-[1.2rem] w-[1.2rem]" />
+      ) : (
+        <Moon className="h-[1.2rem] w-[1.2rem]" />
+      )}
+      <span className="sr-only">Alternar tema do artigo</span>
+    </Button>
+  );
+}
+
+// Componente que renderiza apenas o conteúdo do artigo com tema isolado
+function ArticleContent({ article, theme }: { article: typeof articles[0]; theme: 'light' | 'dark' }) {
+  const isLight = theme === 'light';
+
+  return (
+    <div 
+      data-article-content
+      className={`rounded-lg p-6 transition-colors ${
+        isLight 
+          ? 'bg-white text-gray-900 border border-gray-200 light' 
+          : 'bg-transparent dark'
+      }`}
+    >
+      <article className={`prose max-w-none ${isLight ? 'prose-slate' : 'prose-invert'}`}>
+        <ReactMarkdown
+          components={{
+            h1: ({node, ...props}) => <h1 className={`text-3xl font-bold mt-8 mb-4 ${isLight ? 'text-gray-900' : 'text-foreground'}`} {...props} />,
+            h2: ({node, ...props}) => <h2 className={`text-2xl font-bold mt-6 mb-3 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
+            h3: ({node, ...props}) => <h3 className={`text-xl font-semibold mt-4 mb-2 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
+            h4: ({node, ...props}) => <h4 className={`text-lg font-semibold mt-4 mb-2 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
+            p: ({node, ...props}) => <p className={`leading-relaxed mb-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
+            ul: ({node, ...props}) => <ul className={`list-disc list-inside mb-4 space-y-2 ml-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
+            ol: ({node, ...props}) => <ol className={`list-decimal list-inside mb-4 space-y-2 ml-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
+            li: ({node, ...props}) => <li className="ml-2" {...props} />,
+            code: ({node, className, children, ...props}: any) => {
+              const isInline = !className;
+              if (isInline) {
+                return (
+                  <code className={`px-2 py-1 rounded font-mono text-sm ${isLight ? 'bg-gray-100 text-blue-600' : 'bg-cyber-darker text-primary'}`} {...props}>
+                    {children}
+                  </code>
+                );
+              }
+              return (
+                <code className={`${className} block p-4 rounded-lg font-mono text-sm overflow-x-auto mb-4 ${isLight ? 'bg-gray-100 text-gray-800' : 'bg-cyber-darker text-primary'}`} {...props}>
+                  {children}
+                </code>
+              );
+            },
+            pre: ({node, children, ...props}: any) => {
+              return <CodeBlock theme={theme} {...props}>{children}</CodeBlock>;
+            },
+            strong: ({node, ...props}) => <strong className={`font-bold ${isLight ? 'text-gray-900' : 'text-foreground'}`} {...props} />,
+            em: ({node, ...props}) => <em className={`italic ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
+            a: ({node, ...props}) => <a className="text-primary hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+            blockquote: ({node, ...props}) => <blockquote className={`border-l-4 pl-4 italic my-4 ${isLight ? 'border-gray-300 text-gray-700' : 'border-primary text-muted-foreground'}`} {...props} />,
+            hr: ({node, ...props}) => <hr className={`my-8 ${isLight ? 'border-gray-200' : 'border-border'}`} {...props} />,
+            img: ({node, ...props}) => <img className="w-full h-auto rounded-lg my-4" {...props} />,
+            table: ({node, ...props}) => <div className={`overflow-x-auto my-4 ${isLight ? 'border border-gray-200' : ''}`}><table className={`min-w-full ${isLight ? 'border border-gray-200' : 'border border-border'}`} {...props} /></div>,
+            th: ({node, ...props}) => <th className={`border px-4 py-2 font-semibold ${isLight ? 'border-gray-200 bg-gray-50 text-gray-900' : 'border-border bg-muted text-foreground'}`} {...props} />,
+            td: ({node, ...props}) => <td className={`border px-4 py-2 ${isLight ? 'border-gray-200 text-gray-700' : 'border-border text-muted-foreground'}`} {...props} />,
+          }}
+        >
+          {article.content}
+        </ReactMarkdown>
+      </article>
+    </div>
+  );
+}
