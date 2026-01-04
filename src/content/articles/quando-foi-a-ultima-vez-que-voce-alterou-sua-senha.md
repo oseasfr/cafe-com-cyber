@@ -7,7 +7,7 @@ readTime: "5 min"
 category: "Security"
 icon: "Shield"
 gradient: "from-primary/20 to-accent/20"
-publishedAt: "2025-01-XX"
+publishedAt: "2025-02-01"
 tags: [segurança, password, mfa, senha, 2fa, ]
 featured: false
 priority: 0
