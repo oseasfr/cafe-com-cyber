@@ -229,7 +229,7 @@ export default function ArticlePage() {
               <img 
                 src={imageUrl} 
                 alt={article.title} 
-                className="w-full h-48 sm:h-56 md:h-64 object-cover"
+                className="w-full h-auto max-h-48 sm:max-h-56 md:max-h-64 object-contain bg-muted/20"
               />
             </div>
           )}
