@@ -145,7 +145,8 @@ const CursosSection = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Accordion type="single" collapsible className="w-full">
+                {/* Accordion configurado para ficar sempre aberto quando tiver múltiplos links */}
+                <Accordion type="single" collapsible className="w-full" defaultValue="cis-controls">
                   <AccordionItem value="cis-controls">
                     <AccordionTrigger>1.1 CIS Controls</AccordionTrigger>
                     <AccordionContent>
