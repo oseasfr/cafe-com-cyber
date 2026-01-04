@@ -27,7 +27,7 @@ Cibercriminosos têm maneiras de quebrar até mesmo as senhas complexas.
 
 Mas como elevar a segurança dessas contas a um outro nível? 
 
-Simples: ativando a autenticação multifator (MFA). 
+> **Simples:** ativando a autenticação multifator (MFA). 
 
 O MFA adiciona uma segunda camada de proteção, tornando muito mais difícil para os atacantes acessarem as suas contas.
 
