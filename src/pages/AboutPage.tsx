@@ -114,9 +114,6 @@ const AboutPage = () => {
 
           {/* What We Do */}
           <Card className="border-primary/20 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur">
-            <CardHeader>
-              <CardTitle className="text-2xl">O Que Fazemos</CardTitle>
-            </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-muted-foreground leading-relaxed">
                 Através do nosso site e comunidade no WhatsApp, oferecemos:
