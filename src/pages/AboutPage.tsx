@@ -55,12 +55,9 @@ const AboutPage = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground leading-relaxed">
-                O Café com Cyber nasceu da necessidade de criar um espaço colaborativo onde 
-                profissionais, entusiastas e estudantes de cibersegurança possam compartilhar 
-                conhecimento, experiências e aprender juntos. Acreditamos que a segurança da 
-                informação deve ser acessível a todos, e trabalhamos para fortalecer a comunidade 
-                de cybersecurity no Brasil através de conteúdo de qualidade, discussões abertas 
-                e colaboração mútua.
+                O Café com Cyber surgiu de uma necessidade de um espaço colaborativo, onde 
+                a cibersegurança fosse acessível a todos pelo compartilhamento de conhecimento e experiências. Nossa comunidade 
+                tem o intuido de trazer conteúdos de qualidade, discussões técnicas abertas entre os membros e colaboração contínua.
               </p>
             </CardContent>
           </Card>
