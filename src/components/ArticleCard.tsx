@@ -37,7 +37,7 @@ export const ArticleCard = ({ article }: ArticleProps) => {
                     <CardTitle className="text-xl group-hover:text-primary transition-colors">
                         <Link 
                             to={`/articles/${article.id}`} 
-                            className="hover:underline cursor-pointer"
+                            className="no-underline"
                         >
                             {article.title}
                         </Link>
