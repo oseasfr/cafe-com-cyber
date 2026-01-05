@@ -1,10 +1,13 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PasswordGenerator from "@/components/PasswordGenerator";
+import { useLanguage } from '@/hooks/useLanguage';
 
 const GeradorSenhas = () => {
+  const { t } = useLanguage();
+  
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-gradient-dark flex flex-col">
       <Header />
       <main className="flex-1">
         {/* Seção: Gerador de Senhas */}
@@ -16,10 +19,10 @@ const GeradorSenhas = () => {
           <div className="container relative z-10">
             <div className="text-center mb-12 space-y-4">
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-                Gerador de Senhas <span className="text-primary">Seguras</span>
+                {t('index.passwordGenerator.title')}
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Proteja suas contas com senhas geradas localmente no seu navegador.
+                {t('index.passwordGenerator.subtitle')}
               </p>
             </div>
             
