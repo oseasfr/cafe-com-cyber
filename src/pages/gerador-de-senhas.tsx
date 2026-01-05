@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PasswordGenerator from "@/components/PasswordGenerator";
+import { Badge } from "@/components/ui/badge";
 
 const GeradorSenhas = () => {
   return (
@@ -15,6 +16,11 @@ const GeradorSenhas = () => {
           
           <div className="container relative z-10">
             <div className="text-center mb-12 space-y-4">
+              <div className="flex justify-center mb-4">
+                <Badge variant="secondary" className="text-xs">
+                  Ferramenta de Segurança
+                </Badge>
+              </div>
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
                 Gerador de Senhas Seguras
               </h2>
