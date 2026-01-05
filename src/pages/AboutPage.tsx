@@ -116,6 +116,8 @@ const AboutPage = () => {
           <Card className="border-primary/20 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur">
             <CardContent className="space-y-4">
               <p className="text-muted-foreground leading-relaxed">
+                <CardTitle></CardTitle>
+                </CardHeader>
                 Através do nosso site e comunidade no WhatsApp, oferecemos:
               </p>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4">
