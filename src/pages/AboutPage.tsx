@@ -50,7 +50,7 @@ const AboutPage = () => {
             <CardHeader>
               <div className="flex items-center gap-3 mb-2">
                 <Target className="h-6 w-6 text-primary" />
-                <CardTitle className="text-2xl">Nossa Missão</CardTitle>
+                <CardTitle className="text-2xl">Quem somos</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
