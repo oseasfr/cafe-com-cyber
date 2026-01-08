@@ -14,13 +14,10 @@ const ArticlesSection = memo(() => {
     return null;
   }
 
-  // SEMPRE apenas 3 primeiros artigos fixos
-  const featuredArticles = articles.slice(0, 3);
-  // TODOS os artigos restantes vão para o carousel
-  const remainingArticles = articles.slice(3);
+  // Só mostra carousel se houver mais de 3 artigos
   const hasMoreArticles = articles.length > 3;
 
-  // Componente do Carousel
+  // Componente do Carousel com TODOS os artigos
   const Carousel = () => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ 
       align: 'start',
@@ -58,14 +55,12 @@ const ArticlesSection = memo(() => {
       };
     }, [emblaApi]);
 
-    if (remainingArticles.length === 0) return null;
-
     return (
-      <div className="mt-12">
+      <>
         <div className="flex items-center justify-between mb-8">
-          <h3 className="text-2xl md:text-3xl font-bold">
-            Mais <span className="text-primary">Artigos</span>
-          </h3>
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Artigos em <span className="text-primary">Destaque</span>
+          </h2>
           <div className="flex gap-2">
             <Button
               variant="outline"
@@ -90,12 +85,12 @@ const ArticlesSection = memo(() => {
           </div>
         </div>
         
-        {/* Viewport do carousel - overflow hidden */}
+        {/* Viewport do carousel - TODOS os artigos aqui */}
         <div className="overflow-hidden" ref={emblaRef}>
           {/* Container flex do carousel */}
           <div className="flex touch-pan-y md:touch-none">
-            {/* Exibe TODOS os artigos restantes no carousel */}
-            {remainingArticles.map((article) => (
+            {/* TODOS os artigos em uma única linha horizontal */}
+            {articles.map((article) => (
               <div 
                 key={article.id} 
                 className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 pr-6"
@@ -105,7 +100,7 @@ const ArticlesSection = memo(() => {
             ))}
           </div>
         </div>
-      </div>
+      </>
     );
   };
 
@@ -124,15 +119,17 @@ const ArticlesSection = memo(() => {
           </p>
         </div>
 
-        {/* Grid FIXO com APENAS 3 primeiros artigos */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredArticles.map((article) => (
-            <ArticleCard key={article.id} article={article} />
-          ))}
-        </div>
-
-        {/* Carousel com TODOS os artigos restantes (não limitado a 3) */}
-        {hasMoreArticles && <Carousel />}
+        {/* Se houver mais de 3 artigos, mostra carousel com TODOS eles */}
+        {hasMoreArticles ? (
+          <Carousel />
+        ) : (
+          /* Se 3 ou menos artigos, mostra em grid normal */
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {articles.map((article) => (
+              <ArticleCard key={article.id} article={article} />
+            ))}
+          </div>
+        )}
 
         {/* Botão para ver todos os artigos */}
         {hasMoreArticles && (
