@@ -1,1 +1,161 @@
-> teste 1
+---
+id: guia-para-analise-de-malwares-em-sistemas-linux
+title: Guia para análise de Malwares em sistemas GNU/Linux
+description: Aprenda para cada fase da análise alguns comandos que poderão facilitar os troubleshootings!
+author: Oséas Rosa
+readTime: 10 min
+category: Troubleshooting Linux
+icon: penguin
+gradient: from-primary/20 to-accent/20
+publishedAt: 2025-12-29
+tags: [troubleshooting, security, analise, malware, linux]
+imageUrl: /images/articles/gpadmesl.jpg
+---
+
+Para cada fase desta análise reativa, alguns comandos poderão facilitar *ou não* os troubleshootings!
+
+### Análise dos processos em execução
+
+```bash
+top
+htop
+ps -f
+ps --forest
+ps -ef --forest
+ps aux | grep [nome-do-processo]
+```
+
+### Logs de sistema e falhas de autenticação
+
+```bash
+journalctl -u sshd | grep "Failed password"
+grep -E "failed|error|denied" /var/log/auth.log
+grep -E "failed|error|denied" /var/log/syslog
+```
+> Para as distros RHEL/CentOS/Fedora usar **/var/log/secure**
+
+### Procura dos arquivos suspeitos
+
+```bash
+find / -type f -perm 777 2>/dev/null
+find / -type f -mtime -1 2>/dev/null
+find / -perm -4000 -o -perm -2000 2>/dev/null
+ls -la /tmp /var/tmp /dev/shm
+```
+
+### Análise de possível hash malicioso do arquivo
+
+```bash
+sha256sum [nome-do-arquivo]
+md5sum [nome-do-arquivo]
+```
+> Consulte o hash no site abaixo:
+
+- [www.virustotal.com](https://www.virustotal.com)
+
+### Checagem de usuários
+
+```bash
+cat /etc/passwd
+last
+last | head -20
+sudo lastb | head -10
+ausearch -m [nome-do-usuario]
+```
+
+### Análise de conexões de rede ativas
+
+```bash
+ss -tnap state established '( dport = :22 or sport = :22 )'
+ss -tunap
+ss -tulpn
+```
+
+> ss = socket statistics
+
+### Analise chaves SSH persistentes
+
+```bash
+cat ~/.ssh/authorized_keys
+find /home /root -type f -name authorized_keys -exec sh -c 'echo ">>> {}"; cat "{}"; echo' \; 2>/dev/null
+```
+
+### Análise da reputação dos IPs identificados
+
+- [www.abuseipdb.com](https://www.abuseipdb.com)
+### Análise de tráfego
+
+```bash
+sudo tcpdump -i [nome-da-interface] port 22 -n
+sudo nethogs
+```
+
+### Análise do Crontab
+```bash
+crontab -e
+sudo crontab -l
+ls -la /etc/cron*
+grep cron /var/log/syslog
+```
+
+
+### Análise de persistência de serviços
+
+```bash
+systemctl list-unit-files --state=enabled
+systemctl list-units --type=service --state=running
+ls -la /etc/init.d/
+ls -la /etc/systemd/system/
+ls -la ~/.bashrc ~/.profile /etc/profile
+```
+
+### Histórico de comandos executados
+```bash
+history | tail -50
+cat ~/.bash_history
+```
+
+### Remediações
+
+> 'Matar' os processos, apagar os arquivos e chaves SSH desconhecidas
+
+```bash
+kill -9 [id-processo]
+pkill [nome-do-processo]
+killall [nome-do-processo]
+rm -rf [/caminho/do/arquivo/malicioso]
+rm -rf [/home/nome-do-usuario]
+```
+
+### Hardening da autenticação via SSH
+
+> Edite o arquivo `/etc/ssh/sshd_config`
+
+```bash
+PermitRootLogin no
+Port [porta-alta-aleatoria]
+PermitEmptyPasswords no
+MaxAuthTries 3
+LoginGraceTime 60
+```
+
+> Após salvar
+
+```bash
+sudo systemctl restart sshd
+sudo sshd -t
+```
+
+### Atualize seu Sistema Operacional
+
+```bash
+sudo apt update && sudo apt upgrade
+sudo apt install unattended-upgrades
+sudo dpkg-reconfigure unattended-upgrades
+```
+> Para o **Arch** usar o pacman, para o Fedora usar o dnf ...
+
+### Dicas de hardening adicionais
+
+- Se houver comprometimento e os atacantes tiverem escalado privilégios de root, considere recriar o(s) seu(s) ambiente(s).
+- Gere suas senhas aleatórias e de alta complexidade [cafecomcyber.com.br/gerador-de-senhas](https://www.cafecomcyber.com.br/gerador-de-senhas).
