@@ -14,8 +14,10 @@ const ArticlesSection = memo(() => {
     return null;
   }
 
-  const featuredArticles = articles.slice(0, 3); // Pega os 3 primeiros artigos
-  const remainingArticles = articles.slice(3); // Artigos restantes para o carousel
+  // SEMPRE apenas 3 primeiros artigos fixos
+  const featuredArticles = articles.slice(0, 3);
+  // TODOS os artigos restantes vão para o carousel
+  const remainingArticles = articles.slice(3);
   const hasMoreArticles = articles.length > 3;
 
   // Componente do Carousel
@@ -24,7 +26,7 @@ const ArticlesSection = memo(() => {
       align: 'start',
       slidesToScroll: 1,
       loop: false,
-      axis: 'x' // Garante rolagem horizontal
+      axis: 'x'
     });
 
     const scrollPrev = useCallback(() => {
@@ -88,10 +90,11 @@ const ArticlesSection = memo(() => {
           </div>
         </div>
         
-        {/* Viewport do carousel - overflow hidden é crítico */}
+        {/* Viewport do carousel - overflow hidden */}
         <div className="overflow-hidden" ref={emblaRef}>
           {/* Container flex do carousel */}
           <div className="flex touch-pan-y md:touch-none">
+            {/* Exibe TODOS os artigos restantes no carousel */}
             {remainingArticles.map((article) => (
               <div 
                 key={article.id} 
@@ -121,14 +124,14 @@ const ArticlesSection = memo(() => {
           </p>
         </div>
 
-        {/* Grid dos 3 primeiros artigos */}
+        {/* Grid FIXO com APENAS 3 primeiros artigos */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredArticles.map((article) => (
             <ArticleCard key={article.id} article={article} />
           ))}
         </div>
 
-        {/* Carousel de artigos adicionais quando houver mais de 3 */}
+        {/* Carousel com TODOS os artigos restantes (não limitado a 3) */}
         {hasMoreArticles && <Carousel />}
 
         {/* Botão para ver todos os artigos */}
