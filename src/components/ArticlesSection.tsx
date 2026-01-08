@@ -5,7 +5,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { articles } from "../data/articles";
 import { ArticleCard } from "./ArticleCard";
-import { memo, useCallback, useEffect } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
 const ArticlesSection = memo(() => {
@@ -23,11 +23,7 @@ const ArticlesSection = memo(() => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ 
       align: 'start',
       slidesToScroll: 1,
-      loop: false,
-      breakpoints: {
-        '(min-width: 768px)': { slidesToScroll: 2 },
-        '(min-width: 1024px)': { slidesToScroll: 3 }
-      }
+      loop: false
     });
 
     const scrollPrev = useCallback(() => {
@@ -38,8 +34,8 @@ const ArticlesSection = memo(() => {
       if (emblaApi) emblaApi.scrollNext();
     }, [emblaApi]);
 
-    const [canScrollPrev, setCanScrollPrev] = React.useState(false);
-    const [canScrollNext, setCanScrollNext] = React.useState(false);
+    const [canScrollPrev, setCanScrollPrev] = useState(false);
+    const [canScrollNext, setCanScrollNext] = useState(false);
 
     useEffect(() => {
       if (!emblaApi) return;
