@@ -23,7 +23,8 @@ const ArticlesSection = memo(() => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ 
       align: 'start',
       slidesToScroll: 1,
-      loop: false
+      loop: false,
+      axis: 'x' // Garante rolagem horizontal
     });
 
     const scrollPrev = useCallback(() => {
@@ -86,12 +87,15 @@ const ArticlesSection = memo(() => {
             </Button>
           </div>
         </div>
+        
+        {/* Viewport do carousel - overflow hidden é crítico */}
         <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex gap-6">
+          {/* Container flex do carousel */}
+          <div className="flex touch-pan-y md:touch-none">
             {remainingArticles.map((article) => (
               <div 
                 key={article.id} 
-                className="flex-[0_0_100%] md:flex-[0_0_calc(50%-12px)] lg:flex-[0_0_calc(33.333%-16px)] min-w-0"
+                className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 pr-6"
               >
                 <ArticleCard article={article} />
               </div>
