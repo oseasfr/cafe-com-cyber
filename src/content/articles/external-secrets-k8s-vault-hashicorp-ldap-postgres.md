@@ -1,12 +1,15 @@
 ---
-layout: post
-collection: kubernetes
-permalink: /kubernetes/external-secrets
-title:  "External Secrets"
+id: external-secrets-k8s-vault-hashicorp-ldap-postgres.md
+title: External Secrets K8S
+description: Aprenda a implementar external secrets em ambientes Kubernetes!
 author: Paulo Rogério
-date:   2026-01-07 22:34:00 -0300
-categories: [kubernetes]
-published: true
+readTime: 20 min
+category: k8s
+icon: penguin
+gradient: from-primary/20 to-accent/20
+publishedAt: 2026-01-09
+tags: [k8s, secrets, ldap, postgres, vault, hashicorp]
+imageUrl: /images/articles/gpadmesl.jpg
 ---
 
 ## 🚀 External Secrets 
