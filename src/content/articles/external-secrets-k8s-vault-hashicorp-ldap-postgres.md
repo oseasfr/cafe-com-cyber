@@ -1,6 +1,6 @@
 ---
 id: external-secrets-k8s-vault-hashicorp-ldap-postgres.md
-title: External Secrets Kubernetes
+title: External Secrets K8S
 description: Aprenda a implementar external secrets em ambientes Kubernetes!
 author: "Paulo Rogério"
 authorFirstName: "Paulo"
@@ -10,7 +10,7 @@ authorBio: "Especialista em Kubernetes e segurança de containers. Expertise em 
 authorSocialLink: "https://github.com/paulo-rogerio"
 authorSocialType: "github"
 readTime: "20 min"
-category: "Kubernetes"
+category: "k8s"
 icon: "penguin"
 gradient: "from-primary/20 to-accent/20"
 publishedAt: "2026-01-09T00:00:00"
@@ -21,13 +21,13 @@ imageUrl: "/images/articles/gpadmesl.jpg"
 ## 🚀 External Secrets
 
 - [1) Secrets Vault](#1-secrets-vault)
-- [2) Repositórios](#2-repositórios)
+- [2) Repositórios](#2-repositorios)
 - [3) Deploy](#3-deploy)
 - [4) Youtube Demo](#4-youtube-demo)
 
 #### 1) Secrets Vault
 
-Esse material foi inspirado no material do Jeferson <a href="https://www.youtube.com/watch?v=NlQCTuWXuGk" target="_blank">LINUXtips</a>, porém aqui faço integracao do vault com **LDAP e PostgreSQL**.
+Esse material foi inspirado no material do Jeferson [LINUXtips](https://www.youtube.com/watch?v=NlQCTuWXuGk), porém aqui faço integracao do vault com **LDAP e PostgreSQL**.
 
 Para que essa integração possa funcionar é necessário que o **Kind** esteja rodando na mesma rede que os containers **Docker** dos serviços externos (***PostgreSQL / LDAP***).
 
@@ -128,7 +128,7 @@ Será necessário ajustar seu **/etc/hosts** para simular um DNS local
 
 Segue o link do repositório dos estudos.
 
-<a href="https://gitlab.com/meetups-prgs/external-secrets/vault" target="_blank">External Secrets</a>
+[External Secrets](https://gitlab.com/meetups-prgs/external-secrets/vault)
 
 #### 3) Deploy
 
@@ -598,9 +598,9 @@ POSTGRESQL_DB_PASS=postgres-prod
 POSTGRESQL_DB_USER=postgres
 ```
 
-###### Altere na UI do Vault as credenciais
+###### ALTERE NO UI DO VAULT AS CREDENCIAS
 
-![alt text](/images/articles/external-secrets-k8s-1.jpg)
+![Vault Credentials](/images/articles/external-secrets-k8s-1.jpg)
 
 ```bash
 sh kill.sh && sh teste.sh
