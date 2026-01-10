@@ -1,15 +1,16 @@
 import { MessageCircle, Linkedin, Instagram, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 
 interface ShareButtonsProps {
   title: string;
   url: string;
   description?: string;
+  themeToggle?: ReactNode; // Botão de tema opcional
 }
 
-const ShareButtons = ({ title, url, description }: ShareButtonsProps) => {
+const ShareButtons = ({ title, url, description, themeToggle }: ShareButtonsProps) => {
   const fullUrl = typeof window !== 'undefined' ? window.location.origin + url : url;
   const shareText = description ? `${title} - ${description}` : title;
   const [linkCopied, setLinkCopied] = useState(false);
@@ -75,44 +76,54 @@ const ShareButtons = ({ title, url, description }: ShareButtonsProps) => {
   };
 
   return (
-    <div className="flex items-center gap-3 py-4 border-t border-b border-border">
-      <span className="text-sm text-muted-foreground font-medium">Compartilhar:</span>
-      <div className="flex items-center gap-2">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => handleShare('whatsapp')}
-          className="hover:bg-green-500/10 hover:border-green-500 hover:text-green-500 transition-colors"
-          aria-label="Compartilhar no WhatsApp"
-        >
-          <MessageCircle className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => handleShare('linkedin')}
-          className="hover:bg-blue-500/10 hover:border-blue-500 hover:text-blue-500 transition-colors"
-          aria-label="Compartilhar no LinkedIn"
-        >
-          <Linkedin className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => handleShare('instagram')}
-          className="hover:bg-pink-500/10 hover:border-pink-500 hover:text-pink-500 transition-colors"
-          aria-label="Compartilhar no Instagram"
-          title="Link copiado! Cole na mensagem direta do Instagram"
-        >
-          {linkCopied ? (
-            <Check className="h-4 w-4 text-green-500" />
-          ) : (
-            <Instagram className="h-4 w-4" />
-          )}
-        </Button>
+    <div className="flex items-center justify-between gap-3 py-4 border-t border-b border-border">
+      <div className="flex items-center gap-3">
+        <span className="text-sm text-muted-foreground font-medium">Compartilhar:</span>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleShare('whatsapp')}
+            className="hover:bg-green-500/10 hover:border-green-500 hover:text-green-500 transition-colors"
+            aria-label="Compartilhar no WhatsApp"
+          >
+            <MessageCircle className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleShare('linkedin')}
+            className="hover:bg-blue-500/10 hover:border-blue-500 hover:text-blue-500 transition-colors"
+            aria-label="Compartilhar no LinkedIn"
+          >
+            <Linkedin className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleShare('instagram')}
+            className="hover:bg-pink-500/10 hover:border-pink-500 hover:text-pink-500 transition-colors"
+            aria-label="Compartilhar no Instagram"
+            title="Link copiado! Cole na mensagem direta do Instagram"
+          >
+            {linkCopied ? (
+              <Check className="h-4 w-4 text-green-500" />
+            ) : (
+              <Instagram className="h-4 w-4" />
+            )}
+          </Button>
+        </div>
       </div>
+      
+      {/* Botão de Tema - Alinhado com os botões de compartilhamento */}
+      {themeToggle && (
+        <div className="flex-shrink-0">
+          {themeToggle}
+        </div>
+      )}
     </div>
   );
 };
 
 export default ShareButtons;
+
