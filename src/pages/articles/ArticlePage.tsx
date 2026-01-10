@@ -8,7 +8,7 @@ import { AuthorHeader } from '../../components/AuthorHeader';
 import { AuthorBioFooter } from '../../components/AuthorBioFooter';
 import { Button } from '../../components/ui/button';
 import { ArrowLeft, Clock, User, Copy, Check, Sun, Moon } from 'lucide-react';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import NotFound from '../NotFound';
 
 // Hook customizado para gerenciar tema apenas do artigo
@@ -630,11 +630,30 @@ function ArticleContent({ article, theme }: { article: typeof articles[0]; theme
       if (href && href.startsWith('#')) {
         const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
           e.preventDefault();
-          const targetId = href.substring(1);
+          // Decodifica o href caso tenha URL encoding (ex: %C3%B3 para ó)
+          let targetId = decodeURIComponent(href.substring(1));
           
-          // Tenta encontrar o elemento várias vezes (pode não estar renderizado ainda)
+          // Se ainda não encontrou, tenta normalizar o ID (remove acentos)
           const findAndScroll = (attempts = 0) => {
-            const element = document.getElementById(targetId);
+            let element = document.getElementById(targetId);
+            
+            // Se não encontrou, tenta com ID normalizado (sem acentos)
+            if (!element) {
+              const normalizedId = targetId
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+                .replace(/[^\w\s-]/g, '') // Remove caracteres especiais
+                .replace(/\s+/g, '-') // Espaços para hífen
+                .replace(/-+/g, '-') // Remove hífens duplicados
+                .replace(/^-|-$/g, ''); // Remove hífens nas extremidades
+              
+              element = document.getElementById(normalizedId);
+              if (element) {
+                targetId = normalizedId;
+              }
+            }
+            
             if (element) {
               const headerHeight = 80; // Altura aproximada do header
               const elementPosition = element.getBoundingClientRect().top;
