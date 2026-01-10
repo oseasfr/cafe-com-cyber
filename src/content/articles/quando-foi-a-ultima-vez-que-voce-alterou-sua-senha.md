@@ -20,7 +20,9 @@ featured: false
 priority: 0
 ---
 
-Provavelmente, apenas a sua senha corporativa você deve ter alterado devido à política interna da sua empresa (caso tenha 😶).<br><br> Mas, você sabia que no dia 1º de Fevereiro é o Dia mundial de alteração de senhas? <br><br>Data essa que foi criada para chamar a atenção das pessoas sobre a importância desta boa prática de segurança, tanto pra contas de **e-mail**, **redes sociais** e demais serviços web.
+Provavelmente, apenas a sua senha corporativa você deve ter alterado devido à política interna da sua empresa (caso tenha 😶).
+
+Mas, você sabia que no dia 1º de Fevereiro é o Dia mundial de alteração de senhas? <br><br>Data essa que foi criada para chamar a atenção das pessoas sobre a importância desta boa prática de segurança, tanto pra contas de **e-mail**, **redes sociais** e demais serviços web.
 
 Alterar sua senha é um **ótimo primeiro passo**, mas não é suficiente. Os cibercriminosos têm inúmeras maneiras de quebrar até mesmo as senhas complexas. Mas como elevar a segurança dessas contas a um outro nível?
 
