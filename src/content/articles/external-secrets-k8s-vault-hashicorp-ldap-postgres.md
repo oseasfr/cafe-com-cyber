@@ -620,6 +620,4 @@ POSTGRESQL_DB_USER=postgres
 
 Você pode acompanhar todo esse processo de implementação no link abaixo.
 
-![Vídeos](https://img.shields.io/badge/YouTube-FF0000?style=flat&logo=youtube&logoColor=white)
-
 [![Assistir Demo no YouTube](/images/articles/external-secrets-k8s-2.jpg)](https://youtu.be/xSY3V_JFGaw)
