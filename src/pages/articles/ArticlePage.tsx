@@ -166,8 +166,8 @@ export default function ArticlePage() {
       <Header />
       
       <main className="container mx-auto max-w-4xl px-4 py-8">
-        {/* Botão Voltar e Seletor de Tema */}
-        <div className="mb-6 flex items-center justify-between">
+        {/* Botão Voltar */}
+        <div className="mb-6">
           <Button
             asChild
             variant="ghost"
@@ -179,13 +179,17 @@ export default function ArticlePage() {
               Voltar para Artigos
             </Link>
           </Button>
-          <ArticleThemeToggle theme={articleTheme.theme} onToggle={articleTheme.toggleTheme} />
         </div>
 
-        {/* Título do Artigo */}
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground leading-tight mb-4">
-          {article.title}
-        </h1>
+        {/* Título do Artigo e Botão de Tema - Alinhados */}
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground leading-tight flex-1">
+            {article.title}
+          </h1>
+          <div className="flex-shrink-0 pt-2">
+            <ArticleThemeToggle theme={articleTheme.theme} onToggle={articleTheme.toggleTheme} />
+          </div>
+        </div>
 
         {/* Tags - Logo abaixo do título */}
         {article.tags && article.tags.length > 0 && (
@@ -207,6 +211,8 @@ export default function ArticlePage() {
           authorFirstName={article.authorFirstName}
           authorLastName={article.authorLastName}
           authorAvatar={article.authorAvatar}
+          authorSocialLink={article.authorSocialLink}
+          authorSocialType={article.authorSocialType}
           publishedAt={article.publishedAt}
           readTime={article.readTime}
         />
