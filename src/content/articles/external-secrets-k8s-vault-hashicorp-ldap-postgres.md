@@ -15,7 +15,7 @@ icon: "penguin"
 gradient: "from-primary/20 to-accent/20"
 publishedAt: "2026-01-09T00:00:00"
 tags: [k8s, secrets, ldap, postgres, vault, hashicorp]
-imageUrl: "/images/articles/gpadmesl.jpg"
+imageUrl: "/images/articles/external-secrets-k8s.jpg"
 ---
 
 ## 🚀 External Secrets
