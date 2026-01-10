@@ -600,7 +600,7 @@ POSTGRESQL_DB_USER=postgres
 
 ###### ALTERE NO UI DO VAULT AS CREDENCIAS
 
-![alt text](/images/articles/external-secrets-k8s.jpg)
+![alt text](/images/articles/external-secrets-k8s-1.jpg)
 
 ```bash
 sh kill.sh && sh teste.sh
