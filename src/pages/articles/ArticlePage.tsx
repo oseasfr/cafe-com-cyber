@@ -3,6 +3,8 @@ import ReactMarkdown from 'react-markdown';
 import { articles } from '../../data/articles';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import ShareButtons from '../../components/ShareButtons';
+import { ThemeToggle } from '../../components/ThemeToggle';
 import { AuthorHeader } from '../../components/AuthorHeader';
 import { AuthorBioFooter } from '../../components/AuthorBioFooter';
 
@@ -22,6 +24,8 @@ export default function ArticlePage() {
     );
   }
 
+  const articleUrl = `/articles/${article.id}`;
+
   return (
     <div>
       <Header />
@@ -40,6 +44,16 @@ export default function ArticlePage() {
           publishedAt={article.publishedAt}
           readTime={article.readTime}
         />
+
+        {/* Botão de Tema e Compartilhamento */}
+        <div className="flex items-center justify-between mb-8">
+          <ThemeToggle />
+          <ShareButtons 
+            title={article.title} 
+            url={articleUrl}
+            description={article.description}
+          />
+        </div>
         
         {/* Imagem de Capa do Artigo */}
         {article.imageUrl && (
@@ -47,7 +61,10 @@ export default function ArticlePage() {
         )}
 
         {/* Conteúdo do Artigo */}
-        <div className="prose prose-lg max-w-none text-gray-300">
+        <div 
+          data-article-content
+          className="prose prose-lg prose-invert max-w-none text-gray-300 dark:prose-invert"
+        >
           <ReactMarkdown>
             {article.content}
           </ReactMarkdown>
