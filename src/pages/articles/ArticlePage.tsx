@@ -181,15 +181,10 @@ export default function ArticlePage() {
           </Button>
         </div>
 
-        {/* Título do Artigo e Botão de Tema - Alinhados */}
-        <div className="flex items-start justify-between gap-4 mb-4">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground leading-tight flex-1">
-            {article.title}
-          </h1>
-          <div className="flex-shrink-0 pt-2">
-            <ArticleThemeToggle theme={articleTheme.theme} onToggle={articleTheme.toggleTheme} />
-          </div>
-        </div>
+        {/* Título do Artigo */}
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground leading-tight mb-4">
+          {article.title}
+        </h1>
 
         {/* Tags - Logo abaixo do título */}
         {article.tags && article.tags.length > 0 && (
@@ -205,7 +200,7 @@ export default function ArticlePage() {
           </div>
         )}
 
-        {/* NOVO: Cabeçalho do Autor com Avatar, Nome, Data e ReadTime */}
+        {/* NOVO: Cabeçalho do Autor com Avatar, Nome, Data e ReadTime - Botão de Tema alinhado */}
         <AuthorHeader
           author={article.author}
           authorFirstName={article.authorFirstName}
@@ -215,6 +210,7 @@ export default function ArticlePage() {
           authorSocialType={article.authorSocialType}
           publishedAt={article.publishedAt}
           readTime={article.readTime}
+          themeToggle={<ArticleThemeToggle theme={articleTheme.theme} onToggle={articleTheme.toggleTheme} />}
         />
 
         {/* Botões de Compartilhamento - Topo */}
