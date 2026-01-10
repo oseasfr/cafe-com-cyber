@@ -8,7 +8,7 @@ import { AuthorHeader } from '../../components/AuthorHeader';
 import { AuthorBioFooter } from '../../components/AuthorBioFooter';
 import { Button } from '../../components/ui/button';
 import { ArrowLeft, Clock, User, Copy, Check, Sun, Moon } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import NotFound from '../NotFound';
 
 // Hook customizado para gerenciar tema apenas do artigo
@@ -340,10 +340,42 @@ function ArticleContent({ article, theme }: { article: typeof articles[0]; theme
             },
             strong: ({node, ...props}) => <strong className={`font-bold ${isLight ? 'text-gray-900' : 'text-foreground'}`} {...props} />,
             em: ({node, ...props}) => <em className={`italic ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
-            a: ({node, ...props}) => <a className="text-primary hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+            a: ({node, children, ...props}: any) => {
+              // Verifica se o link contém uma imagem
+              // Na sintaxe markdown [![alt](img)](link), o ReactMarkdown passa a imagem como child
+              const childrenArray = React.Children.toArray(children);
+              const hasImage = childrenArray.some((child: any) => {
+                // Verifica se é um elemento img ou tem props src
+                return child?.type === 'img' || 
+                       (child?.props && child.props.src) ||
+                       (typeof child === 'object' && child !== null && 'src' in child);
+              });
+              
+              if (hasImage) {
+                return (
+                  <a 
+                    className="block cursor-pointer hover:opacity-90 transition-opacity my-4 inline-block" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    {...props}
+                  >
+                    {children}
+                  </a>
+                );
+              }
+              return <a className="text-primary hover:underline" target="_blank" rel="noopener noreferrer" {...props}>{children}</a>;
+            },
             blockquote: ({node, ...props}) => <blockquote className={`border-l-4 pl-4 italic my-4 ${isLight ? 'border-gray-300 text-gray-700' : 'border-primary text-muted-foreground'}`} {...props} />,
             hr: ({node, ...props}) => <hr className={`my-8 ${isLight ? 'border-gray-200' : 'border-border'}`} {...props} />,
-            img: ({node, ...props}) => <img className="w-full h-auto rounded-lg my-4" {...props} />,
+            img: ({node, ...props}: any) => {
+              // Verifica se a imagem está dentro de um link
+              const isInsideLink = node?.parent?.tagName === 'a';
+              
+              if (isInsideLink) {
+                return <img className="w-full max-w-full h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity" {...props} />;
+              }
+              return <img className="w-full h-auto rounded-lg my-4" {...props} />;
+            },
             table: ({node, ...props}) => <div className={`overflow-x-auto my-4 ${isLight ? 'border border-gray-200' : ''}`}><table className={`min-w-full ${isLight ? 'border border-gray-200' : 'border border-border'}`} {...props} /></div>,
             th: ({node, ...props}) => <th className={`border px-4 py-2 font-semibold ${isLight ? 'border-gray-200 bg-gray-50 text-gray-900' : 'border-border bg-muted text-foreground'}`} {...props} />,
             td: ({node, ...props}) => <td className={`border px-4 py-2 ${isLight ? 'border-gray-200 text-gray-700' : 'border-border text-muted-foreground'}`} {...props} />,
