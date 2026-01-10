@@ -3,7 +3,13 @@ export interface ArticleMetadata {
   id: string;
   title: string;
   description: string;
-  author: string;
+  author: string; // Nome completo do autor (para fallback)
+  authorFirstName?: string; // Primeiro nome do autor
+  authorLastName?: string; // Sobrenome do autor
+  authorAvatar?: string; // URL da foto do autor
+  authorBio?: string; // Biografia do autor
+  authorSocialLink?: string; // Link LinkedIn ou GitHub
+  authorSocialType?: "linkedin" | "github"; // Tipo de rede social
   readTime: string;
   category: string;
   icon: string;
@@ -12,6 +18,8 @@ export interface ArticleMetadata {
   publishedAt?: string;
   updatedAt?: string;
   tags?: string[];
+  featured?: boolean; // Artigo em destaque
+  priority?: number; // Prioridade de exibição (quanto maior, mais importante)
 }
 
 // Interface completa do artigo
@@ -57,6 +65,12 @@ export function parseFrontmatter(markdown: string): { metadata: Partial<ArticleM
         .filter(Boolean);
     } else if (key === 'readTime') {
       metadata.readTime = value;
+    } else if (key === 'featured') {
+      // Parse boolean (true/false)
+      metadata.featured = value.toLowerCase() === 'true';
+    } else if (key === 'priority') {
+      // Parse number
+      metadata.priority = parseInt(value, 10) || 0;
     } else {
       // Atribui o valor ao metadata
       (metadata as any)[key] = value;
@@ -111,10 +125,23 @@ export function loadArticles(markdownContents: string[]): Article[] {
     })
     .filter((article): article is Article => article !== null)
     .sort((a, b) => {
-      // Ordena por data de publicação (mais recente primeiro)
+      // 1. Primeiro: Artigos featured primeiro
+      const featuredA = a.featured === true ? 1 : 0;
+      const featuredB = b.featured === true ? 1 : 0;
+      if (featuredB !== featuredA) {
+        return featuredB - featuredA;
+      }
+
+      // 2. Segundo: Por prioridade (maior primeiro)
+      const priorityA = a.priority ?? 0;
+      const priorityB = b.priority ?? 0;
+      if (priorityB !== priorityA) {
+        return priorityB - priorityA;
+      }
+
+      // 3. Terceiro: Por data de publicação (mais recente primeiro)
       const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
       const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
       return dateB - dateA;
     });
 }
-
