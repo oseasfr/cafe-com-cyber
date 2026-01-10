@@ -8,7 +8,7 @@ import { AuthorHeader } from '../../components/AuthorHeader';
 import { AuthorBioFooter } from '../../components/AuthorBioFooter';
 import { Button } from '../../components/ui/button';
 import { ArrowLeft, Clock, User, Copy, Check, Sun, Moon } from 'lucide-react';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import NotFound from '../NotFound';
 
 // Hook customizado para gerenciar tema apenas do artigo
@@ -296,9 +296,391 @@ function ArticleThemeToggle({ theme, onToggle }: { theme: 'light' | 'dark'; onTo
   );
 }
 
+// Função auxiliar para extrair texto de children do ReactMarkdown
+function extractTextFromChildren(children: any): string {
+  if (typeof children === 'string') {
+    return children;
+  }
+  if (typeof children === 'number') {
+    return String(children);
+  }
+  if (Array.isArray(children)) {
+    return children.map(child => extractTextFromChildren(child)).filter(Boolean).join('');
+  }
+  if (React.isValidElement(children)) {
+    const childProps = (children as any).props;
+    if (childProps?.children) {
+      return extractTextFromChildren(childProps.children);
+    }
+    return '';
+  }
+  if (children && typeof children === 'object') {
+    if (children.props?.children) {
+      return extractTextFromChildren(children.props.children);
+    }
+    if (children.children) {
+      return extractTextFromChildren(children.children);
+    }
+    if (children.value) {
+      return String(children.value);
+    }
+  }
+  return String(children || '');
+}
+
+// Função para gerar ID de âncora a partir do texto do heading
+function generateHeadingId(text: string | any): string {
+  // Se não for string, tenta extrair o texto
+  const textString = typeof text === 'string' ? text : extractTextFromChildren(text);
+  
+  if (!textString || textString.trim() === '') return '';
+  
+  // Remove emojis e caracteres especiais, mantém números e letras
+  const id = textString
+    .toString()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+    .replace(/[^\w\s-]/g, '') // Remove caracteres especiais (incluindo parênteses, emojis, etc) exceto hífens, números e letras
+    .replace(/\s+/g, '-') // Substitui espaços por hífens
+    .replace(/-+/g, '-') // Remove hífens duplicados
+    .replace(/^-|-$/g, ''); // Remove hífens no início/fim
+  
+  return id;
+}
+
 // Componente que renderiza apenas o conteúdo do artigo com tema isolado
 function ArticleContent({ article, theme }: { article: typeof articles[0]; theme: 'light' | 'dark' }) {
   const isLight = theme === 'light';
+
+  // Garante que os IDs sejam aplicados após a renderização
+  useEffect(() => {
+    // Aguarda um tick para garantir que o DOM foi atualizado
+    const timeoutId = setTimeout(() => {
+      // Se algum header não tiver ID, tenta adicionar
+      const articleElement = document.querySelector('article[data-article-content], article');
+      if (articleElement) {
+        const headers = articleElement.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        headers.forEach((header) => {
+          if (!header.id) {
+            const text = header.textContent || '';
+            const id = generateHeadingId(text);
+            if (id) {
+              header.id = id;
+            }
+          }
+        });
+      }
+    }, 0);
+
+    return () => clearTimeout(timeoutId);
+  }, [article.content]);
+
+  // Processa o conteúdo para substituir padrões específicos de imagem do YouTube por componentes React
+  const processContentWithYouTubeImages = (content: string) => {
+    const parts: (string | React.ReactElement)[] = [];
+    let lastIndex = 0;
+    
+    // Regex para encontrar [![alt](img)](link)
+    const regex = /\[!\[([^\]]*)\]\(([^)]+)\)\]\((https?:\/\/[^\)]+)\)/g;
+    let match;
+    
+    while ((match = regex.exec(content)) !== null) {
+      const [fullMatch, alt, imgPath, link] = match;
+      const startIndex = match.index;
+      
+      // Adiciona o texto antes do match
+      if (startIndex > lastIndex) {
+        parts.push(content.substring(lastIndex, startIndex));
+      }
+      
+      // Se for um link do YouTube, cria um componente React
+      if (link.includes('youtu.be') || link.includes('youtube.com')) {
+        parts.push(
+          <a
+            key={`youtube-${startIndex}`}
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block cursor-pointer hover:opacity-90 transition-opacity my-4"
+          >
+            <img
+              src={imgPath}
+              alt={alt}
+              className="w-full h-auto rounded-lg cursor-pointer"
+            />
+          </a>
+        );
+      } else {
+        // Mantém o markdown original se não for YouTube
+        parts.push(fullMatch);
+      }
+      
+      lastIndex = regex.lastIndex;
+    }
+    
+    // Adiciona o restante do conteúdo
+    if (lastIndex < content.length) {
+      parts.push(content.substring(lastIndex));
+    }
+    
+    return parts.length > 0 ? parts : [content];
+  };
+
+  const processedParts = processContentWithYouTubeImages(article.content);
+  
+  // Verifica se há componentes React (YouTube images) no conteúdo processado
+  const hasReactComponents = processedParts.some(part => React.isValidElement(part));
+
+  // Componentes do ReactMarkdown
+  const markdownComponents = {
+    h1: ({node, children, ...props}: any) => {
+      let text = '';
+      if (node?.children && Array.isArray(node.children)) {
+        text = node.children
+          .map((child: any) => {
+            if (typeof child === 'string') return child;
+            if (typeof child === 'number') return String(child);
+            if (child?.type === 'text' && child.value) return child.value;
+            return child?.value || String(child || '');
+          })
+          .filter(Boolean)
+          .join('');
+      }
+      if (!text || text.trim() === '') text = extractTextFromChildren(children);
+      const id = generateHeadingId(text);
+      return <h1 id={id || undefined} className={`text-3xl font-bold mt-8 mb-4 scroll-mt-20 ${isLight ? 'text-gray-900' : 'text-foreground'}`} {...props}>{children}</h1>;
+    },
+    h2: ({node, children, ...props}: any) => {
+      let text = '';
+      if (node?.children && Array.isArray(node.children)) {
+        text = node.children
+          .map((child: any) => {
+            if (typeof child === 'string') return child;
+            if (typeof child === 'number') return String(child);
+            if (child?.type === 'text' && child.value) return child.value;
+            return child?.value || String(child || '');
+          })
+          .filter(Boolean)
+          .join('');
+      }
+      if (!text || text.trim() === '') text = extractTextFromChildren(children);
+      const id = generateHeadingId(text);
+      return <h2 id={id || undefined} className={`text-2xl font-bold mt-6 mb-3 scroll-mt-20 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props}>{children}</h2>;
+    },
+    h3: ({node, children, ...props}: any) => {
+      let text = '';
+      if (node?.children && Array.isArray(node.children)) {
+        text = node.children
+          .map((child: any) => {
+            if (typeof child === 'string') return child;
+            if (typeof child === 'number') return String(child);
+            if (child?.type === 'text' && child.value) return child.value;
+            return child?.value || String(child || '');
+          })
+          .filter(Boolean)
+          .join('');
+      }
+      if (!text || text.trim() === '') text = extractTextFromChildren(children);
+      const id = generateHeadingId(text);
+      return <h3 id={id || undefined} className={`text-xl font-semibold mt-4 mb-2 scroll-mt-20 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props}>{children}</h3>;
+    },
+    h4: ({node, children, ...props}: any) => {
+      // Extrai texto de múltiplas fontes para garantir compatibilidade
+      let text = '';
+      
+      // Tenta do node primeiro (estrutura do ReactMarkdown/remark)
+      if (node?.children && Array.isArray(node.children)) {
+        text = node.children
+          .map((child: any) => {
+            if (typeof child === 'string') return child;
+            if (typeof child === 'number') return String(child);
+            if (child?.type === 'text' && child.value) return child.value;
+            if (child?.value) return child.value;
+            if (child?.children && Array.isArray(child.children)) {
+              return child.children.map((c: any) => {
+                if (typeof c === 'string') return c;
+                if (typeof c === 'number') return String(c);
+                if (c?.type === 'text' && c.value) return c.value;
+                return c?.value || String(c || '');
+              }).filter(Boolean).join('');
+            }
+            return String(child || '');
+          })
+          .filter(Boolean)
+          .join('');
+      }
+      
+      // Fallback para children (React elements)
+      if (!text || text.trim() === '') {
+        text = extractTextFromChildren(children);
+      }
+      
+      // Última tentativa: usar o texto renderizado do DOM se disponível
+      // (isso pode não funcionar em SSR, mas ajuda no client-side)
+      if ((!text || text.trim() === '') && typeof document !== 'undefined') {
+        // Não podemos acessar o DOM aqui, então vamos confiar no que temos
+      }
+      
+      const id = generateHeadingId(text);
+      
+      return (
+        <h4 
+          id={id || undefined} 
+          className={`text-lg font-semibold mt-4 mb-2 scroll-mt-20 ${isLight ? 'text-gray-800' : 'text-foreground'}`} 
+          {...props}
+        >
+          {children}
+        </h4>
+      );
+    },
+    h5: ({node, children, ...props}: any) => {
+      let text = '';
+      if (node?.children && Array.isArray(node.children)) {
+        text = node.children
+          .map((child: any) => {
+            if (typeof child === 'string') return child;
+            if (typeof child === 'number') return String(child);
+            if (child?.type === 'text' && child.value) return child.value;
+            return child?.value || String(child || '');
+          })
+          .filter(Boolean)
+          .join('');
+      }
+      if (!text || text.trim() === '') text = extractTextFromChildren(children);
+      const id = generateHeadingId(text);
+      return <h5 id={id || undefined} className={`text-base font-semibold mt-4 mb-2 scroll-mt-20 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props}>{children}</h5>;
+    },
+    h6: ({node, children, ...props}: any) => {
+      let text = '';
+      if (node?.children && Array.isArray(node.children)) {
+        text = node.children
+          .map((child: any) => {
+            if (typeof child === 'string') return child;
+            if (typeof child === 'number') return String(child);
+            if (child?.type === 'text' && child.value) return child.value;
+            return child?.value || String(child || '');
+          })
+          .filter(Boolean)
+          .join('');
+      }
+      if (!text || text.trim() === '') text = extractTextFromChildren(children);
+      const id = generateHeadingId(text);
+      return <h6 id={id || undefined} className={`text-sm font-semibold mt-4 mb-2 scroll-mt-20 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props}>{children}</h6>;
+    },
+    p: ({node, ...props}: any) => <p className={`leading-relaxed mb-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
+    ul: ({node, ...props}: any) => <ul className={`list-disc list-inside mb-4 space-y-2 ml-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
+    ol: ({node, ...props}: any) => <ol className={`list-decimal list-inside mb-4 space-y-2 ml-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
+    li: ({node, ...props}: any) => <li className="ml-2" {...props} />,
+    code: ({node, className, children, ...props}: any) => {
+      const isInline = !className;
+      if (isInline) {
+        return (
+          <code className={`px-2 py-1 rounded font-mono text-sm ${isLight ? 'bg-gray-100 text-blue-600' : 'bg-cyber-darker text-primary'}`} {...props}>
+            {children}
+          </code>
+        );
+      }
+      return (
+        <code className={`${className} block p-4 rounded-lg font-mono text-sm overflow-x-auto mb-4 ${isLight ? 'bg-gray-100 text-gray-800' : 'bg-cyber-darker text-primary'}`} {...props}>
+          {children}
+        </code>
+      );
+    },
+    pre: ({node, children, ...props}: any) => {
+      return <CodeBlock theme={theme} {...props}>{children}</CodeBlock>;
+    },
+    strong: ({node, ...props}: any) => <strong className={`font-bold ${isLight ? 'text-gray-900' : 'text-foreground'}`} {...props} />,
+    em: ({node, ...props}: any) => <em className={`italic ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
+    a: ({node, children, href, ...props}: any) => {
+      // Verifica se o link contém uma imagem
+      let hasImage = false;
+      
+      if (React.isValidElement(children)) {
+        hasImage = (children as any)?.type === 'img' || (children as any)?.props?.src;
+      } else if (Array.isArray(children)) {
+        hasImage = children.some((child: any) => 
+          React.isValidElement(child) && 
+          ((child as any).type === 'img' || (child as any).props?.src)
+        );
+      }
+      
+      if (!hasImage && node?.children) {
+        hasImage = node.children.some((child: any) => 
+          child?.type === 'element' && child.tagName === 'img'
+        );
+      }
+      
+      // Se for um link de âncora (começa com #), faz scroll suave
+      if (hasImage) {
+        return (
+          <a 
+            className="block cursor-pointer hover:opacity-90 transition-opacity my-4" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            href={href}
+            {...props}
+          >
+            {children}
+          </a>
+        );
+      }
+      
+      // Link de âncora interna - scroll suave
+      if (href && href.startsWith('#')) {
+        const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+          e.preventDefault();
+          const targetId = href.substring(1);
+          
+          // Tenta encontrar o elemento várias vezes (pode não estar renderizado ainda)
+          const findAndScroll = (attempts = 0) => {
+            const element = document.getElementById(targetId);
+            if (element) {
+              const headerHeight = 80; // Altura aproximada do header
+              const elementPosition = element.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+              
+              window.scrollTo({
+                top: Math.max(0, offsetPosition),
+                behavior: 'smooth'
+              });
+            } else if (attempts < 5) {
+              // Se não encontrou, tenta novamente após um pequeno delay
+              setTimeout(() => findAndScroll(attempts + 1), 100);
+            }
+          };
+          
+          findAndScroll();
+        };
+        
+        return (
+          <a 
+            className="text-primary hover:underline cursor-pointer" 
+            href={href}
+            onClick={handleAnchorClick}
+            {...props}
+          >
+            {children}
+          </a>
+        );
+      }
+      
+      // Link externo
+      return <a className="text-primary hover:underline" target="_blank" rel="noopener noreferrer" href={href} {...props}>{children}</a>;
+    },
+    blockquote: ({node, ...props}: any) => <blockquote className={`border-l-4 pl-4 italic my-4 ${isLight ? 'border-gray-300 text-gray-700' : 'border-primary text-muted-foreground'}`} {...props} />,
+    hr: ({node, ...props}: any) => <hr className={`my-8 ${isLight ? 'border-gray-200' : 'border-border'}`} {...props} />,
+    img: ({node, ...props}: any) => {
+      const isInsideLink = node?.parent?.tagName === 'a';
+      if (isInsideLink) {
+        return <img className="w-full max-w-full h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity" {...props} />;
+      }
+      return <img className="w-full h-auto rounded-lg my-4" {...props} />;
+    },
+    table: ({node, ...props}: any) => <div className={`overflow-x-auto my-4 ${isLight ? 'border border-gray-200' : ''}`}><table className={`min-w-full ${isLight ? 'border border-gray-200' : 'border border-border'}`} {...props} /></div>,
+    th: ({node, ...props}: any) => <th className={`border px-4 py-2 font-semibold ${isLight ? 'border-gray-200 bg-gray-50 text-gray-900' : 'border-border bg-muted text-foreground'}`} {...props} />,
+    td: ({node, ...props}: any) => <td className={`border px-4 py-2 ${isLight ? 'border-gray-200 text-gray-700' : 'border-border text-muted-foreground'}`} {...props} />,
+  };
 
   return (
     <div 
@@ -310,81 +692,25 @@ function ArticleContent({ article, theme }: { article: typeof articles[0]; theme
       }`}
     >
       <article className={`prose max-w-none ${isLight ? 'prose-slate' : 'prose-invert'}`}>
-        <ReactMarkdown
-          components={{
-            h1: ({node, ...props}) => <h1 className={`text-3xl font-bold mt-8 mb-4 ${isLight ? 'text-gray-900' : 'text-foreground'}`} {...props} />,
-            h2: ({node, ...props}) => <h2 className={`text-2xl font-bold mt-6 mb-3 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
-            h3: ({node, ...props}) => <h3 className={`text-xl font-semibold mt-4 mb-2 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
-            h4: ({node, ...props}) => <h4 className={`text-lg font-semibold mt-4 mb-2 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
-            p: ({node, ...props}) => <p className={`leading-relaxed mb-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
-            ul: ({node, ...props}) => <ul className={`list-disc list-inside mb-4 space-y-2 ml-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
-            ol: ({node, ...props}) => <ol className={`list-decimal list-inside mb-4 space-y-2 ml-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
-            li: ({node, ...props}) => <li className="ml-2" {...props} />,
-            code: ({node, className, children, ...props}: any) => {
-              const isInline = !className;
-              if (isInline) {
-                return (
-                  <code className={`px-2 py-1 rounded font-mono text-sm ${isLight ? 'bg-gray-100 text-blue-600' : 'bg-cyber-darker text-primary'}`} {...props}>
-                    {children}
-                  </code>
-                );
+        {hasReactComponents ? (
+          <>
+            {processedParts.map((part, index) => {
+              if (React.isValidElement(part)) {
+                return <React.Fragment key={`youtube-img-${index}`}>{part}</React.Fragment>;
               }
               return (
-                <code className={`${className} block p-4 rounded-lg font-mono text-sm overflow-x-auto mb-4 ${isLight ? 'bg-gray-100 text-gray-800' : 'bg-cyber-darker text-primary'}`} {...props}>
-                  {children}
-                </code>
+                <ReactMarkdown key={`markdown-${index}`} components={markdownComponents}>
+                  {part as string}
+                </ReactMarkdown>
               );
-            },
-            pre: ({node, children, ...props}: any) => {
-              return <CodeBlock theme={theme} {...props}>{children}</CodeBlock>;
-            },
-            strong: ({node, ...props}) => <strong className={`font-bold ${isLight ? 'text-gray-900' : 'text-foreground'}`} {...props} />,
-            em: ({node, ...props}) => <em className={`italic ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
-            a: ({node, children, ...props}: any) => {
-              // Verifica se o link contém uma imagem
-              // Na sintaxe markdown [![alt](img)](link), o ReactMarkdown passa a imagem como child
-              const childrenArray = React.Children.toArray(children);
-              const hasImage = childrenArray.some((child: any) => {
-                // Verifica se é um elemento img ou tem props src
-                return child?.type === 'img' || 
-                       (child?.props && child.props.src) ||
-                       (typeof child === 'object' && child !== null && 'src' in child);
-              });
-              
-              if (hasImage) {
-                return (
-                  <a 
-                    className="block cursor-pointer hover:opacity-90 transition-opacity my-4 inline-block" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    {...props}
-                  >
-                    {children}
-                  </a>
-                );
-              }
-              return <a className="text-primary hover:underline" target="_blank" rel="noopener noreferrer" {...props}>{children}</a>;
-            },
-            blockquote: ({node, ...props}) => <blockquote className={`border-l-4 pl-4 italic my-4 ${isLight ? 'border-gray-300 text-gray-700' : 'border-primary text-muted-foreground'}`} {...props} />,
-            hr: ({node, ...props}) => <hr className={`my-8 ${isLight ? 'border-gray-200' : 'border-border'}`} {...props} />,
-            img: ({node, ...props}: any) => {
-              // Verifica se a imagem está dentro de um link
-              const isInsideLink = node?.parent?.tagName === 'a';
-              
-              if (isInsideLink) {
-                return <img className="w-full max-w-full h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity" {...props} />;
-              }
-              return <img className="w-full h-auto rounded-lg my-4" {...props} />;
-            },
-            table: ({node, ...props}) => <div className={`overflow-x-auto my-4 ${isLight ? 'border border-gray-200' : ''}`}><table className={`min-w-full ${isLight ? 'border border-gray-200' : 'border border-border'}`} {...props} /></div>,
-            th: ({node, ...props}) => <th className={`border px-4 py-2 font-semibold ${isLight ? 'border-gray-200 bg-gray-50 text-gray-900' : 'border-border bg-muted text-foreground'}`} {...props} />,
-            td: ({node, ...props}) => <td className={`border px-4 py-2 ${isLight ? 'border-gray-200 text-gray-700' : 'border-border text-muted-foreground'}`} {...props} />,
-          }}
-        >
-          {article.content}
-        </ReactMarkdown>
+            })}
+          </>
+        ) : (
+          <ReactMarkdown components={markdownComponents}>
+            {article.content}
+          </ReactMarkdown>
+        )}
       </article>
     </div>
   );
 }
-
