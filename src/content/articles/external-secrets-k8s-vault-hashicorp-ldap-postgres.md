@@ -1,6 +1,6 @@
 ---
 id: external-secrets-k8s-vault-hashicorp-ldap-postgres.md
-title: External Secrets K8S
+title: External Secrets Kubernetes
 description: Aprenda a implementar external secrets em ambientes Kubernetes!
 author: "Paulo Rogério"
 authorFirstName: "Paulo"
@@ -15,17 +15,17 @@ icon: "penguin"
 gradient: "from-primary/20 to-accent/20"
 publishedAt: "2026-01-09T00:00:00"
 tags: [k8s, secrets, ldap, postgres, vault, hashicorp]
-imageUrl: "/images/articles/gpadmesl.jpg"
+imageUrl: "/images/articles/external-secrets-k8s.jpg"
 ---
 
-## 🚀 External Secrets
+## External Secrets
 
-- [1) Secrets Vault](#1-secrets-vault)
-- [2) Repositórios](#2-repositorios)
-- [3) Deploy](#3-deploy)
-- [4) Youtube Demo](#4-youtube-demo)
+- [1. Secrets Vault](#1-secrets-vault)
+- [2. Repositórios](#2-repositorios)
+- [3. Deploy](#3-deploy)
+- [4. Youtube Demo](#4-youtube-demo)
 
-#### 1) Secrets Vault
+#### 1. Secrets Vault
 
 Esse material foi inspirado no material do Jeferson [LINUXtips](https://www.youtube.com/watch?v=NlQCTuWXuGk), porém aqui faço integracao do vault com **LDAP e PostgreSQL**.
 
@@ -124,13 +124,13 @@ Será necessário ajustar seu **/etc/hosts** para simular um DNS local
 #==============================
 ```
 
-#### 2) Repositórios
+#### 2. Repositórios
 
 Segue o link do repositório dos estudos.
 
 [External Secrets](https://gitlab.com/meetups-prgs/external-secrets/vault)
 
-#### 3) Deploy
+#### 3. Deploy
 
 Em cada pasta existe um script que carrega os demais scripts necessário para a compilação do produto final.
 
@@ -241,20 +241,14 @@ Your release is named vault. To learn more about the release, try:
   $ helm get manifest vault
 
 Waiting Pod Health...
-Waiting Pod Health...
-Waiting Pod Health...
-Waiting Pod Health...
-Waiting Pod Health...
-Waiting Pod Health...
-Waiting Pod Health...
-Waiting Pod Health...
+
 Pods Running
 secret/https-tls-secret created
 gateway.gateway.networking.k8s.io/gateway created
 httproute.gateway.networking.k8s.io/httproute-backend created
 httproute.gateway.networking.k8s.io/httproute-redirect created
 Waiting Pod Health...
-Waiting Pod Health...
+
 Pods Running
 
 Key             Value
@@ -598,7 +592,7 @@ POSTGRESQL_DB_PASS=postgres-prod
 POSTGRESQL_DB_USER=postgres
 ```
 
-###### ALTERE NO UI DO VAULT AS CREDENCIAS
+###### Altere no UI do Vault as credenciais
 
 ![Vault Credentials](/images/articles/external-secrets-k8s-1.jpg)
 
@@ -616,8 +610,8 @@ POSTGRESQL_DB_PASS=123456
 POSTGRESQL_DB_USER=postgres
 ```
 
-#### 4) Youtube Demo
+#### 4. Youtube Demo
 
-Você pode acompanhar todo esse processo de implementação no link abaixo.
+Você pode acompanhar todo esse processo de implementação no vídeo do Youtube, clicando na imagem abaixo.
 
 [![Assistir Demo no YouTube](/images/articles/external-secrets-k8s-2.jpg)](https://youtu.be/xSY3V_JFGaw)
