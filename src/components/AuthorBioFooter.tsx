@@ -60,11 +60,6 @@ export function AuthorBioFooter({
               className="text-lg font-semibold text-white hover:text-primary transition-colors inline-block mb-2"
             >
               {displayName}
-              {authorSocialType && (
-                <span className="ml-2 text-sm text-gray-400">
-                  {authorSocialType === "linkedin" ? "🔗" : "💻"}
-                </span>
-              )}
             </a>
           ) : (
             <h3 className="text-lg font-semibold text-white mb-2">
