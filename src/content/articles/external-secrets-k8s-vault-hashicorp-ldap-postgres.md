@@ -600,7 +600,7 @@ POSTGRESQL_DB_USER=postgres
 
 ###### ALTERE NO UI DO VAULT AS CREDENCIAS
 
-![alt text](../../../../images/kubernetes/external-secrets/vault-change-password.png "Vaut Credentials")
+![alt text](/images/articles/external-secrets-k8s.jpg)
 
 ```bash
 sh kill.sh && sh teste.sh
