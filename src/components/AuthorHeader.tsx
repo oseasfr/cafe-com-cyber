@@ -5,6 +5,8 @@ interface AuthorHeaderProps {
   authorFirstName?: string;
   authorLastName?: string;
   authorAvatar?: string;
+  authorSocialLink?: string;
+  authorSocialType?: "linkedin" | "github";
   publishedAt?: string;
   readTime: string;
 }
@@ -13,7 +15,9 @@ export function AuthorHeader({
   author, 
   authorFirstName, 
   authorLastName, 
-  authorAvatar, 
+  authorAvatar,
+  authorSocialLink,
+  authorSocialType,
   publishedAt, 
   readTime 
 }: AuthorHeaderProps) {
@@ -46,9 +50,21 @@ export function AuthorHeader({
       {/* Nome e Informações */}
       <div className="flex flex-col">
         <div className="flex items-center space-x-2">
-          <span className="text-sm font-medium text-gray-300">
-            {displayName}
-          </span>
+          {/* Nome do Autor (linkável se houver socialLink) */}
+          {authorSocialLink ? (
+            <a
+              href={authorSocialLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-gray-300 hover:text-primary transition-colors"
+            >
+              {displayName}
+            </a>
+          ) : (
+            <span className="text-sm font-medium text-gray-300">
+              {displayName}
+            </span>
+          )}
         </div>
         <div className="flex items-center text-xs space-x-2 mt-1">
           <span>{formattedDate}</span>
