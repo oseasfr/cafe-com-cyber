@@ -1,6 +1,6 @@
 ---
 id: external-secrets-k8s-vault-hashicorp-ldap-postgres.md
-title: External Secrets Containers Kubernetes
+title: External Secrets em Containers Kubernetes
 description: Aprenda a implementar external secrets em ambientes Kubernetes!
 author: "Paulo Rogério"
 authorFirstName: "Paulo"
