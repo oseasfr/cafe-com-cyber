@@ -10,8 +10,8 @@ authorBio: "Especialista em Kubernetes e segurança de containers. Expertise em 
 authorSocialLink: "https://github.com/paulo-rogerio"
 authorSocialType: "github"
 readTime: "20 min"
-category: "k8s"
-icon: "key"
+category: "kubernetes"
+icon: "secret"
 gradient: "from-primary/20 to-accent/20"
 publishedAt: "2026-01-09T00:00:00"
 tags: [k8s, secrets, ldap, postgres, vault, hashicorp]
