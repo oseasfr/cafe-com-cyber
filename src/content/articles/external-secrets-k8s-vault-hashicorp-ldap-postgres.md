@@ -598,9 +598,9 @@ POSTGRESQL_DB_PASS=postgres-prod
 POSTGRESQL_DB_USER=postgres
 ```
 
-###### ALTERE NO UI DO VAULT AS CREDENCIAS
+###### Altere na UI do Vault as credenciais
 
-![alt text](../../../../images/kubernetes/external-secrets/vault-change-password.png "Vaut Credentials")
+![alt text](/images/articles/external-secrets-k8s-1.jpg)
 
 ```bash
 sh kill.sh && sh teste.sh
