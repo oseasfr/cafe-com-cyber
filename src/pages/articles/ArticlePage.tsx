@@ -200,7 +200,7 @@ export default function ArticlePage() {
           </div>
         )}
 
-        {/* NOVO: Cabeçalho do Autor com Avatar, Nome, Data e ReadTime - Botão de Tema alinhado */}
+        {/* NOVO: Cabeçalho do Autor com Avatar, Nome, Data e ReadTime */}
         <AuthorHeader
           author={article.author}
           authorFirstName={article.authorFirstName}
@@ -210,14 +210,14 @@ export default function ArticlePage() {
           authorSocialType={article.authorSocialType}
           publishedAt={article.publishedAt}
           readTime={article.readTime}
-          themeToggle={<ArticleThemeToggle theme={articleTheme.theme} onToggle={articleTheme.toggleTheme} />}
         />
 
-        {/* Botões de Compartilhamento - Topo */}
+        {/* Botões de Compartilhamento e Tema - Topo */}
         <ShareButtons 
           title={article.title}
           url={articleUrl}
           description={article.description}
+          themeToggle={<ArticleThemeToggle theme={articleTheme.theme} onToggle={articleTheme.toggleTheme} />}
         />
         
         {/* Imagem de Capa do Artigo */}
@@ -234,12 +234,13 @@ export default function ArticlePage() {
         {/* Conteúdo do Artigo com Tema Isolado */}
         <ArticleContent article={article} theme={articleTheme.theme} />
 
-        {/* Botões de Compartilhamento - Final */}
+        {/* Botões de Compartilhamento e Tema - Final */}
         <div className="mt-8">
           <ShareButtons 
             title={article.title}
             url={articleUrl}
             description={article.description}
+            themeToggle={<ArticleThemeToggle theme={articleTheme.theme} onToggle={articleTheme.toggleTheme} />}
           />
         </div>
 
@@ -354,3 +355,4 @@ function ArticleContent({ article, theme }: { article: typeof articles[0]; theme
     </div>
   );
 }
+
