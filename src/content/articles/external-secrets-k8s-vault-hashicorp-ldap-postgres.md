@@ -1,6 +1,6 @@
 ---
 id: external-secrets-k8s-vault-hashicorp-ldap-postgres.md
-title: External Secrets em Containers Kubernetes
+title: External Secrets K8S
 description: Aprenda a implementar external secrets em ambientes Kubernetes!
 author: "Paulo Rogério"
 authorFirstName: "Paulo"
@@ -10,12 +10,12 @@ authorBio: "Especialista em Kubernetes e segurança de containers. Expertise em 
 authorSocialLink: "https://github.com/paulo-rogerio"
 authorSocialType: "github"
 readTime: "20 min"
-category: "kubernetes"
+category: "k8s"
 icon: "penguin"
 gradient: "from-primary/20 to-accent/20"
 publishedAt: "2026-01-09T00:00:00"
 tags: [k8s, secrets, ldap, postgres, vault, hashicorp]
-imageUrl: "/images/articles/external-secrets-k8s.jpg"
+imageUrl: "/images/articles/gpadmesl.jpg"
 ---
 
 ## 🚀 External Secrets
@@ -600,7 +600,7 @@ POSTGRESQL_DB_USER=postgres
 
 ###### ALTERE NO UI DO VAULT AS CREDENCIAS
 
-![alt text](/images/articles/external-secrets-k8s-1.jpg)
+![alt text](../../../../images/kubernetes/external-secrets/vault-change-password.png "Vaut Credentials")
 
 ```bash
 sh kill.sh && sh teste.sh
@@ -620,4 +620,4 @@ POSTGRESQL_DB_USER=postgres
 
 Você pode acompanhar todo esse processo de implementação no link abaixo.
 
-<a href="https://youtu.be/xSY3V_JFGaw" target="_blank">Demo</a>
+[![Assistir Demo no YouTube](/images/articles/external-secrets-k8s-2.jpg)](https://youtu.be/xSY3V_JFGaw)
