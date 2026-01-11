@@ -128,16 +128,16 @@ const HeroSection = () => {
             <div className="text-sm text-muted-foreground">Analistas</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">Diversos</div>
-            <div className="text-sm text-muted-foreground">Artigos</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary">Artigos</div>
+            <div className="text-sm text-muted-foreground">Diversos</div>
           </div>
           <div className="text-center">
             <div className="text-2xl md:text-3xl font-bold text-primary">Notícias</div>
             <div className="text-sm text-muted-foreground">Diárias</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">Contínuo</div>
-            <div className="text-sm text-muted-foreground">Aprendizado</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary">Aprendizado</div>
+            <div className="text-sm text-muted-foreground">Contínuo</div>
           </div>
         </div>
       </div>
