@@ -46,11 +46,11 @@ const AboutPage = () => {
         {/* Main Content */}
         <div className="space-y-12">
           {/* Mission */}
-          <Card className="border-primary/20 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur">
+          <Card className="border-primary/20 hover:border-primary/50 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
             <CardHeader>
               <div className="flex items-center gap-3 mb-2">
                 <Target className="h-6 w-6 text-primary" />
-                <CardTitle className="text-2xl">Origem</CardTitle>
+                <CardTitle className="text-2xl group-hover:text-primary transition-colors">Origem</CardTitle>
               </div>
             </CardHeader>
             <CardContent>
@@ -68,12 +68,12 @@ const AboutPage = () => {
               Nossos <span className="text-primary">Valores</span>
             </h2>
             <div className="grid md:grid-cols-3 gap-6">
-              <Card className="text-center border-border/50 bg-card/50 backdrop-blur">
+              <Card className="text-center border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
                 <CardHeader>
                   <div className="w-12 h-12 mx-auto rounded-lg bg-gradient-cyber flex items-center justify-center mb-4">
                     <Shield className="h-6 w-6 text-primary" />
                   </div>
-                  <CardTitle>Segurança</CardTitle>
+                  <CardTitle className="group-hover:text-primary transition-colors">Segurança</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
@@ -82,12 +82,12 @@ const AboutPage = () => {
                 </CardContent>
               </Card>
 
-              <Card className="text-center border-border/50 bg-card/50 backdrop-blur">
+              <Card className="text-center border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
                 <CardHeader>
                   <div className="w-12 h-12 mx-auto rounded-lg bg-gradient-cyber flex items-center justify-center mb-4">
                     <Users className="h-6 w-6 text-primary" />
                   </div>
-                  <CardTitle>Comunidade</CardTitle>
+                  <CardTitle className="group-hover:text-primary transition-colors">Comunidade</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
@@ -96,12 +96,12 @@ const AboutPage = () => {
                 </CardContent>
               </Card>
 
-              <Card className="text-center border-border/50 bg-card/50 backdrop-blur">
+              <Card className="text-center border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
                 <CardHeader>
                   <div className="w-12 h-12 mx-auto rounded-lg bg-gradient-cyber flex items-center justify-center mb-4">
                     <Lightbulb className="h-6 w-6 text-primary" />
                   </div>
-                  <CardTitle>Conhecimento</CardTitle>
+                  <CardTitle className="group-hover:text-primary transition-colors">Conhecimento</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
@@ -113,7 +113,7 @@ const AboutPage = () => {
           </div>
 
           {/* What We Do */}
-          <Card className="border-primary/20 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur">
+          <Card className="border-primary/20 hover:border-primary/50 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
             <CardContent className="space-y-4">
               <p className="text-muted-foreground leading-relaxed"><br></br>
                 Através do nosso site e comunidade no WhatsApp, oferecemos:
@@ -154,4 +154,3 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
-
