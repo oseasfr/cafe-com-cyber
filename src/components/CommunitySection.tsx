@@ -70,7 +70,7 @@ const CommunitySection = () => {
         </div>
 
         {/* Community Guidelines */}
-        <Card className="max-w-4xl mx-auto border-primary/20 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur">
+          <Card className="max-w-4xl mx-auto border-primary/20 hover:border-primary/50 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
           <CardHeader className="text-center">
             <div className="w-16 h-16 mx-auto rounded-full bg-gradient-cyber flex items-center justify-center mb-4">
               <Coffee className="h-8 w-8 text-primary animate-cyber-float" />
