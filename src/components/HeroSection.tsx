@@ -45,6 +45,48 @@ function AnimatedCounter({ value, suffix = '' }: { value: number; suffix?: strin
   );
 }
 
+// Hook para animações de entrada ao rolar
+function useScrollAnimation(delay: number = 0) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            setIsVisible(true);
+          }, delay);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [delay]);
+
+  return { ref, isVisible };
+}
+
+// Componente wrapper para animações
+function FadeInUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+  const { ref, isVisible } = useScrollAnimation(delay);
+  
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${
+        isVisible 
+          ? 'opacity-100 translate-y-0' 
+          : 'opacity-0 translate-y-8'
+      } ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
 const HeroSection = () => {
   const handleSectionClick = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -74,72 +116,82 @@ const HeroSection = () => {
       <div className="container relative z-10 text-center space-y-8">
         {/* Main Hero Content */}
         <div className="space-y-4">
-          <div className="flex items-center justify-center mb-6 mt-8 md:mt-0">
-            <img 
-              src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
-              alt="Café com Cyber"
-              className="h-24 w-24 animate-pulsate-blue"
-            />
-          </div>
+          <FadeInUp delay={0}>
+            <div className="flex items-center justify-center mb-6 mt-8 md:mt-0">
+              <img 
+                src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
+                alt="Café com Cyber"
+                className="h-24 w-24 animate-pulsate-blue"
+              />
+            </div>
+          </FadeInUp>
           
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-            <span className="bg-gradient-to-r from-cyber-light via-primary to-accent bg-clip-text text-transparent">
-              Café com Cyber
-            </span>
-          </h1>
+          <FadeInUp delay={100}>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+              <span className="bg-gradient-to-r from-cyber-light via-primary to-accent bg-clip-text text-transparent">
+                Café com Cyber
+              </span>
+            </h1>
+          </FadeInUp>
           
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-            Encontre artigos, notícias e insights da comunidade para expandir seu conhecimento em Cibersegurança.
-          </p>
+          <FadeInUp delay={200}>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
+              Encontre artigos, notícias e insights da comunidade para expandir seu conhecimento em Cibersegurança.
+            </p>
+          </FadeInUp>
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a 
-            href="#articles" 
-            onClick={(e) => {
-              e.preventDefault();
-              handleSectionClick('articles');
-            }}
-          >
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
-              <BookOpen className="mr-2 h-5 w-5" />
-              Explorar Artigos
-            </Button>
-          </a>
-          <a 
-            href="#community"
-            onClick={(e) => {
-              e.preventDefault();
-              handleSectionClick('community');
-            }}
-          >
-            <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-              <Users className="mr-2 h-5 w-5" />
-              Conhecer a Comunidade
-            </Button>
-          </a>
-        </div>
+        <FadeInUp delay={300}>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a 
+              href="#articles" 
+              onClick={(e) => {
+                e.preventDefault();
+                handleSectionClick('articles');
+              }}
+            >
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
+                <BookOpen className="mr-2 h-5 w-5" />
+                Explorar Artigos
+              </Button>
+            </a>
+            <a 
+              href="#community"
+              onClick={(e) => {
+                e.preventDefault();
+                handleSectionClick('community');
+              }}
+            >
+              <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                <Users className="mr-2 h-5 w-5" />
+                Conhecer a Comunidade
+              </Button>
+            </a>
+          </div>
+        </FadeInUp>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-16">
-          <div className="text-center">
-            <AnimatedCounter value={230} suffix="+" />
-            <div className="text-sm text-muted-foreground">Analistas</div>
+        <FadeInUp delay={400}>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-16">
+            <div className="text-center">
+              <AnimatedCounter value={230} suffix="+" />
+              <div className="text-sm text-muted-foreground">Analistas</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-primary">Artigos</div>
+              <div className="text-sm text-muted-foreground">Diversos</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-primary">Notícias</div>
+              <div className="text-sm text-muted-foreground">Diárias</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-primary">Aprendizado</div>
+              <div className="text-sm text-muted-foreground">Contínuo</div>
+            </div>
           </div>
-          <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">Artigos</div>
-            <div className="text-sm text-muted-foreground">Diversos</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">Notícias</div>
-            <div className="text-sm text-muted-foreground">Diárias</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">Aprendizado</div>
-            <div className="text-sm text-muted-foreground">Contínuo</div>
-          </div>
-        </div>
+        </FadeInUp>
       </div>
 
       {/* Floating Elements */}
