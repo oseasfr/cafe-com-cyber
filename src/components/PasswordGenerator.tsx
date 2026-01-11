@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface StrengthResult {
   score: number;
@@ -20,6 +21,7 @@ interface StrengthResult {
 }
 
 const PasswordGenerator = () => {
+  const { t, language } = useLanguage();
   const [password, setPassword] = useState('');
   const [customPassword, setCustomPassword] = useState('');
   const [length, setLength] = useState(16);
@@ -40,9 +42,9 @@ const PasswordGenerator = () => {
     if (!password) {
       return {
         score: 0,
-        strength: 'Vazia',
+        strength: t('passwordGenerator.empty'),
         color: '#c0c0c0',
-        info: 'Digite uma senha para avaliação.',
+        info: t('passwordGenerator.emptyInfo'),
         zxcvbnScore: 0
       };
     }
@@ -70,64 +72,68 @@ const PasswordGenerator = () => {
       switch (zxcvbnScore) {
         case 0:
           score = 20;
-          strength = 'Muito fraca';
+          strength = t('passwordGenerator.veryWeak');
           color = '#ff4d4d';
-          info = 'Senha facilmente quebrável';
+          info = t('passwordGenerator.veryWeakInfo');
           break;
         case 1:
           score = 40;
-          strength = 'Fraca';
+          strength = t('passwordGenerator.weak');
           color = '#ffaa00';
-          info = 'Pode ser quebrada rapidamente';
+          info = t('passwordGenerator.weakInfo');
           break;
         case 2:
           score = 60;
-          strength = 'Razoável';
+          strength = t('passwordGenerator.fair');
           color = '#ffff00';
-          info = 'Segurança moderada';
+          info = t('passwordGenerator.fairInfo');
           break;
         case 3:
           score = 80;
-          strength = 'Boa';
+          strength = t('passwordGenerator.good');
           color = '#aaff00';
-          info = 'Boa segurança';
+          info = t('passwordGenerator.goodInfo');
           break;
         case 4:
           score = 100;
-          strength = 'Forte';
+          strength = t('passwordGenerator.strong');
           color = '#66ff66';
-          info = 'Senha excelente';
+          info = t('passwordGenerator.strongInfo');
           break;
         default:
           score = 0;
-          strength = 'Desconhecida';
+          strength = t('passwordGenerator.error');
           color = '#c0c0c0';
-          info = 'Não foi possível avaliar';
+          info = t('passwordGenerator.errorInfo');
       }
 
       // Mostrar tempo estimado de quebra (traduzido)
       if (result.crack_times_display) {
         const tempoOffline = result.crack_times_display.offline_slow_hashing_1e4_per_second;
         if (tempoOffline) {
-          // Traduzir tempos
-          const tempoTraduzido = tempoOffline
-            .replace('less than a second', 'menos de um segundo')
-            .replace('seconds', 'segundos')
-            .replace('second', 'segundo')
-            .replace('minutes', 'minutos')
-            .replace('minute', 'minuto')
-            .replace('hours', 'horas')
-            .replace('hour', 'hora')
-            .replace('days', 'dias')
-            .replace('day', 'dia')
-            .replace('months', 'meses')
-            .replace('month', 'mês')
-            .replace('years', 'anos')
-            .replace('year', 'ano')
-            .replace('centuries', 'séculos')
-            .replace('century', 'século');
-          
-          info += ` - Tempo estimado: ${tempoTraduzido}`;
+          let tempoTraduzido = tempoOffline;
+          if (language === 'pt') {
+            // Traduzir tempos para português
+            tempoTraduzido = tempoOffline
+              .replace('less than a second', 'menos de um segundo')
+              .replace('seconds', 'segundos')
+              .replace('second', 'segundo')
+              .replace('minutes', 'minutos')
+              .replace('minute', 'minuto')
+              .replace('hours', 'horas')
+              .replace('hour', 'hora')
+              .replace('days', 'dias')
+              .replace('day', 'dia')
+              .replace('months', 'meses')
+              .replace('month', 'mês')
+              .replace('years', 'anos')
+              .replace('year', 'ano')
+              .replace('centuries', 'séculos')
+              .replace('century', 'século');
+            info += ` - ${t('passwordGenerator.crackTime')}: ${tempoTraduzido}`;
+          } else {
+            info += ` - ${t('passwordGenerator.crackTime')}: ${tempoOffline}`;
+          }
         }
       }
 
@@ -230,19 +236,44 @@ const PasswordGenerator = () => {
 
     if (charset === '') {
       toast({
-        title: "Erro",
-        description: "Selecione pelo menos um tipo de caractere.",
+        title: t('passwordGenerator.selectCharTypeError'),
+        description: t('passwordGenerator.selectCharType'),
         variant: "destructive",
       });
       return;
     }
 
+    // Garantir que pelo menos um caractere de cada tipo selecionado seja incluído
     let newPassword = '';
-    for (let i = 0; i < length; i++) {
+    
+    if (options.uppercase) {
+      newPassword += charSets.uppercase.charAt(Math.floor(Math.random() * charSets.uppercase.length));
+    }
+    if (options.lowercase) {
+      newPassword += charSets.lowercase.charAt(Math.floor(Math.random() * charSets.lowercase.length));
+    }
+    if (options.numbers) {
+      newPassword += charSets.numbers.charAt(Math.floor(Math.random() * charSets.numbers.length));
+    }
+    if (options.symbols) {
+      newPassword += charSets.symbols.charAt(Math.floor(Math.random() * charSets.symbols.length));
+    }
+
+    // Preencher o restante com caracteres aleatórios do charset combinado
+    const remainingLength = length - newPassword.length;
+    for (let i = 0; i < remainingLength; i++) {
       newPassword += charset.charAt(Math.floor(Math.random() * charset.length));
     }
-    setPassword(newPassword);
-  }, [length, options, toast]);
+
+    // Embaralhar a senha para evitar padrões previsíveis
+    const passwordArray = newPassword.split('');
+    for (let i = passwordArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [passwordArray[i], passwordArray[j]] = [passwordArray[j], passwordArray[i]];
+    }
+    
+    setPassword(passwordArray.join(''));
+  }, [length, options, toast, t]);
 
   useEffect(() => {
     generatePassword();
@@ -273,8 +304,8 @@ const PasswordGenerator = () => {
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
     toast({
-      title: "Copiado!",
-      description: "Senha copiada para a área de transferência.",
+      title: t('passwordGenerator.copy') + '!',
+      description: t('passwordGenerator.copied') + '!',
     });
   };
 
@@ -291,11 +322,11 @@ const PasswordGenerator = () => {
 
   const getStrengthLabel = (score: number) => {
     switch (score) {
-      case 0: return 'Muito Fraca';
-      case 1: return 'Fraca';
-      case 2: return 'Razoável';
-      case 3: return 'Boa';
-      case 4: return 'Forte';
+      case 0: return t('passwordGenerator.veryWeak');
+      case 1: return t('passwordGenerator.weak');
+      case 2: return t('passwordGenerator.fair');
+      case 3: return t('passwordGenerator.good');
+      case 4: return t('passwordGenerator.strong');
       default: return 'N/A';
     }
   };
@@ -307,14 +338,14 @@ const PasswordGenerator = () => {
         <div className="space-y-4">
           <div className="flex items-center gap-2 mb-2">
             <Search className="w-4 h-4 text-primary" />
-            <Label className="text-base font-semibold">Analisar Senha</Label>
+            <Label className="text-base font-semibold">{t('passwordGenerator.analyzePassword')}</Label>
           </div>
           <div className="relative">
             <Input
               type={showCustomPassword ? "text" : "password"}
               value={customPassword}
               onChange={(e) => setCustomPassword(e.target.value)}
-              placeholder="Digite uma senha para análise..."
+              placeholder={t('passwordGenerator.analyzePlaceholder')}
               className="pr-10"
             />
             <Button
@@ -332,7 +363,7 @@ const PasswordGenerator = () => {
             <div className="space-y-3 p-4 rounded-lg border border-border bg-card/30">
               <div className="flex justify-between items-center">
                 <Label className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                  Força: <span style={{ color: customStrength.color }} className="font-bold">{customStrength.strength}</span>
+                  {t('passwordGenerator.strength')}: <span style={{ color: customStrength.color }} className="font-bold">{customStrength.strength}</span>
                 </Label>
                 <span className="text-sm font-bold px-2 py-0.5 rounded border" style={{ 
                   color: customStrength.color, 
@@ -359,7 +390,7 @@ const PasswordGenerator = () => {
         </div>
 
         <div className="border-t border-border/50 pt-6">
-          <Label className="text-base font-semibold mb-4 block">Gerar Nova Senha</Label>
+          <Label className="text-base font-semibold mb-4 block">{t('passwordGenerator.generatePassword')}</Label>
         </div>
 
         {/* Password Display */}
@@ -398,10 +429,10 @@ const PasswordGenerator = () => {
               <Button
                 onClick={() => copyToClipboard(password)}
                 className="bg-primary hover:bg-primary/80 text-primary-foreground font-bold px-4 sm:px-6 h-9 sm:h-10 text-xs sm:text-sm"
-                title="Copiar senha"
+                title={t('passwordGenerator.copy')}
               >
                 <Copy className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-                Copiar
+                {t('passwordGenerator.copy')}
               </Button>
             </div>
           </div>
@@ -411,7 +442,7 @@ const PasswordGenerator = () => {
         {strength && (
           <div className="space-y-3">
             <div className="flex justify-between items-end">
-              <Label className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Força da Senha</Label>
+              <Label className="text-sm font-medium text-muted-foreground uppercase tracking-wider">{t('passwordGenerator.strengthLabel')}</Label>
               <span className={cn(
                 "text-sm font-bold px-2 py-0.5 rounded border",
                 strength.score <= 1 ? "text-red-400 border-red-400/20 bg-red-400/5" :
@@ -434,7 +465,7 @@ const PasswordGenerator = () => {
             </div>
             {strength.crack_times_display && (
               <p className="text-xs text-muted-foreground italic">
-                Tempo estimado para quebrar: <span className="text-foreground">{strength.crack_times_display.offline_slow_hashing_1e4_per_second || 'Mais de 100 séculos'}</span>
+                {t('passwordGenerator.crackTime')}: <span className="text-foreground">{strength.crack_times_display.offline_slow_hashing_1e4_per_second || (language === 'pt' ? 'Mais de 100 séculos' : 'More than 100 centuries')}</span>
               </p>
             )}
           </div>
@@ -445,7 +476,7 @@ const PasswordGenerator = () => {
           <div className="space-y-6">
             <div className="space-y-4">
               <div className="flex justify-between">
-                <Label className="text-foreground">Comprimento: <span className="text-primary font-mono">{length}</span></Label>
+                <Label className="text-foreground">{t('passwordGenerator.length')}: <span className="text-primary font-mono">{length}</span></Label>
               </div>
               <Slider
                 value={[length]}
@@ -462,9 +493,9 @@ const PasswordGenerator = () => {
             {Object.entries(options).map(([key, value]) => (
               <div key={key} className="flex items-center justify-between p-3 rounded-lg border border-border bg-card/50 hover:bg-card transition-colors">
                 <Label htmlFor={key} className="capitalize text-foreground cursor-pointer">
-                  {key === 'uppercase' ? 'Maiúsculas' : 
-                   key === 'lowercase' ? 'Minúsculas' : 
-                   key === 'numbers' ? 'Números' : 'Símbolos'}
+                  {key === 'uppercase' ? t('passwordGenerator.uppercase') : 
+                   key === 'lowercase' ? t('passwordGenerator.lowercase') : 
+                   key === 'numbers' ? t('passwordGenerator.numbers') : t('passwordGenerator.symbols')}
                 </Label>
                 <Switch
                   id={key}
