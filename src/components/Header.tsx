@@ -87,7 +87,7 @@ const Header = () => {
         <div className="flex items-center space-x-3">
           <Link to="/" onClick={handleHomeClick}>
             <img 
-              src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
+              src="/lovable-uploads/favicon-menu-superior.png" 
               alt="Café com Cyber"
               className="h-10 w-10"
             />
