@@ -1,7 +1,53 @@
 import { Button } from "@/components/ui/button";
 import { Shield, Coffee, Users, BookOpen } from "lucide-react";
+import { useLanguage } from '@/hooks/useLanguage';
+import { useEffect, useState, useRef } from "react";
+
+// Componente para animar números quando a seção entra na viewport
+function AnimatedCounter({ value, suffix = '' }: { value: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          const duration = 2000;
+          const steps = 60;
+          const increment = value / steps;
+          let current = 0;
+
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= value) {
+              setCount(value);
+              clearInterval(timer);
+            } else {
+              setCount(Math.floor(current));
+            }
+          }, duration / steps);
+
+          return () => clearInterval(timer);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [value, hasAnimated]);
+
+  return (
+    <div ref={ref} className="text-2xl md:text-3xl font-bold text-primary">
+      {count}{suffix}
+    </div>
+  );
+}
 
 const HeroSection = () => {
+  const { t } = useLanguage();
 
   const handleSectionClick = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -41,12 +87,12 @@ const HeroSection = () => {
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
             <span className="bg-gradient-to-r from-cyber-light via-primary to-accent bg-clip-text text-transparent">
-              Café com Cyber
+              {t('hero.title')}
             </span>
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-            Encontre artigos, notícias e insights da comunidade para expandir seu conhecimento em Cibersegurança.
+            {t('hero.description')}
           </p>
         </div>
 
@@ -61,7 +107,7 @@ const HeroSection = () => {
           >
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
               <BookOpen className="mr-2 h-5 w-5" />
-              Explorar Artigos
+              {t('hero.exploreArticles')}
             </Button>
           </a>
           <a 
@@ -73,7 +119,7 @@ const HeroSection = () => {
           >
             <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
               <Users className="mr-2 h-5 w-5" />
-              Conhecer a Comunidade
+              {t('hero.knowCommunity')}
             </Button>
           </a>
         </div>
@@ -81,20 +127,20 @@ const HeroSection = () => {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-16">
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">Analistas</div>
-            <div className="text-sm text-muted-foreground">+200</div>
+            <AnimatedCounter value={200} suffix="+" />
+            <div className="text-sm text-muted-foreground">{t('hero.stats.analysts')}</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">Artigos</div>
-            <div className="text-sm text-muted-foreground">Diversos</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary">{t('hero.stats.articlesValue')}</div>
+            <div className="text-sm text-muted-foreground">{t('hero.stats.articles')}</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">Discussões</div>
-            <div className="text-sm text-muted-foreground">24/7</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary">{t('hero.stats.discussionsValue')}</div>
+            <div className="text-sm text-muted-foreground">{t('hero.stats.discussions')}</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">Aprendizado</div>
-            <div className="text-sm text-muted-foreground">Contínuo</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary">{t('hero.stats.learningValue')}</div>
+            <div className="text-sm text-muted-foreground">{t('hero.stats.learning')}</div>
           </div>
         </div>
       </div>
