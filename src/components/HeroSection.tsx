@@ -124,7 +124,7 @@ const HeroSection = () => {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-16">
           <div className="text-center">
-            <AnimatedCounter value={200} suffix="+" />
+            <AnimatedCounter value={230} suffix="+" />
             <div className="text-sm text-muted-foreground">Analistas</div>
           </div>
           <div className="text-center">
