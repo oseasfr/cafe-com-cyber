@@ -51,9 +51,9 @@ const CursosSection = () => {
           </div>
 
           {/* Índice */}
-          <Card className="mb-8">
+          <Card className="mb-8 border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 group-hover:text-primary transition-colors">
                 <BookOpen className="h-5 w-5" />
                 Índice
               </CardTitle>
@@ -130,9 +130,9 @@ const CursosSection = () => {
           {/* Cursos */}
           <div className="space-y-8">
             {/* 1. Escola Virtual Gov */}
-            <Card id="1-escola-virtual-gov">
+            <Card id="1-escola-virtual-gov" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
               <CardHeader>
-                <CardTitle>1. Escola Virtual Gov</CardTitle>
+                <CardTitle className="group-hover:text-primary transition-colors">1. Escola Virtual Gov</CardTitle>
                 <CardDescription>
                   Uma iniciativa{" "}
                   <a
@@ -221,9 +221,9 @@ const CursosSection = () => {
             </Card>
 
             {/* 2. Hackers do Bem */}
-            <Card id="2-hackers-do-bem">
+            <Card id="2-hackers-do-bem" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
               <CardHeader>
-                <CardTitle>2. Hackers do Bem</CardTitle>
+                <CardTitle className="group-hover:text-primary transition-colors">2. Hackers do Bem</CardTitle>
                 <CardDescription>
                   O programa Hackers do Bem visa promover a segurança cibernética por meio de iniciativas educativas e ações de impacto social.
                 </CardDescription>
@@ -258,9 +258,9 @@ const CursosSection = () => {
             </Card>
 
             {/* 3. Senai - SP */}
-            <Card id="3-senai---sp">
+            <Card id="3-senai---sp" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
               <CardHeader>
-                <CardTitle>3. Senai - SP</CardTitle>
+                <CardTitle className="group-hover:text-primary transition-colors">3. Senai - SP</CardTitle>
                 <CardDescription>Cursos voltados para Cibersegurança.</CardDescription>
               </CardHeader>
               <CardContent>
@@ -293,9 +293,9 @@ const CursosSection = () => {
             </Card>
 
             {/* 4. Curso em Vídeo */}
-            <Card id="4-curso-em-vídeo">
+            <Card id="4-curso-em-vídeo" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
               <CardHeader>
-                <CardTitle>4. Curso em Vídeo</CardTitle>
+                <CardTitle className="group-hover:text-primary transition-colors">4. Curso em Vídeo</CardTitle>
                 <CardDescription>
                   O canal Curso em Vídeo no YouTube oferece tutoriais gratuitos de informática, programação e tecnologias diversas.
                 </CardDescription>
@@ -330,9 +330,9 @@ const CursosSection = () => {
             </Card>
 
             {/* 5. Cisco Networking Academy */}
-            <Card id="5-cisco-networking-academy">
+            <Card id="5-cisco-networking-academy" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
               <CardHeader>
-                <CardTitle>5. Cisco Networking Academy</CardTitle>
+                <CardTitle className="group-hover:text-primary transition-colors">5. Cisco Networking Academy</CardTitle>
                 <CardDescription>Listagem de cursos gratuitos da Cisco na área de segurança.</CardDescription>
               </CardHeader>
               <CardContent>
@@ -365,9 +365,9 @@ const CursosSection = () => {
             </Card>
 
             {/* 6. Linux Foundation */}
-            <Card id="6-linux-foundation">
+            <Card id="6-linux-foundation" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
               <CardHeader>
-                <CardTitle>6. Linux Foundation</CardTitle>
+                <CardTitle className="group-hover:text-primary transition-colors">6. Linux Foundation</CardTitle>
                 <CardDescription>Catálogo de certificações gratuitas da Linux Foundation.</CardDescription>
               </CardHeader>
               <CardContent>
@@ -400,9 +400,9 @@ const CursosSection = () => {
             </Card>
 
             {/* 7. Udemy */}
-            <Card id="7-udemy">
+            <Card id="7-udemy" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
               <CardHeader>
-                <CardTitle>7. Udemy</CardTitle>
+                <CardTitle className="group-hover:text-primary transition-colors">7. Udemy</CardTitle>
                 <CardDescription>
                   Página já com o filtro de preço "Gratuito" para os cursos de cibersegurança.
                 </CardDescription>
@@ -443,4 +443,3 @@ const CursosSection = () => {
 };
 
 export default CursosSection;
-
