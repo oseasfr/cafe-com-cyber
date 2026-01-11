@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Shield, Coffee, Users, BookOpen } from "lucide-react";
+import { useLanguage } from '@/hooks/useLanguage';
 
 const HeroSection = () => {
+  const { t } = useLanguage();
 
   const handleSectionClick = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -41,12 +43,12 @@ const HeroSection = () => {
           
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
             <span className="bg-gradient-to-r from-cyber-light via-primary to-accent bg-clip-text text-transparent">
-              Café com Cyber
+              {t('hero.title')}
             </span>
           </h1>
           
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-            Encontre artigos, notícias e insights da comunidade para expandir seu conhecimento em Cibersegurança.
+            {t('hero.description')}
           </p>
         </div>
 
@@ -61,7 +63,7 @@ const HeroSection = () => {
           >
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-cyber">
               <BookOpen className="mr-2 h-5 w-5" />
-              Explorar Artigos
+              {t('hero.exploreArticles')}
             </Button>
           </a>
           <a 
@@ -73,7 +75,7 @@ const HeroSection = () => {
           >
             <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
               <Users className="mr-2 h-5 w-5" />
-              Conhecer a Comunidade
+              {t('hero.knowCommunity')}
             </Button>
           </a>
         </div>
@@ -81,20 +83,20 @@ const HeroSection = () => {
         {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto mt-16">
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">Analistas</div>
-            <div className="text-sm text-muted-foreground">+200</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary">{t('hero.stats.analysts')}</div>
+            <div className="text-sm text-muted-foreground">{t('hero.stats.analystsValue')}</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">Artigos</div>
-            <div className="text-sm text-muted-foreground">Diversos</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary">{t('hero.stats.articles')}</div>
+            <div className="text-sm text-muted-foreground">{t('hero.stats.articlesValue')}</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">Discussões</div>
-            <div className="text-sm text-muted-foreground">24/7</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary">{t('hero.stats.discussions')}</div>
+            <div className="text-sm text-muted-foreground">{t('hero.stats.discussionsValue')}</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">Aprendizado</div>
-            <div className="text-sm text-muted-foreground">Contínuo</div>
+            <div className="text-2xl md:text-3xl font-bold text-primary">{t('hero.stats.learning')}</div>
+            <div className="text-sm text-muted-foreground">{t('hero.stats.learningValue')}</div>
           </div>
         </div>
       </div>
