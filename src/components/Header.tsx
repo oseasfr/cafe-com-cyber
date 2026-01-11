@@ -85,12 +85,15 @@ const Header = () => {
       <div className="container flex h-16 items-center justify-between">
         {/* Logo - Ícone fixo no topo */}
         <div className="flex items-center space-x-3">
-          <Link to="/" onClick={handleHomeClick}>
-            <img 
-              src="/lovable-uploads/icone-home.png" 
-              alt="Café com Cyber"
-              className="h-10 w-10"
-            />
+          <Link to="/" onClick={handleHomeClick} className="group relative">
+            <div className="relative">
+              <img 
+                src="/lovable-uploads/icone-home.png" 
+                alt="Café com Cyber"
+                className="h-10 w-10 transition-transform group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
           </Link>
           <div className="hidden sm:block">
             <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -166,3 +169,5 @@ const Header = () => {
 };
 
 export default Header;
+
+
