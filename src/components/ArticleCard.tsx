@@ -21,10 +21,10 @@ interface ArticleProps {
 const icons = { Shield, Lock, Eye };
 
 export const ArticleCard = ({ article }: ArticleProps) => {
-    const IconComponent = icons[article.icon];
+    const IconComponent = icons[article.icon as keyof typeof icons] || Shield;
 
     return (
-        <Card key={article.id} className="group hover:shadow-cyber-soft transition-all duration-300 border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur hover:shadow-lg hover:shadow-primary/5">
+        <Card className="group hover:shadow-cyber-soft transition-all duration-300 border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur hover:shadow-lg hover:shadow-primary/5">
             <CardHeader className="space-y-4">
                 <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${article.gradient} flex items-center justify-center group-hover:animate-glow-pulse`}>
                     <IconComponent className="h-6 w-6 text-primary" />
