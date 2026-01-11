@@ -1,10 +1,8 @@
-import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Clock, User, ArrowRight } from "lucide-react";
+import { Clock, User, ArrowRight, Shield, Lock, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
-import { getArticleIcon } from "@/lib/articleIcons";
 
 // Supondo que seus dados de artigo tenham esta estrutura
 interface ArticleProps {
@@ -17,30 +15,26 @@ interface ArticleProps {
         category: string;
         icon: string;
         gradient: string;
-        imageUrl?: string;
     };
 }
 
+const icons = { Shield, Lock, Eye };
+
 export const ArticleCard = ({ article }: ArticleProps) => {
-    const { icon: faIcon, color } = getArticleIcon(article.category, article.icon);
+    const IconComponent = icons[article.icon];
 
     return (
-        <Card key={article.id} className="group hover:shadow-cyber-soft transition-all duration-300 border-border/50 bg-card/50 backdrop-blur">
+        <Card key={article.id} className="group hover:shadow-cyber-soft transition-all duration-300 border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur hover:shadow-lg hover:shadow-primary/5">
             <CardHeader className="space-y-4">
                 <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${article.gradient} flex items-center justify-center group-hover:animate-glow-pulse`}>
-                    <i className={`fa-solid ${faIcon} text-lg ${color}`} aria-hidden="true" />
+                    <IconComponent className="h-6 w-6 text-primary" />
                 </div>
                 <div className="space-y-2">
                     <Badge variant="secondary" className="text-xs">
                         {article.category}
                     </Badge>
                     <CardTitle className="text-xl group-hover:text-primary transition-colors">
-                        <Link 
-                            to={`/articles/${article.id}`} 
-                            className="no-underline"
-                        >
-                            {article.title}
-                        </Link>
+                        {article.title}
                     </CardTitle>
                 </div>
             </CardHeader>
