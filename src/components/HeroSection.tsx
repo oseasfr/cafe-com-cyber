@@ -132,6 +132,10 @@ const HeroSection = () => {
             <div className="text-sm text-muted-foreground">Artigos</div>
           </div>
           <div className="text-center">
+            <div className="text-2xl md:text-3xl font-bold text-primary">Notícias</div>
+            <div className="text-sm text-muted-foreground">Diárias</div>
+          </div>
+          <div className="text-center">
             <div className="text-2xl md:text-3xl font-bold text-primary">Contínuo</div>
             <div className="text-sm text-muted-foreground">Aprendizado</div>
           </div>
