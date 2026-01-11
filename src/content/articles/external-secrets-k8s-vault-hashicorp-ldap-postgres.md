@@ -11,7 +11,7 @@ authorSocialLink: "https://github.com/paulo-rogerio"
 authorSocialType: "github"
 readTime: "20 min"
 category: "kubernetes"
-icon: "secret"
+icon: "code"
 gradient: "from-primary/20 to-accent/20"
 publishedAt: "2026-01-09T00:00:00"
 tags: [k8s, secrets, ldap, postgres, vault, hashicorp]
