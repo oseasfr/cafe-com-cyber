@@ -132,8 +132,8 @@ const HeroSection = () => {
             <div className="text-sm text-muted-foreground">Artigos</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl md:text-3xl font-bold text-primary">Diversas</div>
-            <div className="text-sm text-muted-foreground">Discussões</div>
+           <AnimatedCounter value={365} suffix="Dias" />
+            <div className="text-sm text-muted-foreground">Postagens</div>
           </div>
           <div className="text-center">
             <div className="text-2xl md:text-3xl font-bold text-primary">Contínuo</div>
