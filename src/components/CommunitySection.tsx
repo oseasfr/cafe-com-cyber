@@ -75,7 +75,7 @@ const CommunitySection = () => {
             <div className="w-16 h-16 mx-auto rounded-full bg-gradient-cyber flex items-center justify-center mb-4">
               <Coffee className="h-8 w-8 text-primary animate-cyber-float" />
             </div>
-            <CardTitle className="text-2xl">Diretrizes da Comunidade</CardTitle>
+               <CardTitle className="text-2xl group-hover:text-primary transition-colors">Diretrizes da Comunidade</CardTitle>
           </CardHeader>
           <CardContent className="text-center space-y-6">
             <p className="text-muted-foreground leading-relaxed">
