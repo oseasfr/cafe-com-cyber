@@ -84,7 +84,7 @@ const CursosSection = () => {
                     onClick={(e) => handleAnchorClick(e, '3-eha')}
                     className="text-primary hover:underline cursor-pointer"
                   >
-                    EHA
+                    Ethical Hacking Academy
                   </a>
                 </li>
                 <li>
@@ -220,7 +220,7 @@ const CursosSection = () => {
               </CardHeader>
               <CardContent>
                 <a
-                  href="https://www.eha.net.br/cursos/"
+                  href="https://www.eha.net.br"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline inline-flex items-center gap-1"
