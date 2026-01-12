@@ -210,7 +210,7 @@ const CursosSection = () => {
               </CardContent>
             </Card>
 
-            {/* 3. EHA */}
+            {/* 3. Ethical Hacking Academy */}
             <Card id="3-eha" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
               <CardHeader>
                 <CardTitle className="group-hover:text-primary transition-colors">3. EHA</CardTitle>
@@ -225,7 +225,7 @@ const CursosSection = () => {
                   rel="noopener noreferrer"
                   className="text-primary hover:underline inline-flex items-center gap-1"
                 >
-                  EHA
+                  Ethical Hacking Academy
                   <ExternalLink className="h-4 w-4" />
                 </a>
                 <div className="mt-4">
