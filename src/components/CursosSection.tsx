@@ -62,35 +62,17 @@ const CursosSection = () => {
               <ol className="list-decimal list-inside space-y-2 text-sm">
                 <li>
                   <a 
-                    href="#1-escola-virtual-gov" 
-                    onClick={(e) => handleAnchorClick(e, '1-escola-virtual-gov')}
+                    href="#1-cisco-networking-academy" 
+                    onClick={(e) => handleAnchorClick(e, '1-cisco-networking-academy')}
                     className="text-primary hover:underline cursor-pointer"
                   >
-                    Escola Virtual Gov
+                    Cisco Networking Academy
                   </a>
                 </li>
                 <li>
                   <a 
-                    href="#2-hackers-do-bem" 
-                    onClick={(e) => handleAnchorClick(e, '2-hackers-do-bem')}
-                    className="text-primary hover:underline cursor-pointer"
-                  >
-                    Hackers do Bem
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="#3-senai---sp" 
-                    onClick={(e) => handleAnchorClick(e, '3-senai---sp')}
-                    className="text-primary hover:underline cursor-pointer"
-                  >
-                    Senai - SP
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    href="#4-curso-em-vídeo" 
-                    onClick={(e) => handleAnchorClick(e, '4-curso-em-vídeo')}
+                    href="#2-curso-em-vídeo" 
+                    onClick={(e) => handleAnchorClick(e, '2-curso-em-vídeo')}
                     className="text-primary hover:underline cursor-pointer"
                   >
                     Curso em Vídeo
@@ -98,11 +80,29 @@ const CursosSection = () => {
                 </li>
                 <li>
                   <a 
-                    href="#5-cisco-networking-academy" 
-                    onClick={(e) => handleAnchorClick(e, '5-cisco-networking-academy')}
+                    href="#3-eha" 
+                    onClick={(e) => handleAnchorClick(e, '3-eha')}
                     className="text-primary hover:underline cursor-pointer"
                   >
-                    Cisco Networking Academy
+                    EHA
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#4-escola-virtual-gov" 
+                    onClick={(e) => handleAnchorClick(e, '4-escola-virtual-gov')}
+                    className="text-primary hover:underline cursor-pointer"
+                  >
+                    Escola Virtual Gov
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#5-hackers-do-bem" 
+                    onClick={(e) => handleAnchorClick(e, '5-hackers-do-bem')}
+                    className="text-primary hover:underline cursor-pointer"
+                  >
+                    Hackers do Bem
                   </a>
                 </li>
                 <li>
@@ -116,8 +116,17 @@ const CursosSection = () => {
                 </li>
                 <li>
                   <a 
-                    href="#7-udemy" 
-                    onClick={(e) => handleAnchorClick(e, '7-udemy')}
+                    href="#7-senai---sp" 
+                    onClick={(e) => handleAnchorClick(e, '7-senai---sp')}
+                    className="text-primary hover:underline cursor-pointer"
+                  >
+                    Senai - SP
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#8-udemy" 
+                    onClick={(e) => handleAnchorClick(e, '8-udemy')}
                     className="text-primary hover:underline cursor-pointer"
                   >
                     Udemy
@@ -129,10 +138,119 @@ const CursosSection = () => {
 
           {/* Cursos */}
           <div className="space-y-8">
-            {/* 1. Escola Virtual Gov */}
-            <Card id="1-escola-virtual-gov" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
+            {/* 1. Cisco Networking Academy */}
+            <Card id="1-cisco-networking-academy" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
               <CardHeader>
-                <CardTitle className="group-hover:text-primary transition-colors">1. Escola Virtual Gov</CardTitle>
+                <CardTitle className="group-hover:text-primary transition-colors">1. Cisco Networking Academy</CardTitle>
+                <CardDescription>Listagem de cursos gratuitos da Cisco na área de segurança.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <a
+                  href="https://skillsforall.com/catalog?category=course&subject+areas=cybersecurity"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline inline-flex items-center gap-1"
+                >
+                  Cisco Networking Academy
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+                <div className="mt-4">
+                  <a
+                    href="#cursos"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                      });
+                    }}
+                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    <ChevronDown className="h-3 w-3 rotate-180" />
+                    Voltar ao topo
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* 2. Curso em Vídeo */}
+            <Card id="2-curso-em-vídeo" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
+              <CardHeader>
+                <CardTitle className="group-hover:text-primary transition-colors">2. Curso em Vídeo</CardTitle>
+                <CardDescription>
+                  O canal Curso em Vídeo no YouTube oferece tutoriais gratuitos de informática, programação e tecnologias diversas.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <a
+                  href="https://www.youtube.com/playlist?list=PLHz_AreHm4dlaTyjolzCFC6IjLzO8O0XV"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline inline-flex items-center gap-1"
+                >
+                  Playlist - Segurança da Informação
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+                <div className="mt-4">
+                  <a
+                    href="#cursos"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                      });
+                    }}
+                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    <ChevronDown className="h-3 w-3 rotate-180" />
+                    Voltar ao topo
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* 3. EHA */}
+            <Card id="3-eha" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
+              <CardHeader>
+                <CardTitle className="group-hover:text-primary transition-colors">3. EHA</CardTitle>
+                <CardDescription>
+                  Plataforma educacional brasileira que oferece cursos gratuitos em ética hacker e segurança da informação.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <a
+                  href="https://www.eha.net.br/cursos/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline inline-flex items-center gap-1"
+                >
+                  EHA
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+                <div className="mt-4">
+                  <a
+                    href="#cursos"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                      });
+                    }}
+                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    <ChevronDown className="h-3 w-3 rotate-180" />
+                    Voltar ao topo
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* 4. Escola Virtual Gov */}
+            <Card id="4-escola-virtual-gov" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
+              <CardHeader>
+                <CardTitle className="group-hover:text-primary transition-colors">4. Escola Virtual Gov</CardTitle>
                 <CardDescription>
                   Uma iniciativa{" "}
                   <a
@@ -150,7 +268,7 @@ const CursosSection = () => {
                 {/* Accordion configurado para ficar sempre aberto quando tiver múltiplos links */}
                 <Accordion type="single" collapsible className="w-full" defaultValue="cis-controls">
                   <AccordionItem value="cis-controls">
-                    <AccordionTrigger>1.1 CIS Controls</AccordionTrigger>
+                    <AccordionTrigger>4.1 CIS Controls</AccordionTrigger>
                     <AccordionContent>
                       <ul className="space-y-2 ml-4">
                         <li>
@@ -220,10 +338,10 @@ const CursosSection = () => {
               </CardContent>
             </Card>
 
-            {/* 2. Hackers do Bem */}
-            <Card id="2-hackers-do-bem" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
+            {/* 5. Hackers do Bem */}
+            <Card id="5-hackers-do-bem" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
               <CardHeader>
-                <CardTitle className="group-hover:text-primary transition-colors">2. Hackers do Bem</CardTitle>
+                <CardTitle className="group-hover:text-primary transition-colors">5. Hackers do Bem</CardTitle>
                 <CardDescription>
                   O programa Hackers do Bem visa promover a segurança cibernética por meio de iniciativas educativas e ações de impacto social.
                 </CardDescription>
@@ -236,113 +354,6 @@ const CursosSection = () => {
                   className="text-primary hover:underline inline-flex items-center gap-1"
                 >
                   Hackers do Bem
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-                <div className="mt-4">
-                  <a
-                    href="#cursos"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                      });
-                    }}
-                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
-                  >
-                    <ChevronDown className="h-3 w-3 rotate-180" />
-                    Voltar ao topo
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* 3. Senai - SP */}
-            <Card id="3-senai---sp" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
-              <CardHeader>
-                <CardTitle className="group-hover:text-primary transition-colors">3. Senai - SP</CardTitle>
-                <CardDescription>Cursos voltados para Cibersegurança.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <a
-                  href="https://sp.senai.br/curso/por-dentro-da-seguranca-cibernetica/102411?unidade=150"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline inline-flex items-center gap-1"
-                >
-                  Por dentro da Segurança Cibernética
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-                <div className="mt-4">
-                  <a
-                    href="#cursos"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                      });
-                    }}
-                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
-                  >
-                    <ChevronDown className="h-3 w-3 rotate-180" />
-                    Voltar ao topo
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* 4. Curso em Vídeo */}
-            <Card id="4-curso-em-vídeo" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
-              <CardHeader>
-                <CardTitle className="group-hover:text-primary transition-colors">4. Curso em Vídeo</CardTitle>
-                <CardDescription>
-                  O canal Curso em Vídeo no YouTube oferece tutoriais gratuitos de informática, programação e tecnologias diversas.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <a
-                  href="https://www.youtube.com/playlist?list=PLHz_AreHm4dlaTyjolzCFC6IjLzO8O0XV"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline inline-flex items-center gap-1"
-                >
-                  Playlist - Segurança da Informação
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-                <div className="mt-4">
-                  <a
-                    href="#cursos"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                      });
-                    }}
-                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
-                  >
-                    <ChevronDown className="h-3 w-3 rotate-180" />
-                    Voltar ao topo
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* 5. Cisco Networking Academy */}
-            <Card id="5-cisco-networking-academy" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
-              <CardHeader>
-                <CardTitle className="group-hover:text-primary transition-colors">5. Cisco Networking Academy</CardTitle>
-                <CardDescription>Listagem de cursos gratuitos da Cisco na área de segurança.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <a
-                  href="https://skillsforall.com/catalog?category=course&subject+areas=cybersecurity"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline inline-flex items-center gap-1"
-                >
-                  Cisco Networking Academy
                   <ExternalLink className="h-4 w-4" />
                 </a>
                 <div className="mt-4">
@@ -399,10 +410,45 @@ const CursosSection = () => {
               </CardContent>
             </Card>
 
-            {/* 7. Udemy */}
-            <Card id="7-udemy" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
+            {/* 7. Senai - SP */}
+            <Card id="7-senai---sp" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
               <CardHeader>
-                <CardTitle className="group-hover:text-primary transition-colors">7. Udemy</CardTitle>
+                <CardTitle className="group-hover:text-primary transition-colors">7. Senai - SP</CardTitle>
+                <CardDescription>Cursos voltados para Cibersegurança.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <a
+                  href="https://sp.senai.br/curso/por-dentro-da-seguranca-cibernetica/102411?unidade=150"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline inline-flex items-center gap-1"
+                >
+                  Por dentro da Segurança Cibernética
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+                <div className="mt-4">
+                  <a
+                    href="#cursos"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                      });
+                    }}
+                    className="text-xs text-muted-foreground hover:text-primary inline-flex items-center gap-1 cursor-pointer"
+                  >
+                    <ChevronDown className="h-3 w-3 rotate-180" />
+                    Voltar ao topo
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* 8. Udemy */}
+            <Card id="8-udemy" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
+              <CardHeader>
+                <CardTitle className="group-hover:text-primary transition-colors">8. Udemy</CardTitle>
                 <CardDescription>
                   Página já com o filtro de preço "Gratuito" para os cursos de cibersegurança.
                 </CardDescription>
@@ -443,3 +489,4 @@ const CursosSection = () => {
 };
 
 export default CursosSection;
+
