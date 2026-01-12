@@ -213,7 +213,7 @@ const CursosSection = () => {
             {/* 3. Ethical Hacking Academy */}
             <Card id="3-eha" className="border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
               <CardHeader>
-                <CardTitle className="group-hover:text-primary transition-colors">3. EHA</CardTitle>
+                <CardTitle className="group-hover:text-primary transition-colors">3. Ethical Hacking Academy</CardTitle>
                 <CardDescription>
                   Plataforma educacional brasileira que oferece cursos gratuitos em ética hacker e segurança da informação.
                 </CardDescription>
