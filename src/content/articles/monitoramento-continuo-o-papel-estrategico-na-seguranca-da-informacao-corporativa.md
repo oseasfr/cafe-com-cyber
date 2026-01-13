@@ -11,10 +11,11 @@ authorSocialLink: "https://www.linkedin.com/in/robertojduarte"
 authorSocialType: "linkedin"
 readTime: "10 min"
 category: "Security"
-icon: "monitoring"
+icon: "Activity"
 gradient: "from-primary/20 to-accent/20"
 publishedAt: "2025-01-15T10:00:00"
 tags: [monitoramento, segurança, SIEM, DevSecOps, compliance, forense]
+imageUrl: "/images/articles/monitoramento-continuo.jpg"
 ---
 
 # Monitoramento Contínuo: O Papel Estratégico na Segurança da Informação Corporativa
