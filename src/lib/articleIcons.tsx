@@ -20,6 +20,8 @@ export const categoryIcons: Record<string, { icon: string; color: string }> = {
   'Security Awareness': { icon: 'fa-graduation-cap', color: 'text-emerald-500' },
   'Troubleshooting Linux': { icon: 'fa-terminal', color: 'text-blue-500' },
   'kubernetes': { icon: 'fa-server', color: 'text-blue-500' },
+  'monitoring': { icon: 'fa-chart-line', color: 'text-sky-500' },
+  'telemetry': { icon: 'fa-wave-square', color: 'text-violet-500' },
 };
 
 /**
