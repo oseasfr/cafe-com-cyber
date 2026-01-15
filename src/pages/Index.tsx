@@ -4,7 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import ArticlesSection from "@/components/ArticlesSection";
 import CommunitySection from "@/components/CommunitySection";
 import AboutSection from "@/components/AboutSection";
-import PasswordGeneratorSection from "@/components/PasswordGeneratorSection";
+import PasswordGeneratorSection from "@/components/PasswordGenerator";
 
 const Index = () => {
   return (
