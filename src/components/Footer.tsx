@@ -71,7 +71,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
-              A sua dose diária de conhecimento em Segurança da Informação.
+              Desde 2023 a sua dose diária de conhecimento em Segurança da Informação.
             </p>
           </div>
 
