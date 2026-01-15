@@ -21,6 +21,11 @@ export function useScrollReveal({
       return;
     }
 
+    if (!("IntersectionObserver" in window)) {
+      setIsVisible(true);
+      return;
+    }
+
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (prefersReducedMotion.matches) {
       setIsVisible(true);
