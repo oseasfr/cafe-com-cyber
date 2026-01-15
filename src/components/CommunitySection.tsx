@@ -29,11 +29,8 @@ const CommunitySection = () => {
 
   return (
     <section id="community" className="py-20 relative overflow-hidden">
-      {/* Background Effects - Mesmo do HeroSection */}
       <div className="absolute inset-0 bg-gradient-dark"></div>
       <div className="absolute inset-0 bg-gradient-cyber opacity-30"></div>
-      
-      {/* Animated Grid Background - Mesmo do HeroSection */}
       <div className="absolute inset-0 opacity-20">
         <div className="h-full w-full bg-[linear-gradient(hsl(var(--border))_1px,transparent_1px),linear-gradient(90deg,hsl(var(--border))_1px,transparent_1px)] bg-[size:50px_50px] animate-pulse"></div>
       </div>
@@ -50,7 +47,6 @@ const CommunitySection = () => {
           </div>
         </ScrollReveal>
 
-        {/* Features Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {communityFeatures.map((feature, index) => {
             const IconComponent = feature.icon;
@@ -74,14 +70,13 @@ const CommunitySection = () => {
           })}
         </div>
 
-        {/* Community Guidelines */}
         <ScrollReveal delay={480}>
           <Card className="max-w-4xl mx-auto border-primary/20 hover:border-primary/50 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 group">
             <CardHeader className="text-center">
               <div className="w-16 h-16 mx-auto rounded-full bg-gradient-cyber flex items-center justify-center mb-4">
                 <Coffee className="h-8 w-8 text-primary animate-cyber-float" />
               </div>
-              <CardTitle className="text-2xl group-hover:text-primary transition-colors">Diretrizes da Comunidade</CardTitle>
+                 <CardTitle className="text-2xl group-hover:text-primary transition-colors">Diretrizes da Comunidade</CardTitle>
             </CardHeader>
             <CardContent className="text-center space-y-6">
               <p className="text-muted-foreground leading-relaxed">
