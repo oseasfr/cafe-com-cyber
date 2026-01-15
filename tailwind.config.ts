@@ -76,12 +76,17 @@ const config = {
           "50%": {
             filter: "drop-shadow(0 0 10px var(--tw-color-primary))"
           }
+        },
+        "fade-up": {
+          "0%": { opacity: "0", transform: "translateY(24px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
         }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "glow-pulse": "glow-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "fade-up": "fade-up 0.7s ease-out forwards",
       },
       boxShadow: {
         "cyber-soft": "0 0 15px 5px rgba(var(--cyber-glow-rgb), 0.2)",
