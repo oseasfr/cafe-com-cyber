@@ -23,9 +23,35 @@ const ArticlesSection = memo(() => {
 
   // Ordena os artigos APENAS por data de publicação (mais recente primeiro)
   // Ignora featured e priority para exibir os mais recentes na home
+  const now = new Date().getTime();
   const recentArticles = [...articles].sort((a, b) => {
-    const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
-    const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+    let dateA = 0;
+    let dateB = 0;
+    
+    if (a.publishedAt) {
+      // Trata timezone: se não tem Z, assume UTC
+      const dateStr = a.publishedAt.includes('T') && !a.publishedAt.includes('Z') && !a.publishedAt.includes('+') && !a.publishedAt.includes('-', 10)
+        ? a.publishedAt + 'Z'
+        : a.publishedAt;
+      dateA = new Date(dateStr).getTime();
+      // Se a data for futura, considera como se fosse hoje para ordenação (vem por último)
+      if (dateA > now) {
+        dateA = now;
+      }
+    }
+    
+    if (b.publishedAt) {
+      // Trata timezone: se não tem Z, assume UTC
+      const dateStr = b.publishedAt.includes('T') && !b.publishedAt.includes('Z') && !b.publishedAt.includes('+') && !b.publishedAt.includes('-', 10)
+        ? b.publishedAt + 'Z'
+        : b.publishedAt;
+      dateB = new Date(dateStr).getTime();
+      // Se a data for futura, considera como se fosse hoje para ordenação (vem por último)
+      if (dateB > now) {
+        dateB = now;
+      }
+    }
+    
     return dateB - dateA; // Mais recente primeiro
   });
 
