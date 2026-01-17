@@ -23,35 +23,55 @@ export function formatDaysAgo(date: string | Date | undefined): string {
     }
 
     const now = new Date();
-    const diffTime = now.getTime() - dateObj.getTime();
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    
+    // Normaliza as datas para o início do dia (meia-noite) para calcular apenas dias completos
+    // Isso evita problemas de timezone e horas
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const publishDate = new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate());
+    
+    // Calcula a diferença em milissegundos
+    const diffTime = today.getTime() - publishDate.getTime();
+    
+    // Calcula a diferença em dias (positiva = passado, negativa = futuro)
+    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 
-    // Se for hoje (menos de 24 horas)
+    // Se a data for no futuro (mais de 1 dia)
+    if (diffDays < 0) {
+      // Se for muito próximo (menos de 1 dia no futuro), considera como hoje
+      if (diffDays >= -1) {
+        return "hoje";
+      }
+      // Caso contrário, mostra a data formatada normal
+      const day = String(publishDate.getDate()).padStart(2, "0");
+      const month = String(publishDate.getMonth() + 1).padStart(2, "0");
+      const year = publishDate.getFullYear();
+      return `${day}/${month}/${year}`;
+    }
+
+    // Se for hoje (0 dias de diferença)
     if (diffDays === 0) {
-      const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
-      if (diffHours === 0) {
-        const diffMinutes = Math.floor(diffTime / (1000 * 60));
-        if (diffMinutes === 0) {
-          return "Poucos segundos atrás";
+      // Calcula horas/minutos apenas se a data original tiver hora
+      const hoursDiff = Math.floor((now.getTime() - dateObj.getTime()) / (1000 * 60 * 60));
+      if (hoursDiff === 0) {
+        const minutesDiff = Math.floor((now.getTime() - dateObj.getTime()) / (1000 * 60));
+        if (minutesDiff <= 1) {
+          return "há poucos instantes";
         }
-        if (diffMinutes === 1) {
-          return "1 minuto atrás";
-        }
-        return `${diffMinutes} minutos atrás`;
+        return `há ${minutesDiff} minutos`;
       }
-      if (diffHours === 1) {
-        return "1 hora atrás";
+      if (hoursDiff === 1) {
+        return "há 1 hora";
       }
-      return `${diffHours} horas atrás`;
+      return `há ${hoursDiff} horas`;
     }
 
     // Se for há 1 dia
     if (diffDays === 1) {
-      return "1 dia atrás";
+      return "há 1 dia";
     }
 
     // Se for há mais de 1 dia
-    return `${diffDays} dias atrás`;
+    return `há ${diffDays} dias`;
   } catch (error) {
     console.error("Erro ao calcular dias:", error);
     return "Data inválida";
