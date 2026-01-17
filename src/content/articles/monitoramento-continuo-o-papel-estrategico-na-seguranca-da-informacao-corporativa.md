@@ -13,7 +13,7 @@ readTime: "10 minutos de leitura"
 category: "Security"
 icon: "Activity"
 gradient: "from-primary/20 to-accent/20"
-publishedAt: "2025-01-15T10:00:00"
+publishedAt: "2026-01-15T10:00:00"
 tags: [monitoramento, segurança, SIEM, DevSecOps, compliance, forense]
 imageUrl: "/images/articles/monitoramento-continuo.jpg"
 ---
