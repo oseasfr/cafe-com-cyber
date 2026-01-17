@@ -68,7 +68,7 @@ const ArticlesSection = memo(() => {
         </ScrollReveal>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {topRecentArticles.map((article, index) => (
-            <ScrollReveal key={article.id} delay={index * 120}>
+            <ScrollReveal key={article.id} delay={index * 120} className="h-full">
               <ArticleCard article={article} />
             </ScrollReveal>
           ))}
