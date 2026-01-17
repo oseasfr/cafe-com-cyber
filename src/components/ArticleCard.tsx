@@ -44,7 +44,7 @@ export const ArticleCard = ({ article }: ArticleProps) => {
                 </div>
             </CardHeader>
             <CardContent className="space-y-4 flex flex-col flex-grow">
-                <CardDescription className="text-sm leading-relaxed line-clamp-3">
+                <CardDescription className="text-sm leading-relaxed line-clamp-4">
                     {article.description}
                 </CardDescription>
                 <div className="flex items-center justify-between text-xs text-muted-foreground">
