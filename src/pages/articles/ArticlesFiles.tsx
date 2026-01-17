@@ -20,6 +20,40 @@ export default function ArticlesArchive() {
     );
   }
 
+  // Ordena os artigos APENAS por data de publicação (mais recente primeiro)
+  // Ignora featured e priority para exibir sempre os mais recentes primeiro
+  const now = new Date().getTime();
+  const sortedArticles = [...articles].sort((a, b) => {
+    let dateA = 0;
+    let dateB = 0;
+    
+    if (a.publishedAt) {
+      // Trata timezone: se não tem Z, assume UTC
+      const dateStr = a.publishedAt.includes('T') && !a.publishedAt.includes('Z') && !a.publishedAt.includes('+') && !a.publishedAt.includes('-', 10)
+        ? a.publishedAt + 'Z'
+        : a.publishedAt;
+      dateA = new Date(dateStr).getTime();
+      // Se a data for futura, considera como se fosse hoje para ordenação (vem por último)
+      if (dateA > now) {
+        dateA = now;
+      }
+    }
+    
+    if (b.publishedAt) {
+      // Trata timezone: se não tem Z, assume UTC
+      const dateStr = b.publishedAt.includes('T') && !b.publishedAt.includes('Z') && !b.publishedAt.includes('+') && !b.publishedAt.includes('-', 10)
+        ? b.publishedAt + 'Z'
+        : b.publishedAt;
+      dateB = new Date(dateStr).getTime();
+      // Se a data for futura, considera como se fosse hoje para ordenação (vem por último)
+      if (dateB > now) {
+        dateB = now;
+      }
+    }
+    
+    return dateB - dateA; // Mais recente primeiro
+  });
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -36,8 +70,8 @@ export default function ArticlesArchive() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {articles.map((article) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+          {sortedArticles.map((article) => (
             <ArticleCard key={article.id} article={article} />
           ))}
         </div>
