@@ -15,7 +15,21 @@ export function formatDaysAgo(date: string | Date | undefined): string {
   }
 
   try {
-    const dateObj = typeof date === "string" ? new Date(date) : date;
+    let dateObj: Date;
+    
+    if (typeof date === "string") {
+      // Se a string não tem timezone (formato "YYYY-MM-DDTHH:mm:ss"), 
+      // assume que é UTC para evitar problemas de timezone local
+      if (date.includes('T') && !date.includes('Z') && !date.includes('+') && !date.includes('-', 10)) {
+        // Formato: "2025-01-15T10:00:00" - adiciona Z para UTC
+        dateObj = new Date(date + 'Z');
+      } else {
+        // Já tem timezone ou formato diferente
+        dateObj = new Date(date);
+      }
+    } else {
+      dateObj = date;
+    }
 
     // Verifica se a data é válida
     if (isNaN(dateObj.getTime())) {
@@ -24,34 +38,43 @@ export function formatDaysAgo(date: string | Date | undefined): string {
 
     const now = new Date();
     
-    // Normaliza as datas para o início do dia (meia-noite) para calcular apenas dias completos
-    // Isso evita problemas de timezone e horas
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const publishDate = new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate());
+    // Converte ambas as datas para UTC no início do dia para evitar problemas de timezone
+    // Usa UTC para garantir consistência independente do timezone do navegador
+    const todayUTC = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+    const publishDateUTC = new Date(Date.UTC(dateObj.getUTCFullYear(), dateObj.getUTCMonth(), dateObj.getUTCDate()));
     
     // Calcula a diferença em milissegundos
-    const diffTime = today.getTime() - publishDate.getTime();
+    const diffTime = todayUTC.getTime() - publishDateUTC.getTime();
     
     // Calcula a diferença em dias (positiva = passado, negativa = futuro)
-    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-    // Se a data for no futuro (mais de 1 dia)
+    // Se a data for no futuro
     if (diffDays < 0) {
       // Se for muito próximo (menos de 1 dia no futuro), considera como hoje
       if (diffDays >= -1) {
         return "hoje";
       }
-      // Caso contrário, mostra a data formatada normal
-      const day = String(publishDate.getDate()).padStart(2, "0");
-      const month = String(publishDate.getMonth() + 1).padStart(2, "0");
-      const year = publishDate.getFullYear();
+      // Para datas futuras, mostra "em breve" ou a data formatada
+      // Mas se a diferença for pequena (menos de 30 dias), mostra quantos dias falta
+      if (diffDays >= -30) {
+        return `em ${Math.abs(diffDays)} dias`;
+      }
+      // Caso contrário, mostra a data formatada
+      const day = String(publishDateUTC.getUTCDate()).padStart(2, "0");
+      const month = String(publishDateUTC.getUTCMonth() + 1).padStart(2, "0");
+      const year = publishDateUTC.getUTCFullYear();
       return `${day}/${month}/${year}`;
     }
 
     // Se for hoje (0 dias de diferença)
     if (diffDays === 0) {
-      // Calcula horas/minutos apenas se a data original tiver hora
+      // Calcula horas/minutos da diferença real (com hora)
       const hoursDiff = Math.floor((now.getTime() - dateObj.getTime()) / (1000 * 60 * 60));
+      if (hoursDiff < 0) {
+        // Se ainda não passou (futuro dentro do mesmo dia)
+        return "hoje";
+      }
       if (hoursDiff === 0) {
         const minutesDiff = Math.floor((now.getTime() - dateObj.getTime()) / (1000 * 60));
         if (minutesDiff <= 1) {
