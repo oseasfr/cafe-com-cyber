@@ -32,26 +32,26 @@ export function formatDaysAgo(date: string | Date | undefined): string {
       if (diffHours === 0) {
         const diffMinutes = Math.floor(diffTime / (1000 * 60));
         if (diffMinutes === 0) {
-          return "há poucos segundos";
+          return "Poucos segundos atrás";
         }
         if (diffMinutes === 1) {
-          return "há 1 minuto";
+          return "1 minuto atrás";
         }
-        return `há ${diffMinutes} minutos`;
+        return `${diffMinutes} minutos atrás`;
       }
       if (diffHours === 1) {
-        return "há 1 hora";
+        return "1 hora atrás";
       }
-      return `há ${diffHours} horas`;
+      return `${diffHours} horas atrás`;
     }
 
     // Se for há 1 dia
     if (diffDays === 1) {
-      return "há 1 dia";
+      return "1 dia atrás";
     }
 
     // Se for há mais de 1 dia
-    return `há ${diffDays} dias`;
+    return `${diffDays} dias atrás`;
   } catch (error) {
     console.error("Erro ao calcular dias:", error);
     return "Data inválida";
