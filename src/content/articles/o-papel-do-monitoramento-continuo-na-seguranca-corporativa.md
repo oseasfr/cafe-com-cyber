@@ -1,6 +1,6 @@
 ---
-id: o-papel-do-monitoramento-continuo-na-seguranca-corporativa
-title: "O Papel do Monitoramento Contínuo na Segurança Corporativa"
+id: monitoramento-continuo-o-papel-estrategico-na-seguranca-da-informacao-corporativa
+title: "Monitoramento Contínuo: O Papel Estratégico na Segurança da Informação corporativa"
 description: "Entenda como o monitoramento contínuo se tornou indispensável para prevenir incidentes, reduzir MTTD/MTTR e preservar a continuidade dos negócios em ambientes corporativos modernos."
 author: "Roberto Duarte"
 authorFirstName: "Roberto"
@@ -18,7 +18,7 @@ tags: [monitoramento, segurança, SIEM, DevSecOps, compliance, forense]
 imageUrl: "/images/articles/monitoramento-continuo.jpg"
 ---
 
-# O Papel do Monitoramento Contínuo na Segurança Corporativa
+# Monitoramento Contínuo: O Papel Estratégico na Segurança da Informação corporativa
 
 A segurança da informação evoluiu para além de firewalls e antivírus. Em um ambiente corporativo cada vez mais distribuído, com aplicações em nuvem, usuários remotos e sistemas críticos interconectados, a capacidade de monitorar continuamente a rede, o desenvolvimento e a infraestrutura de TI tornou-se indispensável para prevenir incidentes e preservar a continuidade dos negócios.
 
