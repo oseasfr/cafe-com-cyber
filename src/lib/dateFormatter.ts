@@ -5,9 +5,64 @@
  */
 
 /**
+ * Calcula quantos dias se passaram desde a data fornecida até hoje
+ * @param date - Data em formato ISO string, Date object, ou string compatível
+ * @returns String formatada: "há X dias", "há 1 dia", "hoje", etc.
+ */
+export function formatDaysAgo(date: string | Date | undefined): string {
+  if (!date) {
+    return "Data não disponível";
+  }
+
+  try {
+    const dateObj = typeof date === "string" ? new Date(date) : date;
+
+    // Verifica se a data é válida
+    if (isNaN(dateObj.getTime())) {
+      return "Data inválida";
+    }
+
+    const now = new Date();
+    const diffTime = now.getTime() - dateObj.getTime();
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    // Se for hoje (menos de 24 horas)
+    if (diffDays === 0) {
+      const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+      if (diffHours === 0) {
+        const diffMinutes = Math.floor(diffTime / (1000 * 60));
+        if (diffMinutes === 0) {
+          return "há poucos segundos";
+        }
+        if (diffMinutes === 1) {
+          return "há 1 minuto";
+        }
+        return `há ${diffMinutes} minutos`;
+      }
+      if (diffHours === 1) {
+        return "há 1 hora";
+      }
+      return `há ${diffHours} horas`;
+    }
+
+    // Se for há 1 dia
+    if (diffDays === 1) {
+      return "há 1 dia";
+    }
+
+    // Se for há mais de 1 dia
+    return `há ${diffDays} dias`;
+  } catch (error) {
+    console.error("Erro ao calcular dias:", error);
+    return "Data inválida";
+  }
+}
+
+/**
  * Formata uma data para o padrão brasileiro
  * @param date - Data em formato ISO string, Date object, ou string compatível
  * @returns String formatada: "DD/MM/AAAA, às HH:MM"
+ * @deprecated Use formatDaysAgo() para exibir "há X dias"
  */
 export function formatArticleDate(date: string | Date | undefined): string {
   if (!date) {
