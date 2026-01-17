@@ -1,4 +1,4 @@
-import { formatArticleDate } from '../lib/dateFormatter';
+import { formatDaysAgo } from '../lib/dateFormatter';
 
 interface AuthorHeaderProps {
   author: string; // Nome completo (fallback)
@@ -21,7 +21,7 @@ export function AuthorHeader({
   publishedAt, 
   readTime
 }: AuthorHeaderProps) {
-  const formattedDate = formatArticleDate(publishedAt);
+  const formattedDate = formatDaysAgo(publishedAt);
   
   // Usa firstName/lastName se disponível, senão usa o nome completo
   const firstName = authorFirstName || author.split(' ')[0] || author;
@@ -29,7 +29,19 @@ export function AuthorHeader({
   const displayName = authorFirstName && authorLastName 
     ? `${authorFirstName} ${authorLastName}` 
     : author;
-  const avatarUrl = authorAvatar || "/images/authors/default-avatar.jpg";
+  
+  // Processa a URL do avatar da mesma forma que imageUrl é processado
+  const getAvatarUrl = () => {
+    const avatarPath = authorAvatar || "/images/authors/default-avatar.jpg";
+    if (avatarPath.startsWith('http')) {
+      return avatarPath;
+    }
+    // Garante que comece com / se não começar
+    const path = avatarPath.startsWith('/') ? avatarPath : '/' + avatarPath;
+    return typeof window !== 'undefined' ? window.location.origin + path : path;
+  };
+  
+  const avatarUrl = getAvatarUrl();
 
   return (
     <div className="text-gray-400 mb-8 flex items-center space-x-3">
@@ -41,8 +53,12 @@ export function AuthorHeader({
         onError={(e) => {
           // Fallback para avatar padrão se imagem não carregar
           const target = e.target as HTMLImageElement;
-          if (target.src !== "/images/authors/default-avatar.jpg") {
-            target.src = "/images/authors/default-avatar.jpg";
+          const defaultPath = "/images/authors/default-avatar.jpg";
+          const defaultUrl = typeof window !== 'undefined' 
+            ? window.location.origin + defaultPath 
+            : defaultPath;
+          if (!target.src.includes('default-avatar')) {
+            target.src = defaultUrl;
           }
         }}
       />
