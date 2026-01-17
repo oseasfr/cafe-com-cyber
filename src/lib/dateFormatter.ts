@@ -55,10 +55,10 @@ export function formatDaysAgo(date: string | Date | undefined): string {
       if (diffDays >= -1) {
         return "hoje";
       }
-      // Para datas futuras, mostra "em breve" ou a data formatada
+      // Para datas futuras, mostra "há X dias" ou a data formatada
       // Mas se a diferença for pequena (menos de 30 dias), mostra quantos dias falta
       if (diffDays >= -30) {
-        return `em ${Math.abs(diffDays)} dias`;
+        return `há ${Math.abs(diffDays)} dias`;
       }
       // Caso contrário, mostra a data formatada
       const day = String(publishDateUTC.getUTCDate()).padStart(2, "0");
