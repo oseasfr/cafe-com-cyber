@@ -24,7 +24,7 @@ export const ArticleCard = ({ article }: ArticleProps) => {
     const { icon: faIcon, color } = getArticleIcon(article.category, article.icon);
 
     return (
-        <Card className="group hover:shadow-cyber-soft transition-all duration-300 border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur hover:shadow-lg hover:shadow-primary/5 flex flex-col h-full">
+        <Card className="group hover:shadow-cyber-soft transition-all duration-300 border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur hover:shadow-lg hover:shadow-primary/5 flex flex-col">
             <CardHeader className="space-y-4">
                 <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${article.gradient} flex items-center justify-center group-hover:animate-glow-pulse`}>
                     <i className={`fa-solid ${faIcon} text-lg ${color}`} aria-hidden="true" />
