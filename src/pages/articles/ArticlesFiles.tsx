@@ -22,36 +22,28 @@ export default function ArticlesArchive() {
 
   // Ordena os artigos APENAS por data de publicação (mais recente primeiro)
   // Ignora featured e priority para exibir sempre os mais recentes primeiro
-  const now = new Date().getTime();
   const sortedArticles = [...articles].sort((a, b) => {
-    let dateA = 0;
-    let dateB = 0;
-    
-    if (a.publishedAt) {
-      // Trata timezone: se não tem Z, assume UTC
-      const dateStr = a.publishedAt.includes('T') && !a.publishedAt.includes('Z') && !a.publishedAt.includes('+') && !a.publishedAt.includes('-', 10)
-        ? a.publishedAt + 'Z'
-        : a.publishedAt;
-      dateA = new Date(dateStr).getTime();
-      // Se a data for futura, considera como se fosse hoje para ordenação (vem por último)
-      if (dateA > now) {
-        dateA = now;
+    // Função auxiliar para normalizar a data e obter timestamp
+    const getTimestamp = (publishedAt: string | undefined): number => {
+      if (!publishedAt) return 0;
+      
+      // Se não tem timezone (formato "YYYY-MM-DDTHH:mm:ss"), adiciona Z para UTC
+      let dateStr = publishedAt;
+      if (dateStr.includes('T')) {
+        const hasTimezone = dateStr.includes('Z') || dateStr.includes('+') || dateStr.match(/[+-]\d{2}:?\d{2}$/);
+        if (!hasTimezone) {
+          dateStr = dateStr + 'Z';
+        }
       }
-    }
+      
+      return new Date(dateStr).getTime();
+    };
     
-    if (b.publishedAt) {
-      // Trata timezone: se não tem Z, assume UTC
-      const dateStr = b.publishedAt.includes('T') && !b.publishedAt.includes('Z') && !b.publishedAt.includes('+') && !b.publishedAt.includes('-', 10)
-        ? b.publishedAt + 'Z'
-        : b.publishedAt;
-      dateB = new Date(dateStr).getTime();
-      // Se a data for futura, considera como se fosse hoje para ordenação (vem por último)
-      if (dateB > now) {
-        dateB = now;
-      }
-    }
+    const dateA = getTimestamp(a.publishedAt);
+    const dateB = getTimestamp(b.publishedAt);
     
-    return dateB - dateA; // Mais recente primeiro
+    // Ordena: mais recente primeiro (data maior vem primeiro)
+    return dateB - dateA;
   });
 
   return (
