@@ -1,7 +1,7 @@
 ---
 id: monitoramento-continuo-o-papel-estrategico-na-seguranca-da-informacao-corporativa
 title: "Monitoramento Contínuo: O Papel Estratégico na Segurança da Informação corporativa"
-description: "Entenda como o monitoramento contínuo se tornou indispensável para prevenir incidentes, reduzir MTTD/MTTR e preservar a continuidade dos negócios em ambientes corporativos modernos."
+description: "Entenda por que o monitoramento contínuo é essencial para prevenir incidentes e garantir a continuidade dos negócios."
 author: "Roberto Duarte"
 authorFirstName: "Roberto"
 authorLastName: "Duarte"
