@@ -33,7 +33,7 @@ export const ArticleCard = ({ article }: ArticleProps) => {
                     <Badge variant="secondary" className="text-xs">
                         {article.category}
                     </Badge>
-                    <CardTitle className="text-xl group-hover:text-primary transition-colors line-clamp-3">
+                    <CardTitle className="text-xl group-hover:text-primary transition-colors line-clamp-4">
                         <Link 
                             to={`/articles/${article.id}`} 
                             className="no-underline hover:text-primary"
@@ -44,7 +44,7 @@ export const ArticleCard = ({ article }: ArticleProps) => {
                 </div>
             </CardHeader>
             <CardContent className="space-y-4 flex flex-col flex-grow">
-                <CardDescription className="text-sm leading-relaxed line-clamp-2">
+                <CardDescription className="text-sm leading-relaxed line-clamp-3">
                     {article.description}
                 </CardDescription>
                 <div className="flex items-center justify-between text-xs text-muted-foreground">
