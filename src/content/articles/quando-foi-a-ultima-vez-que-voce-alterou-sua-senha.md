@@ -13,7 +13,7 @@ readTime: "8 minutos de leitura"
 category: "Password Security"
 icon: "Key"
 gradient: "from-primary/20 to-accent/20"
-publishedAt: "2026-02-01T00:00:00"
+publishedAt: "2026-01-10T00:00:00"
 tags: [segurança, passwords, mfa, 2fa, senhas]
 imageUrl: "/images/articles/qfauvqvass.jpg"
 featured: false
