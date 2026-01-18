@@ -42,7 +42,7 @@ const CommunitySection = () => {
               Nossa <span className="text-primary">Comunidade</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Um espaço dedicado à troca de conhecimento sobre cibersegurança
+              Um espaço dedicado à troca de conhecimento
             </p>
           </div>
         </ScrollReveal>
