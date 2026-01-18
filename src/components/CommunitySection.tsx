@@ -42,7 +42,7 @@ const CommunitySection = () => {
               Nossa <span className="text-primary">Comunidade</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Um espaço dedicado à troca de conhecimento sobre Cybersecurity com analistas apaixonados por segurança da informação
+              Um espaço dedicado à troca de conhecimento sobre cibersegurança
             </p>
           </div>
         </ScrollReveal>
@@ -80,7 +80,7 @@ const CommunitySection = () => {
             </CardHeader>
             <CardContent className="text-center space-y-6">
               <p className="text-muted-foreground leading-relaxed">
-                Nossa comunidade é um espaço de aprendizado e colaboração. Respeite os membros, compartilhe conhecimento e mantenha um ambiente positivo e construtivo.
+                Nossa comunidade é um espaço de aprendizado e colaboração.
               </p>
               
               <div className="flex flex-wrap justify-center gap-4">
@@ -105,7 +105,7 @@ const CommunitySection = () => {
                 }
                 >
                 <MessageCircle className="mr-2 h-5 w-5" />
-                Entrar no WhatsApp
+                Entrar no grupo do WhatsApp
               </Button>
             </CardContent>
           </Card>
