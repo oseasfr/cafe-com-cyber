@@ -39,7 +39,7 @@ const AboutPage = () => {
             Sobre o <span className="text-primary">Café com Cyber</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Uma iniciativa dedicada a democratizar o conhecimento em Segurança da Informação
+            Uma iniciativa dedicada a democratizar o conhecimento em Segurança da Informação.
           </p>
         </div>
 
@@ -55,7 +55,7 @@ const AboutPage = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground leading-relaxed">
-                O Café com Cyber surgiu de uma necessidade de um espaço colaborativo, onde 
+                O Café com Cyber surgiu da necessidade de um espaço colaborativo, onde 
                 a cibersegurança fosse acessível a todos pelo compartilhamento de conhecimento e experiências. Nossa comunidade 
                 tem o intuido de trazer conteúdos de qualidade, discussões técnicas abertas entre os membros e colaboração contínua.
               </p>
