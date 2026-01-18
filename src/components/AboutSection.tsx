@@ -34,7 +34,7 @@ const ArticlesSection = memo(() => {
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Conteúdo de qualidade produzido pela nossa comunidade de
-            especialistas em cybersecurity
+            especialistas
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
