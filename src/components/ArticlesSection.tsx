@@ -62,7 +62,7 @@ const ArticlesSection = memo(() => {
               Artigos em <span className="text-primary">Destaque</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Conteúdo de qualidade produzido pela nossa comunidade de especialistas em cybersecurity
+              Conteúdo de qualidade produzido pela nossa comunidade de especialistas em cibersegurança
             </p>
           </div>
         </ScrollReveal>
