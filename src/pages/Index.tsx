@@ -56,9 +56,9 @@ const Index = () => {
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   O Café com Cyber é uma iniciativa dedicada a democratizar o conhecimento em 
-                  Segurança da Informação. Nossa missão é criar um espaço colaborativo onde 
+                  Segurança da Informação, através de um espaço colaborativo onde 
                   profissionais, entusiastas e estudantes possam compartilhar experiências, 
-                  aprender juntos e fortalecer a comunidade de cibersegurança no Brasil.
+                  aprender juntos e fortalecer a comunidade.
                 </p>
                 <div className="pt-4">
                   <Link to="/sobre-nos">
