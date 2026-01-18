@@ -23,7 +23,7 @@ const CommunitySection = () => {
     {
       icon: Trophy,
       title: "Conscientização",
-      description: "Promovemos a importância da segurança digital através de memes e alertas"
+      description: "Promovemos a importância da segurança digital através de conteúdos lúdicos e alertas"
     }
   ];
 
