@@ -152,7 +152,7 @@ export default function ArticlePage() {
     return () => {
       document.title = 'Café com Cyber';
       updateMetaTag('og:title', 'Café com Cyber');
-      updateMetaTag('og:description', 'Blog de cybersecurity com artigos, notícias e insights da comunidade de analistas.');
+      updateMetaTag('og:description', 'Blog de cibersegurança com artigos, notícias e insights da comunidade de analistas.');
       updateMetaTag('og:type', 'website');
       updateMetaTag('og:url', window.location.origin);
       updateMetaTag('og:image', window.location.origin + '/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png');
