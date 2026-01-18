@@ -55,7 +55,7 @@ export default function ArticlesArchive() {
             Todos os <span className="text-primary">Artigos</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Explore nossa coleção completa de artigos sobre cybersecurity
+            Explore nossa coleção completa de artigos sobre cibersegurança
           </p>
           <p className="text-sm text-muted-foreground mt-2">
             {articles.length} {articles.length === 1 ? 'artigo encontrado' : 'artigos encontrados'}
