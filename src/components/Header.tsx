@@ -99,7 +99,7 @@ const Header = () => {
             <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Café com Cyber
             </h1>
-            <p className="text-xs text-muted-foreground">Conteúdos diversos sobre Cybersecurity</p>
+            <p className="text-xs text-muted-foreground">Conteúdos diversos sobre Cibersegurança</p>
           </div>
         </div>
 
