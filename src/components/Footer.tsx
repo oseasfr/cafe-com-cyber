@@ -67,7 +67,7 @@ const Footer = () => {
                 <h3 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   Café com Cyber
                 </h3>
-                <p className="text-xs text-muted-foreground">Conteúdos diversos sobre Cybersecurity</p>
+                <p className="text-xs text-muted-foreground">Conteúdos diversos sobre Cibersegurança</p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground">
