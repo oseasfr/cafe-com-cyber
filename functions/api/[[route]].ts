@@ -12,46 +12,56 @@ interface Comment {
   created_at: string;
 }
 
-// Inicializa as tabelas se não existirem
+// Inicializa as tabelas se não existirem (separado por statements)
 async function initDB(db: D1Database) {
-  await db.exec(`
-    CREATE TABLE IF NOT EXISTS article_stats (
-      article_id TEXT PRIMARY KEY,
-      views INTEGER DEFAULT 0,
-      likes INTEGER DEFAULT 0
-    );
+  try {
+    await db.prepare(`
+      CREATE TABLE IF NOT EXISTS article_stats (
+        article_id TEXT PRIMARY KEY,
+        views INTEGER DEFAULT 0,
+        likes INTEGER DEFAULT 0
+      )
+    `).run();
     
-    CREATE TABLE IF NOT EXISTS article_likes (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      article_id TEXT NOT NULL,
-      visitor_id TEXT NOT NULL,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      UNIQUE(article_id, visitor_id)
-    );
+    await db.prepare(`
+      CREATE TABLE IF NOT EXISTS article_likes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        article_id TEXT NOT NULL,
+        visitor_id TEXT NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(article_id, visitor_id)
+      )
+    `).run();
     
-    CREATE TABLE IF NOT EXISTS comments (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      article_id TEXT NOT NULL,
-      parent_id INTEGER,
-      author_name TEXT NOT NULL,
-      content TEXT NOT NULL,
-      likes INTEGER DEFAULT 0,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (parent_id) REFERENCES comments(id)
-    );
+    await db.prepare(`
+      CREATE TABLE IF NOT EXISTS comments (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        article_id TEXT NOT NULL,
+        parent_id INTEGER,
+        author_name TEXT NOT NULL,
+        content TEXT NOT NULL,
+        likes INTEGER DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      )
+    `).run();
     
-    CREATE TABLE IF NOT EXISTS comment_likes (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      comment_id INTEGER NOT NULL,
-      visitor_id TEXT NOT NULL,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      UNIQUE(comment_id, visitor_id),
-      FOREIGN KEY (comment_id) REFERENCES comments(id)
-    );
-    
-    CREATE INDEX IF NOT EXISTS idx_comments_article ON comments(article_id);
-    CREATE INDEX IF NOT EXISTS idx_comments_parent ON comments(parent_id);
-  `);
+    await db.prepare(`
+      CREATE TABLE IF NOT EXISTS comment_likes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        comment_id INTEGER NOT NULL,
+        visitor_id TEXT NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(comment_id, visitor_id)
+      )
+    `).run();
+
+    // Criar índices separadamente
+    await db.prepare(`CREATE INDEX IF NOT EXISTS idx_comments_article ON comments(article_id)`).run();
+    await db.prepare(`CREATE INDEX IF NOT EXISTS idx_comments_parent ON comments(parent_id)`).run();
+  } catch (error) {
+    console.error('Error initializing DB:', error);
+    // Ignora erros se as tabelas já existem
+  }
 }
 
 // Gera um ID único para o visitante baseado em headers
@@ -60,7 +70,6 @@ function getVisitorId(request: Request): string {
   const userAgent = request.headers.get('user-agent') || 'unknown';
   const combined = `${ip}-${userAgent}`;
   
-  // Simple hash
   let hash = 0;
   for (let i = 0; i < combined.length; i++) {
     const char = combined.charCodeAt(i);
@@ -77,14 +86,30 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
+function jsonResponse(data: any, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+  });
+}
+
 export const onRequest: PagesFunction<Env> = async (context) => {
   const { request, env, params } = context;
   const url = new URL(request.url);
-  const path = params.route ? (Array.isArray(params.route) ? params.route.join('/') : params.route) : '';
+  const routeParam = params.route;
+  const path = routeParam 
+    ? (Array.isArray(routeParam) ? routeParam.join('/') : routeParam) 
+    : '';
   
   // Handle CORS preflight
   if (request.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
+  }
+
+  // Verifica se o DB está disponível
+  if (!env.DB) {
+    console.error('D1 Database not bound');
+    return jsonResponse({ error: 'Database not configured' }, 500);
   }
 
   try {
@@ -105,7 +130,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       // Busca estatísticas
       const stats = await env.DB.prepare(`
         SELECT views, likes FROM article_stats WHERE article_id = ?
-      `).bind(articleId).first();
+      `).bind(articleId).first<{ views: number; likes: number }>();
       
       // Verifica se o visitante já curtiu
       const userLike = await env.DB.prepare(`
@@ -117,19 +142,24 @@ export const onRequest: PagesFunction<Env> = async (context) => {
         SELECT COUNT(*) as count FROM comments WHERE article_id = ?
       `).bind(articleId).first<{ count: number }>();
 
-      return new Response(JSON.stringify({
+      return jsonResponse({
         views: stats?.views || 1,
         likes: stats?.likes || 0,
         comments: commentCount?.count || 0,
         userLiked: !!userLike
-      }), {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
       });
     }
 
     // POST /api/like/:articleId - Curtir/descurtir artigo
     if (request.method === 'POST' && path.startsWith('like/')) {
       const articleId = path.replace('like/', '');
+      
+      // Garante que o artigo existe na tabela de stats
+      await env.DB.prepare(`
+        INSERT INTO article_stats (article_id, views, likes) 
+        VALUES (?, 0, 0)
+        ON CONFLICT(article_id) DO NOTHING
+      `).bind(articleId).run();
       
       // Verifica se já curtiu
       const existingLike = await env.DB.prepare(`
@@ -143,19 +173,14 @@ export const onRequest: PagesFunction<Env> = async (context) => {
         `).bind(articleId, visitorId).run();
         
         await env.DB.prepare(`
-          UPDATE article_stats SET likes = likes - 1 WHERE article_id = ?
+          UPDATE article_stats SET likes = MAX(0, likes - 1) WHERE article_id = ?
         `).bind(articleId).run();
         
         const stats = await env.DB.prepare(`
           SELECT likes FROM article_stats WHERE article_id = ?
-        `).bind(articleId).first();
+        `).bind(articleId).first<{ likes: number }>();
         
-        return new Response(JSON.stringify({ 
-          liked: false, 
-          likes: stats?.likes || 0 
-        }), {
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        });
+        return jsonResponse({ liked: false, likes: stats?.likes || 0 });
       } else {
         // Adiciona curtida
         await env.DB.prepare(`
@@ -163,21 +188,14 @@ export const onRequest: PagesFunction<Env> = async (context) => {
         `).bind(articleId, visitorId).run();
         
         await env.DB.prepare(`
-          INSERT INTO article_stats (article_id, views, likes) 
-          VALUES (?, 0, 1)
-          ON CONFLICT(article_id) DO UPDATE SET likes = likes + 1
+          UPDATE article_stats SET likes = likes + 1 WHERE article_id = ?
         `).bind(articleId).run();
         
         const stats = await env.DB.prepare(`
           SELECT likes FROM article_stats WHERE article_id = ?
-        `).bind(articleId).first();
+        `).bind(articleId).first<{ likes: number }>();
         
-        return new Response(JSON.stringify({ 
-          liked: true, 
-          likes: stats?.likes || 1 
-        }), {
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        });
+        return jsonResponse({ liked: true, likes: stats?.likes || 1 });
       }
     }
 
@@ -201,46 +219,50 @@ export const onRequest: PagesFunction<Env> = async (context) => {
         userLiked: likedCommentIds.has(comment.id)
       }));
 
-      return new Response(JSON.stringify(commentsWithUserLike), {
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-      });
+      return jsonResponse(commentsWithUserLike);
     }
 
     // POST /api/comments/:articleId - Criar comentário
     if (request.method === 'POST' && path.startsWith('comments/')) {
       const articleId = path.replace('comments/', '');
-      const body = await request.json() as { 
-        author_name: string; 
-        content: string; 
-        parent_id?: number 
-      };
+      
+      let body: { author_name?: string; content?: string; parent_id?: number };
+      try {
+        body = await request.json();
+      } catch {
+        return jsonResponse({ error: 'Invalid JSON' }, 400);
+      }
       
       if (!body.author_name || !body.content) {
-        return new Response(JSON.stringify({ error: 'Nome e comentário são obrigatórios' }), {
-          status: 400,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        });
+        return jsonResponse({ error: 'Nome e comentário são obrigatórios' }, 400);
       }
       
       // Limita tamanho
-      const authorName = body.author_name.slice(0, 50);
-      const content = body.content.slice(0, 2000);
+      const authorName = body.author_name.slice(0, 50).trim();
+      const content = body.content.slice(0, 2000).trim();
+      const parentId = body.parent_id || null;
       
-      const result = await env.DB.prepare(`
-        INSERT INTO comments (article_id, parent_id, author_name, content)
-        VALUES (?, ?, ?, ?)
-        RETURNING *
-      `).bind(articleId, body.parent_id || null, authorName, content).first<Comment>();
+      // Insere o comentário
+      const insertResult = await env.DB.prepare(`
+        INSERT INTO comments (article_id, parent_id, author_name, content, likes)
+        VALUES (?, ?, ?, ?, 0)
+      `).bind(articleId, parentId, authorName, content).run();
+      
+      // Busca o comentário inserido
+      const newComment = await env.DB.prepare(`
+        SELECT * FROM comments WHERE id = ?
+      `).bind(insertResult.meta.last_row_id).first<Comment>();
 
-      return new Response(JSON.stringify(result), {
-        status: 201,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-      });
+      return jsonResponse(newComment, 201);
     }
 
     // POST /api/comment-like/:commentId - Curtir/descurtir comentário
     if (request.method === 'POST' && path.startsWith('comment-like/')) {
       const commentId = parseInt(path.replace('comment-like/', ''));
+      
+      if (isNaN(commentId)) {
+        return jsonResponse({ error: 'Invalid comment ID' }, 400);
+      }
       
       const existingLike = await env.DB.prepare(`
         SELECT id FROM comment_likes WHERE comment_id = ? AND visitor_id = ?
@@ -252,19 +274,14 @@ export const onRequest: PagesFunction<Env> = async (context) => {
         `).bind(commentId, visitorId).run();
         
         await env.DB.prepare(`
-          UPDATE comments SET likes = likes - 1 WHERE id = ?
+          UPDATE comments SET likes = MAX(0, likes - 1) WHERE id = ?
         `).bind(commentId).run();
         
         const comment = await env.DB.prepare(`
           SELECT likes FROM comments WHERE id = ?
-        `).bind(commentId).first();
+        `).bind(commentId).first<{ likes: number }>();
         
-        return new Response(JSON.stringify({ 
-          liked: false, 
-          likes: comment?.likes || 0 
-        }), {
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        });
+        return jsonResponse({ liked: false, likes: comment?.likes || 0 });
       } else {
         await env.DB.prepare(`
           INSERT INTO comment_likes (comment_id, visitor_id) VALUES (?, ?)
@@ -276,27 +293,17 @@ export const onRequest: PagesFunction<Env> = async (context) => {
         
         const comment = await env.DB.prepare(`
           SELECT likes FROM comments WHERE id = ?
-        `).bind(commentId).first();
+        `).bind(commentId).first<{ likes: number }>();
         
-        return new Response(JSON.stringify({ 
-          liked: true, 
-          likes: comment?.likes || 1 
-        }), {
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        });
+        return jsonResponse({ liked: true, likes: comment?.likes || 1 });
       }
     }
 
-    return new Response(JSON.stringify({ error: 'Not found' }), {
-      status: 404,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-    });
+    return jsonResponse({ error: 'Not found' }, 404);
 
   } catch (error) {
     console.error('API Error:', error);
-    return new Response(JSON.stringify({ error: 'Internal server error' }), {
-      status: 500,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-    });
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    return jsonResponse({ error: 'Internal server error', details: errorMessage }, 500);
   }
 };
