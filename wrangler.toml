@@ -1,0 +1,7 @@
+name = "cafe-com-cyber"
+compatibility_date = "2024-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ccc-db"
+database_id = "YOUR_DATABASE_ID"
