@@ -27,8 +27,9 @@ interface CommentItemProps {
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
   
-  // Retorna data e hora completa no formato brasileiro
+  // Converte para o timezone do Brasil (America/Sao_Paulo)
   return date.toLocaleString('pt-BR', {
+    timeZone: 'America/Sao_Paulo',
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
