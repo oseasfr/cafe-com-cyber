@@ -4,7 +4,7 @@
 ☕🔐
 ---
 
-##### 🧱 Estrutura do Projeto
+##### Estrutura do Projeto
 
 ```plaintext
 ├── index.html                     # Arquivo HTML principal
