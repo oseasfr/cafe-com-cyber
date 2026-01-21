@@ -163,7 +163,7 @@ const Footer = () => {
             <p className="text-sm text-muted-foreground flex items-center space-x-2">
               <Mail className="h-4 w-4" />
               <a 
-                href="mailto:cafecomcyber@proton.me" 
+                href="mailto:contato@cafecomcyber.com.br" 
                 className="hover:text-primary transition-colors"
               >
                 cafecomcyber@proton.me
