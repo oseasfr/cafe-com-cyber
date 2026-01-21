@@ -166,7 +166,7 @@ const Footer = () => {
                 href="mailto:contato@cafecomcyber.com.br" 
                 className="hover:text-primary transition-colors"
               >
-                cafecomcyber@proton.me
+                contato@cafecomcyber.com.br
               </a>
             </p>
           </div>
