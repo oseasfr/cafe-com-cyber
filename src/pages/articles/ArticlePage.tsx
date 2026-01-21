@@ -4,6 +4,7 @@ import { articles } from '../../data/articles';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ShareButtons from '../../components/ShareButtons';
+import CommentsSection from '../../components/CommentsSection';
 import { AuthorHeader } from '../../components/AuthorHeader';
 import { AuthorBioFooter } from '../../components/AuthorBioFooter';
 import { Button } from '../../components/ui/button';
@@ -195,12 +196,14 @@ export default function ArticlePage() {
           readTime={article.readTime}
         />
 
-        {/* Botões de Compartilhamento - Topo */}
+        {/* Botões de Compartilhamento - Topo (com stats) */}
         <ShareButtons
           title={article.title}
           url={articleUrl}
           description={article.description}
           themeToggle={<ArticleThemeToggle theme={articleTheme.theme} onToggle={articleTheme.toggleTheme} />}
+          articleId={article.id}
+          showStats={true}
         />
 
         {/* Imagem de Capa */}
@@ -228,15 +231,20 @@ export default function ArticlePage() {
           authorSocialType={article.authorSocialType}
         />
 
-        {/* Botões de Compartilhamento - Abaixo da Bio */}
+        {/* Botões de Compartilhamento - Abaixo da Bio (sem stats duplicados) */}
         <div className="mt-8">
           <ShareButtons
             title={article.title}
             url={articleUrl}
             description={article.description}
             themeToggle={<ArticleThemeToggle theme={articleTheme.theme} onToggle={articleTheme.toggleTheme} />}
+            articleId={article.id}
+            showStats={false}
           />
         </div>
+
+        {/* Seção de Comentários */}
+        <CommentsSection articleId={article.id} />
 
         {/* Botão Voltar no Final */}
         <div className="mt-12 pt-8 border-t border-border">
