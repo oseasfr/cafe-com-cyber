@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
 import { Input } from './ui/input';
-import { Heart, MessageCircle, Send, ChevronDown, ChevronUp, User } from 'lucide-react';
+import { ThumbsUp, MessageCircle, Send, ChevronDown, ChevronUp, User } from 'lucide-react';
 import { 
   getComments, 
   createComment, 
-  toggleCommentLike, 
-  type Comment 
+  toggleCommentLike,
+  type Comment
 } from '../lib/api';
 
 interface CommentsSectionProps {
@@ -83,12 +83,12 @@ function CommentItem({
           <button
             onClick={() => onLike(comment.id)}
             disabled={isLiking}
-            className={`flex items-center gap-1 text-sm transition-colors hover:text-red-500 ${
-              comment.userLiked ? 'text-red-500' : 'text-muted-foreground'
+            className={`flex items-center gap-1 text-sm transition-colors hover:text-primary ${
+              comment.userLiked ? 'text-primary' : 'text-muted-foreground'
             }`}
           >
-            <Heart 
-              className={`h-4 w-4 ${comment.userLiked ? 'fill-red-500' : ''} ${isLiking ? 'animate-pulse' : ''}`} 
+            <ThumbsUp 
+              className={`h-4 w-4 ${comment.userLiked ? 'fill-primary' : ''} ${isLiking ? 'animate-pulse' : ''}`} 
             />
             <span>{comment.likes}</span>
           </button>
@@ -228,7 +228,6 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
 
   const handleReply = (parentId: number) => {
     setReplyingTo(parentId);
-    // Scroll to form
     document.getElementById('comment-form')?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -243,7 +242,7 @@ export default function CommentsSection({ articleId }: CommentsSectionProps) {
   const rootComments = comments.filter(c => !c.parent_id);
 
   return (
-    <div className="mt-12 pt-8 border-t border-border">
+    <div id="comments-section" className="mt-12 pt-8 border-t border-border">
       <h3 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-2">
         <MessageCircle className="h-6 w-6 text-primary" />
         Comentários ({comments.length})
