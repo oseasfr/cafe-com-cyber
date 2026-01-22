@@ -25,7 +25,32 @@ interface CommentItemProps {
 }
 
 function formatDate(dateString: string): string {
-  const date = new Date(dateString);
+  let date: Date;
+  
+  // Se a string não tem timezone (formato do SQLite: "YYYY-MM-DD HH:mm:ss"),
+  // assume que é UTC e adiciona 'Z' ou converte para ISO
+  if (typeof dateString === 'string') {
+    // Formato SQLite: "2026-01-21 20:08:00" -> converte para ISO UTC
+    if (dateString.includes(' ') && !dateString.includes('T') && !dateString.includes('Z')) {
+      // Substitui espaço por 'T' e adiciona 'Z' para indicar UTC
+      date = new Date(dateString.replace(' ', 'T') + 'Z');
+    }
+    // Formato ISO sem timezone: "2026-01-21T20:08:00" -> adiciona 'Z'
+    else if (dateString.includes('T') && !dateString.includes('Z') && !dateString.includes('+') && !dateString.includes('-', 10)) {
+      date = new Date(dateString + 'Z');
+    }
+    // Já tem timezone ou formato diferente
+    else {
+      date = new Date(dateString);
+    }
+  } else {
+    date = new Date(dateString);
+  }
+  
+  // Verifica se a data é válida
+  if (isNaN(date.getTime())) {
+    return 'Data inválida';
+  }
   
   // Converte para o timezone do Brasil (America/Sao_Paulo)
   return date.toLocaleString('pt-BR', {
