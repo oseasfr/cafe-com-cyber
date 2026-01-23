@@ -1,5 +1,6 @@
 interface Env {
   DB: D1Database;
+  ADMIN_KEY?: string;
 }
 
 interface Comment {
@@ -12,7 +13,7 @@ interface Comment {
   created_at: string;
 }
 
-// Inicializa as tabelas se não existirem (separado por statements)
+// Inicializa as tabelas se não existirem
 async function initDB(db: D1Database) {
   try {
     await db.prepare(`
@@ -55,16 +56,14 @@ async function initDB(db: D1Database) {
       )
     `).run();
 
-    // Criar índices separadamente
     await db.prepare(`CREATE INDEX IF NOT EXISTS idx_comments_article ON comments(article_id)`).run();
     await db.prepare(`CREATE INDEX IF NOT EXISTS idx_comments_parent ON comments(parent_id)`).run();
   } catch (error) {
     console.error('Error initializing DB:', error);
-    // Ignora erros se as tabelas já existem
   }
 }
 
-// Gera um ID único para o visitante baseado em headers
+// Gera um ID único para o visitante
 function getVisitorId(request: Request): string {
   const ip = request.headers.get('cf-connecting-ip') || 'unknown';
   const userAgent = request.headers.get('user-agent') || 'unknown';
@@ -82,8 +81,8 @@ function getVisitorId(request: Request): string {
 // CORS headers
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Key',
 };
 
 function jsonResponse(data: any, status = 200) {
@@ -93,9 +92,15 @@ function jsonResponse(data: any, status = 200) {
   });
 }
 
+// Verifica se a chave admin é válida
+function isValidAdminKey(request: Request, env: Env): boolean {
+  const adminKey = request.headers.get('X-Admin-Key');
+  if (!env.ADMIN_KEY || !adminKey) return false;
+  return adminKey === env.ADMIN_KEY;
+}
+
 export const onRequest: PagesFunction<Env> = async (context) => {
   const { request, env, params } = context;
-  const url = new URL(request.url);
   const routeParam = params.route;
   const path = routeParam 
     ? (Array.isArray(routeParam) ? routeParam.join('/') : routeParam) 
@@ -115,6 +120,80 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   try {
     await initDB(env.DB);
     const visitorId = getVisitorId(request);
+
+    // ==================== ADMIN ENDPOINTS ====================
+
+    // GET /api/admin/comments - Listar todos os comentários (requer ADMIN_KEY)
+    if (request.method === 'GET' && path === 'admin/comments') {
+      if (!isValidAdminKey(request, env)) {
+        return jsonResponse({ error: 'Unauthorized' }, 401);
+      }
+
+      const comments = await env.DB.prepare(`
+        SELECT c.*, 
+          (SELECT COUNT(*) FROM comments r WHERE r.parent_id = c.id) as reply_count
+        FROM comments c 
+        ORDER BY c.created_at DESC
+      `).all<Comment & { reply_count: number }>();
+
+      return jsonResponse(comments.results || []);
+    }
+
+    // DELETE /api/admin/comment/:commentId - Deletar comentário (requer ADMIN_KEY)
+    if (request.method === 'DELETE' && path.startsWith('admin/comment/')) {
+      if (!isValidAdminKey(request, env)) {
+        return jsonResponse({ error: 'Unauthorized' }, 401);
+      }
+
+      const commentId = parseInt(path.replace('admin/comment/', ''));
+      
+      if (isNaN(commentId)) {
+        return jsonResponse({ error: 'Invalid comment ID' }, 400);
+      }
+
+      // Deleta as curtidas do comentário
+      await env.DB.prepare(`DELETE FROM comment_likes WHERE comment_id = ?`).bind(commentId).run();
+      
+      // Deleta respostas do comentário (e suas curtidas)
+      const replies = await env.DB.prepare(`SELECT id FROM comments WHERE parent_id = ?`).bind(commentId).all<{ id: number }>();
+      for (const reply of replies.results || []) {
+        await env.DB.prepare(`DELETE FROM comment_likes WHERE comment_id = ?`).bind(reply.id).run();
+      }
+      await env.DB.prepare(`DELETE FROM comments WHERE parent_id = ?`).bind(commentId).run();
+      
+      // Deleta o comentário
+      const result = await env.DB.prepare(`DELETE FROM comments WHERE id = ?`).bind(commentId).run();
+
+      return jsonResponse({ 
+        success: true, 
+        deleted: result.meta.changes > 0,
+        message: result.meta.changes > 0 ? 'Comentário deletado' : 'Comentário não encontrado'
+      });
+    }
+
+    // GET /api/admin/stats - Estatísticas gerais (requer ADMIN_KEY)
+    if (request.method === 'GET' && path === 'admin/stats') {
+      if (!isValidAdminKey(request, env)) {
+        return jsonResponse({ error: 'Unauthorized' }, 401);
+      }
+
+      const totalComments = await env.DB.prepare(`SELECT COUNT(*) as count FROM comments`).first<{ count: number }>();
+      const totalViews = await env.DB.prepare(`SELECT SUM(views) as total FROM article_stats`).first<{ total: number }>();
+      const topArticles = await env.DB.prepare(`
+        SELECT article_id, views, likes 
+        FROM article_stats 
+        ORDER BY views DESC 
+        LIMIT 10
+      `).all<{ article_id: string; views: number; likes: number }>();
+
+      return jsonResponse({
+        totalComments: totalComments?.count || 0,
+        totalViews: totalViews?.total || 0,
+        topArticles: topArticles.results || []
+      });
+    }
+
+    // ==================== PUBLIC ENDPOINTS ====================
 
     // GET /api/stats/:articleId - Obter estatísticas do artigo
     if (request.method === 'GET' && path.startsWith('stats/')) {
