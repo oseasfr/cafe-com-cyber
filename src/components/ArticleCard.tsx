@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Clock, User, ArrowRight } from "lucide-react";
+import { Clock, User, ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getArticleIcon } from "@/lib/articleIcons";
 
@@ -18,13 +18,28 @@ interface ArticleProps {
         gradient: string;
         imageUrl?: string;
     };
+    isNewest?: boolean;
 }
 
-export const ArticleCard = ({ article }: ArticleProps) => {
+export const ArticleCard = ({ article, isNewest = false }: ArticleProps) => {
     const { icon: faIcon, color } = getArticleIcon(article.category, article.icon);
 
     return (
-        <Card className="group hover:shadow-cyber-soft transition-all duration-300 border-border/50 hover:border-primary/50 bg-card/50 backdrop-blur hover:shadow-lg hover:shadow-primary/5 flex flex-col h-full">
+        <Card className={`group hover:shadow-cyber-soft transition-all duration-300 bg-card/50 backdrop-blur hover:shadow-lg hover:shadow-primary/5 flex flex-col h-full relative ${
+            isNewest 
+                ? 'border-2 border-primary shadow-lg shadow-primary/20' 
+                : 'border-border/50 hover:border-primary/50'
+        }`}>
+            {/* Badge "Novo" no canto superior direito */}
+            {isNewest && (
+                <div className="absolute -top-3 -right-3 z-10">
+                    <Badge className="bg-primary text-primary-foreground px-3 py-1 flex items-center gap-1.5 shadow-lg animate-pulse">
+                        <Sparkles className="h-3 w-3" />
+                        Novo
+                    </Badge>
+                </div>
+            )}
+            
             <CardHeader className="space-y-4">
                 <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${article.gradient} flex items-center justify-center group-hover:animate-glow-pulse`}>
                     <i className={`fa-solid ${faIcon} text-lg ${color}`} aria-hidden="true" />
