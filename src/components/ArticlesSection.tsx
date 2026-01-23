@@ -23,6 +23,8 @@ const ArticlesSection = memo(() => {
 
   // Ordena os artigos APENAS por data de publicação (mais recente primeiro)
   // Ignora featured e priority para exibir os mais recentes na home
+  // Artigos futuros aparecem por último
+  const now = new Date().getTime();
   const recentArticles = [...articles].sort((a, b) => {
     // Função auxiliar para normalizar a data e obter timestamp
     const getTimestamp = (publishedAt: string | undefined): number => {
@@ -43,7 +45,27 @@ const ArticlesSection = memo(() => {
     const dateA = getTimestamp(a.publishedAt);
     const dateB = getTimestamp(b.publishedAt);
     
-    // Ordena: mais recente primeiro (data maior vem primeiro)
+    // Verifica se as datas são futuras
+    const isFutureA = dateA > now;
+    const isFutureB = dateB > now;
+    
+    // Se um é futuro e outro é passado: passado vem primeiro
+    if (isFutureA && !isFutureB) {
+      return 1; // A é futuro, B é passado -> B vem primeiro
+    }
+    if (!isFutureA && isFutureB) {
+      return -1; // A é passado, B é futuro -> A vem primeiro
+    }
+    
+    // Se ambos são passados OU ambos são futuros: ordena por data
+    // Passados: mais recente primeiro (dateB - dateA)
+    // Futuros: mais próximo primeiro (dateA - dateB, mas ainda no final)
+    if (isFutureA && isFutureB) {
+      // Ambos futuros: mais próximo primeiro (mas ainda vêm depois dos passados)
+      return dateA - dateB;
+    }
+    
+    // Ambos passados: mais recente primeiro
     return dateB - dateA;
   });
 
@@ -62,14 +84,14 @@ const ArticlesSection = memo(() => {
               Artigos em <span className="text-primary">Destaque</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Conteúdo de qualidade produzido pela nossa comunidade de especialistas em cibersegurança
+              Conteúdo de qualidade produzido pela nossa comunidade de especialistas em cybersecurity
             </p>
           </div>
         </ScrollReveal>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {topRecentArticles.map((article, index) => (
             <ScrollReveal key={article.id} delay={index * 120} className="h-full">
-              <ArticleCard article={article} />
+              <ArticleCard article={article} isNewest={index === 0} />
             </ScrollReveal>
           ))}
         </div>
