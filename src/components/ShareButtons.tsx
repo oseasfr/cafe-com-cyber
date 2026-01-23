@@ -31,6 +31,7 @@ export default function ShareButtons({
 }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
   const [stats, setStats] = useState<ArticleStats | null>(null);
+  const [isLoadingStats, setIsLoadingStats] = useState(true);
 
   const fullUrl = typeof window !== 'undefined' 
     ? `${window.location.origin}${url}` 
@@ -39,9 +40,13 @@ export default function ShareButtons({
   // Busca estatísticas quando o componente monta
   useEffect(() => {
     if (articleId && showStats) {
+      setIsLoadingStats(true);
       getArticleStats(articleId)
         .then(setStats)
-        .catch(console.error);
+        .catch(console.error)
+        .finally(() => setIsLoadingStats(false));
+    } else {
+      setIsLoadingStats(false);
     }
   }, [articleId, showStats]);
 
@@ -76,21 +81,30 @@ export default function ShareButtons({
   return (
     <div className="py-4">
       {/* Stats Row - Views e Comments (acima do divisor) */}
-      {showStats && stats && (
+      {showStats && (
         <div className="flex items-center gap-6 mb-4 text-sm text-muted-foreground">
           {/* Visualizações */}
           <div className="flex items-center gap-2">
             <Eye className="h-4 w-4" />
-            <span>{stats.views} Visualizaç{stats.views === 1 ? 'ão' : 'ões'}</span>
+            {isLoadingStats ? (
+              <span className="animate-pulse">Carregando...</span>
+            ) : (
+              <span>{stats?.views || 0} Visualizaç{stats?.views === 1 ? 'ão' : 'ões'}</span>
+            )}
           </div>
           
           {/* Comentários - clicável */}
           <button
             onClick={scrollToComments}
             className="flex items-center gap-2 hover:text-primary transition-colors cursor-pointer"
+            disabled={isLoadingStats}
           >
             <MessageCircle className="h-4 w-4" />
-            <span>{stats.comments} Comentário{stats.comments !== 1 ? 's' : ''}</span>
+            {isLoadingStats ? (
+              <span className="animate-pulse">Carregando...</span>
+            ) : (
+              <span>{stats?.comments || 0} Comentário{stats?.comments !== 1 ? 's' : ''}</span>
+            )}
           </button>
         </div>
       )}
