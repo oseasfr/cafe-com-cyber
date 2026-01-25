@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import React from "react";
 
-const TYPEWRITER_TEXT = "> Conteúdos diversos sobre Cibersegurança_";
+const TYPEWRITER_TEXT = "Conteúdos diversos sobre Cibersegurança";
 const TYPEWRITER_DELAY_MS = 80;
 const TYPEWRITER_RESTART_DELAY_MS = 3000;
 
