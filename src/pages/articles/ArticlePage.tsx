@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ShareButtons from '../../components/ShareButtons';
 import CommentsSection from '../../components/CommentsSection';
-import AuthorHeader from '../../components/AuthorHeader';
+import { AuthorHeader } from '../../components/AuthorHeader';
 import AuthorBioFooter from '../../components/AuthorBioFooter';
 import { Button } from '../../components/ui/button';
 import { ArrowLeft, Clock, User, Copy, Check, Sun, Moon } from 'lucide-react';
