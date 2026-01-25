@@ -1,8 +1,38 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
+
+const TYPEWRITER_TEXT = "Conteúdos diversos sobre Cibersegurança";
+const TYPEWRITER_DELAY_MS = 80;
+const TYPEWRITER_RESTART_DELAY_MS = 3000;
+
+function TypewriterSubtitle() {
+  const [displayed, setDisplayed] = useState("");
+
+  useEffect(() => {
+    if (displayed.length < TYPEWRITER_TEXT.length) {
+      const timer = setTimeout(() => {
+        setDisplayed(TYPEWRITER_TEXT.slice(0, displayed.length + 1));
+      }, TYPEWRITER_DELAY_MS);
+      return () => clearTimeout(timer);
+    }
+    // Texto completo: aguarda e reinicia
+    const restartTimer = setTimeout(() => {
+      setDisplayed("");
+    }, TYPEWRITER_RESTART_DELAY_MS);
+    return () => clearTimeout(restartTimer);
+  }, [displayed]);
+
+  return (
+    <p className="text-xs text-muted-foreground font-mono">
+      <span className="text-primary">&gt;</span>{" "}
+      <span id="typewriter">{displayed}</span>
+      <span className="cursor animate-blink" aria-hidden="true">_</span>
+    </p>
+  );
+}
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -99,7 +129,7 @@ const Header = () => {
             <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Café com Cyber
             </h1>
-            <p className="text-xs text-muted-foreground">Conteúdos diversos sobre Cibersegurança</p>
+            <TypewriterSubtitle />
           </div>
         </div>
 
