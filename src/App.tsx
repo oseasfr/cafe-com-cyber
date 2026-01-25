@@ -20,7 +20,7 @@ import CursosPage from "./pages/CursosPage";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 
 // *** Variável de controle: Altere para 'false' para desativar a página de manutenção ***
-const MAINTENANCE_MODE = false;
+const MAINTENANCE_MODE = true;
 
 // Componente para rolar a página para o topo em cada mudança de rota
 const ScrollToTop = () => {
