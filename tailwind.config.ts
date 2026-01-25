@@ -80,6 +80,10 @@ const config = {
         "fade-up": {
           "0%": { opacity: "0", transform: "translateY(24px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "blink": {
+          "0%, 50%": { opacity: "1" },
+          "51%, 100%": { opacity: "0" },
         }
       },
       animation: {
@@ -87,6 +91,7 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "glow-pulse": "glow-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "fade-up": "fade-up 0.7s ease-out forwards",
+        "blink": "blink 1s step-end infinite",
       },
       boxShadow: {
         "cyber-soft": "0 0 15px 5px rgba(var(--cyber-glow-rgb), 0.2)",
