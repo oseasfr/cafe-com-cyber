@@ -6,7 +6,7 @@ import Footer from '../../components/Footer';
 import ShareButtons from '../../components/ShareButtons';
 import CommentsSection from '../../components/CommentsSection';
 import { AuthorHeader } from '../../components/AuthorHeader';
-import AuthorBioFooter from '../../components/AuthorBioFooter';
+import { AuthorBioFooter } from '../../components/AuthorBioFooter';
 import { Button } from '../../components/ui/button';
 import { ArrowLeft, Clock, User, Copy, Check, Sun, Moon } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
@@ -21,7 +21,7 @@ function useArticleTheme() {
     }
     return 'dark';
   });
-
+  
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
@@ -34,9 +34,11 @@ function useArticleTheme() {
 }
 
 // Componente para blocos de código com botão de copiar
-const CodeBlock = ({ children, isLight }: { children: React.ReactNode, isLight: boolean }) => {
+function CodeBlock({ children, theme, ...props }: any) {
   const [copied, setCopied] = useState(false);
-
+  const isLight = theme === 'light';
+  
+  // Extrai o texto do código - pode ser string ou ReactNode
   const getCodeText = (node: any): string => {
     if (typeof node === 'string') return node;
     if (Array.isArray(node)) {
@@ -47,7 +49,7 @@ const CodeBlock = ({ children, isLight }: { children: React.ReactNode, isLight: 
     }
     return String(node);
   };
-
+  
   const code = getCodeText(children).replace(/\n$/, '');
 
   const copyToClipboard = async () => {
@@ -62,16 +64,16 @@ const CodeBlock = ({ children, isLight }: { children: React.ReactNode, isLight: 
 
   return (
     <div className="relative group">
-      <pre className={`p-4 rounded-lg overflow-x-auto mb-4 ${isLight ? 'bg-gray-100 text-gray-800' : 'bg-cyber-darker text-gray-100'}`}>
+      <pre className={`p-4 rounded-lg overflow-x-auto mb-4 ${isLight ? 'bg-gray-100 text-gray-800' : 'bg-cyber-darker text-primary'}`} {...props}>
         {children}
       </pre>
       <button
         onClick={copyToClipboard}
-        className={`absolute top-2 right-2 p-2 rounded-md transition-colors opacity-0 group-hover:opacity-100 z-10
-          ${isLight 
+        className={`absolute top-2 right-2 p-2 rounded-md transition-colors opacity-0 group-hover:opacity-100 z-10 ${
+          isLight 
             ? 'bg-gray-200 hover:bg-gray-300 border border-gray-300 text-gray-700 hover:text-gray-900' 
             : 'bg-cyber-darker/80 hover:bg-cyber-darker border border-border text-muted-foreground hover:text-foreground'
-          }`}
+        }`}
         title="Copiar código"
         aria-label="Copiar código"
       >
@@ -83,23 +85,27 @@ const CodeBlock = ({ children, isLight }: { children: React.ReactNode, isLight: 
       </button>
     </div>
   );
-};
+}
 
 export default function ArticlePage() {
   const { articleId } = useParams();
-  const article = articles.find((a) => a.id === articleId);
+  const article = articles.find(a => a.id === articleId);
 
   if (!article) {
     return <NotFound />;
   }
 
-  const articleUrl = typeof window !== 'undefined' ? window.location.href : '';
-
-  // Prepara o imageUrl para compartilhamento - sempre absoluto
+  const articleUrl = `/articles/${article.id}`;
+  const fullUrl = typeof window !== 'undefined' ? window.location.origin + articleUrl : articleUrl;
+  
+  // Prepara o imageUrl para compartilhamento - usa icone-home.png como padrão
   const getShareImageUrl = () => {
-    return "https://cafecomcyber.com.br/lovable-uploads/icone-home.png";
+    // Sempre usa a imagem padrão para compartilhamento
+    return typeof window !== 'undefined' 
+      ? window.location.origin + '/lovable-uploads/icone-home.png' 
+      : '/lovable-uploads/icone-home.png';
   };
-
+  
   // Prepara o imageUrl para exibição no artigo
   const getImageUrl = () => {
     if (!article.imageUrl) {
@@ -108,17 +114,20 @@ export default function ArticlePage() {
     if (article.imageUrl.startsWith('http')) {
       return article.imageUrl;
     }
+    // Garante que comece com / se não começar
     const path = article.imageUrl.startsWith('/') ? article.imageUrl : '/' + article.imageUrl;
     return typeof window !== 'undefined' ? window.location.origin + path : path;
   };
-
+  
   const imageUrl = getImageUrl();
   const shareImageUrl = getShareImageUrl();
 
   // Atualiza meta tags dinamicamente para compartilhamento
   useEffect(() => {
+    // Atualiza título da página
     document.title = `${article.title} | Café com Cyber`;
 
+    // Função para atualizar ou criar meta tag
     const updateMetaTag = (property: string, content: string, isProperty = true) => {
       const attribute = isProperty ? 'property' : 'name';
       let meta = document.querySelector(`meta[${attribute}="${property}"]`);
@@ -131,28 +140,34 @@ export default function ArticlePage() {
       meta.setAttribute('content', content);
     };
 
+    // Open Graph tags
     updateMetaTag('og:title', article.title);
     updateMetaTag('og:description', article.description);
     updateMetaTag('og:type', 'article');
-    updateMetaTag('og:url', window.location.href);
+    updateMetaTag('og:url', fullUrl);
     updateMetaTag('og:image', shareImageUrl);
+    updateMetaTag('og:site_name', 'Café com Cyber');
 
+    // Twitter Card tags
+    updateMetaTag('twitter:card', 'summary_large_image', false);
     updateMetaTag('twitter:title', article.title, false);
     updateMetaTag('twitter:description', article.description, false);
     updateMetaTag('twitter:image', shareImageUrl, false);
     updateMetaTag('twitter:site', '@cafecomcyber', false);
 
+    // Meta description padrão
     updateMetaTag('description', article.description, false);
 
+    // Cleanup: restaura meta tags padrão ao sair da página
     return () => {
       document.title = 'Café com Cyber';
       updateMetaTag('og:title', 'Café com Cyber');
-      updateMetaTag('og:description', 'Blog de cibersegurança com artigos, notícias e insights da comunidade de analistas com conhecimento em cybersecurity.');
+      updateMetaTag('og:description', 'Blog de cybersecurity com artigos, notícias e insights da comunidade de analistas.');
       updateMetaTag('og:type', 'website');
       updateMetaTag('og:url', window.location.origin);
-      updateMetaTag('og:image', 'https://cafecomcyber.com.br/lovable-uploads/icone-home.png');
+      updateMetaTag('og:image', window.location.origin + '/lovable-uploads/icone-home.png');
     };
-  }, [article, shareImageUrl]);
+  }, [article, fullUrl, shareImageUrl]);
 
   const articleTheme = useArticleTheme();
 
@@ -163,9 +178,9 @@ export default function ArticlePage() {
       <main className="container mx-auto max-w-4xl px-4 py-8">
         {/* Botão Voltar */}
         <div className="mb-6">
-          <Button 
+          <Button
             asChild
-            variant="ghost" 
+            variant="ghost"
             size="sm"
             className="text-muted-foreground hover:text-foreground"
           >
@@ -176,107 +191,562 @@ export default function ArticlePage() {
           </Button>
         </div>
 
-        {/* Titulo do Artigo */}
+        {/* Título do Artigo */}
         <h1 className="text-4xl sm:text-5xl font-extrabold text-foreground leading-tight mb-4">
           {article.title}
         </h1>
 
-        {/* Tags - Logo abaixo do titulo */}
+        {/* Tags - Logo abaixo do título */}
         {article.tags && article.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-6">
             {article.tags.map((tag) => (
-              <span 
+              <span
                 key={tag}
-                className="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full border border-primary/20"
+                className="text-xs px-2 py-1 bg-muted text-muted-foreground rounded-md"
               >
-                {tag}
+                #{tag}
               </span>
             ))}
           </div>
         )}
 
-        {/* Author Header */}
-        <AuthorHeader 
-          authorName={article.author}
-          date={article.date}
+        {/* NOVO: Cabeçalho do Autor com Avatar, Nome, Data e ReadTime */}
+        <AuthorHeader
+          author={article.author}
+          authorFirstName={article.authorFirstName}
+          authorLastName={article.authorLastName}
+          authorAvatar={article.authorAvatar}
+          authorSocialLink={article.authorSocialLink}
+          authorSocialType={article.authorSocialType}
+          publishedAt={article.publishedAt}
           readTime={article.readTime}
         />
 
-        {/* Imagem de Capa */}
-        <div className="relative aspect-video mb-8 rounded-xl overflow-hidden border border-border group">
-          <img 
-            src={imageUrl} 
-            alt={article.title}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </div>
-
-        {/* Barra de Ações do Artigo (Compartilhamento e Tema) */}
-        <div className="flex items-center justify-between py-4 border-y border-border mb-8">
-          <div className="flex items-center space-x-4">
-            <span className="text-sm font-medium text-muted-foreground">Compartilhar:</span>
-            <ShareButtons url={articleUrl} title={article.title} />
+        {/* Botões de Compartilhamento e Tema - Topo */}
+        <ShareButtons 
+          title={article.title}
+          url={articleUrl}
+          description={article.description}
+          themeToggle={<ArticleThemeToggle theme={articleTheme.theme} onToggle={articleTheme.toggleTheme} />}
+          articleId={article.id}
+          showStats={true}
+        />
+        
+        {/* Imagem de Capa do Artigo */}
+        {article.imageUrl && (
+          <div className="mb-8 rounded-lg overflow-hidden mt-6">
+            <img 
+              src={imageUrl} 
+              alt={article.title} 
+              className="w-full h-auto max-h-48 sm:max-h-56 md:max-h-64 object-contain bg-muted/20"
+            />
           </div>
-          
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={articleTheme.toggleTheme}
-            className="flex items-center space-x-2"
-          >
-            {articleTheme.theme === 'dark' ? (
-              <>
-                <Sun className="h-4 w-4" />
-                <span>Modo Claro</span>
-              </>
-            ) : (
-              <>
-                <Moon className="h-4 w-4" />
-                <span>Modo Escuro</span>
-              </>
-            )}
-          </Button>
+        )}
+
+        {/* Conteúdo do Artigo com Tema Isolado */}
+        <ArticleContent article={article} theme={articleTheme.theme} />
+
+        {/* Botões de Compartilhamento e Tema - Final */}
+        <div className="mt-8">
+          <ShareButtons 
+            title={article.title}
+            url={articleUrl}
+            description={article.description}
+            themeToggle={<ArticleThemeToggle theme={articleTheme.theme} onToggle={articleTheme.toggleTheme} />}
+            articleId={article.id}
+            showStats={false}
+          />
         </div>
 
-        {/* Conteúdo do Artigo */}
-        <article className={`prose prose-lg max-w-none mb-12 transition-colors duration-300
-          ${articleTheme.theme === 'dark' 
-            ? 'prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-primary' 
-            : 'prose-headings:text-gray-900 prose-p:text-gray-700 prose-strong:text-gray-900 prose-a:text-primary'
-          }`}>
-          <ReactMarkdown
-            components={{
-              code({ node, inline, className, children, ...props }: any) {
-                const match = /language-(\w+)/.exec(className || '');
-                return !inline ? (
-                  <CodeBlock isLight={articleTheme.theme === 'light'}>
-                    <code className={className} {...props}>
-                      {children}
-                    </code>
-                  </CodeBlock>
-                ) : (
-                  <code className={`${className} px-1.5 py-0.5 rounded-md ${articleTheme.theme === 'light' ? 'bg-gray-100 text-gray-800' : 'bg-cyber-darker text-gray-100'}`} {...props}>
-                    {children}
-                  </code>
-                );
-              },
-            }}
-          >
-            {article.content}
-          </ReactMarkdown>
-        </article>
-
-        {/* Author Bio Footer */}
-        <AuthorBioFooter authorName={article.author} />
+        {/* NOVO: Biografia do Autor no final */}
+        <AuthorBioFooter
+          author={article.author}
+          authorFirstName={article.authorFirstName}
+          authorLastName={article.authorLastName}
+          authorAvatar={article.authorAvatar}
+          authorBio={article.authorBio}
+          authorSocialLink={article.authorSocialLink}
+          authorSocialType={article.authorSocialType}
+        />
 
         {/* Seção de Comentários */}
+        <CommentsSection articleId={article.id} />
+
+        {/* Botão Voltar no Final */}
         <div className="mt-12 pt-8 border-t border-border">
-          <CommentsSection articleId={article.id} />
+          <Button
+            asChild
+            variant="outline"
+            className="w-full sm:w-auto"
+          >
+            <Link to="/articles">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Ver Todos os Artigos
+            </Link>
+          </Button>
         </div>
       </main>
 
       <Footer />
+    </div>
+  );
+}
+
+// Componente de toggle de tema simplificado
+function ArticleThemeToggle({ theme, onToggle }: { theme: 'light' | 'dark'; onToggle: () => void }) {
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={onToggle}
+      className="relative"
+      aria-label="Alternar tema do artigo"
+      title={theme === "dark" ? "Modo claro" : "Modo escuro"}
+    >
+      {theme === 'dark' ? (
+        <Sun className="h-[1.2rem] w-[1.2rem]" />
+      ) : (
+        <Moon className="h-[1.2rem] w-[1.2rem]" />
+      )}
+      <span className="sr-only">Alternar tema do artigo</span>
+    </Button>
+  );
+}
+
+// Função auxiliar para extrair texto de children do ReactMarkdown
+function extractTextFromChildren(children: any): string {
+  if (typeof children === 'string') {
+    return children;
+  }
+  if (typeof children === 'number') {
+    return String(children);
+  }
+  if (Array.isArray(children)) {
+    return children.map(child => extractTextFromChildren(child)).filter(Boolean).join('');
+  }
+  if (React.isValidElement(children)) {
+    const childProps = (children as any).props;
+    if (childProps?.children) {
+      return extractTextFromChildren(childProps.children);
+    }
+    return '';
+  }
+  if (children && typeof children === 'object') {
+    if (children.props?.children) {
+      return extractTextFromChildren(children.props.children);
+    }
+    if (children.children) {
+      return extractTextFromChildren(children.children);
+    }
+    if (children.value) {
+      return String(children.value);
+    }
+  }
+  return String(children || '');
+}
+
+// Função para gerar ID de âncora a partir do texto do heading
+function generateHeadingId(text: string | any): string {
+  // Se não for string, tenta extrair o texto
+  const textString = typeof text === 'string' ? text : extractTextFromChildren(text);
+  
+  if (!textString || textString.trim() === '') return '';
+  
+  // Remove emojis e caracteres especiais, mantém números e letras
+  const id = textString
+    .toString()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+    .replace(/[^\w\s-]/g, '') // Remove caracteres especiais (incluindo parênteses, emojis, etc) exceto hífens, números e letras
+    .replace(/\s+/g, '-') // Substitui espaços por hífens
+    .replace(/-+/g, '-') // Remove hífens duplicados
+    .replace(/^-|-$/g, ''); // Remove hífens no início/fim
+  
+  return id;
+}
+
+// Componente que renderiza apenas o conteúdo do artigo com tema isolado
+function ArticleContent({ article, theme }: { article: typeof articles[0]; theme: 'light' | 'dark' }) {
+  const isLight = theme === 'light';
+
+  // Garante que os IDs sejam aplicados após a renderização
+  useEffect(() => {
+    // Aguarda um tick para garantir que o DOM foi atualizado
+    const timeoutId = setTimeout(() => {
+      // Se algum header não tiver ID, tenta adicionar
+      const articleElement = document.querySelector('article[data-article-content], article');
+      if (articleElement) {
+        const headers = articleElement.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        headers.forEach((header) => {
+          if (!header.id) {
+            const text = header.textContent || '';
+            const id = generateHeadingId(text);
+            if (id) {
+              header.id = id;
+            }
+          }
+        });
+      }
+    }, 0);
+
+    return () => clearTimeout(timeoutId);
+  }, [article.content]);
+
+  // Processa o conteúdo para substituir padrões específicos de imagem do YouTube por componentes React
+  const processContentWithYouTubeImages = (content: string) => {
+    const parts: (string | React.ReactElement)[] = [];
+    let lastIndex = 0;
+    
+    // Regex para encontrar [![alt](img)](link)
+    const regex = /\[!\[([^\]]*)\]\(([^)]+)\)\]\((https?:\/\/[^\)]+)\)/g;
+    let match;
+    
+    while ((match = regex.exec(content)) !== null) {
+      const [fullMatch, alt, imgPath, link] = match;
+      const startIndex = match.index;
+      
+      // Adiciona o texto antes do match
+      if (startIndex > lastIndex) {
+        parts.push(content.substring(lastIndex, startIndex));
+      }
+      
+      // Se for um link do YouTube, cria um componente React
+      if (link.includes('youtu.be') || link.includes('youtube.com')) {
+        parts.push(
+          <a
+            key={`youtube-${startIndex}`}
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block cursor-pointer hover:opacity-90 transition-opacity my-4"
+          >
+            <img
+              src={imgPath}
+              alt={alt}
+              className="w-full h-auto rounded-lg cursor-pointer"
+            />
+          </a>
+        );
+      } else {
+        // Mantém o markdown original se não for YouTube
+        parts.push(fullMatch);
+      }
+      
+      lastIndex = regex.lastIndex;
+    }
+    
+    // Adiciona o restante do conteúdo
+    if (lastIndex < content.length) {
+      parts.push(content.substring(lastIndex));
+    }
+    
+    return parts.length > 0 ? parts : [content];
+  };
+
+  const processedParts = processContentWithYouTubeImages(article.content);
+  
+  // Verifica se há componentes React (YouTube images) no conteúdo processado
+  const hasReactComponents = processedParts.some(part => React.isValidElement(part));
+
+  // Componentes do ReactMarkdown
+  const markdownComponents = {
+    h1: ({node, children, ...props}: any) => {
+      let text = '';
+      if (node?.children && Array.isArray(node.children)) {
+        text = node.children
+          .map((child: any) => {
+            if (typeof child === 'string') return child;
+            if (typeof child === 'number') return String(child);
+            if (child?.type === 'text' && child.value) return child.value;
+            return child?.value || String(child || '');
+          })
+          .filter(Boolean)
+          .join('');
+      }
+      if (!text || text.trim() === '') text = extractTextFromChildren(children);
+      const id = generateHeadingId(text);
+      return <h1 id={id || undefined} className={`text-3xl font-bold mt-8 mb-4 scroll-mt-20 ${isLight ? 'text-gray-900' : 'text-foreground'}`} {...props}>{children}</h1>;
+    },
+    h2: ({node, children, ...props}: any) => {
+      let text = '';
+      if (node?.children && Array.isArray(node.children)) {
+        text = node.children
+          .map((child: any) => {
+            if (typeof child === 'string') return child;
+            if (typeof child === 'number') return String(child);
+            if (child?.type === 'text' && child.value) return child.value;
+            return child?.value || String(child || '');
+          })
+          .filter(Boolean)
+          .join('');
+      }
+      if (!text || text.trim() === '') text = extractTextFromChildren(children);
+      const id = generateHeadingId(text);
+      return <h2 id={id || undefined} className={`text-2xl font-bold mt-6 mb-3 scroll-mt-20 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props}>{children}</h2>;
+    },
+    h3: ({node, children, ...props}: any) => {
+      let text = '';
+      if (node?.children && Array.isArray(node.children)) {
+        text = node.children
+          .map((child: any) => {
+            if (typeof child === 'string') return child;
+            if (typeof child === 'number') return String(child);
+            if (child?.type === 'text' && child.value) return child.value;
+            return child?.value || String(child || '');
+          })
+          .filter(Boolean)
+          .join('');
+      }
+      if (!text || text.trim() === '') text = extractTextFromChildren(children);
+      const id = generateHeadingId(text);
+      return <h3 id={id || undefined} className={`text-xl font-semibold mt-4 mb-2 scroll-mt-20 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props}>{children}</h3>;
+    },
+    h4: ({node, children, ...props}: any) => {
+      // Extrai texto de múltiplas fontes para garantir compatibilidade
+      let text = '';
+      
+      // Tenta do node primeiro (estrutura do ReactMarkdown/remark)
+      if (node?.children && Array.isArray(node.children)) {
+        text = node.children
+          .map((child: any) => {
+            if (typeof child === 'string') return child;
+            if (typeof child === 'number') return String(child);
+            if (child?.type === 'text' && child.value) return child.value;
+            if (child?.value) return child.value;
+            if (child?.children && Array.isArray(child.children)) {
+              return child.children.map((c: any) => {
+                if (typeof c === 'string') return c;
+                if (typeof c === 'number') return String(c);
+                if (c?.type === 'text' && c.value) return c.value;
+                return c?.value || String(c || '');
+              }).filter(Boolean).join('');
+            }
+            return String(child || '');
+          })
+          .filter(Boolean)
+          .join('');
+      }
+      
+      // Fallback para children (React elements)
+      if (!text || text.trim() === '') {
+        text = extractTextFromChildren(children);
+      }
+      
+      // Última tentativa: usar o texto renderizado do DOM se disponível
+      // (isso pode não funcionar em SSR, mas ajuda no client-side)
+      if ((!text || text.trim() === '') && typeof document !== 'undefined') {
+        // Não podemos acessar o DOM aqui, então vamos confiar no que temos
+      }
+      
+      const id = generateHeadingId(text);
+      
+      return (
+        <h4 
+          id={id || undefined} 
+          className={`text-lg font-semibold mt-4 mb-2 scroll-mt-20 ${isLight ? 'text-gray-800' : 'text-foreground'}`} 
+          {...props}
+        >
+          {children}
+        </h4>
+      );
+    },
+    h5: ({node, children, ...props}: any) => {
+      let text = '';
+      if (node?.children && Array.isArray(node.children)) {
+        text = node.children
+          .map((child: any) => {
+            if (typeof child === 'string') return child;
+            if (typeof child === 'number') return String(child);
+            if (child?.type === 'text' && child.value) return child.value;
+            return child?.value || String(child || '');
+          })
+          .filter(Boolean)
+          .join('');
+      }
+      if (!text || text.trim() === '') text = extractTextFromChildren(children);
+      const id = generateHeadingId(text);
+      return <h5 id={id || undefined} className={`text-base font-semibold mt-4 mb-2 scroll-mt-20 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props}>{children}</h5>;
+    },
+    h6: ({node, children, ...props}: any) => {
+      let text = '';
+      if (node?.children && Array.isArray(node.children)) {
+        text = node.children
+          .map((child: any) => {
+            if (typeof child === 'string') return child;
+            if (typeof child === 'number') return String(child);
+            if (child?.type === 'text' && child.value) return child.value;
+            return child?.value || String(child || '');
+          })
+          .filter(Boolean)
+          .join('');
+      }
+      if (!text || text.trim() === '') text = extractTextFromChildren(children);
+      const id = generateHeadingId(text);
+      return <h6 id={id || undefined} className={`text-sm font-semibold mt-4 mb-2 scroll-mt-20 ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props}>{children}</h6>;
+    },
+    p: ({node, ...props}: any) => <p className={`leading-relaxed mb-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
+    ul: ({node, ...props}: any) => <ul className={`list-disc list-inside mb-4 space-y-2 ml-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
+    ol: ({node, ...props}: any) => <ol className={`list-decimal list-inside mb-4 space-y-2 ml-4 ${isLight ? 'text-gray-700' : 'text-muted-foreground'}`} {...props} />,
+    li: ({node, ...props}: any) => <li className="ml-2" {...props} />,
+    code: ({node, className, children, ...props}: any) => {
+      const isInline = !className;
+      if (isInline) {
+        return (
+          <code className={`px-2 py-1 rounded font-mono text-sm ${isLight ? 'bg-gray-100 text-blue-600' : 'bg-cyber-darker text-primary'}`} {...props}>
+            {children}
+          </code>
+        );
+      }
+      return (
+        <code className={`${className} block p-4 rounded-lg font-mono text-sm overflow-x-auto mb-4 ${isLight ? 'bg-gray-100 text-gray-800' : 'bg-cyber-darker text-primary'}`} {...props}>
+          {children}
+        </code>
+      );
+    },
+    pre: ({node, children, ...props}: any) => {
+      return <CodeBlock theme={theme} {...props}>{children}</CodeBlock>;
+    },
+    strong: ({node, ...props}: any) => <strong className={`font-bold ${isLight ? 'text-gray-900' : 'text-foreground'}`} {...props} />,
+    em: ({node, ...props}: any) => <em className={`italic ${isLight ? 'text-gray-800' : 'text-foreground'}`} {...props} />,
+    a: ({node, children, href, ...props}: any) => {
+      // Verifica se o link contém uma imagem
+      let hasImage = false;
+      
+      if (React.isValidElement(children)) {
+        hasImage = (children as any)?.type === 'img' || (children as any)?.props?.src;
+      } else if (Array.isArray(children)) {
+        hasImage = children.some((child: any) => 
+          React.isValidElement(child) && 
+          ((child as any).type === 'img' || (child as any).props?.src)
+        );
+      }
+      
+      if (!hasImage && node?.children) {
+        hasImage = node.children.some((child: any) => 
+          child?.type === 'element' && child.tagName === 'img'
+        );
+      }
+      
+      // Se for um link de âncora (começa com #), faz scroll suave
+      if (hasImage) {
+        return (
+          <a 
+            className="block cursor-pointer hover:opacity-90 transition-opacity my-4" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            href={href}
+            {...props}
+          >
+            {children}
+          </a>
+        );
+      }
+      
+      // Link de âncora interna - scroll suave
+      if (href && href.startsWith('#')) {
+        const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+          e.preventDefault();
+          // Decodifica o href caso tenha URL encoding (ex: %C3%B3 para ó)
+          let targetId = decodeURIComponent(href.substring(1));
+          
+          // Se ainda não encontrou, tenta normalizar o ID (remove acentos)
+          const findAndScroll = (attempts = 0) => {
+            let element = document.getElementById(targetId);
+            
+            // Se não encontrou, tenta com ID normalizado (sem acentos)
+            if (!element) {
+              const normalizedId = targetId
+                .toLowerCase()
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+                .replace(/[^\w\s-]/g, '') // Remove caracteres especiais
+                .replace(/\s+/g, '-') // Espaços para hífen
+                .replace(/-+/g, '-') // Remove hífens duplicados
+                .replace(/^-|-$/g, ''); // Remove hífens nas extremidades
+              
+              element = document.getElementById(normalizedId);
+              if (element) {
+                targetId = normalizedId;
+              }
+            }
+            
+            if (element) {
+              const headerHeight = 80; // Altura aproximada do header
+              const elementPosition = element.getBoundingClientRect().top;
+              const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+              
+              window.scrollTo({
+                top: Math.max(0, offsetPosition),
+                behavior: 'smooth'
+              });
+            } else if (attempts < 5) {
+              // Se não encontrou, tenta novamente após um pequeno delay
+              setTimeout(() => findAndScroll(attempts + 1), 100);
+            }
+          };
+          
+          findAndScroll();
+        };
+        
+        return (
+          <a 
+            className="text-primary hover:underline cursor-pointer" 
+            href={href}
+            onClick={handleAnchorClick}
+            {...props}
+          >
+            {children}
+          </a>
+        );
+      }
+      
+      // Link externo
+      return <a className="text-primary hover:underline" target="_blank" rel="noopener noreferrer" href={href} {...props}>{children}</a>;
+    },
+    blockquote: ({node, ...props}: any) => <blockquote className={`border-l-4 pl-4 italic my-4 ${isLight ? 'border-gray-300 text-gray-700' : 'border-primary text-muted-foreground'}`} {...props} />,
+    hr: ({node, ...props}: any) => <hr className={`my-8 ${isLight ? 'border-gray-200' : 'border-border'}`} {...props} />,
+    img: ({node, ...props}: any) => {
+      const isInsideLink = node?.parent?.tagName === 'a';
+      if (isInsideLink) {
+        return <img className="w-full max-w-full h-auto rounded-lg cursor-pointer hover:opacity-90 transition-opacity" {...props} />;
+      }
+      return <img className="w-full h-auto rounded-lg my-4" {...props} />;
+    },
+    table: ({node, ...props}: any) => <div className={`overflow-x-auto my-4 ${isLight ? 'border border-gray-200' : ''}`}><table className={`min-w-full ${isLight ? 'border border-gray-200' : 'border border-border'}`} {...props} /></div>,
+    th: ({node, ...props}: any) => <th className={`border px-4 py-2 font-semibold ${isLight ? 'border-gray-200 bg-gray-50 text-gray-900' : 'border-border bg-muted text-foreground'}`} {...props} />,
+    td: ({node, ...props}: any) => <td className={`border px-4 py-2 ${isLight ? 'border-gray-200 text-gray-700' : 'border-border text-muted-foreground'}`} {...props} />,
+  };
+
+  return (
+    <div 
+      data-article-content
+      className={`rounded-lg p-6 transition-colors ${
+        isLight 
+          ? 'bg-white text-gray-900 border border-gray-200 light' 
+          : 'bg-transparent dark'
+      }`}
+    >
+      <article className={`prose max-w-none ${isLight ? 'prose-slate' : 'prose-invert'}`}>
+        {hasReactComponents ? (
+          <>
+            {processedParts.map((part, index) => {
+              if (React.isValidElement(part)) {
+                return <React.Fragment key={`youtube-img-${index}`}>{part}</React.Fragment>;
+              }
+              return (
+                <ReactMarkdown key={`markdown-${index}`} components={markdownComponents}>
+                  {part as string}
+                </ReactMarkdown>
+              );
+            })}
+          </>
+        ) : (
+          <ReactMarkdown components={markdownComponents}>
+            {article.content}
+          </ReactMarkdown>
+        )}
+      </article>
     </div>
   );
 }
