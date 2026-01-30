@@ -150,7 +150,7 @@ const Footer = () => {
     rel="noopener noreferrer"
     className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
   >
-    <X className="h-4 w-4" />
+    <Twitter className="h-4 w-4" />
     <span>X</span>
   </a>
 </li>
