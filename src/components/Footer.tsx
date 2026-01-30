@@ -145,13 +145,13 @@ const Footer = () => {
               </li>
               <li>
   <a
-    href="https://twitter.com/cafecomcyber"
+    href="https://x.com/cafecomcyber"
     target="_blank"
     rel="noopener noreferrer"
     className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
   >
-    <Twitter className="h-4 w-4" />
-    <span>Twitter</span>
+    <X className="h-4 w-4" />
+    <span>X</span>
   </a>
 </li>
 
