@@ -121,7 +121,7 @@ const HeroSection = () => {
               <img 
                 src="/lovable-uploads/5d9ff38a-d664-47c2-bd17-2ea73ba5f9d4.png" 
                 alt="Café com Cyber"
-                className="h-36 w-36 animate-pulsate-blue"
+                className="h-26 w-26 animate-pulsate-blue"
               />
             </div>
           </FadeInUp>
