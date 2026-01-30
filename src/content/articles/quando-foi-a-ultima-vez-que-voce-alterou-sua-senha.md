@@ -9,11 +9,11 @@ authorAvatar: "/images/authors/alberto-santos.jpg"
 authorBio: "Especialista em Cibersegurança com uma base técnica sólida e uma abordagem objetiva para lidar com desafios complexos na área de segurança da informação. Acredito que segurança da informação vai além da tecnologia. Envolve visão, processos e pessoas. Por isso, valorizo a transparência, o pensamento analítico e a troca de experiências com profissionais que também buscam excelência e inovação em cibersegurança."
 authorSocialLink: "https://www.linkedin.com/in/alberttosantos/"
 authorSocialType: "linkedin"
-readTime: "8 minutos de leitura"
+readTime: "10 minutos de leitura"
 category: "Password Security"
 icon: "Key"
 gradient: "from-primary/20 to-accent/20"
-publishedAt: "2026-01-10T00:00:00"
+publishedAt: "2026-02-02T00:00:00"
 tags: [segurança, passwords, mfa, 2fa, senhas]
 imageUrl: "/images/articles/qfauvqvass.jpg"
 featured: false
