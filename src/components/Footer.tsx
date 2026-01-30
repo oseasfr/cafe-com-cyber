@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Mail, Linkedin, Github, Instagram, Youtube, Coffee, Shield } from "lucide-react";
+import { Mail, Linkedin, Github, Instagram, Youtube, Coffee, Shield, Twitter } from "lucide-react";
 
 const Footer = () => {
   const handleLinkClick = () => {
@@ -143,6 +143,18 @@ const Footer = () => {
                   <span>GitHub</span>
                 </a>
               </li>
+              <li>
+  <a
+    href="https://twitter.com/cafecomcyber"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors"
+  >
+    <Twitter className="h-4 w-4" />
+    <span>Twitter</span>
+  </a>
+</li>
+
               <li>
                 <a 
                   href="https://www.instagram.com/cafecomcyber_/" 
